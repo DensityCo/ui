@@ -141,7 +141,7 @@ export default function ReportNextWeekForecast({
   forecast,
   predictiveBasisDuration,
 }) {
-  const predictiveBasisWeeks = parseInt(predictiveBasisDuration.asWeeks());
+  const predictiveBasisWeeks = parseInt(predictiveBasisDuration.asWeeks(), 10);
   const predictiveBasisNoun = (predictiveBasisWeeks.length === 1 ? 'week' : 'weeks');
   return (
     <ReportWrapper
