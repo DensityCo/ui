@@ -1,0 +1,27 @@
+{
+  "fontBase": "\"Sailec\", \"Helvetica\", \"Arial\", sans-serif",
+  "fontMonospace": "\"Source Code Pro\", \"Menlo\", \"Monaco\", \"Consolas\", \"Courier New\", monospace",
+
+  "fontSize1": 48,
+  "fontWeight1": "normal",
+  "fontSize2": 24,
+  "fontWeight2": "bold",
+  "fontSize3": 18,
+  "fontWeight3": "bold",
+  "fontSize4": 14,
+  "fontWeight4": "bold",
+  "fontSize5": 12,
+  "fontWeight5": "bold",
+  "fontSize6": 10,
+  "fontWeight6": "bold",
+
+  "fontSizeBase": 14,
+  "fontWeightBase": "normal",
+  "lineHeightBase": 22,
+
+  "fontSizeXSmall": 10,
+  "fontSizeSmall": 12,
+  "fontSizeBase": 14,
+  "fontSizeLarge": 16,
+  "fontSizeXLarge": 24
+}
