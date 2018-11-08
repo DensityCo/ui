@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-next-week-forecast",
-  "version": "0.4.3",
+  "version": "1.0.0",
   "description": "Report next week forecast component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
