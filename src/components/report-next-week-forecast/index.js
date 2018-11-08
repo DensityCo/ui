@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import classnames from 'classnames';
 import moment from 'moment';
 
 import styles from './styles.scss';
+import { toEnglishList } from '@density/ui/helpers/text.js';
 import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 import colorVariables from '@density/ui/variables/colors.json';
 import spacingVariables from '@density/ui/variables/spacing.json';
@@ -141,6 +141,8 @@ export default function ReportNextWeekForecast({
   forecast,
   predictiveBasisDuration,
 }) {
+  const predictiveBasisWeeks = parseInt(predictiveBasisDuration.asWeeks());
+  const predictiveBasisNoun = (predictiveBasisWeeks.length === 1 ? 'week' : 'weeks');
   return (
     <ReportWrapper
       title={title}
@@ -151,17 +153,12 @@ export default function ReportNextWeekForecast({
       <ReportSubHeader
         title={(
           <span>
-            {busiestDays.reduce((acc, day, index) => [
-              ...acc,
-              <strong key={index}>{day.format('dddd')}</strong>,
-              ...(index < busiestDays.length-2 ? [', '] : []),
-              ...(index === busiestDays.length-2 ? [', and '] : []),
-            ], [])}
+            {toEnglishList(busiestDays.map((d, i) => <strong key={i}>{d.format('dddd')}</strong>))}
             {' '} will likely be your busiest {busiestDays.length === 1 ? 'day' : 'days'}.
           </span>
         )}
       >
-        <strong>Based on the past {predictiveBasisDuration.humanize()}</strong>
+        <strong>Based on the past {predictiveBasisWeeks} {predictiveBasisNoun}</strong>
       </ReportSubHeader>
       <ReportCard>
         <ReportNextWeekForecastChart

@@ -80,6 +80,7 @@ storiesOf('ReportNextWeekForecast', module)
         busiestDays={[
           moment("2018-03-17T00:00:00-04:00"),
           moment("2018-03-18T00:00:00-04:00"),
+          moment("2018-03-15T00:00:00-04:00")
         ]}
         predictiveBasisDuration={moment.duration(3, 'months')}
         forecast={[
