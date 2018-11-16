@@ -1,0 +1,14 @@
+{
+  "name": "@density/ui-report-total-visits-rollup",
+  "version": "0.0.1",
+  "description": "Total visits rollup report component",
+  "main": "dist/index.js",
+  "author": "Density <engineering+javascript@density.io>",
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "prop-types": "*",
+    "moment": "*"
+  }
+}

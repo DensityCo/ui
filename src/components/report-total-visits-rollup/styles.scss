@@ -1,0 +1,48 @@
+// Import any global variables from "../../../variables/*.json"
+@import "../../../variables/colors.json";
+
+.rollupWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.rollupRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 35px;
+}
+
+.rollupRowText {
+  flex: 1;
+  font-size: 12px;
+  transform: translate(0px, 1px);
+
+  margin-right: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rollupRowBar {
+  flex: 1;
+  height: 4px;
+  width: 100%;
+}
+
+.rollupRowBarInner {
+  width: 100%;
+  height: 4px;
+  background-color: $brand-primary-new;
+}
+
+.rollupRowBarText {
+  color: $brand-primary-new;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 10px;
+  width: 32px;
+  transform: translate(0px, 2px);
+}
