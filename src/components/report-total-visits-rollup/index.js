@@ -87,23 +87,15 @@ export default class ReportTotalVisitsRollup extends Component {
         spaces={counts.map(i => i.name)}
       >
         <ReportSubHeader
-          title={mode === LEAST_VISITED ? (
-            // Least visited
+          title={
             <span>
               {text.toEnglishJsxList(headerCounts.map(u => <strong>{u.name}</strong>))}{' '}
-              {headerCounts.length === 1 ? 'was' : 'were'} the <strong>least</strong>{' '}
+              {headerCounts.length === 1 ? 'was' : 'were'} the{' '}
+              <strong>{mode === LEAST_VISITED ? 'least' : 'most'}</strong>{' '}
               used space{headerCounts.length > 1 ? 's' : ''} during <strong>{segmentName}</strong>{' '}
-              with <strong>{minCount}</strong> visits.
+              with <strong>{mode === LEAST_VISITED ? minCount : maxCount}</strong> visits.
             </span>
-          ) : (
-            // Most visited
-            <span>
-              {text.toEnglishJsxList(headerCounts.map(u => <strong>{u.name}</strong>))}{' '}
-              {headerCounts.length === 1 ? 'was' : 'were'} the <strong>most</strong>{' '}
-              used space{headerCounts.length > 1 ? 's' : ''} during <strong>{segmentName}</strong>{' '}
-              with <strong>{maxCount}</strong> visits.
-            </span>
-          )}
+          }
         />
         <ReportCard>
           <div ref={r => { this.container = r; }} className={styles.rollupWrapper}>
