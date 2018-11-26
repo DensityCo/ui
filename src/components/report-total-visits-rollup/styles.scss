@@ -15,19 +15,19 @@
 }
 
 .rollupRowText {
-  flex: calc(50% - 42px);
-  font-size: 12px;
+  flex-basis: calc(50% - 42px);
+  margin-right: 10px;
   transform: translate(0px, 1px);
 
-  margin-right: 10px;
-
+  font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .rollupRowBar {
-  flex: calc(50% + 42px);
+  flex-basis: calc(50% + 42px);
+
   display: flex;
   flex-direction: row;
 }
