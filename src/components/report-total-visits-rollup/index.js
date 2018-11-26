@@ -114,10 +114,10 @@ export default class ReportTotalVisitsRollup extends Component {
                   <div className={styles.rollupRowBar}>
                     <div
                       className={styles.rollupRowBarInner}
-                      style={{width: `${maxCount ? item.count / maxCount * 100 : 0}%`}}
+                      style={{width: `calc(${maxCount ? item.count / maxCount * 100 : 0}% - 42px)`}}
                     />
+                    <div className={styles.rollupRowBarText}>{item.count}</div>
                   </div>
-                  <div className={styles.rollupRowBarText}>{item.count}</div>
                 </div>
               );
             })}
