@@ -15,7 +15,7 @@
 }
 
 .rollupRowText {
-  flex: 1;
+  flex: calc(50% - 42px);
   font-size: 12px;
   transform: translate(0px, 1px);
 
@@ -27,7 +27,7 @@
 }
 
 .rollupRowBar {
-  flex: 1;
+  flex: calc(50% + 42px);
   display: flex;
   flex-direction: row;
 }
