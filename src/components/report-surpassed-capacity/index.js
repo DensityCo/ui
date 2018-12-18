@@ -156,7 +156,7 @@ class SurpassedCapacityChart extends Component {
           {/* Render a bar for each row */}
           {days.map((day, index) => {
             // If the day has data that is null, then don't render the day
-            if (data[index] === null || data[index].length < 1) { return null; }
+            if (data[index] === null) { return null; }
 
             // Because of the case above, we have to keep track of the index used to draw the bar
             // seperately as `index` will still increment even when a day has no data.
@@ -212,22 +212,24 @@ class SurpassedCapacityChart extends Component {
               }
             });
 
-            // Add one more remaining color rectangle if necessary
-            const lastItem = data[index][data[index].length - 1];
-            lastColor = calculateColorForBucket(
-              lastItem.count, capacity,
-              {quietBusyThreshold, busyOverCapacityThreshold},
-            );
-            rectangles.push(<g key={`${lastStartXPos},${lastEndXPos}`}>
-              <rect
-                x={lastStartXPos}
-                y={0}
-                width={lastEndXPos - lastStartXPos}
-                height={8}
-                fill={lastColor}
-                stroke={lastColor}
-                strokeWidth={0.5} />
-            </g>);
+            // Add final remaining color rectangle if necessary
+            if (data[index].length > 0) {
+              const lastItem = data[index][data[index].length - 1];
+              lastColor = calculateColorForBucket(
+                lastItem.count, capacity,
+                {quietBusyThreshold, busyOverCapacityThreshold},
+              );
+              rectangles.push(<g key={`${lastStartXPos},${lastEndXPos}`}>
+                <rect
+                  x={lastStartXPos}
+                  y={0}
+                  width={lastEndXPos - lastStartXPos}
+                  height={8}
+                  fill={lastColor}
+                  stroke={lastColor}
+                  strokeWidth={0.5} />
+              </g>);
+            }
 
             return (
               <g key={day} transform={`translate(0,${(dayPositionIndex * this.columnHeight)+(this.columnHeight/2)+5})`}>
