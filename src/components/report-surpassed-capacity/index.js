@@ -192,20 +192,20 @@ class SurpassedCapacityChart extends Component {
                 lastStartXPos = startXPos;
               }
 
+              lastEndXPos = xScale(this.convertTimeToSeconds(end));
+              lastColor = color;
+
               const highestCapacityLabel = color === OVER_CAPACITY_COLOR && daysWithPeakCount.find(h => (
                 h.day.startsWith(day) && h.peak.timestamp === start
               ));
               if (highestCapacityLabel) {
                 peaks.push(<text
                   fontSize="11"
-                  transform={`translate(${startXPos+(width/2)},-4)`}
+                  transform={`translate(${startXPos+((lastEndXPos - startXPos)/2)},-4)`}
                   textAnchor="middle"
                   fill={OVER_CAPACITY_COLOR}
                 >{highestCapacityLabel.peak.count}</text>);
               }
-
-              lastEndXPos = xScale(this.convertTimeToSeconds(end));
-              lastColor = color;
             });
 
             return (
