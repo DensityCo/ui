@@ -227,6 +227,7 @@ class SurpassedCapacityChart extends Component {
 
                   {/* color each region of interest */}
                   {rectangles}
+                  {peaks}
                 </g>
               </g>
             );
