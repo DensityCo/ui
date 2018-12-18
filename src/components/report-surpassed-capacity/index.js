@@ -156,7 +156,7 @@ class SurpassedCapacityChart extends Component {
           {/* Render a bar for each row */}
           {days.map((day, index) => {
             // If the day has data that is null, then don't render the day
-            if (data[index] === null) { return null; }
+            if (data[index] === null || data[index].length < 1) { return null; }
 
             // Because of the case above, we have to keep track of the index used to draw the bar
             // seperately as `index` will still increment even when a day has no data.
@@ -173,6 +173,7 @@ class SurpassedCapacityChart extends Component {
             data[index].forEach(({start, end, count}) => {
               const startXPos = xScale(this.convertTimeToSeconds(start));
 
+              // If "color" for this bucket has changed, complete the previous rectangle
               let color = calculateColorForBucket(
                 count, capacity,
                 {quietBusyThreshold, busyOverCapacityThreshold},
@@ -192,21 +193,41 @@ class SurpassedCapacityChart extends Component {
                 lastStartXPos = startXPos;
               }
 
+              // Always update these after processing the "last color"
               lastEndXPos = xScale(this.convertTimeToSeconds(end));
               lastColor = color;
 
-              const highestCapacityLabel = color === OVER_CAPACITY_COLOR && daysWithPeakCount.find(h => (
+              // Add labels to the locations with the highest occupancy
+              const highestOccupancyLabel = color === OVER_CAPACITY_COLOR && daysWithPeakCount.find(h => (
                 h.day.startsWith(day) && h.peak.timestamp === start
               ));
-              if (highestCapacityLabel) {
+              if (highestOccupancyLabel) {
                 peaks.push(<text
+                  key={`${lastStartXPos},${lastEndXPos}`}
                   fontSize="11"
                   transform={`translate(${startXPos+((lastEndXPos - startXPos)/2)},-4)`}
                   textAnchor="middle"
                   fill={OVER_CAPACITY_COLOR}
-                >{highestCapacityLabel.peak.count}</text>);
+                >{highestOccupancyLabel.peak.count}</text>);
               }
             });
+
+            // Add one more remaining color rectangle if necessary
+            const lastItem = data[index][data[index].length - 1];
+            lastColor = calculateColorForBucket(
+              lastItem.count, capacity,
+              {quietBusyThreshold, busyOverCapacityThreshold},
+            );
+            rectangles.push(<g key={`${lastStartXPos},${lastEndXPos}`}>
+              <rect
+                x={lastStartXPos}
+                y={0}
+                width={lastEndXPos - lastStartXPos}
+                height={8}
+                fill={lastColor}
+                stroke={lastColor}
+                strokeWidth={0.5} />
+            </g>);
 
             return (
               <g key={day} transform={`translate(0,${(dayPositionIndex * this.columnHeight)+(this.columnHeight/2)+5})`}>
