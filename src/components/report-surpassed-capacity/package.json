@@ -1,6 +1,6 @@
 {
   "name": "@density/ui-report-surpassed-capacity",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Surpassed Capacity component",
   "main": "dist/index.js",
   "author": "Density <engineering+javascript@density.io>",
