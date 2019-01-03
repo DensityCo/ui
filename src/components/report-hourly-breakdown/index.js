@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import ReportWrapper, { ReportCard, ReportExpandController } from '@density/ui-report-wrapper';
+import ReportWrapper, { ReportCard, ReportSubHeader, ReportExpandController } from '@density/ui-report-wrapper';
 import styles from './styles.scss';
 import colorVariables from '@density/ui/variables/colors.json';
 import propTypes from 'prop-types';
@@ -58,6 +58,12 @@ export default function ReportHourlyBreakdown({
   space,
 
   data,
+  maxDay,
+  maxHour,
+  maxValue,
+  metric = 'VISITS',
+  aggregation = 'NONE',
+
   cellColorThreshold,
 
   displayContext: {
@@ -68,7 +74,18 @@ export default function ReportHourlyBreakdown({
     dataEndTime,
   },
 }) {
-  const maxValue = Math.max.apply(Math, data.map(i => i.values).reduce((a, b) => [...a, ...b], []));
+
+  // Prepare labels for max start/end times
+  let maxTimeStart = moment().startOf('day').add(maxHour, 'hour');
+  let maxTimeEnd = moment(maxTimeStart).add(1, 'hour');
+  maxTimeEnd = maxTimeEnd.format('Ha');
+  maxTimeStart = maxTimeStart.format('Ha');
+
+  // Remove 'am'/'pm' from start hour ONLY if both are the same
+  if (maxTimeStart.endsWith(maxTimeEnd.slice(-2))) {
+    maxTimeStart = maxTimeStart.slice(0, -2);
+  }
+
   return (
     <ReportWrapper
       title={title}
@@ -76,6 +93,18 @@ export default function ReportHourlyBreakdown({
       endDate={endDate}
       spaces={[space.name]}
     >
+      <ReportSubHeader
+        title={(
+          <span>
+            <strong>{maxDay}</strong> between {' '}
+            <strong>{maxTimeStart}</strong> and <strong>{maxTimeEnd}</strong> had{' '}
+            {aggregation === 'AVERAGE' ? 
+              (metric === 'PEAKS' ? 'an average peak count of ': 'an average of ') :
+              (metric === 'PEAKS' ? 'a peak count of ' : '')}
+            <strong>{maxValue}</strong>{metric === 'VISITS' ? ' visits.' : '.'}
+          </span>
+        )}
+      />
       <ReportCard>
         <table className={styles.reportHourlyBreakdown}>
           <thead>

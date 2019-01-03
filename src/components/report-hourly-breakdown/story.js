@@ -222,6 +222,10 @@ storiesOf('ReportHourlyBreakdown', module)
         space={{name: 'My Space'}}
 
         data={DATA}
+        maxDay="Monday"
+        maxHour="9"
+        maxValue="999"
+
         displayContext={{
           showExpandControl: true,
           onReportExpand: action('Expand report'),
@@ -241,6 +245,9 @@ storiesOf('ReportHourlyBreakdown', module)
         space={{name: 'My Space'}}
 
         data={DATA}
+        maxDay="Monday"
+        maxHour="11"
+        maxValue="999"
 
         displayContext={{
           showExpandControl: false,
