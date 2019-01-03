@@ -223,8 +223,8 @@ storiesOf('ReportHourlyBreakdown', module)
 
         data={DATA}
         maxDay="Monday"
-        maxHour="9"
-        maxValue="999"
+        maxHour={9}
+        maxValue={999}
 
         displayContext={{
           showExpandControl: true,
@@ -246,8 +246,8 @@ storiesOf('ReportHourlyBreakdown', module)
 
         data={DATA}
         maxDay="Monday"
-        maxHour="11"
-        maxValue="999"
+        maxHour={11}
+        maxValue={999}
 
         displayContext={{
           showExpandControl: false,

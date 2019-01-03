@@ -179,6 +179,12 @@ ReportHourlyBreakdown.propTypes = {
     }),
   ).isRequired,
 
+  maxDay: propTypes.string.isRequired,
+  maxHour: propTypes.number.isRequired,
+  maxValue: propTypes.number.isRequired,
+  metric: propTypes.string,
+  aggregation: propTypes.string,
+
   displayContext: propTypes.shape({
     showExpandControl: propTypes.bool.isRequired,
     onReportExpand: propTypes.func,
