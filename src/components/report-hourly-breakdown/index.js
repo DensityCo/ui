@@ -76,6 +76,7 @@ export default function ReportHourlyBreakdown({
 }) {
 
   // Prepare labels for max start/end times
+  // Doesn't need to be in the space's tz because it's just for rendering a number of hours
   let maxTimeStart = moment().startOf('day').add(maxHour, 'hour');
   let maxTimeEnd = moment(maxTimeStart).add(1, 'hour');
   maxTimeEnd = maxTimeEnd.format('Ha');
