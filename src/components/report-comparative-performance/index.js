@@ -61,7 +61,11 @@ export default function ReportComparativePerformance({
 }) {
 
   if (data.length < 2) {
-    throw new Error('Data must be at least 2 periods in length.');
+    throw new Error('Data must contain at least 2 periods.');
+  } else if (data.length > 3 && mode !== COMPARATIVE_WEEK) {
+    throw new Error('Data cannot contain more than 3 periods except in "Comparative Week" mode.');
+  } else if (data.length > 4) {
+    throw new Error('Data cannot contain more than 4 periods.');
   }
 
   const getPercentageDifference = index => (
@@ -99,39 +103,43 @@ export default function ReportComparativePerformance({
               {data.map((p, index) => <th className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
-                {getRangeName(mode, p.startDate, p.endDate)}
+                <strong>{getRangeName(mode, p.startDate, p.endDate)}</strong>
               </th>)}
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Total Visits</td>
+              <td><strong>Total Visits</strong></td>
               {data.map((p, index) => {
                 return <td className={classnames('totalVisitsDescriptor', {
                   [styles.tableHighlight]: index % 2 === 0
                 })}>
-                  <strong>{commaNumber(p.totalVisits)}</strong>
+                  <span>{commaNumber(p.totalVisits)}</span>
                 </td>;
               })}
             </tr>
             <tr>
-              <td>Busiest Day</td>
+              <td><strong>Busiest Day</strong></td>
               {data.map((p, index) => <td className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
                 {p.busiestDays.length === 0 ? '-' : 
-                  text.toEnglishList(p.busiestDays.map(i => <strong>{i.day}</strong>))}
+                  text.toEnglishList(p.busiestDays.map(i => <span>
+                    {data.length > 3 ? i.day.slice(0, 3) : `${i.day}s`}
+                  </span>))}
               </td>)}
             </tr>
             <tr>
-              <td>Busiest Hour</td>
+              <td><strong>Busiest Hour</strong></td>
               {data.map((p, index) => <td className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
                 {p.busiestHours.length === 0 ? '-' : text.toEnglishList(p.busiestHours.map(i => 
                   <span>
-                    <span className={styles.peakHourLabel}><strong>{i.hour}</strong></span>{' '}
-                    <span className={styles.peakHourDayLabel}>on <strong>{i.day}</strong></span>
+                    <span className={styles.peakHourDayLabel}>
+                      {data.length > 3 ? i.day.slice(0, 3) : `${i.day}s`}
+                    </span>{' '}
+                    <span className={styles.peakHourLabel}>@ {i.hour}</span>
                   </span>
                 ))}
               </td>)}
