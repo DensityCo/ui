@@ -45,9 +45,9 @@ function getRangeName(mode, start, end=null) {
       <span className={styles.dateRangeEnd}>{end.format('MMM D')}</span>
     </span>;
   case COMPARATIVE_MONTH:
-    return <strong>{start.format('MMMM')}</strong>;
+    return <span>{start.format('MMM \'YY')}</span>;
   case COMPARATIVE_QUARTER:
-    return <strong>{`Q${start.quarter()}`}</strong>;
+    return <span>{`Q${start.quarter()} '${start.format('YY')}`}</span>;
   default:
     return null;
   }
@@ -107,17 +107,10 @@ export default function ReportComparativePerformance({
             <tr>
               <td>Total Visits</td>
               {data.map((p, index) => {
-                const percentageDifference = index > 0 ? getPercentageDifference(index) : null;
-                return <td style={{position: 'relative'}} className={classnames('totalVisitsDescriptor', {
+                return <td className={classnames('totalVisitsDescriptor', {
                   [styles.tableHighlight]: index % 2 === 0
                 })}>
                   <strong>{commaNumber(p.totalVisits)}</strong>
-                  {percentageDifference > 0 ? <span className={styles.deltaArrow}>
-                    <IconArrowUp height={10} color={colors.reportGreen} />
-                  </span> : null}
-                  {percentageDifference < 0 ?  <span className={styles.deltaArrow}>
-                    <IconArrowDown height={10} color={colors.reportRed} />
-                  </span> : null}
                 </td>;
               })}
             </tr>
@@ -126,7 +119,8 @@ export default function ReportComparativePerformance({
               {data.map((p, index) => <td className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
-                {text.toEnglishList(p.busiestDays.map(i => <strong>{i.day}</strong>))}
+                {p.busiestDays.length === 0 ? '-' : 
+                  text.toEnglishList(p.busiestDays.map(i => <strong>{i.day}</strong>))}
               </td>)}
             </tr>
             <tr>
@@ -134,7 +128,7 @@ export default function ReportComparativePerformance({
               {data.map((p, index) => <td className={classnames({
                 [styles.tableHighlight]: index % 2 === 0
               })}>
-                {text.toEnglishList(p.busiestHours.map(i => 
+                {p.busiestHours.length === 0 ? '-' : text.toEnglishList(p.busiestHours.map(i => 
                   <span>
                     <span className={styles.peakHourLabel}><strong>{i.hour}</strong></span>{' '}
                     <span className={styles.peakHourDayLabel}>on <strong>{i.day}</strong></span>
