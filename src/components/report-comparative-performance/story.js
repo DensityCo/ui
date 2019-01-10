@@ -30,142 +30,127 @@ storiesOf('ReportComparativePerformance', module)
         }}
 
         mode={COMPARATIVE_WEEK}
-        lastStartDate={moment.utc().startOf('week').subtract(1, 'week')}
-        lastEndDate={moment.utc().startOf('week').subtract(1, 'week').clone().endOf('week')}
-        previousStartDate={moment.utc().startOf('week').subtract(1, 'week').clone().subtract(1, 'week')}
-        previousEndDate={moment.utc().startOf('week').subtract(1, 'week').clone().subtract(1, 'week').clone().endOf('week')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 10301,
-          averagePeakCount: 258,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
+        data={[{"totalVisits":7985,"busiestDays":[{"day":"Tue","entrances":1957}],"busiestHours":[{"day":"Wed","hour":"12pm","entrances":613}],"startDate":moment("2018-12-09T08:00:00.000Z"),"endDate":moment("2018-12-16T07:59:59.999Z")},{"totalVisits":6557,"busiestDays":[{"day":"Thu","entrances":1415}],"busiestHours":[{"day":"Thu","hour":"12pm","entrances":480}],"startDate":moment("2018-12-16T08:00:00.000Z"),"endDate":moment("2018-12-23T07:59:59.999Z")},{"totalVisits":324,"busiestDays":[{"day":"Wed","entrances":99}],"busiestHours":[{"day":"Thu","hour":"9am","entrances":26}],"startDate":moment("2018-12-23T08:00:00.000Z"),"endDate":moment("2018-12-30T07:59:59.999Z")},{"totalVisits":3794,"busiestDays":[{"day":"Thu","entrances":1324}],"busiestHours":[{"day":"Thu","hour":"12pm","entrances":448}],"startDate":moment("2018-12-30T08:00:00.000Z"),"endDate":moment("2019-01-06T07:59:59.999Z")}]}
       />
     </div>
   ))
-  .addWithInfo('Comparative month', () => (
-    <div style={{width: '100%', paddingTop: 100}}>
-      <ReportComparativePerformance
-        title="Comparative Performance Example"
-        space={{
-          id: 'spc_XXX',
-          name: 'My space',
-          timeZone: 'America/New_York',
-        }}
+  // .addWithInfo('Comparative month', () => (
+  //   <div style={{width: '100%', paddingTop: 100}}>
+  //     <ReportComparativePerformance
+  //       title="Comparative Performance Example"
+  //       space={{
+  //         id: 'spc_XXX',
+  //         name: 'My space',
+  //         timeZone: 'America/New_York',
+  //       }}
 
-        mode={COMPARATIVE_MONTH}
-        lastStartDate={moment.utc().startOf('month').subtract(1, 'month')}
-        lastEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().endOf('month')}
-        previousStartDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month')}
-        previousEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month').clone().endOf('month')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 10301,
-          averagePeakCount: 258,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
-      />
-    </div>
-  ))
-  .addWithInfo('Comparative quarter', () => (
-    <div style={{width: '100%', paddingTop: 100}}>
-      <ReportComparativePerformance
-        title="Comparative Performance Example"
-        space={{
-          id: 'spc_XXX',
-          name: 'My space',
-          timeZone: 'America/New_York',
-        }}
-
-        mode={COMPARATIVE_QUARTER}
-        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
-        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
-        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
-        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+  //       mode={COMPARATIVE_MONTH}
+  //       lastStartDate={moment.utc().startOf('month').subtract(1, 'month')}
+  //       lastEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().endOf('month')}
+  //       previousStartDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month')}
+  //       previousEndDate={moment.utc().startOf('month').subtract(1, 'month').clone().subtract(1, 'month').clone().endOf('month')}
 
 
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 10301,
-          averagePeakCount: 258,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
-      />
-    </div>
-  ))
-  .addWithInfo('Comparative quarter, with zero percent change', () => (
-    <div style={{width: '100%', paddingTop: 100}}>
-      <ReportComparativePerformance
-        title="Comparative Performance Example"
-        space={{
-          id: 'spc_XXX',
-          name: 'My space',
-          timeZone: 'America/New_York',
-        }}
+  //       lastData={{
+  //         totalVisits: 8570,
+  //         averagePeakCount: 233,
+  //         averagePeakTime: moment.duration('17:03:00'),
+  //       }}
+  //       previousData={{
+  //         totalVisits: 10301,
+  //         averagePeakCount: 258,
+  //         averagePeakTime: moment.duration('11:37:00'),
+  //       }}
+  //     />
+  //   </div>
+  // ))
+  // .addWithInfo('Comparative quarter', () => (
+  //   <div style={{width: '100%', paddingTop: 100}}>
+  //     <ReportComparativePerformance
+  //       title="Comparative Performance Example"
+  //       space={{
+  //         id: 'spc_XXX',
+  //         name: 'My space',
+  //         timeZone: 'America/New_York',
+  //       }}
 
-        mode={COMPARATIVE_QUARTER}
-        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
-        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
-        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
-        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
-
-
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
-      />
-    </div>
-  ))
-  .addWithInfo('Infinity percent', () => (
-    <div style={{width: '100%', paddingTop: 100}}>
-      <ReportComparativePerformance
-        title="Comparative Performance Example"
-        space={{
-          id: 'spc_XXX',
-          name: 'My space',
-          timeZone: 'America/New_York',
-        }}
-
-        mode={COMPARATIVE_QUARTER}
-        lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
-        lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
-        previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
-        previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+  //       mode={COMPARATIVE_QUARTER}
+  //       lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+  //       lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+  //       previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+  //       previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
 
 
-        lastData={{
-          totalVisits: 8570,
-          averagePeakCount: 233,
-          averagePeakTime: moment.duration('17:03:00'),
-        }}
-        previousData={{
-          totalVisits: 0,
-          averagePeakCount: 0,
-          averagePeakTime: moment.duration('11:37:00'),
-        }}
-      />
-    </div>
-  ))
+  //       lastData={{
+  //         totalVisits: 8570,
+  //         averagePeakCount: 233,
+  //         averagePeakTime: moment.duration('17:03:00'),
+  //       }}
+  //       previousData={{
+  //         totalVisits: 10301,
+  //         averagePeakCount: 258,
+  //         averagePeakTime: moment.duration('11:37:00'),
+  //       }}
+  //     />
+  //   </div>
+  // ))
+  // .addWithInfo('Comparative quarter, with zero percent change', () => (
+  //   <div style={{width: '100%', paddingTop: 100}}>
+  //     <ReportComparativePerformance
+  //       title="Comparative Performance Example"
+  //       space={{
+  //         id: 'spc_XXX',
+  //         name: 'My space',
+  //         timeZone: 'America/New_York',
+  //       }}
+
+  //       mode={COMPARATIVE_QUARTER}
+  //       lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+  //       lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+  //       previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+  //       previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+
+
+  //       lastData={{
+  //         totalVisits: 8570,
+  //         averagePeakCount: 233,
+  //         averagePeakTime: moment.duration('17:03:00'),
+  //       }}
+  //       previousData={{
+  //         totalVisits: 8570,
+  //         averagePeakCount: 233,
+  //         averagePeakTime: moment.duration('11:37:00'),
+  //       }}
+  //     />
+  //   </div>
+  // ))
+  // .addWithInfo('Infinity percent', () => (
+  //   <div style={{width: '100%', paddingTop: 100}}>
+  //     <ReportComparativePerformance
+  //       title="Comparative Performance Example"
+  //       space={{
+  //         id: 'spc_XXX',
+  //         name: 'My space',
+  //         timeZone: 'America/New_York',
+  //       }}
+
+  //       mode={COMPARATIVE_QUARTER}
+  //       lastStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter')}
+  //       lastEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().endOf('quarter')}
+  //       previousStartDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter')}
+  //       previousEndDate={moment.utc().startOf('quarter').subtract(1, 'quarter').clone().subtract(1, 'quarter').clone().endOf('quarter')}
+
+
+  //       lastData={{
+  //         totalVisits: 8570,
+  //         averagePeakCount: 233,
+  //         averagePeakTime: moment.duration('17:03:00'),
+  //       }}
+  //       previousData={{
+  //         totalVisits: 0,
+  //         averagePeakCount: 0,
+  //         averagePeakTime: moment.duration('11:37:00'),
+  //       }}
+  //     />
+  //   </div>
+  // ))
