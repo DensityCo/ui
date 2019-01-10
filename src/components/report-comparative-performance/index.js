@@ -40,12 +40,9 @@ function getRangePreviousUnitValue(mode) {
 function getRangeName(mode, start, end=null) {
   switch (mode) {
   case COMPARATIVE_WEEK:
-    return <span>
-      <span className={styles.dateRangeStart}>{start.format('MMM D')} -</span>
-      <span className={styles.dateRangeEnd}>{end.format('MMM D')}</span>
-    </span>;
+    return <span>{start.format('MMM\u00a0D')}{'\u00a0'}- {end.format('MMM\u00a0D')}</span>;
   case COMPARATIVE_MONTH:
-    return <span>{start.format('MMM \'YY')}</span>;
+    return <span>{start.format('MMM\u00a0\'YY')}</span>;
   case COMPARATIVE_QUARTER:
     return <span>{`Q${start.quarter()} '${start.format('YY')}`}</span>;
   default:
@@ -125,7 +122,7 @@ export default function ReportComparativePerformance({
               })}>
                 {p.busiestDays.length === 0 ? '-' : 
                   text.toEnglishList(p.busiestDays.map(i => <span>
-                    {data.length > 3 ? i.day.slice(0, 3) : `${i.day}s`}
+                    {data.length > 3 ? i.day.slice(0, 3) : i.day}{mode === COMPARATIVE_WEEK ? '' : 's'}
                   </span>))}
               </td>)}
             </tr>
@@ -136,10 +133,8 @@ export default function ReportComparativePerformance({
               })}>
                 {p.busiestHours.length === 0 ? '-' : text.toEnglishList(p.busiestHours.map(i => 
                   <span>
-                    <span className={styles.peakHourDayLabel}>
-                      {data.length > 3 ? i.day.slice(0, 3) : `${i.day}s`}
-                    </span>{' '}
-                    <span className={styles.peakHourLabel}>@ {i.hour}</span>
+                    {data.length > 3 ? i.day.slice(0, 3) : i.day}{mode === COMPARATIVE_WEEK ? '' : 's'}
+                    {' '}@{'\u00a0'}{i.hour}
                   </span>
                 ))}
               </td>)}
