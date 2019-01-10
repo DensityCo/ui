@@ -3,10 +3,8 @@ import classnames from 'classnames';
 import commaNumber from 'comma-number';
 
 import styles from './styles.scss';
-import colors from '../../variables/colors';
 
 import { text } from '@density/ui';
-import { IconArrowUp, IconArrowDown } from '@density/ui-icons';
 import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 
 export const COMPARATIVE_WEEK = 'WEEK',
