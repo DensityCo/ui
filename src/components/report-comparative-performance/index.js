@@ -1,22 +1,17 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import classnames from 'classnames';
-import moment from 'moment';
 import commaNumber from 'comma-number';
 
 import styles from './styles.scss';
+import colors from '../../variables/colors';
 
+import { text } from '@density/ui';
+import { IconArrowUp, IconArrowDown } from '@density/ui-icons';
 import ReportWrapper, { ReportCard, ReportSubHeader } from '@density/ui-report-wrapper';
 
 export const COMPARATIVE_WEEK = 'WEEK',
              COMPARATIVE_MONTH = 'MONTH',
              COMPARATIVE_QUARTER = 'QUARTER';
-
-const MODE_TO_UNIT = {
-  [COMPARATIVE_WEEK]: 'week',
-  [COMPARATIVE_MONTH]: 'month',
-  [COMPARATIVE_QUARTER]: 'quarter',
-};
 
 function getRangeLastUnitValue(mode) {
   switch (mode) {
@@ -42,14 +37,17 @@ function getRangePreviousUnitValue(mode) {
     return null;
   }
 }
-function getRangeName(mode, start) {
+function getRangeName(mode, start, end=null) {
   switch (mode) {
   case COMPARATIVE_WEEK:
-    return `Week of ${start.format('MMM D')}`
+    return <span>
+      <span className={styles.dateRangeStart}>{start.format('MMM D')} -</span>
+      <span className={styles.dateRangeEnd}>{end.format('MMM D')}</span>
+    </span>;
   case COMPARATIVE_MONTH:
-    return `${start.format('MMMM')}`;
+    return <strong>{start.format('MMMM')}</strong>;
   case COMPARATIVE_QUARTER:
-    return `Q${start.quarter()}`;
+    return <strong>{`Q${start.quarter()}`}</strong>;
   default:
     return null;
   }
@@ -58,23 +56,19 @@ function getRangeName(mode, start) {
 export default function ReportComparativePerformance({
   title,
   space,
-
   mode,
-  lastData,
-  previousData,
-  lastStartDate,
-  lastEndDate,
-  previousStartDate,
-  previousEndDate,
+  data,
 }) {
-  const unit = MODE_TO_UNIT[mode];
 
-  const visitPercentageDifference = (
-    lastData.totalVisits - previousData.totalVisits
-  ) / previousData.totalVisits;
-  const peakCountPercentageDifference = (
-    lastData.averagePeakCount - previousData.averagePeakCount
-  ) / previousData.averagePeakCount;
+  if (data.length < 2) {
+    throw new Error('Data must be at least 2 periods in length.');
+  }
+
+  const getPercentageDifference = index => (
+    data[index].totalVisits - data[index - 1].totalVisits
+  ) / data[index - 1].totalVisits;
+
+  const lastPercentageDifference = getPercentageDifference(data.length - 1);
 
   return (
     <ReportWrapper
@@ -85,8 +79,11 @@ export default function ReportComparativePerformance({
         title={(
           <span>
             <strong>{getRangeLastUnitValue(mode)}</strong> had{' '}
-            <strong>{visitPercentageDifference === Infinity ? <span>&infin;</span> : Math.round(Math.abs(visitPercentageDifference * 100) * 10) / 10}%</strong>{' '}
-            {visitPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
+            <strong>{lastPercentageDifference === Infinity ?
+              <span>&infin;</span> :
+              commaNumber(Math.round(Math.abs(lastPercentageDifference * 100) * 10) / 10)
+            }%</strong>{' '}
+            {lastPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
             than {getRangePreviousUnitValue(mode)}.
           </span>
         )}
@@ -96,77 +93,51 @@ export default function ReportComparativePerformance({
           <thead>
             <tr>
               <th></th>
-              <th className={styles.tableHighlight}>
-                <strong>{getRangeName(mode, previousStartDate)}</strong>
-                <span className={styles.subheading}>
-                  <span className={styles.subheadingDate}>{previousStartDate.format('MMM D, YYYY')}</span> -{' '}
-                  <span className={styles.subheadingDate}>{previousEndDate.format('MMM D, YYYY')}</span>
-                </span>
-              </th>
-              <th>
-                <strong>{getRangeName(mode, lastStartDate)}</strong>
-                <span className={styles.subheading}>
-                  <span className={styles.subheadingDate}>{lastStartDate.format('MMM D, YYYY')}</span> -{' '}
-                  <span className={styles.subheadingDate}>{lastEndDate.format('MMM D, YYYY')}</span>
-                </span>
-              </th>
+              {data.map((p, index) => <th className={classnames({
+                [styles.tableHighlight]: index % 2 === 0
+              })}>
+                {getRangeName(mode, p.startDate, p.endDate)}
+              </th>)}
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Total Visits</td>
-              <td className={styles.tableHighlight}>{commaNumber(previousData.totalVisits)}</td>
-              <td>
-                {commaNumber(lastData.totalVisits)}{' '}
-                <span className={classnames(styles.percentage, {
-                  [styles.percentagePositive]: visitPercentageDifference > 0,
-                  [styles.percentageNegative]: visitPercentageDifference < 0,
+              {data.map((p, index) => {
+                const percentageDifference = index > 0 ? getPercentageDifference(index) : null;
+                return <td style={{position: 'relative'}} className={classnames('totalVisitsDescriptor', {
+                  [styles.tableHighlight]: index % 2 === 0
                 })}>
-                  {
-                    peakCountPercentageDifference === Infinity ?
-                    <span>&infin;</span> :
-                    Math.round(Math.abs(visitPercentageDifference * 100) * 10) / 10
-                  }%
-                </span>
-              </td>
+                  <strong>{commaNumber(p.totalVisits)}</strong>
+                  {percentageDifference > 0 ? <span className={styles.deltaArrow}>
+                    <IconArrowUp height={10} color={colors.reportGreen} />
+                  </span> : null}
+                  {percentageDifference < 0 ?  <span className={styles.deltaArrow}>
+                    <IconArrowDown height={10} color={colors.reportRed} />
+                  </span> : null}
+                </td>;
+              })}
             </tr>
             <tr>
-              <td>Average Peak Count</td>
-              <td className={styles.tableHighlight}>{commaNumber(previousData.averagePeakCount)}</td>
-              <td>
-                {commaNumber(lastData.averagePeakCount)}{' '}
-                <span className={classnames(styles.percentage, {
-                  [styles.percentagePositive]: peakCountPercentageDifference > 0,
-                  [styles.percentageNegative]: peakCountPercentageDifference < 0,
-                })}>
-                  {
-                    peakCountPercentageDifference === Infinity ?
-                      <span>&infin;</span> :
-                      Math.round(Math.abs(peakCountPercentageDifference * 100) * 10) / 10
-                  }%
-                </span>
-              </td>
+              <td>Busiest Day</td>
+              {data.map((p, index) => <td className={classnames({
+                [styles.tableHighlight]: index % 2 === 0
+              })}>
+                {text.toEnglishList(p.busiestDays.map(i => <strong>{i.day}</strong>))}
+              </td>)}
             </tr>
             <tr>
-              <td>Average Peak Time</td>
-              <td className={styles.tableHighlight}>
-                {
-                  moment.utc()
-                    .startOf('day')
-                    .add(previousData.averagePeakTime.asSeconds(), 'seconds')
-                    .format('h:mma')
-                    .slice(0, -1)
-                }
-              </td>
-              <td>
-                {
-                  moment.utc()
-                    .startOf('day')
-                    .add(lastData.averagePeakTime.asSeconds(), 'seconds')
-                    .format('h:mma')
-                    .slice(0, -1)
-                }
-              </td>
+              <td>Busiest Hour</td>
+              {data.map((p, index) => <td className={classnames({
+                [styles.tableHighlight]: index % 2 === 0
+              })}>
+                {text.toEnglishList(p.busiestHours.map(i => 
+                  <span>
+                    <span className={styles.peakHourLabel}><strong>{i.hour}</strong></span>{' '}
+                    <span className={styles.peakHourDayLabel}>on <strong>{i.day}</strong></span>
+                  </span>
+                ))}
+              </td>)}
             </tr>
           </tbody>
         </table>

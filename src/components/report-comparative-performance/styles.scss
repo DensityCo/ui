@@ -44,13 +44,11 @@
 }
 .subheadingDate { white-space: nowrap; }
 
-.percentage {
-  color: $gray-darker;
-  font-size: 11px;
-}
-.percentage:before { content: '('; }
-.percentage:after { content: ')'; }
-.percentageNegative { color: $report-red; }
-.percentageNegative:before { content: '(-'; }
-.percentagePositive { color: $report-green; }
-.percentagePositive:before { content: '(+'; }
+.dateRangeStart { display: inline-block; margin-right: .333em; }
+.dateRangeEnd { display: inline-block; }
+
+.peakHourLabel { display: inline-block; }
+.peakHourDayLabel { display: inline-block; }
+
+.totalVisitsDescriptor { position: relative; }
+.deltaArrow { position: absolute; top: 16px; }
