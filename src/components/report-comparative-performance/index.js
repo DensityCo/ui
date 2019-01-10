@@ -81,7 +81,10 @@ export default function ReportComparativePerformance({
             <strong>{getRangeLastUnitValue(mode)}</strong> had{' '}
             <strong>{lastPercentageDifference === Infinity ?
               <span>&infin;</span> :
-              commaNumber(Math.round(Math.abs(lastPercentageDifference * 100) * 10) / 10)
+              commaNumber(lastPercentageDifference >= 1 ?
+                Math.round(Math.abs(lastPercentageDifference * 100)) :
+                Math.round(Math.abs(lastPercentageDifference * 100) * 10) / 10
+              )
             }%</strong>{' '}
             {lastPercentageDifference >= 0 ? 'more' : 'fewer'} visits{' '}
             than {getRangePreviousUnitValue(mode)}.
