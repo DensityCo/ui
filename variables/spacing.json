@@ -1,6 +1,6 @@
 {
-  "borderRadiusBase": 4,
-  "borderRadiusSmall": 2,
+  "borderRadiusBase": 2,
+  "borderRadiusSmall": 1,
 
   "reportRowHeight": 35
 }

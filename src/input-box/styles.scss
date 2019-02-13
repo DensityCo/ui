@@ -12,12 +12,12 @@
   resize: none;
 
   font-family: $font-base;
-  font-size: $font-size-base;
+  font-size: 16px;
 
   color: $gray-darker;
   background-color: #fff;
 
-  border: 1px solid $gray-light;
+  border: 1px solid $gray-darker;
   border-radius: $border-radius-base;
 
   // Remove shadow on inside of boxes on ios
@@ -46,7 +46,7 @@
   &::-moz-placeholder,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
-    color: $gray;
+    color: $gray-cinder;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
 }
@@ -60,7 +60,7 @@
 
   background-color: #fff;
   border: 1px solid $gray-light;
-  border-radius: 4px;
+  border-radius: $border-radius-base;
 
   padding-left: 15px;
   padding-right: 15px;
