@@ -1,5 +1,7 @@
 # Density UI
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/DensityCo/ui.svg)](https://greenkeeper.io/)
+
 Density UI is a collection of Density-branded controls and styles for use in web projects.
 <br />
 
