@@ -37,9 +37,9 @@
     "node-sass": "^4.12.0",
     "pretty": "^2.0.0",
     "prop-types": "^15.7.2",
-    "react-live": "^1.12.0",
+    "react-live": "^2.1.2",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
+    "style-loader": "^1.0.0",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
@@ -50,7 +50,7 @@
     "normalize.css": "^8.0.1",
     "react-addons-shallow-compare": "^15.6.2",
     "react-phone-number-input": "^2.3.17",
-    "react-svg-pan-zoom": "^2.18.0",
+    "react-svg-pan-zoom": "^3.1.0",
     "regenerator-runtime": "^0.13.1",
     "uuid": "^3.3.2"
   },
