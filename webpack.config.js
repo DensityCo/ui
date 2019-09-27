@@ -17,7 +17,7 @@ for (const key in package.peerDependencies) {
 }
 
 module.exports = {
-  entry: path.join(path.resolve(__dirname), 'src', 'index.js'),
+  entry: path.join(path.resolve(__dirname), 'src', 'index.ts'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
@@ -27,13 +27,24 @@ module.exports = {
   externals: [
     peerDependencies,
   ],
+  resolve: {
+    extensions: ['.wasm', '.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
+  },
 
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: {
+          loader: 'ts-loader',
+          options: {
+            configFile: 'tsconfig.json'
+          }
+        },
+      },
+
+      {
         test: /\.jsx?$/,
-        // skip all of node_modules EXCEPT for modules > ES5
-        //exclude: /node_modules\/(?![camelcase])/,
         use: {
           loader: 'babel-loader',
           options: {

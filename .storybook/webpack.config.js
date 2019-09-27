@@ -3,6 +3,9 @@ const path = require('path');
 const jsonImporter = require('@density/node-sass-json-importer');
 
 module.exports = {
+  resolve: {
+    extensions: ['.wasm', '.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
+  },
   module: {
     rules: [
       // *.scss files are processed through three steps:
@@ -50,29 +53,12 @@ module.exports = {
       },
 
       {
-        test: /\.jsx?$/,
-        // skip all of node_modules EXCEPT for modules > ES5
-        exclude: /node_modules\/(?![camelcase])/,
+        test: /\.tsx?$/,
         use: {
-          loader: 'babel-loader',
+          loader: 'ts-loader',
           options: {
-            presets: [
-              // compile jsx => React.createElement
-              '@babel/preset-react',
-              // use "modern" javascript, whatever that means
-              ['@babel/preset-env', {
-                // provide polyfills as necessary
-                'useBuiltIns': 'entry',
-                'targets': '>0.2%, not dead, not ie <= 10, not op_mini all'
-              }]
-            ],
-            plugins: [
-              // convert async / await => generators (then generators => regenerator-runtime)
-              '@babel/plugin-transform-async-to-generator',
-              // support for class properties for class components etc
-              '@babel/plugin-proposal-class-properties'
-            ],
-          },
+            configFile: path.join(path.resolve(__dirname, '../'), 'tsconfig.json'),
+          }
         },
       },
 
@@ -82,6 +68,16 @@ module.exports = {
           {
             loader: require.resolve('@storybook/addon-storysource/loader'),
             options: { parser: 'javascript' },
+          },
+        ],
+        enforce: 'pre',
+      },
+      {
+        test: /story\.tsx?$/,
+        loaders: [
+          {
+            loader: require.resolve('@storybook/addon-storysource/loader'),
+            options: { parser: 'typescript' },
           },
         ],
         enforce: 'pre',
