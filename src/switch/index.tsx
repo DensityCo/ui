@@ -3,8 +3,14 @@ import uuid from 'uuid';
 import classnames from 'classnames';
 
 import styles from './styles.scss';
+	
+type SwitchProps = {
+  value: boolean,
+  disabled?: boolean,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+};
 
-export default function Switch({value, disabled, onChange}) {
+const Switch: React.FunctionComponent<SwitchProps> = ({value, disabled, onChange}) => {
   const uniqueId = uuid.v4();
 
   return (
@@ -21,3 +27,4 @@ export default function Switch({value, disabled, onChange}) {
 }
 
 Switch.displayName = 'Switch';
+export default Switch;

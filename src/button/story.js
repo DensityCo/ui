@@ -52,11 +52,11 @@ storiesOf('Button', module)
   .add('Underline danger button', () => (
     <Button variant="underline" type="danger">Hello world!</Button>
   ))
-  .add('Button with icon', () => (
-    <Button size="small" width={40} height={40}>
-      <Icons.Soup />
-    </Button>
-  ))
+  // .add('Button with icon', () => (
+  //   <Button size="small" width={40} height={40}>
+  //     <Icons.Soup />
+  //   </Button>
+  // ))
   .add('Two buttons in a button group', () => (
     <ButtonGroup>
       <Button variant="underline">Cancel</Button>

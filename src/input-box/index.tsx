@@ -13,105 +13,159 @@ const CONTEXT_CLASSES = {
   'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
 };
 
-export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
-  ANCHOR_LEFT = 'ANCHOR_LEFT';
+export enum InputBoxAnchor {
+	ANCHOR_RIGHT = 'ANCHOR_RIGHT',
+	ANCHOR_LEFT = 'ANCHOR_LEFT',
+}
 
-export const InputBoxContext = React.createContext(null);
+// For backwards compatibility
+export const ANCHOR_RIGHT = InputBoxAnchor.ANCHOR_RIGHT,
+						 ANCHOR_LEFT = InputBoxAnchor.ANCHOR_LEFT;
 
-function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
+export const InputBoxContext = React.createContext<keyof typeof CONTEXT_CLASSES>(null);
+
+type InputBoxRawProps = InputBoxProps & {
+	forwardedRef: React.Ref<HTMLInputElement | HTMLTextAreaElement>,
+};
+
+const InputBoxRaw: React.FunctionComponent<InputBoxRawProps> = ({forwardedRef, ...props}) => {
   const [focused, setFocus] = useState(false);
   const defaultInputRef = useRef();
-  const input = forwardedRef || defaultInputRef;
+  const input = (forwardedRef || defaultInputRef) as React.RefObject<HTMLInputElement | HTMLTextAreaElement>;
 
   switch (props.type) {
+		case 'select': {
+			return <SelectBox {...(props as InputBoxSelectBoxProps)} />;
+		}
 
-  case 'select':
-    return <SelectBox {...props} />;
+		case 'textarea': {
+			const textAreaProps = props as InputBoxTextAreaProps;
+			return <textarea
+				{...textAreaProps}
+				style={{width: textAreaProps.width, height: textAreaProps.height}}
+				className={styles.inputBoxTextarea}
+				ref={input as React.Ref<HTMLTextAreaElement>}
+			/>;
+		}
 
-  case 'textarea':
-    return <textarea
-      {...props}
-      style={{width: props.width, height: props.height}}
-      className={styles.inputBoxTextarea}
-      ref={input}
-    />;
-
-  default:
-    return (
-      <div
-        className={classnames(styles.inputBox, {
-          [styles.inputBoxDisabled]: props.disabled,
-          [styles.inputBoxFocused]: focused,
-          [styles.inputBoxContainsIcon]: Boolean(leftIcon),
-          [styles.invalid]: props.invalid,
-        })}
-        style={{width: props.width}}
-        onClick={() => {
-          if (input && input.current) {
-            input.current.focus();
-          }
-        }}
-      >
-        {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
-        <input
-          {...props}
-          ref={input}
-          onFocus={(...args) => {
-            setFocus(true);
-            if (props.onFocus) { props.onFocus(...args); }
-          }}
-          onBlur={(...args) => {
-            setFocus(false);
-            if (props.onBlur) { props.onBlur(...args); }
-          }}
-        />
-      </div>
-    );
+		default: {
+			const {
+				invalid,
+				leftIcon,
+				onFocus,
+				onBlur,
+			} = props as (InputElementProps & AdditionalInputBoxProps);
+			return (
+				<div
+					className={classnames(styles.inputBox, {
+						[styles.inputBoxDisabled]: props.disabled,
+						[styles.inputBoxFocused]: focused,
+						[styles.inputBoxContainsIcon]: Boolean(leftIcon),
+						[styles.invalid]: invalid,
+					})}
+					style={{width: props.width}}
+					onClick={() => {
+						if (input && input.current) {
+							input.current.focus();
+						}
+					}}
+				>
+					{leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
+					<input
+						{...(props as InputElementProps)}
+						ref={input as React.Ref<HTMLInputElement>}
+						onFocus={(...args) => {
+							setFocus(true);
+							if (onFocus) { onFocus(...args); }
+						}}
+						onBlur={(...args) => {
+							setFocus(false);
+							if (onBlur) { onBlur(...args); }
+						}}
+					/>
+				</div>
+			);
+		}
   }
 };
 
-const InputBox = React.forwardRef((props, ref) => (
+export type InputBoxChoice = {
+	id: any,
+	label: React.ReactNode,
+	disabled?: boolean,
+};
+
+type InputElementProps = React.InputHTMLAttributes<HTMLInputElement>;
+type TextAreaElementProps = React.InputHTMLAttributes<HTMLTextAreaElement>;
+
+type AdditionalInputBoxProps = {
+	leftIcon?: React.ReactNode,
+	invalid?: boolean,
+};
+
+type InputBoxSelectBoxProps = SelectBoxProps & { type: 'select' };
+
+type InputBoxTextAreaProps = TextAreaElementProps & {
+	type: 'textarea',
+	width?: React.ReactText,
+	height?: React.ReactText,
+};
+
+type InputBoxProps = (
+	| InputBoxSelectBoxProps
+	| InputBoxTextAreaProps
+	| (InputElementProps & AdditionalInputBoxProps) // For all other input box varieties
+);
+
+const InputBox = React.forwardRef((
+	props: InputBoxProps,
+	ref: React.Ref<HTMLInputElement | HTMLTextAreaElement>
+) => (
   <InputBoxRaw {...props} forwardedRef={ref} />
 ));
+
 InputBox.displayName = 'InputBox';
-InputBox.propTypes = {
-  type: propTypes.string,
-  value: propTypes.any,
-  choices: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.any,
-    label: propTypes.node,
-    disabled: propTypes.bool,
-  })),
-};
 export default InputBox;
 
-export class SelectBox extends React.Component {
-  constructor(props) {
-    super(props);
+type SelectBoxProps = {
+	choices: Array<InputBoxChoice>,
+	onChange: (choice: InputBoxChoice) => void,
+	value: InputBoxChoice | InputBoxChoice['id'] | null,
+	anchor?: InputBoxAnchor,
+	width?: React.ReactText,
+	listBoxWidth?: React.ReactText,
+	id?: string,
+	disabled?: boolean,
+	placeholder?: string,
+	menuMaxHeight?: React.ReactText,
+	invalid?: boolean,
+};
 
-    this.state = {
-      opened: false,
-    };
+export class SelectBox extends React.Component<SelectBoxProps, {opened: boolean}> {
+	selectBoxValueRef?: HTMLDivElement;
+	static displayName: string;
+	state = {
+		opened: false,
+	};
 
-    // Called when the user focuses either the value or an item in the menu part of the box.
-    this.onMenuFocus = () => {
-      this.setState({opened: true});
-    };
+	// Called when the user focuses either the value or an item in the menu part of the box.
+	onMenuFocus = () => {
+		this.setState({opened: true});
+	};
 
-    // Called when the user blurs either the value or an item in the menu part of the box.
-    this.onMenuBlur = (e) => {
-      this.setState({opened: false});
-    };
+	// Called when the user blurs either the value or an item in the menu part of the box.
+	onMenuBlur = (e) => {
+		this.setState({opened: false});
+	};
 
-    // Called when the user selects an item within the menu of the select box.
-    this.onMenuItemSelected = choice => {
-      this.setState({opened: false}, () => {
-        if (this.props.onChange) {
-          const isDefault = String(choice.id).toLowerCase() === 'default';
-          this.props.onChange(isDefault ? null : choice);
-        }
-      });
-    }
+	// Called when the user selects an item within the menu of the select box.
+	onMenuItemSelected = choice => {
+		this.setState({opened: false}, () => {
+			if (this.props.onChange) {
+				const isDefault = String(choice.id).toLowerCase() === 'default';
+				this.props.onChange(isDefault ? null : choice);
+			}
+		});
   }
 
   render() {
@@ -157,10 +211,10 @@ export class SelectBox extends React.Component {
 
           onFocus={this.onMenuFocus}
           onBlur={this.onMenuBlur}
-          onKeyDown={e => {
+          onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
             if (e.keyCode === 27 /* escape */) {
               /* Blur the select value box, which closes the dropdown */
-              e.target.blur();
+              e.currentTarget.blur();
             }
           }}
           onMouseDown={e => {
@@ -210,13 +264,13 @@ export class SelectBox extends React.Component {
 
                 onFocus={this.onMenuFocus}
                 onBlur={this.onMenuBlur}
-                onKeyDown={e => {
+                onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) => {
                   if (e.keyCode === 13 /* enter */) {
                     /* Select this item in the menu */
                     this.onMenuItemSelected(choice);
                   } else if (e.keyCode === 27 /* escape */) {
                     /* Blur this item, which closes the dropdown */
-                    e.target.blur();
+                    e.currentTarget.blur();
                   }
                 }}
                 onMouseDown={e => {
@@ -237,15 +291,4 @@ export class SelectBox extends React.Component {
     )}</InputBoxContext.Consumer>;
   }
 }
-
 SelectBox.displayName = 'SelectBox';
-SelectBox.propTypes = {
-  value: propTypes.any,
-  choices: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.any,
-    label: propTypes.node,
-    disabled: propTypes.bool,
-  })),
-  menuMaxHeight: propTypes.number,
-  placeholder: propTypes.string,
-};

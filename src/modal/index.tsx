@@ -1,17 +1,24 @@
 import React, { useRef, useEffect } from 'react';
-import propTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import styles from './styles.scss';
 
-export default function Modal({
+type ModalProps = {
+	visible: boolean,
+	width?: React.ReactText,
+	height?: React.ReactText,
+	onBlur?: () => void,
+	onEscape?: () => void,
+};
+
+const Modal: React.FunctionComponent<ModalProps> = ({
   visible,
   width, 
   height,
   children,
   onBlur,
   onEscape,
-}) {
+}) => {
   const dialog = useRef(null);
   const container = useRef(null);
   useEffect(() => {
@@ -19,7 +26,7 @@ export default function Modal({
     container.current.scrollTop = 0;
   }, [visible]);
 
-  const inlineStyle = {};
+  const inlineStyle: Any<FixInRefactor> = {};
   if (width) {
     inlineStyle.width = '100%';
     inlineStyle.maxWidth = width;
@@ -33,7 +40,7 @@ export default function Modal({
       tabIndex={0}
       className={classnames(styles.dashboardModalBackdrop, {[styles.visible]: visible})}
       onKeyDown={e => e.keyCode === 27 && onEscape && onEscape()}
-      onMouseDown={onBlur}
+      onMouseDown={() => onBlur()}
       ref={container}
     >
       <div
@@ -50,13 +57,5 @@ export default function Modal({
   );
 }
 
-Modal.propTypes = {
-  visible: propTypes.bool.isRequired,
-  children: propTypes.node.isRequired,
-  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  height: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  onBlur: propTypes.func,
-  onEscape: propTypes.func,
-  onEscape: propTypes.func,
-};
 Modal.displayName = 'Modal';
+export default Modal;

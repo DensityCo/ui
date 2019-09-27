@@ -1,6 +1,12 @@
 import React from "react";
 
-const DensityMark = ({color, width, height}) => <svg width={width || 16} height={height || 14} viewBox='0 0 16 14' xmlns='http://www.w3.org/2000/svg'>
+type DensityMarkProps = {
+	color?: string,
+	width?: string | number,
+	height?: string | number,
+};
+
+const DensityMark: React.FunctionComponent<DensityMarkProps> = ({color, width, height}) => <svg width={width || 16} height={height || 14} viewBox='0 0 16 14' xmlns='http://www.w3.org/2000/svg'>
 <g id='Icons' fill='none' fillRule='evenodd'>
    <g id='icons' transform='translate(-71 -493)'>
        <g id='IconDensityMark' transform='translate(69 490)'>

@@ -7,14 +7,42 @@ import InputBox from '../input-box';
 
 const NULL_CHARACTER = String.fromCharCode(0);
 
-export default class TagInput extends Component {
-  tagWrapper = React.createRef();
+type TagInputChoice = {
+	id: string | number,
+	label: string,
+};
+
+type TagInputProps = {
+	choices: Array<TagInputChoice>,
+	tags: Array<TagInputChoice>,
+	placeholder?: string,
+	emptyTagsPlaceholder?: string,
+	canCreateTags?: boolean,
+	openDropdownOnFocus?: boolean,
+	onCreateNewTag?: (text: string) => void,
+	onAddTag: (value: TagInputChoice) => void,
+	onRemoveTag: (value: TagInputChoice) => void,
+};
+
+type TagInputState = {
+  text: string,
+  focused: boolean,
+  dropdownOpen: boolean,
+  focusedTagId: TagInputChoice['id'] | null,
+  focusedDropdownItemIndex: number,
+};
+
+export default class TagInput extends Component<TagInputProps, TagInputState> {
+  tagWrapper = React.createRef<HTMLDivElement>();
 
   static defaultProps = {
     choices: [],
     tags: [],
     placeholder: 'Select a tag',
     emptyTagsPlaceholder: 'No tags',
+		canCreateTags: true,
+		onCreateNewTag: () => {},
+		openDropdownOnFocus: false,
   };
 
   constructor(props) {
@@ -243,8 +271,3 @@ export default class TagInput extends Component {
     );
   }
 }
-
-TagInput.defaultProps = {
-  canCreateTags: true,
-  onCreateNewTag: () => {},
-};

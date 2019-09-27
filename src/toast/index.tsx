@@ -1,17 +1,22 @@
 import React, { useContext } from 'react';
-import propTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
 import styles from './styles.scss';
 
-export const ToastContext = React.createContext(null);
+export const ToastContext = React.createContext<keyof typeof CONTEXT_CLASSES>(null);
 
 const CONTEXT_CLASSES = {
   MULTILINE: styles.multiline,
 };
 
-export default function Toast({ type, visible, onDismiss, children }) {
+type ToastProps = {
+	type?: 'default' | 'error',
+  visible: boolean,
+  onDismiss: () => void,
+};
+
+const Toast: React.FunctionComponent<ToastProps> = ({ type='default', visible, onDismiss, children }) => {
   const context = useContext(ToastContext);
   return (
     <div className={classnames(
@@ -21,15 +26,9 @@ export default function Toast({ type, visible, onDismiss, children }) {
       {[styles.visible]: visible},
     )}>
       <span className={styles.toastText}>{children}</span>
-      <span role="button" className={styles.toastDismiss} onClick={onDismiss}>Dismiss</span>
+      <span role="button" className={styles.toastDismiss} onClick={() => onDismiss()}>Dismiss</span>
     </div>
   );
 }
-Toast.defaultProps = { type: 'default' };
-Toast.propTypes = {
-  type: propTypes.oneOf(['default', 'error']),
-  visible: propTypes.bool,
-  onDismiss: propTypes.func,
-  children: propTypes.node.isRequired,
-};
 Toast.displayName = 'Toast';
+export default Toast;
