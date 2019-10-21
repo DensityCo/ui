@@ -1,0 +1,45 @@
+// Import any global variables from "../../variables/*.scss"
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+
+.wrapper {
+  display: flex;
+}
+.item { margin-right: 4px; }
+.item:last-child { margin-right: 0px; }
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  color: $grayDarkest;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #fff;
+  border: 1px solid $grayDark;
+  border-radius: $borderRadiusSmall;
+  cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease-in-out;
+  outline: none;
+}
+.button.active {
+  background-color: $brandPrimary;
+  border-color: $brandPrimary;
+  color: #fff;
+}
+.button.disabled {
+  cursor: default;
+  background-color: #fff;
+  color: $grayDarker;
+  border-color: $grayDark;
+}
+.button.active.disabled {
+  cursor: default;
+  background-color: $grayDark;
+  color: #fff;
+  border-color: $grayDark;
+}
