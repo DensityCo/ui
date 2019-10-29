@@ -7,6 +7,7 @@ export { default as AppPane } from './app-pane';
 export { default as AppScrollView } from './app-scroll-view';
 export { default as AppSidebar } from './app-sidebar';
 export { default as Button, ButtonContext, ButtonGroup } from './button';
+export { default as Checkbox } from './checkbox';
 export { default as DashboardReportGrid } from './dashboard-report-grid';
 export { default as DatePicker, DatePickerContext, DatePickerAnchor } from './date-picker';
 export { default as DateRangePicker, DateRangePickerContext } from './date-range-picker';
