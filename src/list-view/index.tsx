@@ -1,4 +1,3 @@
-/*
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import { v4 } from 'uuid';
@@ -18,34 +17,17 @@ const TABLE_HEADER = 'TABLE_HEADER',
     'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
   };
 
-type ListViewContextType = {
-	mode: TABLE_HEADER | TABLE_ROW,
-	height: number,
-	fontSize: number,
-	rowHeaderWidth: number,
-	item,
-};
-
-const ListViewContext = React.createContext<ListViewContextType>({});
-
-type ListViewProps<T extends { id: string }> = {
-  data: Array<T>,
-  sort: Array<{column: any, direction: any}>,
-  onClickHeader: (column: any, template: Function | null) => void,
-  onClickRow: (item: T) => void,
-
-  keyTemplate?: (item: T) => string | number,
-  showHeaders?: boolean,
-  fixedWidth?: boolean,
-  padOuterColumns?: boolean,
-  scrollX?: boolean,
-  rowHeight?: number,
-  headerHeight?: number,
+const ListViewContext = React.createContext({} as {
+  mode?: typeof TABLE_HEADER | typeof TABLE_ROW,
+  height?: number,
   fontSize?: number,
-  headerFontSize?: number,
-};
+  rowHeaderWidth?: number,
+  item?,
+  sort?,
+  onClickHeader?,
+});
 
-function ListView<T>({
+export default function ListView({
   data = [],
   sort = [],
   onClickHeader = null,
@@ -62,10 +44,11 @@ function ListView<T>({
   fontSize = undefined,
   headerFontSize = undefined,
   children = null,
-}: ListViewProps<T> & { children: React.ReactNode }) {
+}) {
+
   // Handle scrolling with state, refs, and a listener
-  const containerRef = useRef();
-  const tableRef = useRef();
+  const containerRef = useRef<HTMLDivElement>();
+  const tableRef = useRef<HTMLTableElement>();
   const [tableShadows, setTableShadows] = useState({left: false, right: false});
 
   useEffect(() => {
@@ -91,7 +74,7 @@ function ListView<T>({
   });
 
   // Compute total width of "row headers"
-  const rowHeaderWidth: number = React.Children.toArray(children).reduce((a, n) => {
+  const rowHeaderWidth = React.Children.toArray(children).reduce((a, n) => {
     a += n.props.isRowHeader ? n.props.width : 0;
     return a;
   }, 0);
@@ -157,34 +140,19 @@ function ListView<T>({
   );
 }
 
-type ListViewColumnProps = {
-  id: string,
-  title?: React.ReactNode,
-  template: (item: any) => React.ReactNode,
-  valueTemplate?: (item: any) => React.ReactNode,
-  onClick?: (item: any) => void,
-  disabled?: (item: any) => boolean,
-  isRowHeader?: boolean,
+export function ListViewColumn({
+  id,
+  title = null,
+  template = null as any,
+  valueTemplate = null,
+  onClick = null,
+  disabled = item => false,
+  isRowHeader = false,
 
-  width?: string | number,
-  minWidth?: string | number,
-  align?: string | number,
-};
-
-export const ListViewColumn: React.FunctionalComponent<ListViewColumnProps> = (props) => {
-  const {
-    id,
-    title = null,
-    template,
-    valueTemplate = null,
-    onClick = null,
-    disabled = item => false,
-    isRowHeader = false,
-  
-    width = 'auto',
-    minWidth = 'auto',
-    align = 'left'
-  } = props;
+  width = 'auto',
+  minWidth = 'auto',
+  align = 'left'
+}) {
 
   const {
     mode,
@@ -301,4 +269,3 @@ export function getNextSortDirection(sortDirection) {
     'none': 'desc'
   }[sortDirection]
 };
-*/
