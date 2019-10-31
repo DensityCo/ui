@@ -6,12 +6,11 @@ import moment from 'moment';
 
 import InputBox from '../input-box';
 import Icons from '../icons';
-import { InputBoxChoice, InputBoxAnchor } from '../input-box';
 
 import styles from './styles.scss';
 
 export enum DateRangePickerAnchor {
-	ANCHOR_RIGHT = 'ANCHOR_RIGHT',
+	ANCHOR_RIGHT = 'ANCHOR_RIGHT',	
 	ANCHOR_LEFT = 'ANCHOR_LEFT',
 }
 
@@ -63,7 +62,7 @@ type DateRangePickerProps = {
 	onChange: (focus: {startDate: moment.Moment, endDate: moment.Moment}) => void,
 	focusedInput: DateRangePickerFocusedInput | null,
 	onFocusChange: (focus: DateRangePickerFocusedInput | null) => void,
-	anchor: InputBoxAnchor,
+	anchor: DateRangePickerAnchor,
 	commonRanges?: Array<CommonRange>,
 	showCommonRangeSubtitles?: boolean,
 	onSelectCommonRange?: (dates: {startDate: moment.Moment, endDate: moment.Moment}) => void,
@@ -91,7 +90,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = ({
         type="select"
         width={70 /* px */}
         listBoxWidth={200 /* px */}
-        anchor={context === 'SMALL_WIDTH' ? InputBoxAnchor.ANCHOR_RIGHT : anchor}
+        anchor={context === 'SMALL_WIDTH' ? 'ANCHOR_RIGHT' : anchor}
         value={{
           id: 'icon',
           label: <div style={{ marginTop: 4, marginLeft: -5, marginRight: 3 }}>
