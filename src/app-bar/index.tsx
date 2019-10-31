@@ -9,7 +9,7 @@ const CONTEXT_CLASSES = {
   'CARD_HEADER': styles.cardHeader,
 };
 
-export const AppBarContext = React.createContext(null);
+export const AppBarContext = React.createContext<any>(null);
 
 export function AppBarTitle({ children }: any) {
   return (
