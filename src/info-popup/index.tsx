@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import Icons from '../icons';
 import styles from './styles.scss';
 
-export default class InfoPopup extends Component {
+export default class InfoPopup extends Component<any, any> {
   constructor(props) {
     super(props);
 
@@ -32,14 +32,14 @@ export default class InfoPopup extends Component {
   }
 
   onResize() {
-    if (!this.popup || !this.icon) {
+    if (!(this as any).popup || !(this as any).icon) {
       return;
     }
     const { verticalPopupOffset } = this.props;
 
-    const containerBBox = this.container.getBoundingClientRect();
-    const popupBBox = this.popup.getBoundingClientRect();
-    const iconBBox = this.icon.getBoundingClientRect();
+    const containerBBox = (this as any).container.getBoundingClientRect();
+    const popupBBox = (this as any).popup.getBoundingClientRect();
+    const iconBBox = (this as any).icon.getBoundingClientRect();
 
     const windowWidth = window.innerWidth;
 
@@ -104,23 +104,23 @@ export default class InfoPopup extends Component {
 
     return <span
       className={styles.infoPopupContainer}
-      onMouseEnter={e => this.onShow(e)}
-      onMouseLeave={e => this.onHide(e)}
+      onMouseEnter={e => this.onShow()}
+      onMouseLeave={e => this.onHide()}
 
-      onTouchStart={e => this.onShow(e)}
+      onTouchStart={e => this.onShow()}
 
       tabIndex={0}
-      onFocus={e => this.onShow(e)}
-      onBlur={e => this.onHide(e)}
+      onFocus={e => this.onShow()}
+      onBlur={e => this.onHide()}
       style={{transform: `translate(${horizontalIconOffset || 0}px, ${verticalIconOffset || 0}px)`}}
-      ref={r => { this.container = r; }}
+      ref={r => { (this as any).container = r; }}
     >
       <span
         className={classnames(styles.infoPopupIcon, {
           [styles.infoPopupStockTarget]: !target,
           [styles.infoPopupIconVisible]: visible,
         })}
-        ref={r => { this.icon = r; }}
+        ref={r => { (this as any).icon = r; }}
       >
         {target || <Icons.Info color={infoIconColor || 'primary'}/>}
       </span>
@@ -132,7 +132,7 @@ export default class InfoPopup extends Component {
             [styles.infoPopupPopupSingleLine]: singleLine,
           })}
           style={{top, left}}
-          ref={r => { this.popup = r; }}
+          ref={r => { (this as any).popup = r; }}
         >
           {children}
         </div>
@@ -140,16 +140,6 @@ export default class InfoPopup extends Component {
     </span>;
   }
 }
-
-InfoPopup.displayName = 'InfoPopup';
-InfoPopup.propTypes = {
-  infoIconColor: propTypes.string,
-  singleLine: propTypes.bool,
-  horizontalIconOffset: propTypes.number,
-  verticalIconOffset: propTypes.number,
-  target: propTypes.node,
-  children: propTypes.node.isRequired,
-};
 
 export function InfoPopupCardWellHighlight(p) {
   const props = Object.assign({}, p);
@@ -163,9 +153,3 @@ export function InfoPopupCardWellHighlight(p) {
     </InfoPopup>
   );
 }
-
-InfoPopupCardWellHighlight.displayName = 'InfoPopupCardWellHighlight';
-InfoPopupCardWellHighlight.propTypes = {
-  target: propTypes.node.isRequired,
-  children: propTypes.node.isRequired,
-};
