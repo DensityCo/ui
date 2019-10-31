@@ -44,6 +44,21 @@ export default function ListView({
   fontSize = undefined,
   headerFontSize = undefined,
   children = null,
+}: {
+  data: Array<any>,
+  sort?: Array<any>,
+  onClickHeader?: Function | null,
+  onClickRow?: Function | null,
+  keyTemplate?: Function | null,
+  showHeaders?: boolean,
+  fixedWidth?: boolean,
+  padOuterColumns?: boolean,
+  scrollX?: boolean,
+  rowHeight?: number | undefined,
+  headerHeight?: number | undefined,
+  fontSize?: number | undefined,
+  headerFontSize?: number | undefined,
+  children?: any
 }) {
 
   // Handle scrolling with state, refs, and a listener
@@ -143,15 +158,25 @@ export default function ListView({
 export function ListViewColumn({
   id,
   title = null,
-  template = null as any,
+  template = null,
   valueTemplate = null,
   onClick = null,
   disabled = item => false,
   isRowHeader = false,
-
-  width = 'auto' as string | number,
-  minWidth = 'auto' as string | number,
+  width = 'auto',
+  minWidth = 'auto',
   align = 'left'
+}: {
+  id?: string,
+  title?: React.ReactNode,
+  template?: Function | null,
+  valueTemplate?: Function | null,
+  onClick?: Function | null,
+  disabled?: Function,
+  isRowHeader?: boolean,
+  width?: string | number,
+  minWidth?: string| number,
+  align?: 'left' | 'right' | 'center'
 }) {
 
   const {
