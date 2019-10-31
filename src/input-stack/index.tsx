@@ -1,11 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { inputStackHeight } from './variables.json';
 import styles from './styles.scss';
 import propTypes from 'prop-types';
 
-export function InputStackGroup({children}) {
+export const InputStackGroup: React.FC<any> = ({children}) => {
   return <div className={styles.inputStackGroup}>
     <div>{children}</div>
   </div>;

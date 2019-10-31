@@ -17,7 +17,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 
 export const DatePickerContext = React.createContext(null);
 
-export default function DatePicker(props: any) {
+const DatePicker: React.FC<any> = (props) => {
   const restProps = Object.assign({}, props);
   delete restProps.onChange;
   delete restProps.anchor;
@@ -95,3 +95,4 @@ DatePicker.propTypes = {
   arrowRightDisabled: propTypes.bool,
   arrowLeftDisabled: propTypes.bool,
 };
+export default DatePicker;

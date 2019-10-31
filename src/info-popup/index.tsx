@@ -151,7 +151,7 @@ export default class InfoPopup extends Component<any, any> {
 //   children: propTypes.node.isRequired,
 // };
 
-export function InfoPopupCardWellHighlight(p: any) {
+export const InfoPopupCardWellHighlight: React.FC<any> = p => {
   const props = Object.assign({}, p);
   const {target, children} = props;
   delete props.target;

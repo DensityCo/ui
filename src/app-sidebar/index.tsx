@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import styles from './styles.scss';
 
-export default function AppSidebar({ visible, width=415, children }: any) {
+const AppSidebar: React.FC<any> = ({ visible, width=415, children }) => {
   return <div
     className={classnames(styles.appSidebarCollapser, { [styles.visible]: visible })}
     style={{width: visible ? width : undefined}}
@@ -12,3 +12,4 @@ export default function AppSidebar({ visible, width=415, children }: any) {
 }
 
 AppSidebar.displayName = 'AppSidebar';
+export default AppSidebar;

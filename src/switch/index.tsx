@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import styles from './styles.scss';
 
-export default function Switch({value, disabled, onChange}: any) {
+const Switch: React.FC<any> = ({value, disabled, onChange}) => {
   const uniqueId = uuid.v4();
 
   return (
@@ -21,3 +21,4 @@ export default function Switch({value, disabled, onChange}: any) {
 }
 
 Switch.displayName = 'Switch';
+export default Switch;

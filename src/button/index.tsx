@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
@@ -25,7 +25,7 @@ export const BUTTON_TYPE_STYLES = {
   muted: styles.muted,
 };
 
-export default function Button({
+const Button: React.FC<any> = ({
   size,
   children,
   disabled,
@@ -37,8 +37,7 @@ export default function Button({
 
   href,
   ...props
-}: any) {
-  const context = useContext(ButtonContext);
+}) => {
   if (href) {
     return (
       <a
@@ -89,8 +88,9 @@ Button.propTypes = {
     'muted',
   ]),
 };
+export default Button;
 
-export function ButtonGroup({ children }: any) {
+export const ButtonGroup: React.FC<any> = ({ children }) => {
   return (
     <div className={styles.buttonGroup}>
       {children}

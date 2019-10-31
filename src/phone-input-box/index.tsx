@@ -5,12 +5,12 @@ import PhoneInput from 'react-phone-number-input';
 
 import './styles.scss';
 
-export default function PhoneInputBox({
+const PhoneInputBox: React.FC<any> = ({
   value = undefined,
   onChange = () => null,
   country = 'US',
   ...props
-}: any) {
+}) => {
   return <PhoneInput
     {...props}
     value={value}
@@ -21,3 +21,5 @@ export default function PhoneInputBox({
     onChange={onChange}
   />;
 }
+
+export default PhoneInputBox;

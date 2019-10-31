@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import styles from './styles.scss';
 import colorVariables from '../../variables/colors.json';
 
-export default function Skeleton({width, height, color, borderRadius}: any) {
+const Skeleton: React.FC<any> = ({width, height, color, borderRadius}) => {
   return (
     <span
       className={styles.skeleton}
@@ -25,3 +25,4 @@ Skeleton.defaultProps = {
   color: colorVariables.gray,
 };
 Skeleton.displayName = 'Skeleton';
+export default Skeleton;

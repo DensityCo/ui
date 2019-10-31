@@ -12,11 +12,11 @@ const DAYS_OF_WEEK = [
   'Sunday',
 ];
 
-export default function DayOfWeekSelector({
+const DayOfWeekSelector: React.FC<any> = ({
   daysOfWeek,
   disabled=false,
   onChange,
-}: any) {
+}) => {
   return (
     <div className={styles.wrapper}>
       {DAYS_OF_WEEK.map(dayName => (
@@ -47,4 +47,6 @@ export default function DayOfWeekSelector({
     </div>
   );
 }
+
 DayOfWeekSelector.displayName = 'DayOfWeekSelector';
+export default DayOfWeekSelector;

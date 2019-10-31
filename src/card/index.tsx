@@ -4,34 +4,35 @@ import classnames from 'classnames';
 
 import './styles.scss';
 
-export default function Card({type, style, className, children}: any) {
+const Card: React.FC<any> = ({type, style, className, children}) => {
   return <div
     className={classnames('card', type ? `card-${type}` : null, className)}
     style={style}
   >{children}</div>;
 }
+export default Card;
 
-export function CardBody({children, className}: any) {
+export const CardBody: React.FC<any> = ({children, className}) => {
   return <div className={classnames('card-body', className)}>{children}</div>;
 }
 
-export function CardHeader({children, size, className, onClick}: any) {
+export const CardHeader: React.FC<any> = ({children, size, className, onClick}) => {
   return <div
       className={classnames('card-header', `card-header-${size || 'base'}`, className)}
       onClick={onClick}
     >{children}</div>;
 }
 
-export function CardWell({children, type, className}: any) {
+export const CardWell: React.FC<any> = ({children, type, className}) => {
   return <div className={classnames('card-well', `card-well-${type}`, className)}>{children}</div>;
 }
-export function CardWellHighlight({children, className}: any) {
+export const CardWellHighlight: React.FC<any> = ({children, className}) => {
   return <span className={classnames('card-well-highlight', className)}>
     {children}
   </span>;
 }
 
-export function CardLoading({indeterminate, percent, className}: any) {
+export const CardLoading: React.FC<any> = ({indeterminate, percent, className}) => {
   return <div className="card-loading-wrapper">
     <div className={classnames(
       'card-loading',

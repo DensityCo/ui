@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-export default function DensityMark({size, color}: any) {
+const DensityMark: React.FC<any> = ({size, color}) => {
   return (
     <svg version="1.1" height={size || 300} x="0px" y="0px" viewBox="0 0 211 216.5">
       <path fill={color || '#211d1d'} d="M84.9,119.8c4.5-2.7,8.3-6.5,10.9-11c2.8-4.7,4.4-10.2,4.4-16.1v-21c0-1.1,0.9-2,2-2h9.5c1.1,0,2,0.9,2,2v21
@@ -17,8 +17,9 @@ DensityMark.propTypes = {
   size: propTypes.number,
   color: propTypes.string,
 };
+export default DensityMark;
 
-export function DensityLogo({size, color}) {
+export const DensityLogo: React.FC<any> = ({size, color}) => {
   return <div className="density-mark">
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 945.71064 201.92023' height={size || 100}>
         <g transform='matrix(1.33333 0 0 -1.33333 0 201.919)' id='g10'>

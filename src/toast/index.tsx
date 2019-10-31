@@ -11,7 +11,7 @@ const CONTEXT_CLASSES = {
   MULTILINE: styles.multiline,
 };
 
-export default function Toast({ type, visible, onDismiss, children }: any) {
+const Toast: React.FC<any> = ({ type, visible, onDismiss, children }) => {
   const context = useContext(ToastContext);
   return (
     <div className={classnames(
@@ -25,6 +25,7 @@ export default function Toast({ type, visible, onDismiss, children }: any) {
     </div>
   );
 }
+
 Toast.defaultProps = { type: 'default' };
 Toast.propTypes = {
   type: propTypes.oneOf(['default', 'error']),
@@ -33,3 +34,4 @@ Toast.propTypes = {
   children: propTypes.node.isRequired,
 };
 Toast.displayName = 'Toast';
+export default Toast;

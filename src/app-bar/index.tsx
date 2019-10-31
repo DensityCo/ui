@@ -11,7 +11,7 @@ const CONTEXT_CLASSES = {
 
 export const AppBarContext = React.createContext<any>(null);
 
-export function AppBarTitle({ children }: any) {
+export const AppBarTitle: React.FC<any> = ({ children }) => {
   return (
     <span className={styles.appBarTitle}>
       {children}
@@ -19,7 +19,7 @@ export function AppBarTitle({ children }: any) {
   );
 }
 
-export function AppBarSection({ children }: any) {
+export const AppBarSection: React.FC<any> = ({ children }) => {
   return (
     <span className={styles.appBarSection}>
       {children}
@@ -27,7 +27,7 @@ export function AppBarSection({ children }: any) {
   );
 }
 
-export default function AppBar({ padding, children }: any) {
+const AppBar: React.FC<any> = ({ padding, children }) => {
   const context = useContext(AppBarContext);
   const containerClasses = classnames(CONTEXT_CLASSES[context], styles.appBar);
   return (
@@ -38,3 +38,4 @@ export default function AppBar({ padding, children }: any) {
 }
 
 AppBar.displayName = 'AppBar';
+export default AppBar;

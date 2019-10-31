@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-export default function PagerButtonGroup({
+const PagerButtonGroup: React.FC<any> = ({
   showFirstLastButtons,
 
   disabledPrevious,
@@ -16,7 +16,7 @@ export default function PagerButtonGroup({
   onClickNext,
   onClickStart,
   onClickEnd,
-}: any) {
+}) => {
   return <div className={styles.pagerButtonGroup}>
     {showFirstLastButtons ? <div
       className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledStart})}
@@ -69,3 +69,4 @@ PagerButtonGroup.propTypes = {
   disabledNext: propTypes.bool,
   disabledPrevious: propTypes.bool,
 };
+export default PagerButtonGroup;

@@ -19,7 +19,7 @@ const TABLE_HEADER = 'TABLE_HEADER',
 
 const ListViewContext = React.createContext<any>({});
 
-export default function ListView({
+const ListView: React.FC<any> = ({
   data = [],
   sort = [],
   onClickHeader = null,
@@ -36,7 +36,7 @@ export default function ListView({
   fontSize = undefined,
   headerFontSize = undefined,
   children = null,
-}: any) {
+}) => {
 
   // Handle scrolling with state, refs, and a listener
   const containerRef = useRef<any>();
@@ -132,8 +132,10 @@ export default function ListView({
   );
 }
 
+export default ListView;
 
-export function ListViewColumn(props: any) {
+
+export const ListViewColumn: React.FC<any> = (props) => {
 
   const {
     id,
@@ -210,7 +212,7 @@ export function ListViewColumn(props: any) {
 }
 
 
-export function ListViewColumnSpacer() {
+export const ListViewColumnSpacer: React.FC<any> = () => {
   return <ListViewColumn id={v4()} title=" " width="auto" />;
 }
 
@@ -220,7 +222,7 @@ export function ListViewColumnSpacer() {
 //   children: ReactNode
 // }
 
-export function ListViewClickableLink({ onClick, children }: any) {
+export const ListViewClickableLink: React.FC<any> = ({ onClick, children }) => {
   return (
     <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
       {children}

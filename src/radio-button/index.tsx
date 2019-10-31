@@ -12,7 +12,7 @@ const CONTEXT_CLASSES = {
 
 export const RadioButtonContext = React.createContext<any>(null);
 
-export default function RadioButton({text=null, name, value, defaultChecked, checked, disabled, onChange}: any) {
+const RadioButton: React.FC<any> = ({text=null, name, value, defaultChecked, checked, disabled, onChange}) => {
   const unique = v4();
   return <RadioButtonContext.Consumer>{context => (
     <div className={classnames(CONTEXT_CLASSES[context], styles.radioButton, {
@@ -45,3 +45,4 @@ RadioButton.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
 };
+export default RadioButton;

@@ -18,7 +18,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 
 export const InputBoxContext = React.createContext<any>(null);
 
-function InputBoxRaw({leftIcon, forwardedRef, ...props}: any) {
+const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, ...props}) => {
   const [focused, setFocus] = useState(false);
   const defaultInputRef = useRef();
   const input = forwardedRef || defaultInputRef;

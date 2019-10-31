@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import styles from './styles.scss';
 
-export default function Modal({
+const Modal: React.FC<any> = ({
   visible,
   width, 
   height,
   children,
   onBlur,
   onEscape,
-}: any) {
+}) => {
   const dialog = useRef(null);
   const container = useRef(null);
   useEffect(() => {
@@ -59,3 +59,4 @@ Modal.propTypes = {
   onEscape: propTypes.func,
 };
 Modal.displayName = 'Modal';
+export default Modal;
