@@ -1,15 +1,10 @@
 import React from 'react';
 import styles from './styles.scss';
 
-const AppScrollView: React.FunctionComponent<{backgroundColor: string}> = ({
-	children,
-	backgroundColor='#FFFFFF',
-}) => (
-  <div
+export default function AppScrollView({ children, backgroundColor='#FFFFFF' }) {
+  return <div
     className={styles.appScrollView}
-    style={{ backgroundColor }}
-	>{children}</div>
-);
+    style={{ backgroundColor }}>{children}</div>;
+}
 
 AppScrollView.displayName = 'AppScrollView';
-export default AppScrollView;

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
@@ -24,36 +25,25 @@ export const BUTTON_TYPE_STYLES = {
   muted: styles.muted,
 };
 
-type ButtonProps = {
-	size?: 'small' | 'large',
-	disabled?: boolean,
-	variant?: keyof typeof BUTTON_VARIANT_STYLES,
-	type?: keyof typeof BUTTON_TYPE_STYLES,
-	width?: number | string,
-	height?: number | string,
-	href?: string,
-	[otherProp: string]: any,
-};
-
-export const Button: React.FunctionComponent<ButtonProps> = ({
+export default function Button({
   size,
   children,
   disabled,
-  variant = 'default',
-  type = 'primary',
+  variant,
+  type,
 
   width,
   height,
 
   href,
   ...props
-}) => {
-  const context = React.useContext(ButtonContext);
+}) {
+  const context = useContext(ButtonContext);
   if (href) {
     return (
       <a
         {...props}
-        aria-disabled={disabled}
+        disabled={disabled}
         className={classnames(
           styles.button,
           BUTTON_TYPE_STYLES[type],
@@ -85,11 +75,26 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
   }
 }
 Button.displayName = 'Button';
-export default Button;
+Button.defaultProps = {
+  variant: 'default',
+  type: 'primary',
+};
+Button.propTypes = {
+  variant: propTypes.oneOf(['default', 'filled', 'underline']),
+  type: propTypes.oneOf([
+    'primary',
+    'danger',
+    'warning',
+    'success',
+    'muted',
+  ]),
+};
 
-export const ButtonGroup: React.FunctionComponent<{}> = ({ children }) => (
-	<div className={styles.buttonGroup}>
-		{children}
-	</div>
-);
+export function ButtonGroup({ children }) {
+  return (
+    <div className={styles.buttonGroup}>
+      {children}
+    </div>
+  );
+}
 ButtonGroup.displayName = 'ButtonGroup';

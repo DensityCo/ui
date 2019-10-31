@@ -18,7 +18,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 
 export const InputBoxContext = React.createContext(null);
 
-function InputBoxRaw({leftIcon, forwardedRef, ...props}: any) {
+function InputBoxRaw({leftIcon, forwardedRef, ...props}) {
   const [focused, setFocus] = useState(false);
   const defaultInputRef = useRef();
   const input = forwardedRef || defaultInputRef;
@@ -70,41 +70,48 @@ function InputBoxRaw({leftIcon, forwardedRef, ...props}: any) {
   }
 };
 
-const InputBox = React.forwardRef((props: any, ref) => (
+const InputBox = React.forwardRef((props, ref) => (
   <InputBoxRaw {...props} forwardedRef={ref} />
 ));
 InputBox.displayName = 'InputBox';
+InputBox.propTypes = {
+  type: propTypes.string,
+  value: propTypes.any,
+  choices: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any,
+    label: propTypes.node,
+    disabled: propTypes.bool,
+  })),
+};
 export default InputBox;
 
-export class SelectBox extends React.Component<any, any> {
-  selectBoxValueRef = null;
-
+export class SelectBox extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       opened: false,
     };
-  }
 
-  // Called when the user focuses either the value or an item in the menu part of the box.
-  onMenuFocus() {
-    this.setState({opened: true});
-  }
+    // Called when the user focuses either the value or an item in the menu part of the box.
+    this.onMenuFocus = () => {
+      this.setState({opened: true});
+    };
 
-  // Called when the user blurs either the value or an item in the menu part of the box.
-  onMenuBlur(e) {
-    this.setState({opened: false});
-  }
+    // Called when the user blurs either the value or an item in the menu part of the box.
+    this.onMenuBlur = (e) => {
+      this.setState({opened: false});
+    };
 
-  // Called when the user selects an item within the menu of the select box.
-  onMenuItemSelected(choice) {
-    this.setState({opened: false}, () => {
-      if (this.props.onChange) {
-        const isDefault = String(choice.id).toLowerCase() === 'default';
-        this.props.onChange(isDefault ? null : choice);
-      }
-    });
+    // Called when the user selects an item within the menu of the select box.
+    this.onMenuItemSelected = choice => {
+      this.setState({opened: false}, () => {
+        if (this.props.onChange) {
+          const isDefault = String(choice.id).toLowerCase() === 'default';
+          this.props.onChange(isDefault ? null : choice);
+        }
+      });
+    }
   }
 
   render() {
@@ -148,12 +155,12 @@ export class SelectBox extends React.Component<any, any> {
           aria-expanded={opened}
           aria-autocomplete="list"
 
-          onFocus={this.onMenuFocus.bind(this)}
-          onBlur={this.onMenuBlur.bind(this)}
+          onFocus={this.onMenuFocus}
+          onBlur={this.onMenuBlur}
           onKeyDown={e => {
             if (e.keyCode === 27 /* escape */) {
               /* Blur the select value box, which closes the dropdown */
-              (e.target as any).blur();
+              e.target.blur();
             }
           }}
           onMouseDown={e => {
@@ -201,15 +208,15 @@ export class SelectBox extends React.Component<any, any> {
                 tabIndex={!choice.disabled && opened ? 0 : -1}
                 aria-selected={selectedValue && selectedValue.id === choice.id}
 
-                onFocus={this.onMenuFocus.bind(this)}
-                onBlur={this.onMenuBlur.bind(this)}
+                onFocus={this.onMenuFocus}
+                onBlur={this.onMenuBlur}
                 onKeyDown={e => {
                   if (e.keyCode === 13 /* enter */) {
                     /* Select this item in the menu */
-                    this.onMenuItemSelected.call(this, choice);
+                    this.onMenuItemSelected(choice);
                   } else if (e.keyCode === 27 /* escape */) {
                     /* Blur this item, which closes the dropdown */
-                    (e.target as any).blur();
+                    e.target.blur();
                   }
                 }}
                 onMouseDown={e => {
@@ -218,7 +225,7 @@ export class SelectBox extends React.Component<any, any> {
                 }}
                 onClick={() => {
                   /* Allow click to select elements that aren't disabled */
-                  if (!choice.disabled) { this.onMenuItemSelected.call(this, choice); }
+                  if (!choice.disabled) { this.onMenuItemSelected(choice); }
                 }}
               >
                 {label}
@@ -230,3 +237,15 @@ export class SelectBox extends React.Component<any, any> {
     )}</InputBoxContext.Consumer>;
   }
 }
+
+SelectBox.displayName = 'SelectBox';
+SelectBox.propTypes = {
+  value: propTypes.any,
+  choices: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.any,
+    label: propTypes.node,
+    disabled: propTypes.bool,
+  })),
+  menuMaxHeight: propTypes.number,
+  placeholder: propTypes.string,
+};

@@ -2,33 +2,17 @@ import React, { Component } from 'react';
 
 import styles from './styles.scss';
 
-type ReportItem = {
-	id: string,
-	report: any,
-};
-
-type DashboardReportGridProps = {
-	reports: Array<ReportItem>,
-	mobileBreakpoint?: number,
-};
-
-type State = {
-	reportHeights: { [key: string]: number },
-};
-
-export default class DashboardReportGrid extends Component<DashboardReportGridProps, State> {
-  reportElements: { [key: string]: HTMLDivElement } = {};
-
+export default class DashboardReportGrid extends Component {
   constructor(props) {
     super(props);
+    this.reportElements = {};
     this.state = { reportHeights: {} };
   }
 
   render() {
-    const reports = this.props.reports;
-		const mobileBreakpoint = this.props.mobileBreakpoint || 768;
+    const { reports } = this.props;
 
-    const singleColumn = document.body.clientWidth <= mobileBreakpoint;
+    const singleColumn = document.body.clientWidth <= this.props.mobileBreakpoint;
 
     const reportComponents = reports.map(({id, report}) => {
       return (
@@ -39,7 +23,7 @@ export default class DashboardReportGrid extends Component<DashboardReportGridPr
             this.reportElements[id] = report;
             if (report && this.state.reportHeights[id] !== report.clientHeight) {
               this.setState({ 
-                reportHeights: {...this.state.reportHeights, [id]: report.clientHeight}
+                reportHeights: Object.assign(this.state.reportHeights, {[id]: report.clientHeight})
               });
             }
           }}
@@ -111,4 +95,7 @@ export default class DashboardReportGrid extends Component<DashboardReportGridPr
   }
 }
 
-(DashboardReportGrid as any).displayName = 'DashboardReportGrid';
+DashboardReportGrid.displayName = 'DashboardReportGrid';
+DashboardReportGrid.defaultProps = {
+  mobileBreakpoint: 768,
+};

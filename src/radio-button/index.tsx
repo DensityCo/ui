@@ -7,31 +7,13 @@ import styles from './styles.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
-  'LEGACY': styles.contextLegacy,
+  'LEGACY': styles.contextLegacy
 };
 
-export const RadioButtonContext = React.createContext<keyof typeof CONTEXT_CLASSES>(null);
+export const RadioButtonContext = React.createContext(null);
 
-type RadioButtonProps = {
-	text?: React.ReactNode,
-	name: string,
-	value: string,
-	defaultChecked?: boolean,
-	checked: boolean,
-	disabled?: boolean,
-	onChange: (value: React.ChangeEvent<HTMLInputElement>) => void,
-};
-
-const RadioButton: React.FunctionComponent<RadioButtonProps> = ({
-	text=null,
-	name,
-	value,
-	defaultChecked,
-	checked,
-	disabled,
-	onChange,
-}) => {
-  const unique: string = v4();
+export default function RadioButton({text=null, name, value, defaultChecked, checked, disabled, onChange}) {
+  const unique = v4();
   return <RadioButtonContext.Consumer>{context => (
     <div className={classnames(CONTEXT_CLASSES[context], styles.radioButton, {
       [styles.noText]: text === null,
@@ -54,5 +36,12 @@ const RadioButton: React.FunctionComponent<RadioButtonProps> = ({
     </div>
   )}</RadioButtonContext.Consumer>;
 }
+
 RadioButton.displayName = 'RadioButton';
-export default RadioButton;
+RadioButton.propTypes = {
+  text: propTypes.node,
+  name: propTypes.string,
+  value: propTypes.string,
+  checked: propTypes.bool,
+  disabled: propTypes.bool,
+};

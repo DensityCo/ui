@@ -1,51 +1,46 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { inputStackHeight } from './variables.json';
+import { inputStackHeight } from './variables';
 import styles from './styles.scss';
 import propTypes from 'prop-types';
 
-export const InputStackGroup: React.FunctionComponent<{}> = ({children}) => (
-  <div className={styles.inputStackGroup}>
+export function InputStackGroup({children}) {
+  return <div className={styles.inputStackGroup}>
     <div>{children}</div>
-  </div>
-);
-InputStackGroup.displayName = 'InputStackGroup';
+  </div>;
+}
 
-type InputElementProps = React.InputHTMLAttributes<HTMLInputElement>;
-type InputStackItemProps = InputElementProps & {
-	invalid?: boolean,
-	focused?: boolean,
-	onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void,
-	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void,
+InputStackGroup.displayName = 'InputStackGroup';
+InputStackGroup.propTypes = {
+  children: propTypes.node,
 };
 
-export class InputStackItem extends React.Component<InputStackItemProps, {focused: boolean}> {
-  state = { focused: false };
-	static displayName: string;
-
+export class InputStackItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {focused: false};
+  }
   render() {
-		const {
-			invalid,
-			focused,
-			onFocus,
-			onBlur,
-			...propsRest
-		} = this.props;
+    const propsRest = Object.assign({}, this.props);
+    delete propsRest.invalid;
+    delete propsRest.focused;
+    delete propsRest.className;
 
-    return <div className={classnames(styles.inputStackItem, {
-			[styles.inputStackItemInvalid]: invalid,
-			[styles.inputStackItemFocus]: focused,
-    })}>
+    return <div className={classnames(
+      styles.inputStackItem,
+      this.props.invalid ? styles.inputStackItemInvalid : null,
+      this.state.focused ? styles.inputStackItemFocus : null,
+    )}>
       <input
         {...propsRest}
         onFocus={data => {
           this.setState({focused: true});
-          onFocus && onFocus(data);
+          this.props.onFocus && this.props.onFocus(data);
         }}
         onBlur={data => {
           this.setState({focused: false});
-          onBlur && onBlur(data);
+          this.props.onBlur && this.props.onBlur(data);
         }}
       />
     </div>;
@@ -53,3 +48,7 @@ export class InputStackItem extends React.Component<InputStackItemProps, {focuse
 }
 
 InputStackItem.displayName = 'InputStackItem';
+InputStackItem.propTypes = {
+  invalid: propTypes.bool,
+  focused: propTypes.bool,
+};

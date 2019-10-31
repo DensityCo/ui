@@ -1,23 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
+import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-type PagerButtonGroupProps = {
-	showFirstLastButtons: boolean,
-
-	disabledPrevious: boolean,
-	disabledNext: boolean,
-	disabledStart: boolean,
-	disabledEnd: boolean,
-
-	onClickPrevious: () => void,
-	onClickNext: () => void,
-	onClickStart: () => void,
-	onClickEnd: () => void,
-};
-
-const PagerButtonGroup: React.FunctionComponent<PagerButtonGroupProps> = ({
+export default function PagerButtonGroup({
   showFirstLastButtons,
 
   disabledPrevious,
@@ -29,13 +16,13 @@ const PagerButtonGroup: React.FunctionComponent<PagerButtonGroupProps> = ({
   onClickNext,
   onClickStart,
   onClickEnd,
-}) => (
-  <div className={styles.pagerButtonGroup}>
+}) {
+  return <div className={styles.pagerButtonGroup}>
     {showFirstLastButtons ? <div
       className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledStart})}
       onClick={e => {
         if (!disabledStart) {
-          onClickStart();
+          onClickStart(e);
         }
       }}
     >&laquo;</div> : null}
@@ -44,7 +31,7 @@ const PagerButtonGroup: React.FunctionComponent<PagerButtonGroupProps> = ({
       className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledPrevious})}
       onClick={e => {
         if (!disabledPrevious) {
-          onClickPrevious();
+          onClickPrevious(e);
         }
       }}
     >&lsaquo;</div>
@@ -52,7 +39,7 @@ const PagerButtonGroup: React.FunctionComponent<PagerButtonGroupProps> = ({
       className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledNext})}
       onClick={e => {
         if (!disabledNext) {
-          onClickNext();
+          onClickNext(e);
         }
       }}
     >&rsaquo;</div>
@@ -61,11 +48,24 @@ const PagerButtonGroup: React.FunctionComponent<PagerButtonGroupProps> = ({
       className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledEnd})}
       onClick={e => {
         if (!disabledEnd) {
-          onClickEnd();
+          onClickEnd(e);
         }
       }}
     >&raquo;</div> : null}
-  </div>
-);
+  </div>;
+}
+
 PagerButtonGroup.displayName = 'PagerButtonGroup';
-export default PagerButtonGroup;
+PagerButtonGroup.propTypes = {
+  onClickNext: propTypes.func.isRequired,
+  onClickPrevious: propTypes.func.isRequired,
+
+  showFirstLastButtons: propTypes.bool,
+  onClickStart: propTypes.func,
+  onClickEnd: propTypes.func,
+
+  disabledStart: propTypes.bool,
+  disabledEnd: propTypes.bool,
+  disabledNext: propTypes.bool,
+  disabledPrevious: propTypes.bool,
+};

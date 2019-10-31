@@ -17,15 +17,7 @@ const TABLE_HEADER = 'TABLE_HEADER',
     'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
   };
 
-const ListViewContext = React.createContext({} as {
-  mode?: typeof TABLE_HEADER | typeof TABLE_ROW,
-  height?: number,
-  fontSize?: number,
-  rowHeaderWidth?: number,
-  item?,
-  sort?,
-  onClickHeader?,
-});
+const ListViewContext = React.createContext({});
 
 export default function ListView({
   data = [],
@@ -44,26 +36,11 @@ export default function ListView({
   fontSize = undefined,
   headerFontSize = undefined,
   children = null,
-}: {
-  data: Array<any>,
-  sort?: Array<any>,
-  onClickHeader?: Function | null,
-  onClickRow?: Function | null,
-  keyTemplate?: Function | null,
-  showHeaders?: boolean,
-  fixedWidth?: boolean,
-  padOuterColumns?: boolean,
-  scrollX?: boolean,
-  rowHeight?: number | undefined,
-  headerHeight?: number | undefined,
-  fontSize?: number | undefined,
-  headerFontSize?: number | undefined,
-  children?: any
 }) {
 
   // Handle scrolling with state, refs, and a listener
-  const containerRef = useRef<HTMLDivElement>();
-  const tableRef = useRef<HTMLTableElement>();
+  const containerRef = useRef();
+  const tableRef = useRef();
   const [tableShadows, setTableShadows] = useState({left: false, right: false});
 
   useEffect(() => {
@@ -155,29 +132,22 @@ export default function ListView({
   );
 }
 
-export function ListViewColumn({
-  id,
-  title = null,
-  template = null,
-  valueTemplate = null,
-  onClick = null,
-  disabled = item => false,
-  isRowHeader = false,
-  width = 'auto',
-  minWidth = 'auto',
-  align = 'left'
-}: {
-  id?: string,
-  title?: React.ReactNode,
-  template?: Function | null,
-  valueTemplate?: Function | null,
-  onClick?: Function | null,
-  disabled?: Function,
-  isRowHeader?: boolean,
-  width?: string | number,
-  minWidth?: string| number,
-  align?: 'left' | 'right' | 'center'
-}) {
+
+export function ListViewColumn(props) {
+
+  const {
+    id,
+    title = null,
+    template,
+    valueTemplate = null,
+    onClick = null,
+    disabled = item => false,
+    isRowHeader = false,
+  
+    width = 'auto',
+    minWidth = 'auto',
+    align = 'left'
+  } = props;
 
   const {
     mode,
@@ -250,7 +220,7 @@ export function ListViewColumnSpacer() {
 //   children: ReactNode
 // }
 
-export function ListViewClickableLink({ onClick = null as any, children }) {
+export function ListViewClickableLink({ onClick, children }) {
   return (
     <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
       {children}

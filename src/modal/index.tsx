@@ -19,7 +19,7 @@ export default function Modal({
     container.current.scrollTop = 0;
   }, [visible]);
 
-  const inlineStyle = {} as any;
+  const inlineStyle = {};
   if (width) {
     inlineStyle.width = '100%';
     inlineStyle.maxWidth = width;
@@ -56,6 +56,7 @@ Modal.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onBlur: propTypes.func,
+  onEscape: propTypes.func,
   onEscape: propTypes.func,
 };
 Modal.displayName = 'Modal';

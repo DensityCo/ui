@@ -68,7 +68,7 @@ storiesOf('Modal', module)
   ))
   .add('Modal with onBlur handler', () => (
     <ModalTriggerer children={(visibility, hide) => (
-      <Modal width={500} height={300} visible={visibility} onBlur={hide}>
+      <Modal width={500} height={300} visible={visibility} onBlur={action('onBlur')}>
         <AppBar>
           <AppBarTitle>
             Foo
@@ -84,7 +84,7 @@ storiesOf('Modal', module)
   ))
   .add('Modal with onEscape handler', () => (
     <ModalTriggerer children={(visibility, hide) => (
-      <Modal width={500} height={300} visible={visibility} onEscape={hide}>
+      <Modal width={500} height={300} visible={visibility} onEscape={action('onEscape')}>
         <AppBar>
           <AppBarTitle>
             Foo

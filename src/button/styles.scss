@@ -37,7 +37,7 @@ $buttonBorderColor: $gray;
     box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09);
 	}
 
-  &[disabled], &[aria-disabled] {
+  &:disabled {
     color: $grayDarker;
     border-color: $grayLight;
     cursor: default;

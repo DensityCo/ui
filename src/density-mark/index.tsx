@@ -1,28 +1,25 @@
 import React from 'react';
+import propTypes from 'prop-types';
 
-type DensityMarkProps = {
-	size: number | string,
-	color: string,
-};
+export default function DensityMark({size, color}) {
+  return (
+    <svg version="1.1" height={size || 300} x="0px" y="0px" viewBox="0 0 211 216.5">
+      <path fill={color || '#211d1d'} d="M84.9,119.8c4.5-2.7,8.3-6.5,10.9-11c2.8-4.7,4.4-10.2,4.4-16.1v-21c0-1.1,0.9-2,2-2h9.5c1.1,0,2,0.9,2,2v21
+      c0,5.9,1.6,11.4,4.4,16.1c2.7,4.5,6.4,8.3,10.9,11l18.7,10.8c1,0.6,1.3,1.8,0.7,2.7l-4.7,8.2c-0.6,1-1.8,1.3-2.7,0.7l-18.3-10.6
+      c-4.6-2.6-10-4.1-15.7-4.1c-5.7,0-11,1.5-15.7,4.1l-18.3,10.6c-1,0.6-2.2,0.2-2.7-0.7l-4.7-8.2c-0.6-1-0.2-2.2,0.7-2.7L84.9,119.8z"
+      />
+    </svg>
+  );
+}
 
-const DensityMark: React.FunctionComponent<DensityMarkProps> = ({size, color}) => (
-	<svg version="1.1" height={size || 300} x="0px" y="0px" viewBox="0 0 211 216.5">
-		<path fill={color || '#211d1d'} d="M84.9,119.8c4.5-2.7,8.3-6.5,10.9-11c2.8-4.7,4.4-10.2,4.4-16.1v-21c0-1.1,0.9-2,2-2h9.5c1.1,0,2,0.9,2,2v21
-		c0,5.9,1.6,11.4,4.4,16.1c2.7,4.5,6.4,8.3,10.9,11l18.7,10.8c1,0.6,1.3,1.8,0.7,2.7l-4.7,8.2c-0.6,1-1.8,1.3-2.7,0.7l-18.3-10.6
-		c-4.6-2.6-10-4.1-15.7-4.1c-5.7,0-11,1.5-15.7,4.1l-18.3,10.6c-1,0.6-2.2,0.2-2.7-0.7l-4.7-8.2c-0.6-1-0.2-2.2,0.7-2.7L84.9,119.8z"
-		/>
-	</svg>
-);
 DensityMark.displayName = 'DensityMark';
-export default DensityMark;
-
-type DensityLogoProps = {
-	size: number | string,
-	color: string,
+DensityMark.propTypes = {
+  size: propTypes.number,
+  color: propTypes.string,
 };
 
-export const DensityLogo: React.FunctionComponent<DensityLogoProps> = ({size, color}) => (
-  <div className="density-mark">
+export function DensityLogo({size, color}) {
+  return <div className="density-mark">
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 945.71064 201.92023' height={size || 100}>
         <g transform='matrix(1.33333 0 0 -1.33333 0 201.919)' id='g10'>
             <g transform='scale(.1)' id='g12' fill={color || '#211d1d'}>
@@ -46,6 +43,11 @@ export const DensityLogo: React.FunctionComponent<DensityLogoProps> = ({size, co
             </g>
         </g>
     </svg>
-  </div>
-);
+  </div>;
+}
+
 DensityLogo.displayName = 'DensityLogo';
+DensityLogo.propTypes = {
+  size: propTypes.number,
+  color: propTypes.string,
+};

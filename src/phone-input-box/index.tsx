@@ -5,28 +5,19 @@ import PhoneInput from 'react-phone-number-input';
 
 import './styles.scss';
 
-type PhoneInputBoxProps = {
-	value?: string,
-	country?: string,
-	onChange: (phonenumber: string) => void,
-	disabled?: boolean,
-
-	// Other props for react phone number input
-	[prop: string]: any,
-}
-
-const PhoneInputBox: React.FunctionComponent<PhoneInputBoxProps> = ({
+export default function PhoneInputBox({
   value = undefined,
   onChange = () => null,
   country = 'US',
   ...props
-}) => (
-  <PhoneInput
+}) {
+  return <PhoneInput
     {...props}
     value={value}
     country={country}
-    className={classnames({ 'react-phone-number-input--disabled': props.disabled })}
+    className={classnames(props.className, {
+      'react-phone-number-input--disabled': props.disabled
+    })}
     onChange={onChange}
-  />
-);
-export default PhoneInputBox;
+  />;
+}
