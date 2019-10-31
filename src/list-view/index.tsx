@@ -250,7 +250,7 @@ export function ListViewColumnSpacer() {
 //   children: ReactNode
 // }
 
-export function ListViewClickableLink({ onClick, children }) {
+export function ListViewClickableLink({ onClick = null as any, children }) {
   return (
     <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
       {children}
