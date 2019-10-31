@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "20.0.0-pre1",
+  "version": "20.0.0-pre3",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -62,5 +62,5 @@
     "uuid": "^3.3.2"
   },
   "main": "dist/index.js",
-  "types": "dist/index.d.ts"
+  "types": "dist/src/index.d.ts"
 }
