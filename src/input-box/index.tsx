@@ -148,8 +148,8 @@ export class SelectBox extends React.Component<any, any> {
           aria-expanded={opened}
           aria-autocomplete="list"
 
-          onFocus={this.onMenuFocus}
-          onBlur={this.onMenuBlur}
+          onFocus={this.onMenuFocus.bind(this)}
+          onBlur={this.onMenuBlur.bind(this)}
           onKeyDown={e => {
             if (e.keyCode === 27 /* escape */) {
               /* Blur the select value box, which closes the dropdown */
@@ -201,12 +201,12 @@ export class SelectBox extends React.Component<any, any> {
                 tabIndex={!choice.disabled && opened ? 0 : -1}
                 aria-selected={selectedValue && selectedValue.id === choice.id}
 
-                onFocus={this.onMenuFocus}
-                onBlur={this.onMenuBlur}
+                onFocus={this.onMenuFocus.bind(this)}
+                onBlur={this.onMenuBlur.bind(this)}
                 onKeyDown={e => {
                   if (e.keyCode === 13 /* enter */) {
                     /* Select this item in the menu */
-                    this.onMenuItemSelected(choice);
+                    this.onMenuItemSelected.call(this, choice);
                   } else if (e.keyCode === 27 /* escape */) {
                     /* Blur this item, which closes the dropdown */
                     (e.target as any).blur();
@@ -218,7 +218,7 @@ export class SelectBox extends React.Component<any, any> {
                 }}
                 onClick={() => {
                   /* Allow click to select elements that aren't disabled */
-                  if (!choice.disabled) { this.onMenuItemSelected(choice); }
+                  if (!choice.disabled) { this.onMenuItemSelected.call(this, choice); }
                 }}
               >
                 {label}
