@@ -17,7 +17,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 export const DateRangePickerContext = React.createContext(null);
 
 // internal date range picker (via ReactDates)
-function ReactDateRangePicker(props) {
+function ReactDateRangePicker(props: any) {
   const context = useContext(DateRangePickerContext);
 
   const restProps = Object.assign({}, props);
@@ -44,7 +44,7 @@ function ReactDateRangePicker(props) {
 
 // exposed component that renders both the date range picker and
 // common range list, and binds them together
-export default function DateRangePicker(props) {
+export default function DateRangePicker(props: any) {
   const context = useContext(DateRangePickerContext);
 
   const commonRangeList = Array.isArray(props.commonRanges) ? (
@@ -92,12 +92,12 @@ DateRangePicker.propTypes = {
   anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
 
   startDate: propTypes.oneOfType([
-    propTypes.instanceOf(moment),
+    propTypes.instanceOf(moment as any),
     propTypes.string, /* for moment to parse */
     propTypes.number,
   ]).isRequired,
   endDate: propTypes.oneOfType([
-    propTypes.instanceOf(moment),
+    propTypes.instanceOf(moment as any),
     propTypes.string, /* for moment to parse */
     propTypes.number,
   ]).isRequired,

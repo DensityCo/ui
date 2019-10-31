@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import styles from './styles.scss';
 
-export default function Switch({value, disabled, onChange}) {
+export default function Switch({value, disabled, onChange}: any) {
   const uniqueId = uuid.v4();
 
   return (

@@ -11,7 +11,7 @@ const CONTEXT_CLASSES = {
   MULTILINE: styles.multiline,
 };
 
-export default function Toast({ type, visible, onDismiss, children }) {
+export default function Toast({ type, visible, onDismiss, children }: any) {
   const context = useContext(ToastContext);
   return (
     <div className={classnames(

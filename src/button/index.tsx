@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 
 import styles from './styles.scss';
 
-export const ButtonContext = React.createContext(null);
+export const ButtonContext = React.createContext<any>(null);
 
 const BUTTON_SIZE_STYLES = {
   small: styles.small,
@@ -37,7 +37,7 @@ export default function Button({
 
   href,
   ...props
-}) {
+}: any) {
   const context = useContext(ButtonContext);
   if (href) {
     return (
@@ -90,7 +90,7 @@ Button.propTypes = {
   ]),
 };
 
-export function ButtonGroup({ children }) {
+export function ButtonGroup({ children }: any) {
   return (
     <div className={styles.buttonGroup}>
       {children}

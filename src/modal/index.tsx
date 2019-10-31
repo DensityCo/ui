@@ -11,7 +11,7 @@ export default function Modal({
   children,
   onBlur,
   onEscape,
-}) {
+}: any) {
   const dialog = useRef(null);
   const container = useRef(null);
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Modal({
     container.current.scrollTop = 0;
   }, [visible]);
 
-  const inlineStyle = {};
+  const inlineStyle = {} as any;
   if (width) {
     inlineStyle.width = '100%';
     inlineStyle.maxWidth = width;
@@ -56,7 +56,6 @@ Modal.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onBlur: propTypes.func,
-  onEscape: propTypes.func,
   onEscape: propTypes.func,
 };
 Modal.displayName = 'Modal';

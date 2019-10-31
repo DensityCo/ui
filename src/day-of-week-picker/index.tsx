@@ -16,7 +16,7 @@ export default function DayOfWeekSelector({
   daysOfWeek,
   disabled=false,
   onChange,
-}) {
+}: any) {
   return (
     <div className={styles.wrapper}>
       {DAYS_OF_WEEK.map(dayName => (

@@ -7,12 +7,14 @@ import InputBox from '../input-box';
 
 const NULL_CHARACTER = String.fromCharCode(0);
 
-export default class TagInput extends Component {
-  tagWrapper = React.createRef();
+export default class TagInput extends Component<any, any> {
+  tagWrapper = React.createRef<any>();
 
   static defaultProps = {
     choices: [],
     tags: [],
+    canCreateTags: true,
+    onCreateNewTag: () => {},
     placeholder: 'Select a tag',
     emptyTagsPlaceholder: 'No tags',
   };
@@ -66,10 +68,10 @@ export default class TagInput extends Component {
 
     const selectedTagIds = tags.map(t => t.id);
     const choicesNotAlreadySelected = choices.filter(c => !selectedTagIds.includes(c.id))
-    const matches = fuzzy.filter(text, choicesNotAlreadySelected, {
+    const matches: any = fuzzy.filter(text, choicesNotAlreadySelected, {
       pre: NULL_CHARACTER,
       post: NULL_CHARACTER,
-      extract: i => i.label,
+      extract: i => (i as any).label,
     });
 
     return (
@@ -243,8 +245,3 @@ export default class TagInput extends Component {
     );
   }
 }
-
-TagInput.defaultProps = {
-  canCreateTags: true,
-  onCreateNewTag: () => {},
-};

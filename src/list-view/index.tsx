@@ -17,7 +17,7 @@ const TABLE_HEADER = 'TABLE_HEADER',
     'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
   };
 
-const ListViewContext = React.createContext({});
+const ListViewContext = React.createContext<any>({});
 
 export default function ListView({
   data = [],
@@ -36,11 +36,11 @@ export default function ListView({
   fontSize = undefined,
   headerFontSize = undefined,
   children = null,
-}) {
+}: any) {
 
   // Handle scrolling with state, refs, and a listener
-  const containerRef = useRef();
-  const tableRef = useRef();
+  const containerRef = useRef<any>();
+  const tableRef = useRef<any>();
   const [tableShadows, setTableShadows] = useState({left: false, right: false});
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function ListView({
 }
 
 
-export function ListViewColumn(props) {
+export function ListViewColumn(props: any) {
 
   const {
     id,
@@ -220,7 +220,7 @@ export function ListViewColumnSpacer() {
 //   children: ReactNode
 // }
 
-export function ListViewClickableLink({ onClick, children }) {
+export function ListViewClickableLink({ onClick, children }: any) {
   return (
     <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
       {children}

@@ -10,9 +10,9 @@ const CONTEXT_CLASSES = {
   'LEGACY': styles.contextLegacy
 };
 
-export const RadioButtonContext = React.createContext(null);
+export const RadioButtonContext = React.createContext<any>(null);
 
-export default function RadioButton({text=null, name, value, defaultChecked, checked, disabled, onChange}) {
+export default function RadioButton({text=null, name, value, defaultChecked, checked, disabled, onChange}: any) {
   const unique = v4();
   return <RadioButtonContext.Consumer>{context => (
     <div className={classnames(CONTEXT_CLASSES[context], styles.radioButton, {

@@ -31,7 +31,7 @@ function lightenDarkenColor(col, amt) {
   return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
 }
 
-export default function Checkbox({ id, color, checked, disabled=false, onChange, label="" }) {
+export default function Checkbox({ id, color, checked, disabled=false, onChange, label="" }: any) {
   const [idProp] = useState(id || `checkbox-${uuid.v4()}`);
   return (
     <div

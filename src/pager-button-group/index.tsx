@@ -16,7 +16,7 @@ export default function PagerButtonGroup({
   onClickNext,
   onClickStart,
   onClickEnd,
-}) {
+}: any) {
   return <div className={styles.pagerButtonGroup}>
     {showFirstLastButtons ? <div
       className={classnames(styles.pagerButton, {[styles.pagerButtonDisabled]: disabledStart})}

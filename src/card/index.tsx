@@ -4,34 +4,34 @@ import classnames from 'classnames';
 
 import './styles.scss';
 
-export default function Card({type, style, className, children}) {
+export default function Card({type, style, className, children}: any) {
   return <div
     className={classnames('card', type ? `card-${type}` : null, className)}
     style={style}
   >{children}</div>;
 }
 
-export function CardBody({children, className}) {
+export function CardBody({children, className}: any) {
   return <div className={classnames('card-body', className)}>{children}</div>;
 }
 
-export function CardHeader({children, size, className, onClick}) {
+export function CardHeader({children, size, className, onClick}: any) {
   return <div
       className={classnames('card-header', `card-header-${size || 'base'}`, className)}
       onClick={onClick}
     >{children}</div>;
 }
 
-export function CardWell({children, type, className}) {
+export function CardWell({children, type, className}: any) {
   return <div className={classnames('card-well', `card-well-${type}`, className)}>{children}</div>;
 }
-export function CardWellHighlight({children, className}) {
+export function CardWellHighlight({children, className}: any) {
   return <span className={classnames('card-well-highlight', className)}>
     {children}
   </span>;
 }
 
-export function CardLoading({indeterminate, percent, className}) {
+export function CardLoading({indeterminate, percent, className}: any) {
   return <div className="card-loading-wrapper">
     <div className={classnames(
       'card-loading',
@@ -41,7 +41,7 @@ export function CardLoading({indeterminate, percent, className}) {
   </div>
 }
 
-export class CardTable extends Component {
+export class CardTable extends Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,8 +53,8 @@ export class CardTable extends Component {
   }
 
   onScroll() {
-    const container = this.container.getBoundingClientRect();
-    const table = this.table.getBoundingClientRect();
+    const container = (this as any).container.getBoundingClientRect();
+    const table = (this as any).table.getBoundingClientRect();
 
     let showLeftArrow = table.width > container.width && table.left < container.left;
     let showRightArrow = table.width > container.width && table.right > container.right;
@@ -65,12 +65,12 @@ export class CardTable extends Component {
   }
   componentDidMount() {
     window.addEventListener('resize', this.onScroll);
-    this.container.addEventListener('scroll', this.onScroll);
+    (this as any).container.addEventListener('scroll', this.onScroll);
     this.onScroll();
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.onScroll);
-    this.container.removeEventListener('scroll', this.onScroll);
+    (this as any).container.removeEventListener('scroll', this.onScroll);
   }
 
   render() {
@@ -81,8 +81,8 @@ export class CardTable extends Component {
         'card-table-scroll-right': this.state.showRightArrow,
         'card-table-scroll-both': this.state.showLeftArrow && this.state.showRightArrow,
       })}>
-        <div className="card-table-scroll" ref={r => { this.container = r; }}>
-          <table ref={r => { this.table = r; }}>
+        <div className="card-table-scroll" ref={r => { (this as any).container = r; }}>
+          <table ref={r => { (this as any).table = r; }}>
             <thead>
               <tr>
                 {headings.map(heading => <th key={heading}><span>{heading}</span></th>)}
@@ -106,6 +106,5 @@ Card.displayName = 'Card';
 CardBody.displayName = 'CardBody';
 CardHeader.displayName = 'CardHeader';
 CardLoading.displayName = 'CardLoading';
-CardTable.displayName = 'CardTable';
 CardWell.displayName = 'CardWell';
 CardWellHighlight.displayName = 'CardWellHighlight';

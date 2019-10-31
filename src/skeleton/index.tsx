@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import styles from './styles.scss';
 import colorVariables from '../../variables/colors.json';
 
-export default function Skeleton({width, height, color, borderRadius}) {
+export default function Skeleton({width, height, color, borderRadius}: any) {
   return (
     <span
       className={styles.skeleton}

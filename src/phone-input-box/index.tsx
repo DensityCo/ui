@@ -10,7 +10,7 @@ export default function PhoneInputBox({
   onChange = () => null,
   country = 'US',
   ...props
-}) {
+}: any) {
   return <PhoneInput
     {...props}
     value={value}

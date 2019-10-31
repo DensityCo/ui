@@ -9,13 +9,13 @@ const MDASH = String.fromCharCode(8212);
 
 import styles from './styles.scss';
 
-export default class PercentageBar extends React.Component {
+export default class PercentageBar extends React.Component<any, any> {
   componentDidMount() {
-    this.updateDimensions = () => this.forceUpdate();
-    window.addEventListener('resize', this.updateDimensions);
+    (this as any).updateDimensions = () => this.forceUpdate();
+    window.addEventListener('resize', (this as any).updateDimensions);
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
+    window.removeEventListener('resize', (this as any).updateDimensions);
   }
   render() {
     let {
@@ -62,9 +62,9 @@ export default class PercentageBar extends React.Component {
   }
 }
 
-PercentageBar.displayName = 'PercentageBar';
-PercentageBar.propTypes = {
-  percentage: propTypes.number.isRequired,
-  percentageFormatter: propTypes.func,
-  breakWidth: propTypes.number.isRequired,
-};
+// PercentageBar.displayName = 'PercentageBar';
+// PercentageBar.propTypes = {
+//   percentage: propTypes.number.isRequired,
+//   percentageFormatter: propTypes.func,
+//   breakWidth: propTypes.number.isRequired,
+// };

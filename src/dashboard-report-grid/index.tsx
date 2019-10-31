@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 
 import styles from './styles.scss';
 
-export default class DashboardReportGrid extends Component {
+export default class DashboardReportGrid extends Component<any, any> {
   constructor(props) {
     super(props);
-    this.reportElements = {};
+    (this as any).reportElements = {};
     this.state = { reportHeights: {} };
   }
 
   render() {
     const { reports } = this.props;
 
-    const singleColumn = document.body.clientWidth <= this.props.mobileBreakpoint;
+    const singleColumn = document.body.clientWidth <= (this.props.mobileBreakpoint || 768);
 
     const reportComponents = reports.map(({id, report}) => {
       return (
@@ -20,7 +20,7 @@ export default class DashboardReportGrid extends Component {
           className={styles.dashboardReportGridCell}
           key={id}
           ref={report => {
-            this.reportElements[id] = report;
+            (this as any).reportElements[id] = report;
             if (report && this.state.reportHeights[id] !== report.clientHeight) {
               this.setState({ 
                 reportHeights: Object.assign(this.state.reportHeights, {[id]: report.clientHeight})
@@ -94,8 +94,3 @@ export default class DashboardReportGrid extends Component {
     }
   }
 }
-
-DashboardReportGrid.displayName = 'DashboardReportGrid';
-DashboardReportGrid.defaultProps = {
-  mobileBreakpoint: 768,
-};

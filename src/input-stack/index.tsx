@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { inputStackHeight } from './variables';
+import { inputStackHeight } from './variables.json';
 import styles from './styles.scss';
 import propTypes from 'prop-types';
 
@@ -16,13 +16,13 @@ InputStackGroup.propTypes = {
   children: propTypes.node,
 };
 
-export class InputStackItem extends React.Component {
+export class InputStackItem extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {focused: false};
   }
   render() {
-    const propsRest = Object.assign({}, this.props);
+    const propsRest = Object.assign({}, this.props) as any;
     delete propsRest.invalid;
     delete propsRest.focused;
     delete propsRest.className;
@@ -47,8 +47,8 @@ export class InputStackItem extends React.Component {
   }
 }
 
-InputStackItem.displayName = 'InputStackItem';
-InputStackItem.propTypes = {
-  invalid: propTypes.bool,
-  focused: propTypes.bool,
-};
+// InputStackItem.displayName = 'InputStackItem';
+// InputStackItem.propTypes = {
+//   invalid: propTypes.bool,
+//   focused: propTypes.bool,
+// };
