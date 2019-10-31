@@ -149,8 +149,8 @@ export function ListViewColumn({
   disabled = item => false,
   isRowHeader = false,
 
-  width = 'auto',
-  minWidth = 'auto',
+  width = 'auto' as string | number,
+  minWidth = 'auto' as string | number,
   align = 'left'
 }) {
 
