@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
@@ -36,8 +37,6 @@ export default class InfoPopup extends Component<any, any> {
       return;
     }
     const { verticalPopupOffset } = this.props;
-
-    const containerBBox = (this as any).container.getBoundingClientRect();
     const popupBBox = (this as any).popup.getBoundingClientRect();
     const iconBBox = (this as any).icon.getBoundingClientRect();
 
@@ -46,7 +45,7 @@ export default class InfoPopup extends Component<any, any> {
     let top = iconBBox.bottom + 3 + (verticalPopupOffset || 0);
 
     // Craft a "left" value that will ensure that the popup is centered underneath the (i).
-    let left = iconBBox.x + (iconBBox.width / 2) - (popupBBox.width / 2);
+    let left = iconBBox.left + (iconBBox.width / 2) - (popupBBox.width / 2);
 
     // Attempt to handle the case of the popup going off the left edge of the screen
     if (left < 20) {
@@ -58,14 +57,10 @@ export default class InfoPopup extends Component<any, any> {
       left = windowWidth - popupBBox.width - 20;
     }
 
-    // `left` and `top` are relative to the upper left hand corner of the screen. That isn't going
-    // to work though since all positions are relative to `,info-popup-container` as to avoid using
-    // positioning systems from upper containers outside of this component.
-
-    // Use `left` / `top` values offset from `.info-popup-container` instead of the root.
+    // Use raw `left` / `top` values, because this popup will render in a portal
     this.setState({
-      top: isNaN(top - containerBBox.y) ? 0 : top - containerBBox.y,
-      left: isNaN(left - containerBBox.x) ? 0 : left - containerBBox.x ,
+      top: top,
+      left: left,
     });
   }
 
@@ -113,7 +108,6 @@ export default class InfoPopup extends Component<any, any> {
       onFocus={e => this.onShow()}
       onBlur={e => this.onHide()}
       style={{transform: `translate(${horizontalIconOffset || 0}px, ${verticalIconOffset || 0}px)`}}
-      ref={r => { (this as any).container = r; }}
     >
       <span
         className={classnames(styles.infoPopupIcon, {
@@ -125,18 +119,21 @@ export default class InfoPopup extends Component<any, any> {
         {target || <Icons.Info color={infoIconColor || 'primary'}/>}
       </span>
 
-      <div className={styles.infoPopupWrapper}>
-        <div
-          className={classnames(styles.infoPopupPopup, {
-            [styles.infoPopupPopupVisible]: visible,
-            [styles.infoPopupPopupSingleLine]: singleLine,
-          })}
-          style={{top, left}}
-          ref={r => { (this as any).popup = r; }}
-        >
-          {children}
-        </div>
-      </div>
+      {ReactDOM.createPortal(
+        <div className={styles.infoPopupWrapper}>
+          <div
+            className={classnames(styles.infoPopupPopup, {
+              [styles.infoPopupPopupVisible]: visible,
+              [styles.infoPopupPopupSingleLine]: singleLine,
+            })}
+            style={{top, left}}
+            ref={r => { (this as any).popup = r; }}
+          >
+            {children}
+          </div>
+        </div>,
+        document.querySelector('body')
+      )}
     </span>;
   }
 }

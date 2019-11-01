@@ -36,7 +36,7 @@ storiesOf('InfoPopup', module)
     <div style={{width: 800}}>
       <Card>
         <CardHeader>
-          My header&nbsp;
+          My header with quite a long name&nbsp;
           <InfoPopup>
             <h3>Utilization</h3>
             <p>A measure of lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla diam orci, lacinia ac vestibulum ut, vehicula at eros. Pellentesque molestie eu odio nec volutpat. Fusce cursus sapien quis massa tincidunt pellentesque. Sed molestie orci a augue auctor iaculis. Donec pharetra fringilla sem in convallis. Maecenas diam nisi, hendrerit rhoncus aliquam et, bibendum et felis. Nunc nec tortor interdum, mattis lectus nec, aliquet lectus. Vivamus hendrerit pharetra metus ut pulvinar.</p>
