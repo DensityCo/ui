@@ -36,7 +36,7 @@ export default class InfoPopup extends Component<any, any> {
     if (!(this as any).popup || !(this as any).icon) {
       return;
     }
-    const { verticalPopupOffset } = this.props;
+    const { popupAnchor = 'center', verticalPopupOffset } = this.props;
     const popupBBox = (this as any).popup.getBoundingClientRect();
     const iconBBox = (this as any).icon.getBoundingClientRect();
 
@@ -44,8 +44,14 @@ export default class InfoPopup extends Component<any, any> {
 
     let top = iconBBox.bottom + 3 + (verticalPopupOffset || 0);
 
-    // Craft a "left" value that will ensure that the popup is centered underneath the (i).
-    let left = iconBBox.left + (iconBBox.width / 2) - (popupBBox.width / 2);
+    // Craft a "left" value that will ensure that the popup is correctly positioned.
+    console.log(this.props);
+    let left = iconBBox.left;
+    if (popupAnchor === 'center') {
+      left = left + (iconBBox.width / 2) - (popupBBox.width / 2);
+    } else if (popupAnchor === 'right') {
+      left = left - popupBBox.width + iconBBox.width;
+    }
 
     // Attempt to handle the case of the popup going off the left edge of the screen
     if (left < 20) {
@@ -92,6 +98,9 @@ export default class InfoPopup extends Component<any, any> {
       singleLine,
       horizontalIconOffset,
       verticalIconOffset,
+      popupBackground,
+      popupBorder,
+      popupPadding,
       target,
       children,
     } = this.props;
@@ -126,7 +135,13 @@ export default class InfoPopup extends Component<any, any> {
               [styles.infoPopupPopupVisible]: visible,
               [styles.infoPopupPopupSingleLine]: singleLine,
             })}
-            style={{top, left}}
+            style={{
+              top,
+              left,
+              background: popupBackground,
+              border: popupBorder,
+              padding: popupPadding
+            }}
             ref={r => { (this as any).popup = r; }}
           >
             {children}
@@ -144,6 +159,11 @@ export default class InfoPopup extends Component<any, any> {
 //   singleLine: propTypes.bool,
 //   horizontalIconOffset: propTypes.number,
 //   verticalIconOffset: propTypes.number,
+//   verticalPopupOffset: propTypes.number,
+//   popupAnchor: propTypes.string,
+//   popupBackground: propTypes.string,
+//   popupBorder: propTypes.string,
+//   popupPadding: propTypes.string,
 //   target: propTypes.node,
 //   children: propTypes.node.isRequired,
 // };
