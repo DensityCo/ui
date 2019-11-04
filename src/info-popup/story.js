@@ -85,13 +85,14 @@ storiesOf('InfoPopup', module)
       </InfoPopup>
     </div>
   ))
-  .add('With right anchor, and custom background, border, and padding', () => (
+  .add('With right anchor, and custom background, border, padding, and width', () => (
     <div style={{position: 'absolute', left: 300, top: 100}}>
       <InfoPopup
         popupAnchor="right"
         popupBackground="#777"
         popupBorder="3px solid #00D"
         popupPadding="2px"
+        popupWidth={200}
         target={<span style={{fontFamily: fontVariables.fontBase, fontSize: 14}}>
           With right anchor</span>}
       >

@@ -15,6 +15,7 @@ export type InfoPopupProps = {
   popupBackground?: string,
   popupBorder?: string,
   popupPadding?: string | number,
+  popupWidth?: string | number,
   target?: React.ReactNode,
   children: React.ReactNode,
 };
@@ -126,6 +127,7 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
       popupBackground,
       popupBorder,
       popupPadding,
+      popupWidth,
       target,
       children,
     } = this.props;
@@ -165,7 +167,8 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
               left,
               background: popupBackground,
               border: popupBorder,
-              padding: popupPadding
+              padding: popupPadding,
+              width: popupWidth,
             }}
             ref={this.popup}
           >
