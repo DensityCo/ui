@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "declaration": true,
     "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,

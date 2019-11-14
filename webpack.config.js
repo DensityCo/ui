@@ -18,6 +18,7 @@ for (const key in package.peerDependencies) {
 
 module.exports = {
   entry: path.join(path.resolve(__dirname), 'src', 'index.ts'),
+  devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
