@@ -5,7 +5,7 @@ import Icons from '../icons';
 import propTypes from 'prop-types';
 
 import colorVariables from '../../variables/colors.json';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {

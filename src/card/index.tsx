@@ -2,7 +2,7 @@ import * as uuid from 'uuid';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import './styles.scss';
+import './styles.module.scss';
 
 const Card: React.FC<any> = ({type, style, className, children}) => {
   return <div

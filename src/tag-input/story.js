@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import moment from 'moment';
 
-import './styles.scss';
+import './styles.module.scss';
 import TagInput from './index';
 import DateRangePicker, { START_DATE_ACTIVE } from '../date-range-picker/index';
 import colorVariables from '../../variables/colors.json';

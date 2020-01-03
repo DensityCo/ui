@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import classnames from 'classnames';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 import fuzzy from 'fuzzy';
 import Icons from '../icons';
 import InputBox from '../input-box';

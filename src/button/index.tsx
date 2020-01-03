@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 export const ButtonContext = React.createContext<any>(null);
 

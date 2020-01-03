@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 const PagerButtonGroup: React.FC<any> = ({
   showFirstLastButtons,

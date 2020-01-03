@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import './styles.scss';
+import './styles.module.scss';
 import PercentageBar from './index';
 import fontVariables from '../../variables/fonts.json';
 

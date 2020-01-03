@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 import propTypes from 'prop-types';
 
 export const InputStackGroup: React.FC<any> = ({children}) => {

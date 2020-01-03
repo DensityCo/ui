@@ -2,7 +2,7 @@ import React from 'react';
 import uuid from 'uuid';
 import classnames from 'classnames';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 const Switch: React.FC<any> = ({value, disabled, onChange}) => {
   const uniqueId = uuid.v4();

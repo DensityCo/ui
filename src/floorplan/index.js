@@ -8,7 +8,7 @@ import propTypes from 'prop-types';
 
 import colorVariables from '../../variables/colors.json';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 import "regenerator-runtime";
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 import InputBox from '../input-box';
 import PhoneInputBox from './index';
 

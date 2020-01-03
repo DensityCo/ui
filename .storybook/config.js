@@ -1,5 +1,5 @@
 import '!css-loader!normalize.css';
-import './styles.scss';
+import './styles.module.scss';
 import 'moment-timezone';
 
 import { configure, addParameters } from '@storybook/react';

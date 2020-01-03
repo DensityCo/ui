@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import './styles.scss';
+import './styles.module.scss';
 import DatePicker, { DatePickerContext, ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
 import { isInclusivelyBeforeDay } from '@density/react-dates';
 

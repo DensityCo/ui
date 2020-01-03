@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import './styles.scss';
+import './styles.module.scss';
 import Toast, { ToastContext } from './index';
 
 import Icons from '../icons';

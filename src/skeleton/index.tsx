@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 import colorVariables from '../../variables/colors.json';
 
 const Skeleton: React.FC<any> = ({width, height, color, borderRadius}) => {

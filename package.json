@@ -1,13 +1,12 @@
 {
   "name": "@density/ui",
-  "version": "20.3.2",
+  "version": "20.4.0",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
     "start": "start-storybook -p 6006",
     "prepublishOnly": "rm -rf dist/ && ./node_modules/.bin/webpack --mode production",
-    "watch": "npm link && rm -rf dist/ && ./node_modules/.bin/webpack --watch",
-    "make-component": "./utilities/make-component"
+    "watch": "npm link && rm -rf dist/ && ./node_modules/.bin/webpack --watch"
   },
   "keywords": [],
   "author": "Density <team+javascript@density.io>",

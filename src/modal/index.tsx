@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 const Modal: React.FC<any> = ({
   visible,

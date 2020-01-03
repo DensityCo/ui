@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {

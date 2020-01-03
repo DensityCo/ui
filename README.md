@@ -20,7 +20,7 @@ Each component has a number of different files:
 - `story.js` contains a number of stories used to render the component in different states. Think
   of these like visual tests that one can quickly run through to determine if a component is
   working.
-- `styles.scss` contains all styles required to render the ui component. This uses [css
+- `styles.module.scss` contains all styles required to render the ui component. This uses [css
   modules](https://github.com/css-modules/css-modules), which allows styles to be scoped to a given
   component.
 
@@ -32,7 +32,7 @@ convention in camelcase, which allows them to be imported into javascript and gi
 A basic example of this is below:
 
 ```scss
-// styles.scss
+// styles.module.scss
 
 .myCoolStyle {
   color: red;
@@ -42,7 +42,7 @@ A basic example of this is below:
 ```jsx
 // component.js
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 const component = () => (
   <div className={styles.myCoolStyle}>Hello world!</div>

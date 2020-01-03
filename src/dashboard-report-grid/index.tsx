@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 export default class DashboardReportGrid extends Component<any, any> {
   constructor(props) {

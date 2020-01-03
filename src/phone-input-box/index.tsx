@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import PhoneInput from 'react-phone-number-input';
 
-import './styles.scss';
+import './styles.module.scss';
 
 const PhoneInputBox: React.FC<any> = ({
   value = undefined,

@@ -7,7 +7,7 @@ import moment from 'moment';
 import InputBox from '../input-box';
 import Icons from '../icons';
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT',

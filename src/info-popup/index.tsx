@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
 import Icons from '../icons';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 export type InfoPopupProps = {
   infoIconColor?: string,

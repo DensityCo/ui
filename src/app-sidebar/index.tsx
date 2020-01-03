@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 const AppSidebar: React.FC<any> = ({ visible, width=415, children }) => {
   return <div

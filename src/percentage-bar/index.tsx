@@ -7,7 +7,7 @@ const PERCENTAGE_BAR_DEFAULT_BREAK_WIDTH = 768;
 
 const MDASH = String.fromCharCode(8212);
 
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 export default class PercentageBar extends React.Component<any, any> {
   componentDidMount() {

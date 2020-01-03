@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import './styles.scss';
+import './styles.module.scss';
 import Floorplan, { DPU, CIRCLE } from './index';
 import RadioButton from '../radio-button';
 import Button from '../button';

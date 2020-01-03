@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.scss';
+import styles from './styles.module.scss';
 
 const AppScrollView: React.FC<any> = ({ children, backgroundColor='#FFFFFF' }) => {
   return <div
