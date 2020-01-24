@@ -1,28 +1,76 @@
+// Find and replace
+
 $grayCinder: #222A2E;
+// $midnight:              #0D183A;
+
+$gray800:              	#2F363D;
+$gray900:              	#24292E;
+
 $grayDarkest: #445158;
+// $gray700:              	#444D56;
+
+$gray600:              	#586069;
+
 $grayDarker: #8E9299;
+// $gray500:              	#6A737D;
+
 $grayDark: #B4B8BF;
+// $gray400:              	#959DA5;
+
 $gray: #CBCFD6;
+// $gray300:              	#D1D5DA;
+
 $grayLight: #E8E8ED;
+// $gray200:              	#E1E4E8;
+
 $grayLighter: #F0F0F2;
+// $gray100:              	#F6F8FA;
+
 $grayLightest: #FAFAFA;
+// $gray000:              	#FAFBFC;
+
 $brandPrimary: #2C4EB9;
+// $midnight;
+
 $brandPrimaryNew: #2C4EB9;
+// $midnight;
+
 $brandPrimaryLight: #B6C6F6;
+// $blueLight;
+
 $brandSuccess: #80CD80;
+// $green
+
 $brandDanger: #FF7A68;
+// $red
+
 $brandWarning: #FFBA08;
+// $yellow
+
 $brandMuted: $grayDarkest;
-$textColorBase: $grayDarkest;
+// $gray500
+
+
+// Text Colors
+// -----------------------------------
+$textColorBase: $gray700;
 $textColorLight: #8E9299;
 $textColor: $textColorLight;
 $headerColor: #4E5457;
+
 $inputFieldTextColor: #CBCFD6;
 $inputFieldTextActiveColor: #4E5457;
 $inputFieldPlaceholderColor: #9B9B9B;
 $inputFieldBorderColor: $grayDark;
+
+
 $reportBlueLight: #97A6D4;
+// $blue
 $reportGreen: #4E8475;
+// $green
 $reportYellow: #F9B35B;
+// $yellow
 $reportOrange: #F26B40;
+// $purple
 $reportRed: #FF7B6C;
+// $red
