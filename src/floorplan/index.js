@@ -51,7 +51,7 @@ export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
     r={26 * scale}
     style={{
       opacity: selected ? 0.35 : 0,
-      fill: colorVariables.brandPrimary, /* must be here for transition to work */
+      fill: colorVariables.midnight, /* must be here for transition to work */
                                          /* see https://stackoverflow.com/a/20012937/4115328 */
       transition: "all 200ms ease-in-out",
     }}
@@ -60,7 +60,7 @@ export const CIRCLE = ({scale, selected, index}) => <g className="Circle">
     cx={21}
     cy={21}
     r={18 * scale}
-    fill={colorVariables.brandPrimary}
+    fill={colorVariables.midnight}
   />
 </g>;
 
@@ -793,8 +793,8 @@ export default class Floorplan extends Component {
                       cx={createdShape.x}
                       cy={createdShape.y}
                       r={20}
-                      fill={colorVariables.brandPrimary}
-                      stroke={colorVariables.brandPrimary}
+                      fill={colorVariables.midnight}
+                      stroke={colorVariables.midnight}
                     />
                   );
                 })() : null}

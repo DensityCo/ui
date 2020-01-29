@@ -15,11 +15,11 @@
 
   width: 24px;
   height: 24px;
-  color: $grayDarkest;
+  color: $gray700;
   font-size: 12px;
   font-weight: 500;
   background-color: #fff;
-  border: 1px solid $grayDark;
+  border: 1px solid $gray400;
   border-radius: $borderRadiusSmall;
   cursor: pointer;
   user-select: none;
@@ -27,19 +27,19 @@
   outline: none;
 }
 .button.active {
-  background-color: $brandPrimary;
-  border-color: $brandPrimary;
+  background-color: $midnight;
+  border-color: $midnight;
   color: #fff;
 }
 .button.disabled {
   cursor: default;
   background-color: #fff;
-  color: $grayDarker;
-  border-color: $grayDark;
+  color: $gray500;
+  border-color: $gray400;
 }
 .button.active.disabled {
   cursor: default;
-  background-color: $grayDark;
+  background-color: $gray400;
   color: #fff;
-  border-color: $grayDark;
+  border-color: $gray400;
 }

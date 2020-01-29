@@ -437,10 +437,10 @@ const ICONS = {
 // colors can either be `primary`, `darker`, or a hex/rgb color.
 function parseColor(color) {
     return color && typeof color === 'string' ? (
-        colorVariables[`brand${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, brandPrimary */
-        colorVariables[`gray${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, grayDarker */
+        colorVariables[`brand${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, midnight */
+        colorVariables[`gray300${color[0].toUpperCase()}${color.slice(1)}`] || /* ie, gray500 */
         color /* ie, #555 */
-    ) : colorVariables.grayCinder; /* defaults to gray-cinder */
+    ) : colorVariables.midnight; /* defaults to gray300-cinder */
 }
 
 // Wrap each icon in a component.

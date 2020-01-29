@@ -2,18 +2,18 @@
 @import "../../variables/spacing.scss";
 @import "../../variables/fonts.scss";
 
-@mixin make-card($background: #fff, $foreground: $grayDarker, $paddingHorizontal: 20px, $paddingVertical: 20px) {
+@mixin make-card($background: #fff, $foreground: $gray500, $paddingHorizontal: 20px, $paddingVertical: 20px) {
   box-sizing: border-box;
   background-color: $background;
   border-radius: $borderRadiusBase;
   border: none;
   color: $foreground;
-  border: 1px solid $grayLight;
+  border: 1px solid $gray200;
   position: relative;
 }
 
 @mixin make-card-header(
-  $color: $grayDarkest,
+  $color: $gray700,
   $paddingHorizontal: 20px,
   $paddingVertical: 30px,
   $fontSize: $fontSize3,
@@ -60,8 +60,8 @@
 @mixin make-card-well(
   $fontSize: $fontSize3,
   $fontWeight: $fontWeight3,
-  $color: $grayCinder,
-  $background: $grayLightest
+  $color: $midnight,
+  $background: $gray000
 ) {
   font-family: $fontBase;
   font-size: $fontSize;
@@ -86,7 +86,7 @@
   }
 }
 
-@mixin make-card-well-highlight($color: $brandPrimary, $fontWeight: $fontWeight3) {
+@mixin make-card-well-highlight($color: $midnight, $fontWeight: $fontWeight3) {
   color: $color;
   white-space: nowrap; // don't wrap in the middle of a highlighted item
   font-weight: $fontWeight;
@@ -120,7 +120,7 @@
   border-top-right-radius: 4px;
 }
 
-@mixin make-card-loading($color: $brandPrimary, $percent: 100%, $height: 2px, $indeterminate: false) {
+@mixin make-card-loading($color: $midnight, $percent: 100%, $height: 2px, $indeterminate: false) {
   width: $percent;
   height: $height;
   background-color: $color;
@@ -140,7 +140,7 @@
 
 @mixin make-card-table(
   $background: #fff,
-  $foreground: $grayCinder,
+  $foreground: $midnight,
   $paddingVertical: 20px,
 ) {
   background-color: $background;
@@ -169,8 +169,8 @@
     padding-right: 20px;
     padding-top: 5px;
     line-height: 38px;
-    border-top: 1px solid $grayLighter;
-    border-bottom: 1px solid $grayLighter;
+    border-top: 1px solid $gray100;
+    border-bottom: 1px solid $gray100;
     text-align: left;
   }
   table > tbody > tr > td {
@@ -180,7 +180,7 @@
     padding-top: 5px;
     line-height: 38px;
 
-    border-bottom: 1px solid $grayLighter;
+    border-bottom: 1px solid $gray100;
     text-align: left;
 
     white-space: nowrap;
@@ -224,9 +224,9 @@
 
 :global(.card-well-dark) {
   @include make-card-well(
-    $color: $grayDark,
+    $color: $gray400,
     $fontWeight: 400,
-    $background: $grayCinder
+    $background: $midnight
   );
 }
 :global(.card-well-dark .card-well-highlight) {
@@ -238,8 +238,8 @@
 :global(.card-loading) { @include make-card-loading; }
 :global(.card-loading-indeterminate) { @include make-card-loading($indeterminate: true); }
 :global(.card-dark) {
-  @include make-card($grayCinder, #fff);
+  @include make-card($midnight, #fff);
 }
 
-:global(.card-table) { @include make-card-table(#fff, $grayCinder); }
+:global(.card-table) { @include make-card-table(#fff, $midnight); }
 :global(.card-table-scroll) { @include make-card-table-scroll; }

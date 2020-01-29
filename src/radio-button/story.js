@@ -28,7 +28,7 @@ storiesOf('RadioButton', module)
     </div>
   ))
   .add('A single radio button without a specified text value does not have a right margin', () => (
-    <div style={{display: 'flex', alignItems: 'center', height: 40, backgroundColor: colorVariables.grayLighter}}>
+    <div style={{display: 'flex', alignItems: 'center', height: 40, backgroundColor: colorVariables.gray100}}>
       <RadioButton checked={true} />
       <div style={{marginLeft: 8}}>
         <Icons.Building />

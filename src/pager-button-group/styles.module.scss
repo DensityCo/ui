@@ -8,7 +8,7 @@
   background-color: #fff;
   width: 22px;
   height: 22px;
-  color: $gray;
+  color: $gray300;
 
   font-family: $fontBase;
   font-size: 18px;
@@ -31,11 +31,11 @@
   }
 
   &:active {
-    color: $grayDarker;
+    color: $gray500;
   }
 
   // Make sure neighboring buttons share only a single border.
-  border: 1px solid $grayLighter;
+  border: 1px solid $gray100;
   & + & {
     border-left-width: 0px;
   }
@@ -45,6 +45,6 @@
   opacity: 0.5;
   cursor: default;
   &:active {
-    color: $gray;
+    color: $gray300;
   }
 }

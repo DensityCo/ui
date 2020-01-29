@@ -20,7 +20,7 @@ storiesOf('Skeleton', module)
     <Skeleton width={32} height={32} borderRadius={16} />
   ))
   .add('Primary-colored skeleton', () => (
-    <Skeleton color={colorVariables.brandPrimary} width={300} height={24} />
+    <Skeleton color={colorVariables.midnight} width={300} height={24} />
   ))
   .add('Skeleton in Button', () => (
     <Button type="primary" disabled>

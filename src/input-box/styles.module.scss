@@ -12,14 +12,14 @@
   height: 40px;
   padding-right: 16px;
   padding-bottom: 3px;
-  border: 1px solid $inputFieldBorderColor;
+  border: 1px solid $gray400;
   border-radius: $borderRadiusBase;
   background-color: #fff;
   cursor: text;
   font-family: $fontBase;
 }
 
-.inputBoxFocused { border-color: $brandPrimary; }
+.inputBoxFocused { border-color: $midnight; }
 
 .inputBox input {
   flex-grow: 1;
@@ -30,17 +30,17 @@
   background-color: transparent;
   border: 0px;
   outline: none;
-  color: $grayCinder;
+  color: $midnight;
   font-size: $fontSizeBase;
   font-family: $fontBase;
   width: 100%;
 
   &::placeholder {
-    color: $inputFieldPlaceholderColor;
+    color: $gray400;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
-  &::-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
-  &:-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
+  &::-ms-input-placeholder { color: $gray400; }
+  &:-ms-input-placeholder { color: $gray400; }
 }
 
 .inputBoxContainsIcon { padding-left: 16px; }
@@ -63,7 +63,7 @@
   padding-left: 17px;
   padding-right: 17px;
   margin: 0;
-  border: 1px solid $inputFieldBorderColor;
+  border: 1px solid $gray400;
   border-radius: $borderRadiusBase;
   background-color: #fff;
   font-family: $fontBase;
@@ -72,24 +72,24 @@
   outline: none;
 
   &::placeholder {
-    color: $inputFieldPlaceholderColor;
+    color: $gray400;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
-  &::-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
-  &:-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
+  &::-ms-input-placeholder { color: $gray400; }
+  &:-ms-input-placeholder { color: $gray400; }
 }
-.inputBoxTextarea:focus { border-color: $brandPrimary; }
+.inputBoxTextarea:focus { border-color: $midnight; }
 .inputBoxDisabled {
-  border-color: $grayLight;
-  background-color: $grayLight;
+  border-color: $gray200;
+  background-color: $gray200;
   cursor: not-allowed;
 
   &::placeholder {
-    color: $inputFieldPlaceholderColor;
+    color: $gray400;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
-  &::-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
-  &:-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
+  &::-ms-input-placeholder { color: $gray400; }
+  &:-ms-input-placeholder { color: $gray400; }
 }
 
 
@@ -100,7 +100,7 @@
   width: calc(100% - 18px - 12px);
 
   background-color: #fff;
-  border: 1px solid $inputFieldBorderColor;
+  border: 1px solid $gray400;
   border-radius: 4px;
 
   padding-left: 17px;
@@ -123,7 +123,7 @@
   height: (40px - 1px - 1px); // (for borders)
 
   font-size: $fontSizeBase;
-  color: $grayCinder;
+  color: $midnight;
 
   display: flex;
   flex-direction: row;
@@ -147,12 +147,12 @@
   align-items: center;
 }
 // When focused, flip the caret.
-.inputBoxSelectBoxValueOpened { border-color: $brandPrimary; }
+.inputBoxSelectBoxValueOpened { border-color: $midnight; }
 
 // When disabled, a selectbox is grayed out and can't be clicked.
 .inputBoxSelectBoxValueDisabled {
-  background-color: $grayLight;
-  border-color: $grayLight;
+  background-color: $gray200;
+  border-color: $gray200;
   pointer-events: none;
   cursor: not-allowed;
 }
@@ -173,7 +173,7 @@
   width: 100%;
 
   z-index: 999999;
-  color: $grayCinder;
+  color: $midnight;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 100ms ease-in-out;
   user-select: none;
@@ -217,22 +217,22 @@
   border-radius: $borderRadiusBase;
 
   &:focus {
-    background-color: $grayLighter;
-    color: $brandPrimary;
+    background-color: $gray100;
+    color: $midnight;
     text-decoration: underline;
   }
 
   &:hover {
-    background-color: $grayLighter;
-    color: $brandPrimary;
+    background-color: $gray100;
+    color: $midnight;
     text-decoration: underline;
   }
 }
 .inputBoxSelectBoxMenuLiDisabled {
-  color: $grayDark;
+  color: $gray400;
   cursor: not-allowed;
   &:hover {
-    color: $grayDark;
+    color: $gray400;
     text-decoration: none;
     background-color: transparent;
   }
@@ -240,15 +240,15 @@
 
 .inputBoxSelectBoxItemHighlight {
   margin-left: 10px;
-  color: $grayDark;
+  color: $gray400;
   font-style: italic;
 }
 
 .inputBoxSelectPlaceholder {
-  color: $inputFieldPlaceholderColor;
+  color: $gray400;
 }
 
-.invalid { border-color: $brandDanger; }
+.invalid { border-color: $red; }
 
 
 // RULES FOR LIST_VIEW CONTEXT
@@ -259,7 +259,7 @@
   font-size: 16px;
 }
 .contextListView.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
-  border: 1px solid $brandPrimary;
+  border: 1px solid $midnight;
 }
 .contextListView.inputBoxSelectBoxMenu {
   top: 41px;
@@ -290,5 +290,5 @@
   border: 1px solid transparent;
 }
 .contextAnalyticsControlBar.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
-  border: 1px solid $brandPrimary;
+  border: 1px solid $midnight;
 }

@@ -6,7 +6,7 @@ it uses the react lifecycle to listen for window resize events, and if the windo
 `breakWidth`, collapses the component.
 
 If the `percentageFormatter` prop below returns `null`, the component renders its "empty" state.
-When in this state, the bar is rendered ampty and a gray dash is rendered instead of the percentage.
+When in this state, the bar is rendered ampty and a gray300 dash is rendered instead of the percentage.
 
 ## Component Props
 - `percentage: Number` - One-hot encoded percentage (0...1)

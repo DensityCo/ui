@@ -33,7 +33,7 @@
 .listViewTable tr,
 .listViewRowHeader > .listViewHeader,
 .listViewRowHeader > .listViewCell {
-  border-bottom: 1px solid $grayLight;
+  border-bottom: 1px solid $gray200;
 }
 
 
@@ -70,7 +70,7 @@
   height: 56px;
   padding-right: 24px;
   font-size: $fontSizeBase;
-  color: $grayDarkest;
+  color: $gray700;
 }
 
 .listViewTable :last-child > .listViewCell { padding-right: 0px; }
@@ -93,6 +93,6 @@
   align-items: center;
   text-decoration: underline;
   font-weight: 500;
-  color: $brandPrimary;
+  color: $midnight;
   cursor: pointer;
 }

@@ -11,7 +11,7 @@
   box-sizing: border-box;
   height: 64px;
   padding: 0 24px;
-  border-bottom: 1px solid $grayLight;
+  border-bottom: 1px solid $gray200;
   font-family: $fontBase;
 }
 
@@ -26,7 +26,7 @@
   height: 32px;
   font-size: 24px;
   font-weight: 500;
-  color: $grayCinder;
+  color: $midnight;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -39,9 +39,9 @@
 
 // Rules for "BOTTOM_ACTIONS" context
 .contextBottomActions.appBar {
-  border-top: 1px solid $grayLight;
+  border-top: 1px solid $gray200;
   border-bottom: none;
-  background: $grayLightest;
+  background: $gray000;
   border-bottom-left-radius: $borderRadiusBase;
   border-bottom-right-radius: $borderRadiusBase;
 }
@@ -49,5 +49,5 @@
 // Rules for "CARD_HEADER" context
 .cardHeader .appBarTitle {
   font-size: 20px;
-  color: $grayDarkest;
+  color: $gray700;
 }

@@ -21,7 +21,7 @@
   background-color: white;
   z-index: 100;
   border-radius: $borderRadiusBase;
-  border: 1px solid $gray;
+  border: 1px solid $gray300;
 	box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
 
   cursor: default;
@@ -50,7 +50,7 @@
 }
 .floorplanCursorTag {
   color: #fff;
-  background-color: $grayCinder;
+  background-color: $midnight;
   padding: 7px;
   border-radius: 4px;
 
@@ -71,7 +71,7 @@
   line-height: 43px;
   height: 43px;
 
-  background-color: $grayCinder;
+  background-color: $midnight;
   font-family: $fontBase;
   text-align: center;
   color: #fff;

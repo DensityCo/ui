@@ -20,7 +20,7 @@ $inputStackBorderWidth: 1px;
 @mixin make-input-stack-item(
   $height: $inputStackHeight,
   $borderWidth: $inputStackBorderWidth,
-  $validColor: $brandPrimary
+  $validColor: $midnight
 ) {
   position: relative;
 
@@ -32,7 +32,7 @@ $inputStackBorderWidth: 1px;
   &:last-child input {
     border-bottom-left-radius: $borderRadiusBase;
     border-bottom-right-radius: $borderRadiusBase;
-    border-bottom-color: $gray;
+    border-bottom-color: $gray300;
   }
 
 
@@ -63,7 +63,7 @@ $inputStackBorderWidth: 1px;
   input:focus {
     border-color: $validColor;
   }
-  input::placeholder { color: $gray; }
+  input::placeholder { color: $gray300; }
   &Focus + & input {
     border-top-color: transparent;
   }
@@ -71,7 +71,7 @@ $inputStackBorderWidth: 1px;
   // The "bubble" on the right of the input. This is why each is surrounded in a div - since an
   // :after cannot be applied to a self closing element such as an input, a container is required.
   // The bubble indicates the state of the input when the input isn't focused. When the input is
-  // focused, then the bubble turns gray and he border of the input box indicates status.
+  // focused, then the bubble turns gray300 and he border of the input box indicates status.
   &:after {
     content: " ";
     display: block;
@@ -88,12 +88,12 @@ $inputStackBorderWidth: 1px;
     margin-bottom: $inputStackHeight - 8px;
   }
   &.focus:after {
-    background-color: $gray;
+    background-color: $gray300;
   }
 }
 
 // Add this mixin to a input-stack item to show an invalid (or other) state.
-@mixin make-input-stack-item-invalid($color: $brandDanger) {
+@mixin make-input-stack-item-invalid($color: $red) {
   input:focus {
     border-color: $color;
   }

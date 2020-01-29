@@ -9,19 +9,19 @@
   height          : 40px;
 	display         : flex;
   align-items     : center;
-  border          : 1px solid $inputFieldBorderColor;
+  border          : 1px solid $gray400;
   border-radius   : $borderRadiusBase;
   box-sizing      : border-box;
   padding-bottom  : 2px;
 }
 :global(.react-phone-number-input--focus > .react-phone-number-input__row)
 {
-  border: 1px solid $brandPrimary;
+  border: 1px solid $midnight;
 }
 :global(.react-phone-number-input--disabled > .react-phone-number-input__row)
 {
-	background-color: $grayLight;
-	border-color: $grayLight;
+	background-color: $gray200;
+	border-color: $gray200;
 	cursor: default;
 }
 
@@ -173,23 +173,23 @@
 	border        : none;
   padding       : 0;
   margin-right  : 16px;
-  color         : $grayCinder;
+  color         : $midnight;
 	border-radius : $borderRadiusBase;
 	font-size     : $fontSizeBase;
   font-family   : $fontBase;
 
   &::placeholder {
-    color: $inputFieldPlaceholderColor;
+    color: $gray400;
     opacity: 1; // Placeholders in firefox have opacity by default. Undo that.
   }
-  &::-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
-  &:-ms-input-placeholder { color: $inputFieldPlaceholderColor; }
+  &::-ms-input-placeholder { color: $gray400; }
+  &:-ms-input-placeholder { color: $gray400; }
 }
 
 :global(.react-phone-number-input__input--disabled)
 {
-	background-color: $grayLight;
-	border-color: $grayLight;
+	background-color: $gray200;
+	border-color: $gray200;
 	cursor : default;
 }
 

@@ -47,7 +47,7 @@ const DatePicker: React.FC<any> = (props) => {
           }}
         >
           <Icons.ArrowLeft
-            color={props.arrowLeftDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
+            color={props.arrowLeftDisabled ? colorVariables.gray400 : colorVariables.midnight}
             width={20}
             height={20}
           />
@@ -75,7 +75,7 @@ const DatePicker: React.FC<any> = (props) => {
           }}
         >
           <Icons.ArrowRight
-            color={props.arrowRightDisabled ? colorVariables.grayDark : colorVariables.brandPrimary}
+            color={props.arrowRightDisabled ? colorVariables.gray400 : colorVariables.midnight}
             width={20}
             height={20}
           />

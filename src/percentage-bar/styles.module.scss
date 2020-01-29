@@ -13,7 +13,7 @@ $percentageBarPercentageTextSpacing: 8px; // Spacing to the left of the formatte
   flex-direction: row;
   width: 100%;
 
-  color: $brandPrimary;
+  color: $midnight;
   line-height: $percentageBarContainerHeight;
 }
 
@@ -21,7 +21,7 @@ $percentageBarPercentageTextSpacing: 8px; // Spacing to the left of the formatte
 .percentageBar {
   // overridden in media query below
   display: none;
-  background-color: $grayLight;
+  background-color: $gray200;
 
   width: 100%;
   height: $percentageBarHeight;
@@ -37,7 +37,7 @@ $percentageBarPercentageTextSpacing: 8px; // Spacing to the left of the formatte
   // a width is set as an inline style in the component, which overrides the style set below
   width: 0%;
 
-  background-color: $brandPrimary;
+  background-color: $midnight;
   height: $percentageBarHeight;
   transition: all 250ms ease-in-out;
 }
@@ -55,6 +55,6 @@ $percentageBarPercentageTextSpacing: 8px; // Spacing to the left of the formatte
 }
 
 .percentageBarTextDisabled {
-  color: $gray;
+  color: $gray300;
   font-size: $fontSizeLarge;
 }

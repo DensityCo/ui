@@ -6,7 +6,7 @@
 // equates rgba($brand-primary, 30%).
 // needed a solid color due to using for borders + background
 // (opacity was stacking)
-$brandPrimaryLight: #B6C6F6;
+$blueLight: #B6C6F6;
 
 .dateRangePicker {
   // Styles from `react-dates`.
@@ -63,35 +63,35 @@ $brandPrimaryLight: #B6C6F6;
         background: #fff; }
 
     .CalendarDay--selected-span {
-      background: $brandPrimaryLight;
-      border: 1px double $brandPrimaryLight;
+      background: $blueLight;
+      border: 1px double $blueLight;
       color: #fff; }
 
       .CalendarDay--selected-span.CalendarDay--hovered, .CalendarDay--selected-span:active {
-        background: $brandPrimary;
-        border: 1px double $brandPrimary; }
+        background: $midnight;
+        border: 1px double $midnight; }
       .CalendarDay--selected-span.CalendarDay--last-in-range {
-        border-right: $brandPrimary; }
+        border-right: $midnight; }
 
     .CalendarDay--hovered-span,
     .CalendarDay--after-hovered-start {
-      background: $brandPrimaryLight;
-      border: 1px double $brandPrimaryLight;
+      background: $blueLight;
+      border: 1px double $blueLight;
       color: #fff; }
       .CalendarDay--hovered-span:active,
       .CalendarDay--after-hovered-start:active {
-        background: darken($brandPrimary, 5%); }
+        background: darken($midnight, 5%); }
 
     .CalendarDay--selected-start,
     .CalendarDay--selected-end,
     .CalendarDay--selected {
-      background: $brandPrimary;
-      border: 1px double $brandPrimary;
+      background: $midnight;
+      border: 1px double $midnight;
       color: #fff; }
       .CalendarDay--selected-start:active,
       .CalendarDay--selected-end:active,
       .CalendarDay--selected:active {
-        background: $brandPrimary; }
+        background: $midnight; }
 
     .CalendarDay--blocked-calendar {
       background: #cacccd;
@@ -179,7 +179,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPicker--horizontal {
       background: #fff;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px $inputFieldBorderColor;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px $gray400;
       border-radius: $borderRadiusBase; }
       .DayPicker--horizontal.DayPicker--portal {
         box-shadow: none;
@@ -223,7 +223,7 @@ $brandPrimaryLight: #B6C6F6;
       .DayPicker--vertical-scrollable .DayPicker__week-header {
         top: 0;
         display: table-row;
-        border-bottom: 1px solid $brandPrimary;
+        border-bottom: 1px solid $midnight;
         background: white; }
       .DayPicker--vertical-scrollable .transition-container--vertical {
         padding-top: 20px;
@@ -265,7 +265,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPickerNavigation__prev--default,
     .DayPickerNavigation__next--default {
-      border: 1px solid $inputFieldBorderColor;
+      border: 1px solid $gray400;
       background-color: #fff;
       color: #757575; }
       // .DayPickerNavigation__prev--default:focus, .DayPickerNavigation__prev--default:hover,
@@ -274,7 +274,7 @@ $brandPrimaryLight: #B6C6F6;
       //   border: 1px solid #c4c4c4; }
       .DayPickerNavigation__prev--default:active,
       .DayPickerNavigation__next--default:active {
-        border: 1px solid $brandPrimary; }
+        border: 1px solid $midnight; }
 
     .DayPickerNavigation--horizontal {
       position: relative; }
@@ -355,7 +355,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPickerKeyboardShortcuts__show--bottom-right {
       border-top: 26px solid transparent;
-      border-right: 33px solid $brandPrimary;
+      border-right: 33px solid $midnight;
       bottom: 0;
       right: 0; }
       .DayPickerKeyboardShortcuts__show--bottom-right:hover {
@@ -366,7 +366,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPickerKeyboardShortcuts__show--top-right {
       border-bottom: 26px solid transparent;
-      border-right: 33px solid $brandPrimary;
+      border-right: 33px solid $midnight;
       top: 0;
       right: 0; }
       .DayPickerKeyboardShortcuts__show--top-right:hover {
@@ -377,7 +377,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DayPickerKeyboardShortcuts__show--top-left {
       border-bottom: 26px solid transparent;
-      border-left: 33px solid $brandPrimary;
+      border-left: 33px solid $midnight;
       top: 0;
       left: 0; }
       .DayPickerKeyboardShortcuts__show--top-left:hover {
@@ -393,7 +393,7 @@ $brandPrimaryLight: #B6C6F6;
     .DayPickerKeyboardShortcuts__panel {
       overflow: auto;
       background: #fff;
-      border: 1px solid $brandPrimary;
+      border: 1px solid $midnight;
       border-radius: 2px;
       position: absolute;
       top: 0;
@@ -533,7 +533,7 @@ $brandPrimaryLight: #B6C6F6;
       color: #484848; }
 
     .DateInput__display-text--focused {
-      border-color: $brandPrimary;
+      border-color: $midnight;
       border-radius: $borderRadiusBase;
       color: #007a87; }
 
@@ -646,7 +646,7 @@ $brandPrimaryLight: #B6C6F6;
 
     .DateRangePickerInput__clear-dates:focus,
     .DateRangePickerInput__clear-dates--hover {
-      background: $brandPrimary;
+      background: $midnight;
       border-radius: 50%; }
 
     .DateRangePickerInput__calendar-icon {
@@ -685,15 +685,15 @@ $brandPrimaryLight: #B6C6F6;
   font-size: $fontSizeBase;
   font-weight: normal;
 
-  color: $grayDarker;
+  color: $gray500;
   background-color: #fff;
 
-  border: 1px solid $inputFieldBorderColor;
+  border: 1px solid $gray400;
   border-radius: $borderRadiusBase;
 
   // On active, remove outline and add a border color.
   &:focus {
-    border-color: $brandPrimary;
+    border-color: $midnight;
   }
 
   :global {
@@ -727,15 +727,15 @@ $brandPrimaryLight: #B6C6F6;
     input[type=text] {
       padding: 0;
       cursor: pointer;
-      color: $grayCinder;
+      color: $midnight;
     }
     .DateRangePicker__picker { top: 47px; }
     .DateInput__display-text {
-      color: $grayCinder;
+      color: $midnight;
       height: 24px;
     }
     .DateInput__display-text--focused {
-      background-color: $brandPrimary;
+      background-color: $midnight;
       color: white;
     }
     .DayPickerKeyboardShortcuts__show { display: none; }
@@ -761,7 +761,7 @@ $brandPrimaryLight: #B6C6F6;
   :global(.DateRangePicker__picker) { left: -384px !important; }
 }
 .dateRangePickerFocused {
-  border-color: $brandPrimary;
+  border-color: $midnight;
 }
 .dateRangePickerCommonRangeList {
   $valueWidth: 41px;

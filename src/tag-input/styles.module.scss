@@ -35,11 +35,11 @@
   user-select: none;
   border-radius: $borderRadiusBase;
   color: #fff;
-  background-color: $grayCinder;
-  border: 1px solid $grayCinder;
+  background-color: $midnight;
+  border: 1px solid $midnight;
   transition: all 150ms ease-in-out;
 }
-.tag.focus { background-color: $brandPrimary; }
+.tag.focus { background-color: $midnight; }
 
 .tagLabel { transform: translate(0px, -1px); }
 
@@ -60,7 +60,7 @@
   top: 30px;
   padding-top: 8px;
   padding-bottom: 8px;
-  border: 1px solid $gray;
+  border: 1px solid $gray300;
   border-radius: $borderRadiusBase;
   background-color: #fff;
 }
@@ -72,9 +72,9 @@
   cursor: pointer;
   user-select: none;
 }
-.dropdownItem.focused { background-color: $grayLightest; }
+.dropdownItem.focused { background-color: $gray000; }
 .dropdownItem.disabled {
-  color: $grayDarker;
+  color: $gray500;
   cursor: default;
 }
 
@@ -83,7 +83,7 @@
   align-items: center;
   font-size: $fontSizeBase;
   font-style: italic;
-  color: $grayDark;
+  color: $gray400;
   user-select: none;
   cursor: default;
 }

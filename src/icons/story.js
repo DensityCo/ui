@@ -13,7 +13,7 @@ storiesOf('Icons', module)
   .add('A sample icon in brand-primary color', () => (
     <Icons.ImageUpload color="primary" />
   ))
-  .add('A sample icon in gray-darker color', () => (
+  .add('A sample icon in gray300-darker color', () => (
     <Icons.ImageUpload color="darker" />
   ))
   .add('A sample icon with color accent', () => (
@@ -38,7 +38,7 @@ storiesOf('Icons', module)
         const IconComponent = Icons[iconName];
         return <div key={iconName} style={{fontFamily: fontVariables.fontBase}}>
           <IconComponent />
-          <span style={{marginLeft: 10, fontSize: 14, verticalAlign: 4, color: colorVariables.grayDarker}}>{iconName}</span>
+          <span style={{marginLeft: 10, fontSize: 14, verticalAlign: 4, color: colorVariables.gray500}}>{iconName}</span>
         </div>;
       })}
     </div>

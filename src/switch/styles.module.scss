@@ -5,7 +5,7 @@ $switchBaseHeight: 24px;
 $switchHandleSize: 20px;
 $switchHandleBorderSize: 2px;
 
-@mixin make-switch($background: $brandPrimary, $foreground: #fff) {
+@mixin make-switch($background: $midnight, $foreground: #fff) {
   label {
     outline: 0;
     display: inline-block;
@@ -14,7 +14,7 @@ $switchHandleBorderSize: 2px;
     position: relative;
     cursor: pointer;
     user-select: none;
-    background-color: $gray;
+    background-color: $gray300;
     border-radius: $switchBaseHeight;
     transition: all 200ms ease;
 
@@ -30,7 +30,7 @@ $switchHandleBorderSize: 2px;
       top: ($switchBaseHeight - $switchHandleSize - $switchHandleBorderSize) / 2;
       border-radius: 50%;
       background-color: $foreground;
-      border: $switchHandleBorderSize solid $gray;
+      border: $switchHandleBorderSize solid $gray300;
       transition: all 200ms ease;
     }
   }
@@ -51,10 +51,10 @@ $switchHandleBorderSize: 2px;
   &.disabled input[type=checkbox] + label,
   &.disabled input[type=checkbox]:checked + label {
     pointer-events: none;
-    background-color: $grayLight;
+    background-color: $gray200;
   }
   &.disabled input[type=checkbox]:checked + label:after {
-    border-color: $grayLight;
+    border-color: $gray200;
   }
 }
 

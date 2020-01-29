@@ -22,7 +22,7 @@ Skeleton.propTypes = {
 Skeleton.defaultProps = {
   width: '100%',
   height: 8,
-  color: colorVariables.gray,
+  color: colorVariables.gray300,
 };
 Skeleton.displayName = 'Skeleton';
 export default Skeleton;

@@ -3,7 +3,7 @@
 @import "../../variables/fonts.scss";
 @import "../../variables/spacing.scss";
 
-$buttonBorderColor: $gray;
+$buttonBorderColor: $gray300;
 
 .button {
   display: inline-block;
@@ -33,13 +33,13 @@ $buttonBorderColor: $gray;
 
   &:hover, &:focus { box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09); }
   &:active {
-		border-color: $brandPrimary;
+		border-color: $midnight;
     box-shadow: 0 2px 4px 0 rgba(34,42,46,0.09);
 	}
 
   &:disabled {
-    color: $grayDarker;
-    border-color: $grayLight;
+    color: $gray500;
+    border-color: $gray200;
     cursor: default;
     &:hover, &:focus { box-shadow: none; }
     &:active { border-color: $buttonBorderColor; }
@@ -60,11 +60,11 @@ $buttonBorderColor: $gray;
   font-size: 18px;
 }
 
-$themes: primary $brandPrimary,
-         danger $brandDanger,
-         warning $brandWarning,
-         success $brandSuccess,
-         muted $brandMuted;
+$themes: primary $midnight,
+         danger $red,
+         warning $yellow,
+         success $green,
+         muted $gray500;
 
 @each $entry in $themes {
   $name: nth($entry, 1);
@@ -73,13 +73,13 @@ $themes: primary $brandPrimary,
     &.default {
       color: $color;
       background-color: #fff;
-      border-color: $gray;
+      border-color: $gray300;
     }
     &.default:hover, &.default:focus { box-shadow: 0 2px 6px 0 rgba(34,42,46,0.09); }
     &.default:disabled {
-      color: $grayDarker;
-      background-color: $grayLight;
-      border-color: $grayLight;
+      color: $gray500;
+      background-color: $gray200;
+      border-color: $gray200;
     }
     &.default:active { border-color: $color; }
     &.default:hover:disabled, &.default:active:disabled { box-shadow: none; }
@@ -91,9 +91,9 @@ $themes: primary $brandPrimary,
     }
     &.filled:hover, &.filled:focus { box-shadow: 0 2px 6px 0 rgba(34,42,46,0.09); }
     &.filled:disabled {
-      color: $grayDarker;
-      background-color: $grayLight;
-      border-color: $grayLight;
+      color: $gray500;
+      background-color: $gray200;
+      border-color: $gray200;
     }
     &.filled:hover:disabled, &.filled:active:disabled { box-shadow: none; }
 
@@ -104,13 +104,13 @@ $themes: primary $brandPrimary,
       text-decoration: underline;
     }
     &.underline:hover, &.underline:focus {
-      border-color: $gray;
+      border-color: $gray300;
       box-shadow: none;
     }
     &.underline:active { border-color: $color; }
     &.underline:disabled {
-      color: $grayDarker;
-      background-color: $grayLight;
+      color: $gray500;
+      background-color: $gray200;
     }
     &.underline:hover:disabled, &.underline:active:disabled { border-color: transparent; }
   }

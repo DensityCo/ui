@@ -31,13 +31,13 @@
   background-color: #fff;
   padding: 20px;
 
-  border: 1px solid $gray;
+  border: 1px solid $gray300;
   border-radius: 4px;
 
   font-family: $fontBase;
   font-size: $fontSizeBase;
   font-weight: normal;
-  color: $grayCinder;
+  color: $midnight;
 
   position: absolute;
   top: 0px;
@@ -68,5 +68,5 @@
 }
 
 
-.infoPopupCardWellHighlight { border-bottom: 1px dotted $grayCinder; }
-.card-well-dark .info-popup-card-well-highlight { border-bottom: 1px dotted $gray; }
+.infoPopupCardWellHighlight { border-bottom: 1px dotted $midnight; }
+.card-well-dark .info-popup-card-well-highlight { border-bottom: 1px dotted $gray300; }
