@@ -203,11 +203,11 @@ export default function ListView<T = any, C extends string = string>(props: List
   );
 }
 
-type ListViewColumnProps<T, V> = {
+type ListViewColumnProps<T> = {
   id: string
   title?: React.ReactNode
   template?: (item: T) => React.ReactNode
-  valueTemplate?: (item: T) => V
+  valueTemplate?: (item: T) => SortableValue
   onClick?: (item: T) => void
   disabled?: (item: T) => boolean
   isRowHeader?: boolean
@@ -218,9 +218,8 @@ type ListViewColumnProps<T, V> = {
 
 /**
  * `T` is the data type of each Row,
- * `V` is the value type returned from the valueTemplate prop
  */
-export function ListViewColumn<T = any, V = any>(props: ListViewColumnProps<T, V>) {
+export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
 
   const {
     id,
