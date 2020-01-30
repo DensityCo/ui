@@ -343,10 +343,10 @@ export function getDefaultSortFunction<T>(sortTemplate: (item: T) => SortableVal
   }
 }
 
-export function getNextSortDirection(sortDirection) {
+export function getNextSortDirection(sortDirection: SortDirection) {
   return {
     'desc': 'asc',
     'asc': 'none',
     'none': 'desc'
-  }[sortDirection]
+  }[sortDirection] as SortDirection
 };
