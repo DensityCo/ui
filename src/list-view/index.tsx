@@ -5,42 +5,113 @@ import { v4 } from 'uuid';
 import styles from './styles.module.scss';
 import { Icons } from '..';
 
-const TABLE_HEADER = 'TABLE_HEADER',
-  TABLE_ROW = 'TABLE_ROW',
-  ALIGN_TO_JUSTIFY = {
-    'left': 'flex-start',
-    'center': 'center',
-    'right': 'flex-end'
-  },
-  SORT_INDICATORS = {
-    'asc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowUp height={12} width={12} /></div>,
-    'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
-  };
+const TABLE_HEADER = 'TABLE_HEADER';
+const TABLE_ROW = 'TABLE_ROW';
+const ALIGN_TO_JUSTIFY = {
+  'left': 'flex-start',
+  'center': 'center',
+  'right': 'flex-end'
+};
+const SORT_INDICATORS = {
+  'asc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowUp height={12} width={12} /></div>,
+  'desc': <div style={{marginLeft: 8, marginRight: -20}}><Icons.ArrowDown height={12} width={12} /></div>
+};
 
-const ListViewContext = React.createContext<any>({});
+export type SortDirection = 'asc' | 'desc' | 'none';
 
-const ListView: React.FC<any> = ({
-  data = [],
-  sort = [],
-  onClickHeader = null,
-  onClickRow = null,
-  keyTemplate = item => item.id || v4(),
+export type SortRule = {
+  column: string | null
+  direction: SortDirection
+}
 
-  showHeaders = true,
-  fixedWidth = true,
-  padOuterColumns = false,
-  scrollX = false,
+type ListViewContextType = {
+  mode: typeof TABLE_ROW | typeof TABLE_HEADER
+  height: React.CSSProperties['height']
+  fontSize: React.CSSProperties['fontSize']
+  rowHeaderWidth: number
+  item?: any
+  sort?: SortRule[]
+  onClickHeader?: (column: string, value: any) => void
+}
 
-  rowHeight = undefined,
-  headerHeight = undefined,
-  fontSize = undefined,
-  headerFontSize = undefined,
-  children = null,
-}) => {
+// In practice, this should not be used, but a React.Context requires a default value
+const DEFAULT_LIST_VIEW_CONTEXT: ListViewContextType = {
+  mode: 'TABLE_ROW' as const,
+  height: 0,
+  fontSize: 0,
+  rowHeaderWidth: 0,
+}
+
+const ListViewContext = React.createContext<ListViewContextType>(DEFAULT_LIST_VIEW_CONTEXT);
+
+export type ListViewProps<T, C extends string> = {
+  data: T[]
+  sort?: SortRule[]
+  onClickHeader?: (column: C, sortTemplate: (item: T) => SortableValue) => void
+  onClickRow?: (item: T) => void
+  keyTemplate?: (item: T) => C
+  
+  showHeaders?: boolean
+  fixedWidth?: boolean
+  padOuterColumns?: boolean
+  scrollX?: boolean
+
+  rowHeight?: React.CSSProperties['height']
+  headerHeight?: React.CSSProperties['height']
+  fontSize?: React.CSSProperties['fontSize']
+  headerFontSize?: React.CSSProperties['fontSize']
+
+  // HACK: this is needed because we're reading `props` out of children,
+  //       which isn't defined on all React.ReactNode types (such as string or number)
+  children: JSX.Element | JSX.Element[]
+  // children: React.ReactNode
+}
+
+interface ObjectWithID {
+  id: string | number | symbol
+}
+
+function isAnObjectWithID(thing: unknown): thing is ObjectWithID {
+  if (thing instanceof Object) return thing.hasOwnProperty('id');
+  return false;
+}
+
+function defaultKeyTemplate<T>(item: T) {
+  if (isAnObjectWithID(item)) {
+    return item.id;
+  } else {
+    return v4();
+  }
+}
+
+/**
+ * `T` is the data type of each Row,
+ * `C` is the column id type (probably a union of string literals)
+ */
+export default function ListView<T = any, C extends string = string>(props: ListViewProps<T, C>) {
+
+  const {
+    data = [],
+    sort = [],
+    onClickHeader,
+    onClickRow,
+    keyTemplate = defaultKeyTemplate,
+  
+    showHeaders = true,
+    fixedWidth = true,
+    padOuterColumns = false,
+    scrollX = false,
+  
+    rowHeight,
+    headerHeight,
+    fontSize,
+    headerFontSize,
+    children,
+  } = props;
 
   // Handle scrolling with state, refs, and a listener
-  const containerRef = useRef<any>();
-  const tableRef = useRef<any>();
+  const containerRef = useRef<HTMLDivElement>();
+  const tableRef = useRef<HTMLTableElement>();
   const [tableShadows, setTableShadows] = useState({left: false, right: false});
 
   useEffect(() => {
@@ -132,18 +203,32 @@ const ListView: React.FC<any> = ({
   );
 }
 
-export default ListView;
+type ListViewColumnProps<T, V> = {
+  id: string
+  title?: React.ReactNode
+  template?: (item: T) => React.ReactNode
+  valueTemplate?: (item: T) => V
+  onClick?: (item: T) => void
+  disabled?: (item: T) => boolean
+  isRowHeader?: boolean
+  width?: React.CSSProperties['width']
+  minWidth?: React.CSSProperties['minWidth']
+  align?: keyof typeof ALIGN_TO_JUSTIFY
+}
 
-
-export const ListViewColumn: React.FC<any> = (props) => {
+/**
+ * `T` is the data type of each Row,
+ * `V` is the value type returned from the valueTemplate prop
+ */
+export function ListViewColumn<T = any, V = any>(props: ListViewColumnProps<T, V>) {
 
   const {
     id,
     title = null,
-    template,
-    valueTemplate = null,
-    onClick = null,
-    disabled = item => false,
+    template = () => null,
+    valueTemplate,
+    onClick = () => {},
+    disabled = () => false,
     isRowHeader = false,
   
     width = 'auto',
@@ -212,17 +297,16 @@ export const ListViewColumn: React.FC<any> = (props) => {
 }
 
 
-export const ListViewColumnSpacer: React.FC<any> = () => {
+export const ListViewColumnSpacer: React.FC = () => {
   return <ListViewColumn id={v4()} title=" " width="auto" />;
 }
 
-
-// type ListViewClickableLinkProps = {
-//   onClick?: () => any,
-//   children: ReactNode
-// }
-
-export const ListViewClickableLink: React.FC<any> = ({ onClick, children }) => {
+export const ListViewClickableLink: React.FC<{
+  onClick: (evt: React.MouseEvent<HTMLSpanElement>) => void
+}> = ({
+  onClick,
+  children,
+}) => {
   return (
     <span role="button" className={styles.listViewClickableLink} onClick={onClick}>
       {children}
@@ -230,10 +314,10 @@ export const ListViewClickableLink: React.FC<any> = ({ onClick, children }) => {
   );
 }
 
-
+export type SortableValue = number | string | boolean | null | undefined;
 // Helper functions
-export function getDefaultSortFunction(sortTemplate, sortDirection, nullsLast = true) {
-  return function(a, b) {
+export function getDefaultSortFunction<T>(sortTemplate: (item: T) => SortableValue, sortDirection: SortDirection, nullsLast = true) {
+  return function(a: T, b: T) {
     // Short circuit and return initial order if sorting is toggled off
     if (sortDirection !== 'asc' && sortDirection !== 'desc') { return 1; }
 
