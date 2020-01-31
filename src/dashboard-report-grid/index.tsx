@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import styles from './styles.module.scss';
 
 
-type ReportWrapper = {
+type ReportComponentPairedWithDomId = {
   id: string,
   report: React.ReactElement,
 }
 
 type DashboardReportGridProps = {
-  reports: ReportWrapper[],
+  reports: ReportComponentPairedWithDomId[],
   mobileBreakpoint?: number
 }
 
