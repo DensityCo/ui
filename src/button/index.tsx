@@ -25,12 +25,22 @@ export const BUTTON_TYPE_STYLES = {
   muted: styles.muted,
 };
 
-const Button: React.FC<any> = React.forwardRef(({
+type ButtonProps = React.HTMLProps<HTMLButtonElement> & {
+  size?: keyof typeof BUTTON_SIZE_STYLES
+  variant?: keyof typeof BUTTON_VARIANT_STYLES
+  type?: keyof typeof BUTTON_TYPE_STYLES
+  disabled?: boolean
+  width?: React.CSSProperties['width']
+  height?: React.CSSProperties['height']
+  href?: React.HTMLProps<HTMLAnchorElement>['href']
+}
+
+const Button = React.forwardRef<HTMLElement, ButtonProps>(({
   size,
   children,
   disabled,
-  variant,
-  type,
+  variant = 'default',
+  type = 'primary',
 
   width,
   height,
@@ -41,8 +51,7 @@ const Button: React.FC<any> = React.forwardRef(({
   if (href) {
     return (
       <a
-        {...props}
-        disabled={disabled}
+        {...(props as any as React.HTMLProps<HTMLAnchorElement>)}
         className={classnames(
           styles.button,
           BUTTON_TYPE_STYLES[type],
@@ -51,7 +60,7 @@ const Button: React.FC<any> = React.forwardRef(({
         )}
         style={{ width, height }}
         href={href}
-        ref={ref}
+        ref={ref as React.Ref<HTMLAnchorElement>}
       >
         {children}
       </a>
@@ -68,7 +77,7 @@ const Button: React.FC<any> = React.forwardRef(({
           BUTTON_SIZE_STYLES[size],
         )}
         style={{ width, height }}
-        ref={ref}
+        ref={ref as React.Ref<HTMLButtonElement>}
       >
         {children}
       </button>
@@ -92,7 +101,7 @@ Button.propTypes = {
 };
 export default Button;
 
-export const ButtonGroup: React.FC<any> = ({ children }) => {
+export const ButtonGroup: React.FC = ({ children }) => {
   return (
     <div className={styles.buttonGroup}>
       {children}
