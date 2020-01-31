@@ -2,10 +2,32 @@ import React, { Component } from 'react';
 
 import styles from './styles.module.scss';
 
-export default class DashboardReportGrid extends Component<any, any> {
+
+type ReportWrapper = {
+  id: string,
+  report: React.ReactElement,
+}
+
+type DashboardReportGridProps = {
+  reports: ReportWrapper[],
+  mobileBreakpoint?: number
+}
+
+type DashboardReportGridState = {
+  reportHeights: {
+    [id: string]: number,
+  }
+}
+
+export default class DashboardReportGrid extends Component<DashboardReportGridProps, DashboardReportGridState> {
+
+  reportElements: {
+    [id: string]: HTMLDivElement
+  }
+
   constructor(props) {
     super(props);
-    (this as any).reportElements = {};
+    this.reportElements = {};
     this.state = { reportHeights: {} };
   }
 
@@ -20,7 +42,7 @@ export default class DashboardReportGrid extends Component<any, any> {
           className={styles.dashboardReportGridCell}
           key={id}
           ref={report => {
-            (this as any).reportElements[id] = report;
+            this.reportElements[id] = report;
             if (report && this.state.reportHeights[id] !== report.clientHeight) {
               this.setState({ 
                 reportHeights: Object.assign(this.state.reportHeights, {[id]: report.clientHeight})
