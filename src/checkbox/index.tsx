@@ -31,7 +31,21 @@ function lightenDarkenColor(col, amt) {
   return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
 }
 
-const Checkbox: React.FC<any> = ({ id, color, checked, disabled=false, onChange, label="" }) => {
+const Checkbox: React.FC<{
+  id: React.HTMLProps<HTMLInputElement>['id']
+  checked: React.HTMLProps<HTMLInputElement>['checked']
+  disabled: React.HTMLProps<HTMLInputElement>['disabled']
+  onChange: React.HTMLProps<HTMLInputElement>['onChange']
+  color: React.CSSProperties['color']
+  label: React.ReactNode
+}> = ({
+  id,
+  color = colorVariables.midnight,
+  checked = false,
+  disabled = false,
+  onChange,
+  label="",
+}) => {
   const [idProp] = useState(id || `checkbox-${uuid.v4()}`);
   return (
     <div

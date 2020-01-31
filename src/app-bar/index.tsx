@@ -11,7 +11,7 @@ const CONTEXT_CLASSES = {
 
 export const AppBarContext = React.createContext<string | null>(null);
 
-export const AppBarTitle: React.FC<any> = ({ children }) => {
+export const AppBarTitle: React.FC = ({ children }) => {
   return (
     <span className={styles.appBarTitle}>
       {children}
@@ -19,7 +19,7 @@ export const AppBarTitle: React.FC<any> = ({ children }) => {
   );
 }
 
-export const AppBarSection: React.FC<any> = ({ children }) => {
+export const AppBarSection: React.FC = ({ children }) => {
   return (
     <span className={styles.appBarSection}>
       {children}
@@ -27,7 +27,12 @@ export const AppBarSection: React.FC<any> = ({ children }) => {
   );
 }
 
-const AppBar: React.FC<any> = ({ padding, children }) => {
+const AppBar: React.FC<{
+  padding?: React.CSSProperties['padding']
+}> = ({
+  padding,
+  children,
+}) => {
   const context = useContext(AppBarContext);
   const containerClasses = classnames(context && CONTEXT_CLASSES[context], styles.appBar);
   return (
