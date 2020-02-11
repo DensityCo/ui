@@ -8,6 +8,7 @@ import InputBox from '../input-box';
 import Icons from '../icons';
 
 import styles from './styles.module.scss';
+import colors from '../../variables/colors.json';
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
   ANCHOR_LEFT = 'ANCHOR_LEFT',
@@ -57,7 +58,7 @@ const DateRangePicker: React.FC<any> = props => {
         value={{
           id: 'icon',
           label: <div style={{ marginTop: 4, marginLeft: -5, marginRight: 3 }}>
-            <Icons.Calendar width={22} height={22} color="dark" />
+            <Icons.Calendar width={22} height={22} color={colors.gray700} />
           </div>,
         }}
         choices={props.commonRanges.map(range => Object.assign({}, range, {

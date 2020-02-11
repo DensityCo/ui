@@ -58,7 +58,7 @@ $blueLight: #b6c6f6;
 
     .CalendarDay--hovered {
       background: #e4e7e7;
-      border: 1px double #d4d9d9;
+      border: 1px solid #d4d9d9;
       color: inherit;
     }
 
@@ -74,14 +74,14 @@ $blueLight: #b6c6f6;
 
     .CalendarDay--selected-span {
       background: $blueLight;
-      border: 1px double $blueLight;
+      border: 1px solid $blueLight;
       color: #fff;
     }
 
     .CalendarDay--selected-span.CalendarDay--hovered,
     .CalendarDay--selected-span:active {
       background: $midnight;
-      border: 1px double $midnight;
+      border: 1px solid $midnight;
     }
     .CalendarDay--selected-span.CalendarDay--last-in-range {
       border-right: $midnight;
@@ -90,7 +90,7 @@ $blueLight: #b6c6f6;
     .CalendarDay--hovered-span,
     .CalendarDay--after-hovered-start {
       background: $blueLight;
-      border: 1px double $blueLight;
+      border: 1px solid $blueLight;
       color: #fff;
     }
     .CalendarDay--hovered-span:active,
@@ -102,7 +102,7 @@ $blueLight: #b6c6f6;
     .CalendarDay--selected-end,
     .CalendarDay--selected {
       background: $midnight;
-      border: 1px double $midnight;
+      border: 1px solid $midnight;
       color: #fff;
     }
     .CalendarDay--selected-start:active,
@@ -215,7 +215,8 @@ $blueLight: #b6c6f6;
 
     .DayPicker--horizontal {
       background: #fff;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px $gray300;
+      border: 1px solid $gray300;
+      box-shadow: 0px 2px 4px rgba($gray900, 0.1);
       border-radius: $borderRadiusBase;
     }
     .DayPicker--horizontal.DayPicker--portal {
@@ -329,7 +330,7 @@ $blueLight: #b6c6f6;
     //   border: 1px solid #c4c4c4; }
     .DayPickerNavigation__prev--default:active,
     .DayPickerNavigation__next--default:active {
-      border: 1px solid $midnight;
+      border: 1px solid $blue;
     }
 
     .DayPickerNavigation--horizontal {
@@ -643,7 +644,7 @@ $blueLight: #b6c6f6;
     }
 
     .DateInput__display-text--focused {
-      border-color: $midnight;
+      border-color: $blue;
       border-radius: $borderRadiusBase;
       color: #007a87;
     }
@@ -825,7 +826,7 @@ $blueLight: #b6c6f6;
 
   // On active, remove outline and add a border color.
   &:focus {
-    border-color: $midnight;
+    border-color: $blue;
   }
 
   :global {
@@ -863,13 +864,13 @@ $blueLight: #b6c6f6;
     input[type="text"] {
       padding: 0;
       cursor: pointer;
-      color: $midnight;
+      color: $gray700;
     }
     .DateRangePicker__picker {
       top: 47px;
     }
     .DateInput__display-text {
-      color: $midnight;
+      color: $gray700;
       height: 24px;
     }
     .DateInput__display-text--focused {
@@ -913,7 +914,7 @@ $blueLight: #b6c6f6;
   }
 }
 .dateRangePickerFocused {
-  border-color: $midnight;
+  border-color: $blue;
 }
 .dateRangePickerCommonRangeList {
   $valueWidth: 41px;
