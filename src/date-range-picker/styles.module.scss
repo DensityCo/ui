@@ -142,7 +142,7 @@ $blueLight: #b6c6f6;
     .CalendarMonth table {
       border-collapse: collapse;
       border-spacing: 0;
-      caption-caption-side: initial;
+      caption-side: initial;
     }
 
     .CalendarMonth--horizontal:first-of-type,
@@ -215,7 +215,7 @@ $blueLight: #b6c6f6;
 
     .DayPicker--horizontal {
       background: #fff;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px $gray400;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px $gray300;
       border-radius: $borderRadiusBase;
     }
     .DayPicker--horizontal.DayPicker--portal {
@@ -319,7 +319,7 @@ $blueLight: #b6c6f6;
 
     .DayPickerNavigation__prev--default,
     .DayPickerNavigation__next--default {
-      border: 1px solid $gray400;
+      border: 1px solid $gray300;
       background-color: #fff;
       color: #757575;
     }
@@ -548,7 +548,6 @@ $blueLight: #b6c6f6;
     }
 
     .DayPickerKeyboardShortcuts__panel--block .KeyboardShortcutRow__key-container {
-      width: auto;
       text-align: left;
       display: inline;
     }
@@ -821,7 +820,7 @@ $blueLight: #b6c6f6;
   color: $gray500;
   background-color: #fff;
 
-  border: 1px solid $gray400;
+  border: 1px solid $gray300;
   border-radius: $borderRadiusBase;
 
   // On active, remove outline and add a border color.
