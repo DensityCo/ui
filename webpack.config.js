@@ -94,12 +94,14 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-							// Apply the JSON importer via sass-loader's options.
-              importer: jsonImporter,
-							// Tell node-sass to search in the node modules directory for things to import
-							includePaths: [
-								path.join(path.resolve(__dirname), 'node_modules'),
-							],
+              sassOptions: {
+                // Apply the JSON importer via sass-loader's options.
+                importer: jsonImporter,
+                // Tell node-sass to search in the node modules directory for things to import
+                includePaths: [
+                  path.join(path.resolve(__dirname), 'node_modules'),
+                ],
+              },
             },
           },
         ],
