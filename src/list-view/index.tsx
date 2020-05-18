@@ -141,10 +141,10 @@ export default function ListView<T = any, C extends string = string>(props: List
   });
 
   // Compute total width of "row headers"
-  const rowHeaderWidth = React.Children.toArray(children).reduce((a, n) => {
+  const rowHeaderWidth = React.Children.toArray(children).reduce((a, n: React.ReactElement) => {
     a += n.props.isRowHeader ? n.props.width : 0;
     return a;
-  }, 0);
+  }, 0) as number;
 
   const headerContextValue: ListViewContextType<C> = {
     mode: TABLE_HEADER,
