@@ -18,7 +18,7 @@ export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 
 export const InputBoxContext = React.createContext<string | null>(null);
 
-const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, invalid, ...props}) => {
+const InputBoxRaw: React.FC<any> = ({leftIcon, rightIcon, forwardedRef, invalid, ...props}) => {
   const [focused, setFocus] = useState(false);
   const defaultInputRef = useRef();
   const input = forwardedRef || defaultInputRef;
@@ -42,7 +42,8 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, invalid, ...props})
         className={classnames(styles.inputBox, {
           [styles.inputBoxDisabled]: props.disabled,
           [styles.inputBoxFocused]: focused,
-          [styles.inputBoxContainsIcon]: Boolean(leftIcon),
+          [styles.inputBoxContainsLeftIcon]: Boolean(leftIcon),
+          [styles.inputBoxContainsRightIcon]: Boolean(rightIcon),
           [styles.invalid]: invalid,
         })}
         style={{width: props.width}}
@@ -65,6 +66,7 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, forwardedRef, invalid, ...props})
             if (props.onBlur) { props.onBlur(...args); }
           }}
         />
+        {rightIcon ? <div className={styles.rightIcon}>{rightIcon}</div> : null}
       </div>
     );
   }

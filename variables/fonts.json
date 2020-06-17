@@ -22,5 +22,9 @@
   "fontSizeSmall": 12,
   "fontSizeBase": 14,
   "fontSizeLarge": 16,
-  "fontSizeXLarge": 24
+  "fontSizeXLarge": 24,
+
+  "fontWeightNormal": "normal",
+  "fontWeightMedium": 500,
+  "fontWeightBold": "bold"
 }

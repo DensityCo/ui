@@ -41,6 +41,22 @@
   }
 }
 
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  height: 24px;
+  margin-bottom: 2px;
+}
+.icon.left {
+  transform: translate(-4px, 0px);
+  margin-right: 4px;
+}
+.icon.left:last-child { transform: translate(-9px, 0px); }
+.icon.right {
+  transform: translate(4px, 0px);
+  margin-left: 4px;
+}
+
 .small {
   font-weight: normal;
   height: 24px;

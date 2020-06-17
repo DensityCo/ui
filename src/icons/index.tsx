@@ -478,8 +478,8 @@ for (let iconName in ICONS) {
   ICON_COMPONENTS[iconName].propTypes = {
     color: propTypes.string,
     accentColor: propTypes.string,
-    width: propTypes.number,
-    height: propTypes.number,
+    width: propTypes.oneOfType([propTypes.number, propTypes.string]),
+    height: propTypes.oneOfType([propTypes.number, propTypes.string]),
   };
 
   // Since the name of the function of each component is `IconComponent`, add a name that React will

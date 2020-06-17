@@ -26,6 +26,11 @@ export { default as Toast, ToastContext } from './toast';
 export { default as Skeleton } from './skeleton';
 export { default as TagInput } from './tag-input';
 export { default as DayOfWeekPicker } from './day-of-week-picker';
+export {
+  default as SpacePicker,
+  SpacePickerDropdown,
+  SpacePickerSelectControlTypes,
+} from './space-picker';
 
 export {
   InputStackGroup,

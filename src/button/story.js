@@ -88,6 +88,15 @@ storiesOf('Button', module)
   .add('Button with width=100%', () => (
     <Button width="100%">Hello world!</Button>
   ))
+  .add('Button with left icon', () => (
+    <Button leftIcon={<Icons.VisibilityShow />}>More Details</Button>
+  ))
+  .add('Button with right icon', () => (
+    <Button variant="filled" rightIcon={<Icons.Plus />}>Add Device</Button>
+  ))
+  .add('Button with only an icon', () => (
+    <Button leftIcon={<Icons.VisibilityShow />} width={40} />
+  ))
   .add('Small button', () => (
     <Button size="small">Hello world!</Button>
   ))
