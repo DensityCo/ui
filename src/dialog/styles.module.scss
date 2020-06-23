@@ -1,0 +1,14 @@
+@import "../../variables/colors.scss";
+@import "../../variables/fonts.scss";
+
+.dialogConfirm {
+  display: flex;
+  flex-direction: column;
+}
+.dialogConfirmContent { padding: 32px; }
+
+.dialogPromptContent { padding: 32px; }
+.dialogPromptLabel {
+  padding-bottom: 16px;
+  font-size: $fontSizeBase;
+}
