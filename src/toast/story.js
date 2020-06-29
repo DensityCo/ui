@@ -5,8 +5,6 @@ import { action } from '@storybook/addon-actions';
 import './styles.module.scss';
 import Toast, { ToastContext } from './index';
 
-import Icons from '../icons';
-
 storiesOf('Toast', module)
   .add('Default Toast', () => (
     <Toast visible onDismiss={action('onDismiss')}>
