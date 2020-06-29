@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import colorVariables from '../../variables/colors.json';
 
-import Checkbox from '.';
+import { Checkbox } from '..';
 
 function State({ initialState, hide, children }) {
   const [state, setState] = useState(initialState);
