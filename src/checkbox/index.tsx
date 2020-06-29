@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.scss';
 import colorVariables from '../../variables/colors.json';
 
-type CheckboxProps = {
+type CheckboxPropsBase = {
   checked: boolean,
   id?: string,
   color?: string
@@ -12,7 +12,12 @@ type CheckboxProps = {
   label?: React.ReactNode,
 };
 
-const Checkbox: React.FunctionComponent<CheckboxProps> = ({ id, color, checked, disabled=false, onChange, label="" }) => {
+type NativeCheckboxProps = React.HTMLProps<HTMLInputElement>;
+
+// Allow passing native checkbox props, but Omit those that we define in CheckboxPropsBase so they don't conflict
+type CheckboxProps = Omit<NativeCheckboxProps, keyof CheckboxPropsBase> & CheckboxPropsBase;
+
+const Checkbox: React.FunctionComponent<CheckboxProps> = ({ id, color, checked, disabled=false, onChange, label="", ...props}) => {
   const [idProp] = useState(id || `checkbox-${uuidv4()}`);
   return (
     <div
@@ -21,6 +26,7 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({ id, color, checked, 
       onClick={e => e.stopPropagation()}
     >
       <input
+        {...props}
         type="checkbox"
         disabled={disabled}
         checked={checked}
