@@ -23,7 +23,7 @@ type DialogBaseProps = {
 // ----------------------------------------------------------------------------
 // ALERT DIALOG
 // ----------------------------------------------------------------------------
-type AlertDialogProps = DialogBaseProps & {
+export type AlertDialogProps = DialogBaseProps & {
   prompt: React.ReactNode,
   onSubmit: () => void,
 
@@ -64,7 +64,7 @@ AlertDialog.displayName = 'AlertDialog';
 // ----------------------------------------------------------------------------
 // CONFIRM DIALOG
 // ----------------------------------------------------------------------------
-type ConfirmDialogProps = DialogBaseProps & {
+export type ConfirmDialogProps = DialogBaseProps & {
   prompt: React.ReactNode,
   onSubmit: () => void,
   onDismiss: () => void,
@@ -107,7 +107,7 @@ ConfirmDialog.displayName = 'ConfirmDialog';
 // ----------------------------------------------------------------------------
 // PROMPT DIALOG
 // ----------------------------------------------------------------------------
-type PromptDialogProps = DialogBaseProps & {
+export type PromptDialogProps = DialogBaseProps & {
   prompt: React.ReactNode,
   onSubmit: (text: string) => void,
   onDismiss: () => void,

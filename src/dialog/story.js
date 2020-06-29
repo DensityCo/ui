@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { ConfirmDialog, AlertDialog, PromptDialog } from '.';
-import { Button, Icons } from '..';
+import { Button, ButtonGroup, Icons } from '..';
 
 class DialogTriggerer extends Component {
   state = {
