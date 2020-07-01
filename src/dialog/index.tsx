@@ -71,9 +71,10 @@ export type ConfirmDialogProps = DialogBaseProps & {
 
   title?: React.ReactNode,
   confirmText?: React.ReactNode,
+  cancelText?: React.ReactNode,
 };
 
-export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({title, prompt, confirmText, onSubmit, onDismiss, ...modalProps}) => (
+export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({title, prompt, confirmText, cancelText, onSubmit, onDismiss, ...modalProps}) => (
   <Modal width={480} {...modalProps} onBlur={onDismiss} onEscape={onDismiss}>
     <div className={styles.dialogConfirm}>
       <AppBar>
@@ -87,7 +88,7 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({titl
           <AppBarSection />
           <AppBarSection>
             <ButtonGroup>
-              <Button variant="underline" onClick={onDismiss}>Cancel</Button>
+              <Button variant="underline" onClick={onDismiss}>{cancelText || 'Cancel'}</Button>
               <Button
                 variant="filled"
                 type="primary"
@@ -117,9 +118,10 @@ export type PromptDialogProps = DialogBaseProps & {
   leftIcon?: React.ReactNode,
   rightIcon?: React.ReactNode,
   confirmText?: React.ReactNode,
+  cancelText?: React.ReactNode,
 };
 
-export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({title, prompt, confirmText, onSubmit, onDismiss, placeholder, leftIcon, rightIcon, ...modalProps}) => {
+export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({title, prompt, confirmText, cancelText, onSubmit, onDismiss, placeholder, leftIcon, rightIcon, ...modalProps}) => {
   const [ text, setText ] = useState('');
 
   // When a prompt is shown, auto focus its text box.
@@ -163,7 +165,7 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({title,
             <AppBarSection></AppBarSection>
             <AppBarSection>
               <ButtonGroup>
-                <Button variant="underline" onClick={onDismiss}>Cancel</Button>
+                <Button variant="underline" onClick={onDismiss}>{cancelText || 'Cancel'}</Button>
                 <Button
                   variant="filled"
                   type="primary"
