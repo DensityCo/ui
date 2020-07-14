@@ -7,9 +7,9 @@ import { Toast } from '..';
 type ToastId = string;
 type ToastOptions = {
   text: React.ReactNode,
-  id?: ToastId,
-  type?: 'default' | 'error',
-  timeout?: number | null,
+  id: ToastId,
+  type: 'default' | 'error',
+  timeout: number | null,
 };
 type ToasterState = Array<ToastOptions & {visible: boolean}>;
 
@@ -67,7 +67,7 @@ function toasterReducer(state: ToasterState, action: ToasterAction) {
 let dispatch: React.Dispatch<ToasterAction> | null = null;
 
 type ToasterType = React.FunctionComponent<{width: number, top: React.ReactText}> & {
-  showToast: (options: ToastOptions) => ToastId,
+  showToast: (options: Partial<ToastOptions>) => ToastId,
   hideToast: (id: ToastId) => void,
 };
 const Toaster: ToasterType = ({width=360, top=40}) => {
@@ -122,33 +122,35 @@ const Toaster: ToasterType = ({width=360, top=40}) => {
 }
 Toaster.displayName = 'Toaster';
 
-Toaster.showToast = function showToast(options: ToastOptions): ToastId {
+Toaster.showToast = function showToast(options: Partial<ToastOptions>): ToastId {
   if (!dispatch) {
     throw new Error('Before calling Toaster.showToast, please render a <Toaster /> component.');
   }
 
-  options.id = options.id || uuidv4();
-  if (typeof options.timeout === 'undefined') {
-    options.timeout = 3000;
-  }
+  const optionsWithDefaults: ToastOptions = {
+    text: options.text || '',
+    id: options.id || uuidv4(),
+    type: options.type || 'default',
+    timeout: typeof options.timeout !== 'undefined' ? options.timeout : 3000,
+  };
 
   // Add the toast to the screen, but keep it invisible
   dispatch({
     type: ToasterActionTypes.TRANSITION_TO_SHOW_TOAST,
-    options,
+    options: optionsWithDefaults,
   });
 
   // Fade in the toast so it's visible
   dispatch({
     type: ToasterActionTypes.TOAST_SHOW,
-    id: options.id,
+    id: optionsWithDefaults.id,
   });
 
-  if (options.timeout !== null) {
-    setTimeout(() => Toaster.hideToast(options.id), options.timeout);
+  if (optionsWithDefaults.timeout !== null) {
+    setTimeout(() => Toaster.hideToast(optionsWithDefaults.id), optionsWithDefaults.timeout);
   }
 
-  return options.id;
+  return optionsWithDefaults.id;
 };
 
 Toaster.hideToast = async function hideToast(id: ToastId) {
