@@ -31,11 +31,17 @@ export type AlertDialogProps = DialogBaseProps & {
   confirmText?: React.ReactNode,
 };
 
-export const AlertDialog: React.FunctionComponent<AlertDialogProps> = ({title, prompt, confirmText, onSubmit, ...modalProps}) => (
+export const AlertDialog: React.FunctionComponent<AlertDialogProps> = ({
+  title='Alert',
+  prompt,
+  confirmText='OK',
+  onSubmit,
+  ...modalProps
+}) => (
   <Modal width={480} {...modalProps} onBlur={onSubmit} onEscape={onSubmit}>
     <div className={styles.dialogConfirm}>
       <AppBar>
-        <AppBarTitle>{title || 'Alert'}</AppBarTitle>
+        <AppBarTitle>{title}</AppBarTitle>
       </AppBar>
       <div className={styles.dialogConfirmContent}>
         {prompt}
@@ -50,7 +56,7 @@ export const AlertDialog: React.FunctionComponent<AlertDialogProps> = ({title, p
                 type="primary"
                 onClick={() => onSubmit()}
               >
-                {confirmText || 'OK'}
+                {confirmText}
               </Button>
             </ButtonGroup>
           </AppBarSection>
@@ -74,11 +80,19 @@ export type ConfirmDialogProps = DialogBaseProps & {
   cancelText?: React.ReactNode,
 };
 
-export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({title, prompt, confirmText, cancelText, onSubmit, onDismiss, ...modalProps}) => (
+export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({
+  title="Confirm",
+  prompt,
+  confirmText="Confirm",
+  cancelText="Cancel",
+  onSubmit,
+  onDismiss,
+  ...modalProps
+}) => (
   <Modal width={480} {...modalProps} onBlur={onDismiss} onEscape={onDismiss}>
     <div className={styles.dialogConfirm}>
       <AppBar>
-        <AppBarTitle>{title || 'Confirm'}</AppBarTitle>
+        <AppBarTitle>{title}</AppBarTitle>
       </AppBar>
       <div className={styles.dialogConfirmContent}>
         {prompt}
@@ -88,13 +102,13 @@ export const ConfirmDialog: React.FunctionComponent<ConfirmDialogProps> = ({titl
           <AppBarSection />
           <AppBarSection>
             <ButtonGroup>
-              <Button variant="underline" onClick={onDismiss}>{cancelText || 'Cancel'}</Button>
+              <Button variant="underline" onClick={onDismiss}>{cancelText}</Button>
               <Button
                 variant="filled"
                 type="primary"
                 onClick={() => onSubmit()}
               >
-                {confirmText || 'Confirm'}
+                {confirmText}
               </Button>
             </ButtonGroup>
           </AppBarSection>
@@ -121,7 +135,18 @@ export type PromptDialogProps = DialogBaseProps & {
   cancelText?: React.ReactNode,
 };
 
-export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({title, prompt, confirmText, cancelText, onSubmit, onDismiss, placeholder, leftIcon, rightIcon, ...modalProps}) => {
+export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
+  title='Prompt',
+  prompt,
+  confirmText='Submit',
+  cancelText='Cancel',
+  onSubmit,
+  onDismiss,
+  placeholder,
+  leftIcon,
+  rightIcon,
+  ...modalProps
+}) => {
   const [ text, setText ] = useState('');
 
   // When a prompt is shown, auto focus its text box.
@@ -136,7 +161,7 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({title,
     <Modal width={480} {...modalProps} onBlur={onDismiss} onEscape={onDismiss}>
       <div className={styles.dialogPrompt}>
         <AppBar>
-          <AppBarTitle>{title || 'Prompt'}</AppBarTitle>
+          <AppBarTitle>{title}</AppBarTitle>
         </AppBar>
         <div className={styles.dialogPromptContent}>
           {prompt ? (
@@ -165,13 +190,13 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({title,
             <AppBarSection></AppBarSection>
             <AppBarSection>
               <ButtonGroup>
-                <Button variant="underline" onClick={onDismiss}>{cancelText || 'Cancel'}</Button>
+                <Button variant="underline" onClick={onDismiss}>{cancelText}</Button>
                 <Button
                   variant="filled"
                   type="primary"
                   onClick={() => onSubmit(text)}
                 >
-                  {confirmText || 'Submit'}
+                  {confirmText}
                 </Button>
               </ButtonGroup>
             </AppBarSection>
