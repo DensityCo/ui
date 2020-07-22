@@ -104,10 +104,14 @@ jobs:
       - run:
           name: "Publish to npm registry"
           command: |
-            # If the version has more than just xx.xx.xx, then it's a non-official release
             tag="next"
+            # If the version has more than just xx.xx.xx, then it's a non-official release
             if jq -r .version ./package.json | grep '^[0-9]\+.[0-9]\+.[0-9]\+$'; then
               tag="latest"
+            fi
+            # If the version contains "onprem", it's an on prem release
+            if jq -r .version ./package.json | grep 'onprem'; then
+              tag="onprem-stable"
             fi
 
             echo "Publishing $(jq -r .version ./package.json) to tag ${tag}"
@@ -123,11 +127,13 @@ workflows:
       # For all pushes, build/deploy to `https://ui-preview.density.rodeo/SHA`
       - preview
 
-      # Trunk is published to npm
+      # Trunk and onprem branches are published to npm
       - publish:
           filters:
             branches:
-              only: trunk
+              only:
+                - trunk
+                - onprem-stable
 
       # Trunk is also built and deployed to https://ui-preview.density.rodeo
       - build:
