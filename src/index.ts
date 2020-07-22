@@ -1,5 +1,6 @@
 ///<reference path="global.d.ts"/>
-import './fonts';
+// NOTE: Commented out as part of "onprem" changeset
+// import './fonts';
 
 export { default as AppBar, AppBarContext, AppBarSection, AppBarTitle } from './app-bar';
 export { default as AppFrame } from './app-frame';
