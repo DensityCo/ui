@@ -37,7 +37,7 @@ type ToasterAction =
   | { type: ToasterActionTypes.TRANSITION_TO_HIDE_TOAST; id: ToastId }
   | { type: ToasterActionTypes.TOAST_HIDE; id: ToastId };
 
-function toasterReducer(state: ToasterState, action: ToasterAction) {
+function toasterReducer(state: ToasterState, action: ToasterAction): ToasterState {
   switch (action.type) {
     case ToasterActionTypes.TRANSITION_TO_SHOW_TOAST:
       return [...state, { ...action.options, visible: false }];
@@ -66,7 +66,7 @@ function toasterReducer(state: ToasterState, action: ToasterAction) {
 
 let dispatch: React.Dispatch<ToasterAction> | null = null;
 
-type ToasterType = React.FunctionComponent<{width: number, top: React.ReactText}> & {
+type ToasterType = React.FunctionComponent<{width?: number, top?: React.ReactText}> & {
   showToast: (options: Partial<ToastOptions>) => ToastId,
   hideToast: (id: ToastId) => void,
 };
@@ -155,12 +155,17 @@ Toaster.showToast = function showToast(options: Partial<ToastOptions>): ToastId 
 
 Toaster.hideToast = async function hideToast(id: ToastId) {
   return new Promise((resolve) => {
+    if (!dispatch) {
+      throw new Error('Before calling Toaster.hideToast, please render a <Toaster /> component.');
+    }
+    const notNullDispatch = dispatch;
+
     // Fade out the toast but keep it in the dom
     dispatch({ type: ToasterActionTypes.TRANSITION_TO_HIDE_TOAST, id });
 
     // After fading it out is complete, then remove it.
     setTimeout(() => {
-      dispatch({ type: ToasterActionTypes.TOAST_HIDE, id });
+      notNullDispatch({ type: ToasterActionTypes.TOAST_HIDE, id });
       resolve();
     }, 500);
   });

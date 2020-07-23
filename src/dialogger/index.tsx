@@ -49,16 +49,22 @@ type DialoggerAction =
   | { type: DialoggerActionTypes.TRANSITION_TO_HIDE_DIALOG }
   | { type: DialoggerActionTypes.DIALOG_HIDE };
 
-function dialoggerReducer(state: DialoggerState, action: DialoggerAction) {
+function dialoggerReducer(state: DialoggerState, action: DialoggerAction): DialoggerState {
   switch (action.type) {
     case DialoggerActionTypes.TRANSITION_TO_SHOW_DIALOG:
       return { ...action.options, visible: false };
+
     case DialoggerActionTypes.DIALOG_SHOW:
+      if (state === null) { return state; }
       return { ...state, visible: true };
+
     case DialoggerActionTypes.TRANSITION_TO_HIDE_DIALOG:
+      if (state === null) { return state; }
       return { ...state, visible: false };
+
     case DialoggerActionTypes.DIALOG_HIDE:
       return null;
+
     default:
       return state;
   }
@@ -67,7 +73,7 @@ function dialoggerReducer(state: DialoggerState, action: DialoggerAction) {
 let dispatch: any = null;
 
 type DialoggerType = React.FunctionComponent & {
-  alert: (options: AlertDialogOptions) => Promise<void>,
+  alert: (options: AlertDialogOptions) => Promise<undefined>,
   confirm: (options: ConfirmDialogOptions) => Promise<boolean>,
   prompt: (options: PromptDialogOptions) => Promise<string | null>,
 };
