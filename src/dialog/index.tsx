@@ -133,6 +133,7 @@ export type PromptDialogProps = DialogBaseProps & {
   rightIcon?: React.ReactNode,
   confirmText?: React.ReactNode,
   cancelText?: React.ReactNode,
+  initialText?: string,
 };
 
 export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
@@ -145,9 +146,10 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
   placeholder,
   leftIcon,
   rightIcon,
+  initialText,
   ...modalProps
 }) => {
-  const [ text, setText ] = useState('');
+  const [ text, setText ] = useState(initialText || '');
 
   // When a prompt is shown, auto focus its text box.
   const textBoxRef = useRef(null);
