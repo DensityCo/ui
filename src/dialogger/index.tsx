@@ -9,9 +9,12 @@ import {
 } from '..';
 import { PromptDialogProps, ConfirmDialogProps, AlertDialogProps } from '../dialog';
 
-type AlertDialogOptions = Omit<AlertDialogProps, 'visible' | 'onSubmit'>;
-type ConfirmDialogOptions = Omit<ConfirmDialogProps, 'visible' | 'onSubmit' | 'onDismiss'>;
-type PromptDialogOptions = Omit<PromptDialogProps, 'visible' | 'onSubmit' | 'onDismiss'>;
+// NOTE: the "optimistic" option unioned to all the below types is used by the dashboard in one
+// place, and is therefore required to maintain backwards compatibility, but I'd like to push for it
+// to not be used going forward unless there's a good reason to.
+type AlertDialogOptions = Omit<AlertDialogProps, 'visible' | 'onSubmit'> & { optimistic?: boolean };
+type ConfirmDialogOptions = Omit<ConfirmDialogProps, 'visible' | 'onSubmit' | 'onDismiss'> & { optimistic?: boolean };
+type PromptDialogOptions = Omit<PromptDialogProps, 'visible' | 'onSubmit' | 'onDismiss'> & { optimistic?: boolean };
 
 type DialogOptions =
   | {
@@ -94,11 +97,14 @@ const Dialogger: DialoggerType = () => {
     }
   });
 
-  const hideDialog = function() {
-    dispatch({ type: DialoggerActionTypes.TRANSITION_TO_HIDE_DIALOG });
-    setTimeout(() => {
-      dispatch({ type: DialoggerActionTypes.DIALOG_HIDE });
-    }, 500);
+  const hideDialog = async function() {
+    return new Promise(resolve => {
+      dispatch({ type: DialoggerActionTypes.TRANSITION_TO_HIDE_DIALOG });
+      setTimeout(() => {
+        dispatch({ type: DialoggerActionTypes.DIALOG_HIDE });
+        resolve();
+      }, 500);
+    });
   };
 
   if (state === null) {
@@ -111,8 +117,12 @@ const Dialogger: DialoggerType = () => {
       <AlertDialog
         {...state.options}
         visible={state.visible}
-        onSubmit={() => {
-          hideDialog();
+        onSubmit={async () => {
+          if (state.options.optimistic) {
+            hideDialog();
+          } else {
+            await hideDialog();
+          }
           state.resolve();
         }}
       />
@@ -122,8 +132,12 @@ const Dialogger: DialoggerType = () => {
       <ConfirmDialog
         {...state.options}
         visible={state.visible}
-        onSubmit={() => {
-          hideDialog();
+        onSubmit={async () => {
+          if (state.options.optimistic) {
+            hideDialog();
+          } else {
+            await hideDialog();
+          }
           state.resolve(true);
         }}
         onDismiss={() => {
@@ -138,8 +152,12 @@ const Dialogger: DialoggerType = () => {
         {...state.options}
 
         visible={state.visible}
-        onSubmit={text => {
-          hideDialog();
+        onSubmit={async text => {
+          if (state.options.optimistic) {
+            hideDialog();
+          } else {
+            await hideDialog();
+          }
           state.resolve(text);
         }}
         onDismiss={() => {
