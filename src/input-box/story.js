@@ -20,7 +20,13 @@ storiesOf('InputBox', module)
     <InputBox type="text" leftIcon={<Icon.Search width={18} height={18} />} placeholder="Search" />
   ))
   .add('type=text with text on the left', () => (
-    <InputBox type="text" leftIcon={<span>Text</span>} placeholder="Textbox here" />
+    <InputBox type="text" leftIcon={<span>$</span>} placeholder="Textbox here" />
+  ))
+  .add('type=text with icon on the right', () => (
+    <InputBox type="text" rightIcon={<Icon.Search width={18} height={18} />} placeholder="Search" />
+  ))
+  .add('type=text with text on the right', () => (
+    <InputBox type="text" rightIcon={<span>%</span>} placeholder="Textbox here" />
   ))
   .add('type=text with a forwarded ref to the underlying input used to autofocus', () => {
     const inputRef = React.createRef();

@@ -1,7 +1,9 @@
+/* eslint-disable import/first */
 import React, { Fragment, useState } from 'react';
 import { storiesOf } from '@storybook/react';
+import colorVariables from '../../variables/colors.json';
 
-import Checkbox from './index';
+import { Checkbox } from '..';
 
 function State({ initialState, hide, children }) {
   const [state, setState] = useState(initialState);
@@ -57,7 +59,7 @@ storiesOf('Checkbox', module)
       {(state, setState) => (
         <Checkbox
           label="My Checkbox"
-          color="#FF0000"
+          color={colorVariables.blue}
           checked={state}
           onChange={(e) => setState(e.target.checked)}
         />

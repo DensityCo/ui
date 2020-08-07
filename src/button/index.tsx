@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
@@ -33,7 +33,9 @@ type ButtonPropsBase = {
   width?: React.CSSProperties['width']
   height?: React.CSSProperties['height']
   href?: React.HTMLProps<HTMLAnchorElement>['href']
-}
+  leftIcon?: React.ReactNode,
+  rightIcon?: React.ReactNode,
+};
 
 type NativeButtonProps = React.HTMLProps<HTMLButtonElement>;
 
@@ -46,6 +48,8 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>((props, ref) => {
     variant = 'default',
     type = 'primary',
     disabled,
+    leftIcon,
+    rightIcon,
     
     width,
     height,
@@ -54,6 +58,29 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>((props, ref) => {
     children,
     ...otherProps
   } = props;
+
+  let contents = children;
+  if (leftIcon) {
+    contents = (
+      <Fragment>
+        <div className={classnames(styles.icon, styles.left)}>
+          {leftIcon}
+        </div>
+        {contents}
+      </Fragment>
+    );
+  }
+  if (rightIcon) {
+    contents = (
+      <Fragment>
+        {contents}
+        <div className={classnames(styles.icon, styles.right)}>
+          {rightIcon}
+        </div>
+      </Fragment>
+    );
+  }
+
   if (href) {
     return (
       <a
@@ -68,7 +95,7 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>((props, ref) => {
         ref={ref as React.Ref<HTMLAnchorElement>}
         {...(otherProps as any as React.HTMLProps<HTMLAnchorElement>)}
       >
-        {children}
+        {contents}
       </a>
     );
   } else {
@@ -85,7 +112,7 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>((props, ref) => {
         ref={ref as React.Ref<HTMLButtonElement>}
         {...otherProps}
       >
-        {children}
+        {contents}
       </button>
     );
   }

@@ -3,49 +3,21 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.scss';
 import colorVariables from '../../variables/colors.json';
 
-function lightenDarkenColor(col: string, amt: number) {
-  var usePound = false;
+type CheckboxPropsBase = {
+  checked: boolean,
+  id?: string,
+  color?: string
+  disabled?: boolean,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  label?: React.ReactNode,
+};
 
-  if (col[0] === "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
+type NativeCheckboxProps = React.HTMLProps<HTMLInputElement>;
 
-  var num = parseInt(col,16);
+// Allow passing native checkbox props, but Omit those that we define in CheckboxPropsBase so they don't conflict
+type CheckboxProps = Omit<NativeCheckboxProps, keyof CheckboxPropsBase> & CheckboxPropsBase;
 
-  var r = (num >> 16) + amt;
-
-  if (r > 255) r = 255;
-  else if  (r < 0) r = 0;
-
-  var b = ((num >> 8) & 0x00FF) + amt;
-
-  if (b > 255) b = 255;
-  else if  (b < 0) b = 0;
-
-  var g = (num & 0x0000FF) + amt;
-
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-
-  return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
-}
-
-const Checkbox: React.FC<{
-  id?: React.HTMLProps<HTMLInputElement>['id']
-  checked?: React.HTMLProps<HTMLInputElement>['checked']
-  disabled?: React.HTMLProps<HTMLInputElement>['disabled']
-  onChange?: React.HTMLProps<HTMLInputElement>['onChange']
-  color?: React.CSSProperties['color']
-  label?: React.ReactNode
-}> = ({
-  id,
-  color = colorVariables.blue,
-  checked = false,
-  disabled = false,
-  onChange,
-  label='',
-}) => {
+const Checkbox: React.FunctionComponent<CheckboxProps> = ({ id, color, checked, disabled=false, onChange, label="", ...props}) => {
   const [idProp] = useState(id || `checkbox-${uuidv4()}`);
   return (
     <div
@@ -54,6 +26,7 @@ const Checkbox: React.FC<{
       onClick={e => e.stopPropagation()}
     >
       <input
+        {...props}
         type="checkbox"
         disabled={disabled}
         checked={checked}
@@ -66,8 +39,8 @@ const Checkbox: React.FC<{
         htmlFor={idProp}
         style={checked && !disabled ? {
           color: color,
-          backgroundColor: lightenDarkenColor(color, 40),
-          borderColor: lightenDarkenColor(color, -20),
+          backgroundColor: color,
+          borderColor: color,
         } : {}}
       >{label}</label>
     </div>
@@ -75,9 +48,9 @@ const Checkbox: React.FC<{
 }
 
 Checkbox.defaultProps = {
+  id: undefined,
   checked: false,
   disabled: false,
-  color: colorVariables.blue,
-  label: ''
+  color: colorVariables.midnight,
 };
 export default Checkbox;
