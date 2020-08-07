@@ -1,0 +1,123 @@
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/fonts.scss";
+
+.spacePicker {
+  position: relative;
+  width: 200px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  width: 100%;
+  height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+  border: 1px solid $gray300;
+  border-radius: $borderRadiusBase;
+  background-color: #fff;
+  font-family: $fontBase;
+  cursor: pointer;
+  color: $gray700;
+  user-select: none;
+  transition: all 100ms ease-in-out;
+  outline: none;
+}
+
+.box.focus { border-color: $blue; }
+
+.placeholder { color: $inputFieldPlaceholderColor; }
+
+.popup {
+  position: absolute;
+  top: 50px;
+  padding-left: 0px;
+  padding-right: 0px;
+
+  width: 368px;
+
+  z-index: 999999;
+  color: $midnight;
+  background-color: $white;
+  box-shadow: 0px 2px 4px rgba($gray900, 0.1);
+  box-sizing: border-box;
+  border: 1px solid $gray200;
+  border-radius: $borderRadiusBase;
+  transition: all 100ms ease-in-out;
+  user-select: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  // When opened, fade in the select box and enable pointer events.
+  // NOTE: when the select box is closed, it isn't given `display: none`, because giving it that
+  // would make the animation difficult. Instead, it's given `pointer-events: none`, which causes
+  // any clicks to not occur on that element and instead be handled by the element underneath it.
+  opacity: 0;
+  pointer-events: none;
+}
+.popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chevron {
+  transform: translate(5px, 3px);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: none;
+}
+.backdrop.visible { display: block; }
+
+
+
+.searchBar {
+  background-color: $white;
+}
+
+.scrollContainer {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: calc(100% - 64px - 64px - 64px);
+  height: 100%;
+}
+.item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 24px;
+  padding-right: 24px;
+  color: $gray700;
+  cursor: pointer;
+  user-select: none;
+}
+.item.depth0 { border-top: 1px solid $gray200; }
+.item.depth0:first-child { border-top-width: 0px; }
+.item.disabled { cursor: default; color: $gray400; }
+
+.itemIcon { margin-left: 8px; }
+
+.itemName {
+  margin-left: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.itemName.selected {
+  color: $blue;
+  font-weight: 500;
+}
+.copyFromSpaceModalItemName.bold { font-weight: bold; }
+.copyFromSpaceModalItemName.disabled {
+  color: $gray400;
+}

@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "21.5.4",
+  "version": "21.9.0",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -17,7 +17,9 @@
     "prop-types": "*",
     "moment": "*",
     "moment-timezone": "*",
-    "regenerator-runtime": "*"
+    "regenerator-runtime": "*",
+    "@density/lib-space-helpers": "*",
+    "@density/lib-api-types": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -26,6 +28,8 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "@density/lib-api-types": "^2.0.1",
+    "@density/lib-space-helpers": "^0.2.7",
     "@density/node-sass-json-importer": "^5.0.0",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-notes": "^5.1.10",
@@ -59,7 +63,7 @@
     "fuzzy": "^0.1.3",
     "normalize.css": "^8.0.1",
     "react-addons-shallow-compare": "^15.6.2",
-    "react-phone-number-input": "^3.0.22",
+    "react-phone-number-input": "^2.5.3",
     "react-svg-pan-zoom": "^3.2.0",
     "regenerator-runtime": "^0.13.1",
     "typescript": "^3.7.5",

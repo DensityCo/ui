@@ -28,6 +28,9 @@ storiesOf('Icons', module)
   .add(`A sample icon that's sized smaller`, () => (
     <Icons.ImageUpload width={10} height={10} />
   ))
+  .add(`A sample icon that's sized with percents`, () => (
+    <Icons.ImageUpload width="10%" height="10%" />
+  ))
   .add('All Icons', () => (
     <div style={{
       display: 'grid',
