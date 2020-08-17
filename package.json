@@ -33,7 +33,7 @@
     "@density/node-sass-json-importer": "^5.0.0",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-notes": "^5.1.10",
-    "@storybook/addon-storysource": "^5.1.10",
+    "@storybook/addon-storysource": "^6.0.12",
     "@storybook/addons": "^5.1.10",
     "@storybook/react": "^5.2.6",
     "@svgr/cli": "^5.4.0",
