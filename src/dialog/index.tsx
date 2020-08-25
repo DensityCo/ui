@@ -134,6 +134,7 @@ export type PromptDialogProps = DialogBaseProps & {
   confirmText?: React.ReactNode,
   cancelText?: React.ReactNode,
   initialText?: string,
+  emptyValueIsInvalid?: boolean,
 };
 
 export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
@@ -147,6 +148,7 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
   leftIcon,
   rightIcon,
   initialText,
+  emptyValueIsInvalid,
   ...modalProps
 }) => {
   const [ text, setText ] = useState(initialText || '');
@@ -158,6 +160,8 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
       (textBoxRef as any).current.focus();
     }
   }, [modalProps.visible, textBoxRef]);
+
+  const disabled = emptyValueIsInvalid && text.length === 0;
 
   return (
     <Modal width={480} {...modalProps} onBlur={onDismiss} onEscape={onDismiss}>
@@ -173,14 +177,14 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
           ) : null}
           <InputBox
             type="text"
-            value={text || ''}
+            value={text}
             onChange={e => setText(e.target.value)}
             placeholder={placeholder}
             leftIcon={leftIcon}
             rightIcon={rightIcon}
             width="100%"
             onKeyDown={e => {
-              if (e.key === 'Enter') {
+              if (!disabled && e.key === 'Enter') {
                 onSubmit(text);
               }
             }}
@@ -196,6 +200,7 @@ export const PromptDialog: React.FunctionComponent<PromptDialogProps> = ({
                 <Button
                   variant="filled"
                   type="primary"
+                  disabled={disabled}
                   onClick={() => onSubmit(text)}
                 >
                   {confirmText}
