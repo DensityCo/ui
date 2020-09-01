@@ -29,6 +29,7 @@ export { default as Dialogger } from './dialogger';
 export { default as Skeleton } from './skeleton';
 export { default as TagInput } from './tag-input';
 export { default as DayOfWeekPicker } from './day-of-week-picker';
+export { default as FormLabel } from './form-label';
 export {
   default as SpacePicker,
   SpacePickerDropdown,
