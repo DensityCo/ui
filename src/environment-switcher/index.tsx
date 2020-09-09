@@ -96,40 +96,47 @@ type EnvironmentSwitcherState<C extends EnvironmentConfigurationBase> = {
   configuration: C /* version of the configuration used by the app */;
 };
 
+type LocalEnvironmentConfigurationBase<G extends EnvironmentConfigurationBase> = G & {
+  [key: string]: any,
+}
+
+type CustomEnvironmentConfigurationBase<G extends EnvironmentConfigurationBase> = G & {
+  [key: string]: any,
+}
 
 type EnvironmentSwitcherProps<
-  L extends object,
-  C extends object,
-  G extends object,
+  G extends EnvironmentConfigurationBase,
+  L extends LocalEnvironmentConfigurationBase<G>,
+  C extends CustomEnvironmentConfigurationBase<G>,
 > = {
   // Settings shown in "More options" panel
   globalSettings: G;
   globalControls?: (
-    config: { type: Environment } & G & EnvironmentConfigurationBase,
-    setConfig: (config: { type: Environment } & G & EnvironmentConfigurationBase) => void,
+    config: { type: Environment } & G,
+    setConfig: (config: { type: Environment } & G) => void,
   ) => React.ReactNode;
 
   // Settings shown when "local" environment is selected
   localEnvironmentControls: (
-    config: { type: Environment.LOCAL } & L & G & EnvironmentConfigurationBase,
-    setConfig: (config: L & G & EnvironmentConfigurationBase) => void,
+    config: { type: Environment.LOCAL } & L,
+    setConfig: (config: { type: Environment.LOCAL } & L) => void,
   ) => React.ReactNode;
   localEnvironmentDefaultValue: L,
 
   // Settings shown when "custom" environment is selected
   customEnvironmentControls: (
-    config: { type: Environment.CUSTOM } & C & G & EnvironmentConfigurationBase,
-    setConfig: (config: C & G & EnvironmentConfigurationBase) => void,
+    config: {type: Environment.CUSTOM } & C,
+    setConfig: (config: { type: Environment.CUSTOM } & C) => void,
   ) => React.ReactNode;
   customEnvironmentDefaultValue: C,
 };
 
 // See https://stackoverflow.com/a/63279565/4115328 for more info on this syntax
 type EnvironmentSwitcherComponentType = <
-  L extends object, // Local configuration shape
-  C extends object, // Custom configuration shape
   G extends EnvironmentConfigurationBase, // Global configuration shape
->(p: EnvironmentSwitcherProps<L, C, G>) => React.ReactElement;
+  L extends LocalEnvironmentConfigurationBase<G>, // Local configuration shape
+  C extends CustomEnvironmentConfigurationBase<G>, // Custom configuration shape
+>(p: EnvironmentSwitcherProps<G, L, C>) => React.ReactElement;
 
 export const EnvironmentSwitcher: EnvironmentSwitcherComponentType = ({
   localEnvironmentControls,
