@@ -99,9 +99,10 @@ export const SpacePicker: React.FunctionComponent<SpacePickerProps> = ({
   // The select control is the control to the left of each space that can be clicked to select it.
   const defaultSelectControl = canSelectMultiple ? SpacePickerSelectControlTypes.CHECKBOX : SpacePickerSelectControlTypes.RADIOBUTTON;
   selectControl = selectControl || defaultSelectControl;
+  let filteredFormattedHierarchy = formattedHierarchy;
 
   if (searchText.length > 0) {
-    formattedHierarchy = spaceHierarchySearcher(formattedHierarchy, searchText);
+    filteredFormattedHierarchy = spaceHierarchySearcher(formattedHierarchy, searchText);
   }
 
   // This function normalizes the difference between when `canSelectMultiple` is set or unset.
@@ -143,7 +144,7 @@ export const SpacePicker: React.FunctionComponent<SpacePickerProps> = ({
       </div> : null}
 
       <div className={styles.scrollContainer} style={{height}}>
-        {formattedHierarchy.map(item => {
+        {filteredFormattedHierarchy.map(item => {
           const spaceDisabled = disabled || !item.space.has_purview || isItemDisabled(item);
           const isChecked = Boolean(selectedSpaceIds.find(id => id === item.space.id));
 
