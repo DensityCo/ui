@@ -1,0 +1,51 @@
+@import "../../variables/colors.scss";
+@import "../../variables/fonts.scss";
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  color: $gray700;
+  margin-bottom: 16px;
+}
+
+// The actual label element within the `form-label`
+.formLabelLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: $fontSizeBase;
+  font-weight: $fontWeightBase;
+  user-select: none;
+  color: $gray700;
+  position: relative;
+}
+// The first .form-label-label should not have a top margin.
+.formLabel:first-child .formLabelLabel {
+  margin-top: 0px;
+}
+
+// The last .form-label should have some bottom margin.
+.formLabel:last-child, .formLabel:last-of-type {
+  margin-bottom: 10px;
+}
+
+.formLabel > span {
+  flex: 1;
+  height: 34px;
+}
+
+.formLabelInfoIcon {
+  font-family: "Densicons";
+  font-size: $fontSize3;
+
+  position: absolute;
+  top: -4px;
+  right: 0px;
+}
+
+.formLabelRequired {
+  color: $midnight;
+  font-size: 12px;
+  font-weight: 500;
+}

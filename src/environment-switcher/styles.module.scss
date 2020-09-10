@@ -1,0 +1,165 @@
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $midnight;
+  width: 26px;
+  height: 26px;
+  border-radius: $borderRadiusBase;
+  transform: translate(-7px, 0px);
+}
+.mark.active {
+  background-color: $midnight;
+}
+
+.navbarSelectBox {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+
+  height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 1px;
+  cursor: pointer;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: $midnight;
+  font-weight: 500;
+}
+
+.navbarSelectBox .text {
+  margin-left: 10px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+
+.search {
+  width: 24px;
+  height: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  background-color: transparent;
+  border: 0px;
+  outline: none;
+  color: $gray500;
+}
+.search.active, .search:focus {
+  color: $midnight;
+}
+
+.logout {
+  font-weight: bold;
+  font-size: 14px;
+  color: $midnight;
+  text-decoration: none;
+  outline: none;
+}
+.logout:focus, .logout:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+.environment {
+  background-color: $gray000;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 32px;
+  border-radius: $borderRadiusBase;
+  color: $gray700;
+  border: 1px solid $blue;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.25;
+}
+.environment:hover { opacity: 1; }
+.environment:focus {
+  border-color: $midnight;
+  opacity: 1;
+}
+
+.environment.selected {
+  background-color: #dde6ff;
+  opacity: 1;
+}
+
+.environmentChoiceList {
+  padding-left: 0px;
+  list-style: none;
+  margin: 24px;
+}
+.environmentChoiceWrapper { margin-bottom: 16px; }
+.environmentChoiceControls { margin-top: 16px; }
+.environmentChoice {
+  display: flex;
+  align-items: center;
+  border: 1px solid $gray300;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: $borderRadiusBase;
+  cursor: pointer;
+  user-select: none;
+}
+.environmentChoice.selected {
+  border-color: $midnight;
+}
+
+.environmentChoice div {
+  margin-left: 24px;
+}
+
+.environmentChoice h3 {
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.environment.nonProductionEnvironment,
+.environment.nonProductionEnvironment:hover {
+  opacity: 1;
+  color: #fff;
+  border: 0px;
+  min-width: 64px;
+}
+.environment.nonProductionEnvironment:hover,
+.environment.nonProductionEnvironment:focus { opacity: 0.8; }
+
+
+.environmentDescription {
+  padding: 24px;
+  padding-bottom: 0px;
+}
+
+.environmentGlobalControls {
+  border-top: 1px solid $gray300;
+}
+.environmentGlobalControls summary {
+  cursor: pointer;
+  user-select: none;
+  padding: 24px;
+}
+.environmentGlobalControls summary:focus { outline: none; }
+.environmentGlobalControlsInner {
+  padding: 24px;
+  padding-top: 0px;
+}
+
+.environmentGlobalControlsTooltipTarget {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
