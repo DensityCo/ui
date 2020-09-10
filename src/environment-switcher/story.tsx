@@ -17,6 +17,7 @@ import colorVariables from "../../variables/colors.json";
 const DEFAULT_LOCAL_CORE_API_PORT = 8000;
 
 const DEFAULT_SETTING_VALUES = {
+  showEnvironmentSwitcher: false,
   featureFlag: false,
 };
 
