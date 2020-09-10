@@ -147,9 +147,29 @@ export const EnvironmentSwitcher: EnvironmentSwitcherComponentType = ({
   globalControls,
   globalSettings,
 }) => {
-  // FIXME: fix modal
-  const visible = true;
   const [ open, setOpen ] = useState(false);
+
+  // TODO: This is a hack that should be upstreamed into the modal. Now that the modal is used more
+  // extensively, requiring every application to manage whether it's "rendered" or "opened" seems
+  // like a bad decision.
+  const [ openModal, setOpenModal ] = useState(true);
+  const [ renderModal, setRenderModal ] = useState(false);
+  useEffect(() => {
+    let unmounted = false;
+    if (open) {
+      setRenderModal(true);
+      setOpenModal(true);
+    } else {
+      setOpenModal(false);
+      setTimeout(() => {
+        if (!unmounted) {
+          setRenderModal(false);
+        }
+      }, 500);
+    }
+
+    return () => { unmounted = true; }
+  }, [ open ]);
 
   const environments = [
     {
@@ -266,7 +286,7 @@ export const EnvironmentSwitcher: EnvironmentSwitcherComponentType = ({
     </button>
   ) : null;
 
-  if (!open) {
+  if (!renderModal) {
     return button;
   }
 
@@ -279,7 +299,7 @@ export const EnvironmentSwitcher: EnvironmentSwitcherComponentType = ({
     <Fragment>
       {button}
       <Modal
-        visible={visible}
+        visible={openModal}
         onEscape={onClose}
         onBlur={onClose}
         width={500}
