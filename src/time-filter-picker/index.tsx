@@ -181,7 +181,7 @@ function TimeFilterPicker({
       <div>
         <div style={{
           display: 'flex',
-          paddingBottom: 16,
+          paddingBottom: 24,
           borderBottom: `1px dashed ${colorVariables.gray200}`
         }}>
           <TimePicker disabled={disabled} value={startTime} onChange={setStartTime} />
