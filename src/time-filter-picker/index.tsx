@@ -80,7 +80,7 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
       flex: 1,
       paddingTop: displayTwoDays ? 12 : 24,
       paddingBottom: 56,
-      borderRight: (displayTwoDays && !isTomorrow) ? `1px dashed ${colorVariables.gray300}` : undefined,
+      borderRight: (displayTwoDays && !isTomorrow) ? `1px dashed ${colorVariables.gray200}` : undefined,
     }}>
       {displayTwoDays ? <div style={{
           display: 'flex',
@@ -119,7 +119,7 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
             return <div key={hours} style={{
               position: 'absolute',
               left: `${tickPercent}%`,
-              transform: (isTomorrow && hours === 0) ? undefined : 'translateX(-50%)',
+              transform: hours === 0 ? undefined : `translateX(${hours === 24 ? '-100%' : '-50%'})`,
               fontSize: 12,
               fontWeight: 500,
               color: (tickPercent >= shadedStartPercent && tickPercent <= shadedStartPercent + shadedWidthPercent) ?
@@ -178,12 +178,12 @@ function TimeFilterPicker({
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
-      <div style={{
-        paddingTop: 24,
-        paddingLeft: 24,
-        paddingRight: 24,
-      }}>
-        <div style={{display: 'flex'}}>
+      <div>
+        <div style={{
+          display: 'flex',
+          paddingBottom: 16,
+          borderBottom: `1px dashed ${colorVariables.gray200}`
+        }}>
           <TimePicker disabled={disabled} value={startTime} onChange={setStartTime} />
           <div style={{lineHeight: '40px', padding: '0px 16px'}}>to</div>
           <TimePicker disabled={disabled} value={endTimeNormalized} onChange={setEndTime} />
@@ -192,13 +192,6 @@ function TimeFilterPicker({
             <DayOfWeekSelector disabled={disabled} daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
           </div>
         </div>
-        <div style={{
-          backgroundColor: colorVariables.gray200,
-          width: 'calc(100% + 48px)',
-          height: 1,
-          marginTop: 16,
-          marginLeft: -24,
-        }}></div>
         <div style={{display: 'flex'}}>
           <TimeFilterDisplay
             displayTwoDays={displayTwoDays}
