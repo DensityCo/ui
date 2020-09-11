@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import moment from 'moment-timezone';
 import MomentUtils from '@date-io/moment';
@@ -37,11 +37,15 @@ const COMMON_TIMES = [
 ]
 
 function TimePickerInput({value, onChange, disabled, error}) {
+  const [tempValue, setTempValue] = useState(value);
+  useEffect(() => setTempValue(value), [value]);
   return (
     <InputBox
       width={108}
-      value={value}
-      onChange={onChange}
+      value={tempValue}
+      onChange={e => setTempValue(e.target.value)}
+      onKeyDown={e => e.key === 'Enter' && onChange(e)}
+      onBlur={onChange}
       disabled={disabled}
       invalid={error ? 'true' : undefined} />
   );
