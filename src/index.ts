@@ -43,6 +43,8 @@ export {
   InputStackItem
 } from './input-stack';
 
+export { default as TimeFilterPicker } from './time-filter-picker';
+
 
 export {
   default as ListView,
