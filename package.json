@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "21.11.1-gus",
+  "version": "21.11.2-gus",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@date-io/moment": "^1.3.13",
+    "@density/lib-common-types": "^1.1.1",
     "@density/react-dates": "^12.6.0",
     "@material-ui/core": "^4.9.9",
     "@material-ui/pickers": "^3.2.10",

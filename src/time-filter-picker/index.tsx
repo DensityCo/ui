@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import moment from 'moment-timezone';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers';
+import { DayOfWeek } from '@density/lib-common-types';
 
 import colorVariables from '../../variables/colors.json';
-import InputBox, { ANCHOR_RIGHT, InputBoxContext } from '../input-box';
 import DayOfWeekSelector from '../day-of-week-picker';
-import { Icons } from '..';
+import InputBox, { ANCHOR_RIGHT, InputBoxContext } from '../input-box';
 
 const COMMON_TIMES = [
   '12:00 AM',
@@ -107,7 +107,10 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
           left: `${shadedStartPercent}%`,
           width: `${isNaN(shadedWidthPercent) ? 0 : shadedWidthPercent}%`,
           backgroundColor: isTomorrow ? colorVariables.yellow : colorVariables.blue,
-          borderRadius: 4,
+          borderTopLeftRadius: displayTwoDays ? isTomorrow ? 0 : 3 : 3,
+          borderBottomLeftRadius: displayTwoDays ? isTomorrow ? 0 : 3 : 3,
+          borderTopRightRadius: displayTwoDays ? isTomorrow ? 3 : 0 : 3,
+          borderBottomRightRadius: displayTwoDays ? isTomorrow ? 3 : 0 : 3,
         }}></div>
         <div style={{marginTop: 8}}>
           {(displayTwoDays ? isTomorrow ? [0,4,8,12,16,20,24] : [0,4,8,12,16,20] : [0,2,4,6,8,10,12,14,16,18,20,22,24]).map(hours => {
@@ -129,22 +132,32 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
   );
 }
 
-function TimeFilterPicker() {
-  const [startTimePickerValue, setStartTimePickerValue] = useState(moment('08:00', 'HH:mm'));
-  const [endTimePickerValue, setEndTimePickerValue] = useState(moment('17:00', 'HH:mm'));
-  const [daysOfWeek, setDaysOfWeek] = useState(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
-
+function TimeFilterPicker({
+  startTime,
+  endTime,
+  daysOfWeek,
+  setStartTime,
+  setEndTime,
+  setDaysOfWeek,
+}: {
+  startTime: moment.Moment,
+  endTime: moment.Moment,
+  daysOfWeek: Array<DayOfWeek>,
+  setStartTime: (value: moment.Moment) => void,
+  setEndTime: (value: moment.Moment) => void,
+  setDaysOfWeek: (value: Array<DayOfWeek>) => void,
+}) {
   let displayTwoDays = false;
-  let endTimeNormalized = endTimePickerValue && endTimePickerValue.clone();
+  let endTimeNormalized = endTime && endTime.clone();
   while (
     endTimeNormalized &&
-    endTimeNormalized.diff(startTimePickerValue, 'days') > 0
+    endTimeNormalized.diff(startTime, 'days') > 0
   ) {
     endTimeNormalized.subtract(1, 'day');
   }
   if (
     endTimeNormalized &&
-    endTimeNormalized.diff(startTimePickerValue) <= 0 &&
+    endTimeNormalized.diff(startTime) <= 0 &&
     endTimeNormalized !== endTimeNormalized.clone().startOf('day')
   ) {
     endTimeNormalized.add(1, 'day');
@@ -152,13 +165,13 @@ function TimeFilterPicker() {
   }
 
   // Calculate
-  const startOfDay = startTimePickerValue.clone().startOf('day');
-  const shadedStartPercent = startTimePickerValue ? 
-    startTimePickerValue.diff(startOfDay, 'minutes') * 100 / 1440 : 0;
-  const shadedWidthPercent = (startTimePickerValue && endTimeNormalized) ? 
+  const startOfDay = startTime.clone().startOf('day');
+  const shadedStartPercent = startTime ? 
+    startTime.diff(startOfDay, 'minutes') * 100 / 1440 : 0;
+  const shadedWidthPercent = (startTime && endTimeNormalized) ? 
     displayTwoDays ? 
       endTimeNormalized.diff(endTimeNormalized.clone().startOf('day'), 'minutes') * 100 / 1440 :
-      endTimeNormalized.diff(startTimePickerValue, 'minutes') * 100 / 1440 : 0;
+      endTimeNormalized.diff(startTime, 'minutes') * 100 / 1440 : 0;
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -168,9 +181,9 @@ function TimeFilterPicker() {
         paddingRight: 16,
       }}>
         <div style={{display: 'flex'}}>
-          <TimePicker value={startTimePickerValue} onChange={setStartTimePickerValue} />
+          <TimePicker value={startTime} onChange={setStartTime} />
           <div style={{lineHeight: '40px', padding: '0px 16px'}}>to</div>
-          <TimePicker value={endTimeNormalized} onChange={setEndTimePickerValue} />
+          <TimePicker value={endTimeNormalized} onChange={setEndTime} />
           <div style={{flex:1}}></div>
           <div style={{height: 40, display: 'flex', alignItems: 'center'}}>
             <DayOfWeekSelector daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
