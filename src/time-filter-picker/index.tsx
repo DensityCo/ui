@@ -63,7 +63,7 @@ function TimePicker({value, onChange, disabled}) {
         type="select"
         width={40}
         listBoxWidth={148}
-        menuMaxHeight={240}
+        menuMaxHeight={140}
         disabled={disabled}
         anchor={ANCHOR_RIGHT}
         value={{ id: 'caret', label: '' }}

@@ -293,6 +293,9 @@
 .contextComboBox.inputBoxSelectBoxOpened {
   z-index: 1;
 }
+.contextComboBox.inputBoxSelectBoxMenu {
+  z-index: 2;
+}
 
 // RULES FOR LIST_VIEW CONTEXT
 .contextListView.inputBoxSelectBoxValue {
