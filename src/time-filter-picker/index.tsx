@@ -47,7 +47,7 @@ function TimePickerInput({value, onChange, disabled, error}) {
   );
 }
 
-function TimePicker({value, onChange}) {
+function TimePicker({value, onChange, disabled}) {
   return (
     <InputBoxContext.Provider value="COMBO_BOX">
       {/* Renders an InputBox as its input */}
@@ -56,6 +56,7 @@ function TimePicker({value, onChange}) {
         placeholder="08:00 AM"
         value={value}
         onChange={onChange}
+        disabled={disabled}
         TextFieldComponent={TimePickerInput} />
       {/* Renders a SelectBox */}
       <InputBox
@@ -63,7 +64,7 @@ function TimePicker({value, onChange}) {
         width={40}
         listBoxWidth={148}
         menuMaxHeight={240}
-        menu
+        disabled={disabled}
         anchor={ANCHOR_RIGHT}
         value={{ id: 'caret', label: '' }}
         choices={COMMON_TIMES.map(time => ({ id: time, label: <div style={{width: 114}}>{time}</div> }))}
@@ -73,7 +74,7 @@ function TimePicker({value, onChange}) {
   );
 }
 
-function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPercent, isTomorrow}) {
+function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPercent, isTomorrow, disabled}) {
   return (
     <div style={{
       flex: 1,
@@ -106,7 +107,7 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
           height: 5,
           left: `${shadedStartPercent}%`,
           width: `${isNaN(shadedWidthPercent) ? 0 : shadedWidthPercent}%`,
-          backgroundColor: isTomorrow ? colorVariables.yellow : colorVariables.blue,
+          backgroundColor: disabled ? colorVariables.gray400 : isTomorrow ? colorVariables.yellow : colorVariables.blue,
           borderTopLeftRadius: displayTwoDays ? isTomorrow ? 0 : 3 : 3,
           borderBottomLeftRadius: displayTwoDays ? isTomorrow ? 0 : 3 : 3,
           borderTopRightRadius: displayTwoDays ? isTomorrow ? 3 : 0 : 3,
@@ -139,6 +140,7 @@ function TimeFilterPicker({
   setStartTime,
   setEndTime,
   setDaysOfWeek,
+  disabled = false,
 }: {
   startTime: moment.Moment,
   endTime: moment.Moment,
@@ -146,6 +148,7 @@ function TimeFilterPicker({
   setStartTime: (value: moment.Moment) => void,
   setEndTime: (value: moment.Moment) => void,
   setDaysOfWeek: (value: Array<DayOfWeek>) => void,
+  disabled?: boolean,
 }) {
   let displayTwoDays = false;
   let endTimeNormalized = endTime && endTime.clone();
@@ -176,38 +179,39 @@ function TimeFilterPicker({
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <div style={{
-        paddingTop: 16,
-        paddingLeft: 16,
-        paddingRight: 16,
+        paddingTop: 24,
+        paddingLeft: 24,
+        paddingRight: 24,
       }}>
         <div style={{display: 'flex'}}>
-          <TimePicker value={startTime} onChange={setStartTime} />
+          <TimePicker disabled={disabled} value={startTime} onChange={setStartTime} />
           <div style={{lineHeight: '40px', padding: '0px 16px'}}>to</div>
-          <TimePicker value={endTimeNormalized} onChange={setEndTime} />
+          <TimePicker disabled={disabled} value={endTimeNormalized} onChange={setEndTime} />
           <div style={{flex:1}}></div>
           <div style={{height: 40, display: 'flex', alignItems: 'center'}}>
-            <DayOfWeekSelector daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
+            <DayOfWeekSelector disabled={disabled} daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
           </div>
         </div>
         <div style={{
+          backgroundColor: colorVariables.gray200,
           width: 'calc(100% + 48px)',
           height: 1,
-          backgroundColor: colorVariables.gray300,
           marginTop: 16,
           marginLeft: -24,
-          marginRight: -24,
         }}></div>
         <div style={{display: 'flex'}}>
           <TimeFilterDisplay
             displayTwoDays={displayTwoDays}
             shadedStartPercent={shadedStartPercent}
             shadedWidthPercent={displayTwoDays ? 100 - shadedStartPercent : shadedWidthPercent}
-            isTomorrow={false} />
+            isTomorrow={false}
+            disabled={disabled} />
           {displayTwoDays ? <TimeFilterDisplay
             displayTwoDays={displayTwoDays}
             shadedStartPercent={0}
             shadedWidthPercent={shadedWidthPercent}
-            isTomorrow={true} /> : null}
+            isTomorrow={true}
+            disabled={disabled} /> : null}
         </div>
       </div>
     </MuiPickersUtilsProvider>
