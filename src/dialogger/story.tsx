@@ -44,6 +44,19 @@ storiesOf('Dialogger', module)
         }}>
           Open Prompt
         </Button>
+        <Button onClick={() => {
+          Dialogger.prompt({
+            title: "Favorite Ice Cream",
+            prompt: "What is your favorite ice cream?",
+            confirmText: "Give me some!",
+            placeholder: "ex: Chocolate",
+            emptyValueIsInvalid: true,
+          }).then(result => {
+            console.log('Typed text:', result);
+          });
+        }}>
+          Open Prompt (requires text)
+        </Button>
       </ButtonGroup>
     </Fragment>
   ))

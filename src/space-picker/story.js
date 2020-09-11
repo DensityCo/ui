@@ -950,6 +950,15 @@ storiesOf('SpacePicker/Regular Space Picker', module)
         <Wrapper />
       </div>
     );
+  },
+  {
+    notes: `Test an edge case with filtering:
+
+    1. Select a space (e.g. Ames)
+    2. Filter to a view without the select space (e.g. by typing "Dallas")
+    3. Select another space (e.g. Dallas)
+    4. Undo the search and filter. Make sure that both spaces are still selected.
+    `,
   })
   .add('Space Picker: with all buildings disabled', () => {
     function Wrapper() {

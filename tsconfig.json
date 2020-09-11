@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "lib": ["es6", "dom", "es2017"]
+    "lib": ["es6", "dom", "es2019"]
   },
   "files": [ "src/index.ts" ]
 }
