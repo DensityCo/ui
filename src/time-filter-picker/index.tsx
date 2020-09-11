@@ -79,7 +79,7 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
     <div style={{
       flex: 1,
       paddingTop: displayTwoDays ? 12 : 24,
-      paddingBottom: 56,
+      paddingBottom: 32,
       borderRight: (displayTwoDays && !isTomorrow) ? `1px dashed ${colorVariables.gray200}` : undefined,
     }}>
       {displayTwoDays ? <div style={{
