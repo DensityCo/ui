@@ -277,23 +277,23 @@
 .invalid { border-color: $red; }
 
 
-// RULES FOR COMBO_BOX context
-.contextComboBox.inputBox {
+// RULES FOR TIME_PICKER context
+.contextTimePicker.inputBox {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   z-index: 1;
 }
-.contextComboBox.inputBoxSelectBoxValue {
+.contextTimePicker.inputBoxSelectBoxValue {
   margin-left: -1px;
   padding: 0 8px;
   width: 24px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.contextComboBox.inputBoxSelectBoxOpened {
+.contextTimePicker.inputBoxSelectBoxOpened {
   z-index: 1;
 }
-.contextComboBox.inputBoxSelectBoxMenu {
+.contextTimePicker.inputBoxSelectBoxMenu {
   z-index: 2;
 }
 

@@ -53,13 +53,13 @@ function TimePickerInput({value, onChange, disabled, error}) {
 
 function TimePicker({value, onChange, disabled}) {
   return (
-    <InputBoxContext.Provider value="COMBO_BOX">
+    <InputBoxContext.Provider value="TIME_PICKER">
       {/* Renders an InputBox as its input */}
       <KeyboardTimePicker
         mask="__:__ _M"
         placeholder="08:00 AM"
         value={value}
-        onChange={onChange}
+        onChange={value => onChange(value || moment('12:00 AM', 'hh:mm A'))}
         disabled={disabled}
         TextFieldComponent={TimePickerInput} />
       {/* Renders a SelectBox */}

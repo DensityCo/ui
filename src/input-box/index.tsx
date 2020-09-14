@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
-  'COMBO_BOX': styles.contextComboBox,
+  'TIME_PICKER': styles.contextTimePicker,
   'LIST_VIEW': styles.contextListView,
   'NAVBAR_INLINE': styles.contextNavbarInline,
   'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
