@@ -6,7 +6,7 @@ import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/picker
 import { DayOfWeek } from '@density/lib-common-types';
 
 import colorVariables from '../../variables/colors.json';
-import DayOfWeekSelector from '../day-of-week-picker';
+import DayOfWeekPicker, { DayOfWeekPickerContext } from '../day-of-week-picker';
 import InputBox, { ANCHOR_RIGHT, InputBoxContext } from '../input-box';
 
 const COMMON_TIMES = [
@@ -197,7 +197,9 @@ export default function TimeFilterPicker({
           <TimePicker disabled={disabled} value={endTimeNormalized} onChange={setEndTime} />
           <div style={{flex:1}}></div>
           <div style={{height: 40, display: 'flex', alignItems: 'center'}}>
-            <DayOfWeekSelector disabled={disabled} daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
+            <DayOfWeekPickerContext.Provider value="TIME_FILTER_PICKER">
+              <DayOfWeekPicker disabled={disabled} daysOfWeek={daysOfWeek} onChange={setDaysOfWeek} />
+            </DayOfWeekPickerContext.Provider>
           </div>
         </div>
         <div style={{display: 'flex'}}>
