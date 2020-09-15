@@ -28,7 +28,7 @@ export { AlertDialog, ConfirmDialog, PromptDialog } from './dialog';
 export { default as Dialogger } from './dialogger';
 export { default as Skeleton } from './skeleton';
 export { default as TagInput } from './tag-input';
-export { default as DayOfWeekPicker } from './day-of-week-picker';
+export { default as DayOfWeekPicker, DayOfWeekPickerContext } from './day-of-week-picker';
 export { default as FormLabel } from './form-label';
 export { default as EnvironmentSwitcher, getEnvironmentFromLocalStorage } from './environment-switcher';
 export {

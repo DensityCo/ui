@@ -41,7 +41,7 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, rightIcon, forwardedRef, invalid,
     return (
       <InputBoxContext.Consumer>{context => (
         <div
-          className={classnames(context && CONTEXT_CLASSES[context],styles.inputBox, {
+          className={classnames(context && CONTEXT_CLASSES[context], styles.inputBox, {
             [styles.inputBoxDisabled]: props.disabled,
             [styles.inputBoxFocused]: focused,
             [styles.inputBoxContainsLeftIcon]: Boolean(leftIcon),
