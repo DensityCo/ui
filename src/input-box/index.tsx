@@ -8,6 +8,7 @@ import styles from './styles.module.scss';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
+  'TIME_PICKER': styles.contextTimePicker,
   'LIST_VIEW': styles.contextListView,
   'NAVBAR_INLINE': styles.contextNavbarInline,
   'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
@@ -38,36 +39,38 @@ const InputBoxRaw: React.FC<any> = ({leftIcon, rightIcon, forwardedRef, invalid,
 
   default:
     return (
-      <div
-        className={classnames(styles.inputBox, {
-          [styles.inputBoxDisabled]: props.disabled,
-          [styles.inputBoxFocused]: focused,
-          [styles.inputBoxContainsLeftIcon]: Boolean(leftIcon),
-          [styles.inputBoxContainsRightIcon]: Boolean(rightIcon),
-          [styles.invalid]: invalid,
-        })}
-        style={{width: props.width}}
-        onClick={() => {
-          if (input && input.current) {
-            input.current.focus();
-          }
-        }}
-      >
-        {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
-        <input
-          {...props}
-          ref={input}
-          onFocus={(...args) => {
-            setFocus(true);
-            if (props.onFocus) { props.onFocus(...args); }
+      <InputBoxContext.Consumer>{context => (
+        <div
+          className={classnames(context && CONTEXT_CLASSES[context],styles.inputBox, {
+            [styles.inputBoxDisabled]: props.disabled,
+            [styles.inputBoxFocused]: focused,
+            [styles.inputBoxContainsLeftIcon]: Boolean(leftIcon),
+            [styles.inputBoxContainsRightIcon]: Boolean(rightIcon),
+            [styles.invalid]: invalid,
+          })}
+          style={{width: props.width}}
+          onClick={() => {
+            if (input && input.current) {
+              input.current.focus();
+            }
           }}
-          onBlur={(...args) => {
-            setFocus(false);
-            if (props.onBlur) { props.onBlur(...args); }
-          }}
-        />
-        {rightIcon ? <div className={styles.rightIcon}>{rightIcon}</div> : null}
-      </div>
+        >
+          {leftIcon ? <div className={styles.leftIcon}>{leftIcon}</div> : null}
+          <input
+            {...props}
+            ref={input}
+            onFocus={(...args) => {
+              setFocus(true);
+              if (props.onFocus) { props.onFocus(...args); }
+            }}
+            onBlur={(...args) => {
+              setFocus(false);
+              if (props.onBlur) { props.onBlur(...args); }
+            }}
+          />
+          {rightIcon ? <div className={styles.rightIcon}>{rightIcon}</div> : null}
+        </div>
+      )}</InputBoxContext.Consumer>
     );
   }
 };
@@ -144,7 +147,9 @@ export class SelectBox extends React.Component<any, any> {
     }
 
     return <InputBoxContext.Consumer>{context => (
-      <div className={classnames(styles.inputBoxSelectBox)} style={{width}}>
+      <div className={classnames(context && CONTEXT_CLASSES[context], styles.inputBoxSelectBox, {
+        [styles.inputBoxSelectBoxOpened]: opened,
+      })} style={{width}}>
         <div
           id={id}
           ref={r => { (this as any).selectBoxValueRef = r; }}

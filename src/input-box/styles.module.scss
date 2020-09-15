@@ -277,6 +277,26 @@
 .invalid { border-color: $red; }
 
 
+// RULES FOR TIME_PICKER context
+.contextTimePicker.inputBox {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  z-index: 1;
+}
+.contextTimePicker.inputBoxSelectBoxValue {
+  margin-left: -1px;
+  padding: 0 8px;
+  width: 24px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.contextTimePicker.inputBoxSelectBoxOpened {
+  z-index: 1;
+}
+.contextTimePicker.inputBoxSelectBoxMenu {
+  z-index: 2;
+}
+
 // RULES FOR LIST_VIEW CONTEXT
 .contextListView.inputBoxSelectBoxValue {
   height: 36px;

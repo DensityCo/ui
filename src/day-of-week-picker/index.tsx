@@ -1,16 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-
-const DAYS_OF_WEEK = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
+import {DayOfWeek} from '@density/lib-common-types';
 
 const DayOfWeekSelector: React.FC<any> = ({
   daysOfWeek,
@@ -19,7 +10,7 @@ const DayOfWeekSelector: React.FC<any> = ({
 }) => {
   return (
     <div className={styles.wrapper}>
-      {DAYS_OF_WEEK.map(dayName => (
+      {Object.values(DayOfWeek).map(dayName => (
         <div key={dayName} className={styles.item}>
          <div
             className={classnames(styles.button, {
@@ -27,16 +18,15 @@ const DayOfWeekSelector: React.FC<any> = ({
               [styles.disabled]: disabled,
             })}
             onClick={() => {
-              if (!daysOfWeek.includes(dayName)) {
-                // Add day
-                onChange([...daysOfWeek, dayName]);
-              } else {
-                // Ensure the user doesn't deselect the last day
-                if (daysOfWeek.length <= 1) { return; }
+              // Add or remove the selected day
+              const selectedDays = !daysOfWeek.includes(dayName) ?
+                [...daysOfWeek, dayName] :
+                daysOfWeek.length > 1 ?
+                  daysOfWeek.filter(x => x !== dayName) :
+                  daysOfWeek;  // Don't remove the last selected day
 
-                // Remove day
-                onChange(daysOfWeek.filter(day => day !== dayName));
-              }
+              // Always emit changed value in consistent order
+              onChange(Object.values(DayOfWeek).filter(x => selectedDays.includes(x)));
             }}
             tabIndex={0}
           >
