@@ -137,7 +137,16 @@ function TimeFilterDisplay({displayTwoDays, shadedStartPercent, shadedWidthPerce
   );
 }
 
-function TimeFilterPicker({
+/**
+ * @param startTime       A moment instance that represents the start time-of-day, in the user's local tz, e.g. the return value of moment()
+ * @param endTime         A moment instance that represents the end time-of-day
+ * @param daysOfWeek      The days of the week that this segment should apply to
+ * @param setStartTime    Setter function for the start time-of-day, that accepts a moment in the user's local tz
+ * @param setEndTime      Setter function for the end time-of-day
+ * @param setDaysOfWeek   Setter function for the days-of-week array
+ * @param disabled        If true, disable the whole picker
+ */
+export default function TimeFilterPicker({
   startTime,
   endTime,
   daysOfWeek,
@@ -214,5 +223,3 @@ function TimeFilterPicker({
     </MuiPickersUtilsProvider>
   );
 }
-
-export default TimeFilterPicker;
