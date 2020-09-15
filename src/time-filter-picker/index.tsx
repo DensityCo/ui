@@ -165,19 +165,14 @@ export default function TimeFilterPicker({
 }) {
   let displayTwoDays = false;
   let endTimeNormalized = endTime && endTime.clone();
-  while (
-    endTimeNormalized &&
-    endTimeNormalized.diff(startTime, 'days') > 0
-  ) {
+  while (endTimeNormalized && endTimeNormalized.diff(startTime, 'days') > 0) {
     endTimeNormalized.subtract(1, 'day');
   }
-  if (
-    endTimeNormalized &&
-    endTimeNormalized.diff(startTime) <= 0 &&
-    endTimeNormalized !== endTimeNormalized.clone().startOf('day')
-  ) {
+  if (endTimeNormalized && endTimeNormalized.diff(startTime) <= 0) {
     endTimeNormalized.add(1, 'day');
-    displayTwoDays = true;
+    if (endTimeNormalized.diff(endTimeNormalized.clone().startOf('day')) !== 0) {
+      displayTwoDays = true;
+    }
   }
 
   // Calculate
