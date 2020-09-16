@@ -36,14 +36,20 @@ const COMMON_TIMES = [
   '11:00 PM',
 ]
 
-function TimePickerInput({value, onChange, disabled, error}) {
+function TimePickerInput({value, onBlur, onChange, disabled, error}) {
   const [tempValue, setTempValue] = useState(value);
   useEffect(() => setTempValue(value), [value]);
   return (
     <InputBox
       width={108}
       value={tempValue}
-      onChange={e => setTempValue(e.target.value)}
+      onBlur={() => {
+        const newValue = moment(tempValue, 'hh:mm A').toISOString() ||
+          moment('12:00 AM', 'hh:mm A').toISOString();
+        setTempValue(moment(newValue).format('hh:mm A'));
+        onBlur(moment(newValue));
+      }}
+      onChange={event => setTempValue(event.target.value)}
       onKeyDown={e => e.key === 'Enter' && onChange(e)}
       disabled={disabled}
       invalid={error ? 'true' : undefined} />
@@ -58,6 +64,7 @@ function TimePicker({value, onChange, disabled}) {
         mask="__:__ _M"
         placeholder="08:00 AM"
         value={value}
+        onBlur={onChange}
         onChange={value => onChange(value || moment('12:00 AM', 'hh:mm A'))}
         disabled={disabled}
         TextFieldComponent={TimePickerInput} />
