@@ -45,7 +45,6 @@ function TimePickerInput({value, onChange, disabled, error}) {
       value={tempValue}
       onChange={e => setTempValue(e.target.value)}
       onKeyDown={e => e.key === 'Enter' && onChange(e)}
-      onBlur={onChange}
       disabled={disabled}
       invalid={error ? 'true' : undefined} />
   );
@@ -67,7 +66,7 @@ function TimePicker({value, onChange, disabled}) {
         type="select"
         width={40}
         listBoxWidth={148}
-        menuMaxHeight={140}
+        menuMaxHeight={128}
         disabled={disabled}
         anchor={ANCHOR_RIGHT}
         value={{ id: 'caret', label: '' }}

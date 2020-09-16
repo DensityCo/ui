@@ -24,8 +24,8 @@ storiesOf('TimeFilterPicker', module)
     />
   })
   .add('Overnight', () => {
-    const [startTime, setStartTime] = useState(moment('17:00', 'HH:mm'));
-    const [endTime, setEndTime] = useState(moment('08:00', 'HH:mm'));
+    const [startTime, setStartTime] = useState(moment('19:00', 'HH:mm'));
+    const [endTime, setEndTime] = useState(moment('02:00', 'HH:mm'));
     const [daysOfWeek, setDaysOfWeek] = useState([DayOfWeek.MONDAY]);
     return <TimeFilterPicker
       startTime={startTime}
