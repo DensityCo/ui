@@ -50,7 +50,16 @@ function TimePickerInput({value, onBlur, onChange, disabled, error}) {
         onBlur(moment(newValue));
       }}
       onChange={event => setTempValue(event.target.value)}
-      onKeyDown={e => e.key === 'Enter' && onChange(e)}
+      onKeyDown={e => {
+        if (e.key === 'Enter') {
+          onChange(e);
+        } else if (e.key === ':') {
+          const value = e.target.value;
+          if (value.length === 1 && parseInt(value, 10).toString() === value) {
+            e.target.value = '0' + value;
+          }
+        }
+      }}
       disabled={disabled}
       invalid={error ? 'true' : undefined} />
   );
