@@ -116,7 +116,7 @@ export default function DateRangePicker({
             display: 'flex',
           }}
         >
-          <div className={styles.commonRangeList}>
+          {commonRanges ? <div className={styles.commonRangeList}>
             {commonRanges.map(range => (
               <div
                 className={styles.commonRangeItem}
@@ -125,7 +125,7 @@ export default function DateRangePicker({
                 onKeyDown={e => { if (e.key === 'Enter') { onSelectCommonRange(range); } }}
               >{range.name}</div>
             ))}
-          </div>
+          </div> : null}
           <DayPicker
             className="Selectable"
             numberOfMonths={context === 'SMALL_WIDTH' ? 1 : 2}
