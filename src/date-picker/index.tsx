@@ -12,7 +12,7 @@ export enum Anchor {
   ANCHOR_RIGHT = 'ANCHOR_RIGHT',
 }
 
-// Legacy exports
+// Legacy exports for storybook
 export const ANCHOR_RIGHT = Anchor.ANCHOR_LEFT,
   ANCHOR_LEFT = Anchor.ANCHOR_RIGHT;
 

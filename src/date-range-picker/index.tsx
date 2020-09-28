@@ -15,7 +15,7 @@ export enum ActiveDateMode {
 }
 export type ActiveDate = ActiveDateMode.START_DATE_ACTIVE | ActiveDateMode.END_DATE_ACTIVE | null;
 
-// Legacy exports
+// Legacy exports for storybook
 export const ANCHOR_LEFT = Anchor.ANCHOR_LEFT,
   ANCHOR_RIGHT = Anchor.ANCHOR_RIGHT,
   START_DATE_ACTIVE = ActiveDateMode.START_DATE_ACTIVE,
