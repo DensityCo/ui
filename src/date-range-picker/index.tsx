@@ -32,6 +32,7 @@ export default function DateRangePicker({
   onChange,
   onFocusChange,
   onSelectCommonRange,
+  isOutsideRange,
 }: {
   startDate: Moment | string | number,
   endDate: Moment | string | number,
@@ -41,6 +42,7 @@ export default function DateRangePicker({
   onChange: Function,
   onFocusChange: (active: ActiveDate) => void,
   onSelectCommonRange?: (range: any) => void,
+  isOutsideRange?: (date: Moment | string | number) => boolean,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
   const startValue = moment(startDate).toDate();
@@ -109,20 +111,26 @@ export default function DateRangePicker({
             className="Selectable"
             month={startValue}
             numberOfMonths={context === 'SMALL_WIDTH' ? 1 : 2}
-            selectedDays={{ from: startValue, to: endValue }}
-            modifiers={{start: startValue, end: endValue}}
+            selectedDays={{from: startValue, to: endValue}}
+            modifiers={{
+              start: startValue,
+              end: endValue,
+              disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
+            }}
             onDayClick={day => {
-              const focus = moment(day).diff(startDate) < 0 ?
-                ActiveDateMode.START_DATE_ACTIVE :
-                moment(day).diff(endDate) > 0 ?
-                  ActiveDateMode.END_DATE_ACTIVE :
-                  focusedInput;
-              onChange({
-                startDate: focus === ActiveDateMode.START_DATE_ACTIVE ? moment(day) : startDate,
-                endDate: focus === ActiveDateMode.END_DATE_ACTIVE ? moment(day) : endDate,
-              });
-              if (focusedInput !== ActiveDateMode.END_DATE_ACTIVE) {
-                onFocusChange(ActiveDateMode.END_DATE_ACTIVE);
+              if (!isOutsideRange || !isOutsideRange(moment(day))) {
+                const focus = moment(day).diff(startDate) < 0 ?
+                  ActiveDateMode.START_DATE_ACTIVE :
+                  moment(day).diff(endDate) > 0 ?
+                    ActiveDateMode.END_DATE_ACTIVE :
+                    focusedInput;
+                onChange({
+                  startDate: focus === ActiveDateMode.START_DATE_ACTIVE ? moment(day) : startDate,
+                  endDate: focus === ActiveDateMode.END_DATE_ACTIVE ? moment(day) : endDate,
+                });
+                if (focusedInput !== ActiveDateMode.END_DATE_ACTIVE) {
+                  onFocusChange(ActiveDateMode.END_DATE_ACTIVE);
+                }
               }
             }}
           />

@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions';
 
 import './styles.module.scss';
 import DatePicker, { DatePickerContext, ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
-import { isInclusivelyBeforeDay } from '@density/react-dates';
 
 import moment from 'moment';
 
@@ -49,7 +48,7 @@ storiesOf('DatePicker', module)
 
       // Other props
       numberOfMonths={2}
-      isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+      isOutsideRange={day => moment().startOf('day').diff(day) > 0}
     />
   ))
   .add('Interactive', () => {

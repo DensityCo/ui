@@ -64,18 +64,28 @@ export default function DatePicker({
   anchor,
   arrowLeftDisabled,
   arrowRightDisabled,
+  numberOfMonths,
   onChange,
   onFocusChange,
+  isOutsideRange,
 }: {
   date: Moment | string | number,
   focused: boolean,
   anchor?: Anchor,
   arrowLeftDisabled?: boolean,
   arrowRightDisabled?: boolean,
+  numberOfMonths?: 1 | 2,
   onChange: (date: Moment | string | number) => void,
   onFocusChange: ({focused}: {focused: boolean}) => void,
+  isOutsideRange?: (date: Moment | string | number) => boolean,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
+  const value = moment(date).toDate();
+
+  function scrubDays(days: number) {
+    const newDate = moment(date).clone().add(days, 'days');
+    return onChange(newDate);
+  }
 
   return <DatePickerContext.Consumer>{context => (
     <div
@@ -105,18 +115,15 @@ export default function DatePicker({
         }}
       >
         <div
+          tabIndex={0}
           className={classnames(
             styles.datePickerIcon,
             styles.datePickerIconLeft,
             {[styles.datePickerIconDisabled]: arrowLeftDisabled},
           )}
           role="button"
-          onClick={() => {
-            if (!arrowLeftDisabled) {
-              const yesterday = moment(date).clone().subtract(1, 'day');
-              return onChange(yesterday);
-            }
-          }}
+          onKeyDown={e => e.key === 'Enter' && !arrowLeftDisabled && scrubDays(-1)}
+          onClick={() => !arrowLeftDisabled && scrubDays(-1)}
         >
           <Icons.ArrowLeft
             color={arrowLeftDisabled ? colors.gray400 : colors.midnight}
@@ -126,18 +133,15 @@ export default function DatePicker({
         </div>
         <DateDisplay value={date} active={focused} onSelect={() => onFocusChange({focused: true})} />
         <div
+          tabIndex={0}
           className={classnames(
             styles.datePickerIcon,
             styles.datePickerIconRight,
             {[styles.datePickerIconDisabled]: arrowRightDisabled},
           )}
           role="button"
-          onClick={() => {
-            if (!arrowRightDisabled) {
-              const tomorrow = moment(date).clone().add(1, 'day');
-              return onChange(tomorrow);
-            }
-          }}
+          onKeyDown={e => e.key === 'Enter' && !arrowRightDisabled && scrubDays(1)}
+          onClick={() => !arrowRightDisabled && scrubDays(1)}
         >
           <Icons.ArrowRight
             color={arrowRightDisabled ? colors.gray400 : colors.midnight}
@@ -151,17 +155,23 @@ export default function DatePicker({
           marginTop: 10,
           border: `1px solid ${colors.gray300}`,
           borderRadius: 4,
-          width: 277,
+          width: numberOfMonths === 2 ? 557 : 277,
           display: 'flex',
         }}
       >
         <DayPicker
           className="Selectable"
-          month={moment(date).toDate()}
-          selectedDays={moment(date).toDate()}
+          month={value}
+          selectedDays={value}
+          numberOfMonths={numberOfMonths || 1}
+          modifiers={{
+            disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
+          }}
           onDayClick={day => {
-            onChange(moment(day));
-            onFocusChange({focused: false});
+            if (!isOutsideRange || !isOutsideRange(moment(day))) {
+              onChange(moment(day));
+              onFocusChange({focused: false});
+            }
           }}
         />
       </div> : null}
