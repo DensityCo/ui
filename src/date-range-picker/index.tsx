@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 import colors from '../../variables/colors.json';
 import { Anchor, DateDisplay, elementContains } from '../date-picker';
 
-enum ActiveDateMode {
+export enum ActiveDateMode {
   START_DATE_ACTIVE = 'startDate',
   END_DATE_ACTIVE = 'endDate',
 }
