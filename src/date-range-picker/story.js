@@ -141,7 +141,6 @@ storiesOf('DateRangePicker', module)
       constructor(props) {
         super(props);
         this.state = {
-          focus: null,
           startDate: moment(),
           endDate: moment().add(1, 'day'),
         };
@@ -151,8 +150,6 @@ storiesOf('DateRangePicker', module)
           startDate={this.state.startDate}
           endDate={this.state.endDate}
           onChange={e => this.setState({ startDate: e.startDate, endDate: e.endDate })}
-          focusedInput={this.state.focus}
-          onFocusChange={focus => this.setState({ focus }) }
           commonRanges={commonRanges}
           onSelectCommonRange={commonRange => {
             this.setState({

@@ -33,18 +33,24 @@ export default function DateRangePicker({
 }: {
   startDate: CompatibleDateValue,
   endDate: CompatibleDateValue,
-  focusedInput: ActiveDate,
+  // This should be renamed to "activeDate" or some such in a future version
+  focusedInput?: ActiveDate,
   anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
   commonRanges?: Array<CommonRange>,
   numberOfMonths?: 1 | 2,
   onChange: (values: {startDate: CompatibleDateValue, endDate: CompatibleDateValue}) => void,
-  onFocusChange: (active: ActiveDate) => void,
+  onFocusChange?: (active: ActiveDate) => void,
   onSelectCommonRange?: (range: any) => void,
   isOutsideRange?: (date: CompatibleDateValue) => boolean,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
+  const [uncontrolledActiveDate, setUncontrolledActiveDate] = useState<ActiveDate>(null);
   const startValue = moment(startDate).toDate();
   const endValue = moment(endDate).toDate();
+
+  // Either controlled or uncontrolled "active date" state
+  const activeDate = focusedInput === undefined ? uncontrolledActiveDate : focusedInput;
+  const setActiveDate = onFocusChange === undefined ? setUncontrolledActiveDate : onFocusChange;
 
   return (
     <DateRangePickerContext.Consumer>{context => (
@@ -57,7 +63,7 @@ export default function DateRangePicker({
         }}
         onBlur={e => {
           if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
-            onFocusChange(null);
+            setActiveDate(null);
           }
         }}
         onMouseDown={() => setMouseMode(true)}
@@ -68,7 +74,7 @@ export default function DateRangePicker({
             width: 240,
             height: 38,
             backgroundColor: colors.white,
-            border: `1px solid ${focusedInput ? colors.blue : colors.gray300}`,
+            border: `1px solid ${activeDate ? colors.blue : colors.gray300}`,
             borderRadius: 4,
             display: 'flex',
             justifyContent: 'center',
@@ -77,15 +83,15 @@ export default function DateRangePicker({
         >
           <DateDisplay
             value={startDate}
-            active={focusedInput === 'startDate'}
-            onSelect={() => onFocusChange('startDate')} />
+            active={activeDate === 'startDate'}
+            onSelect={() => setActiveDate('startDate')} />
           <span style={{padding: '0 4px', userSelect: 'none', msUserSelect: 'none', WebkitUserSelect: 'none'}}>—</span>
           <DateDisplay
             value={endDate}
-            active={focusedInput === 'endDate'}
-            onSelect={() => onFocusChange('endDate')} />
+            active={activeDate === 'endDate'}
+            onSelect={() => setActiveDate('endDate')} />
         </div>
-        {focusedInput ? <div
+        {activeDate ? <div
           style={{
             marginTop: 10,
             border: `1px solid ${colors.gray300}`,
@@ -113,18 +119,18 @@ export default function DateRangePicker({
               disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
             }}
             numberOfMonths={numberOfMonths || 2}
-            month={focusedInput === 'endDate' ? endValue : startValue}
+            month={activeDate === 'endDate' ? endValue : startValue}
             onDayClick={day => {
               if (!isOutsideRange || !isOutsideRange(moment(day))) {
-                const focus = moment(day).diff(startDate) < 0 ? 'startDate' : focusedInput
+                const active = moment(day).diff(startDate) < 0 ? 'startDate' : activeDate
                 onChange({
-                  startDate: focus === 'startDate' ? moment(day) : startDate,
+                  startDate: active === 'startDate' ? moment(day) : startDate,
                   endDate: moment(day),
                 });
-                if (focus === 'startDate') {
-                  onFocusChange('endDate');
-                } else if (focus === 'endDate') {
-                  onFocusChange('startDate');
+                if (active === 'startDate') {
+                  setActiveDate('endDate');
+                } else if (active === 'endDate') {
+                  setActiveDate('startDate');
                 }
               }
             }}
