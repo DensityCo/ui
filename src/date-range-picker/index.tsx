@@ -1,51 +1,27 @@
 import React, { useState } from 'react';
+import classnames from 'classnames';
+import moment, { Moment } from 'moment-timezone';
+
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
-import classnames from 'classnames';
-import moment, { Moment } from 'moment';
-
 import styles from './styles.module.scss';
 import colors from '../../variables/colors.json';
+import { Anchor, DateDisplay, elementContains } from '../date-picker';
 
-export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
-  ANCHOR_LEFT = 'ANCHOR_LEFT',
+enum ActiveDateMode {
   START_DATE_ACTIVE = 'startDate',
-  END_DATE_ACTIVE = 'endDate';
+  END_DATE_ACTIVE = 'endDate',
+}
+export type ActiveDate = ActiveDateMode.START_DATE_ACTIVE | ActiveDateMode.END_DATE_ACTIVE | null;
+
+// Legacy exports
+export const ANCHOR_LEFT = Anchor.ANCHOR_LEFT,
+  ANCHOR_RIGHT = Anchor.ANCHOR_RIGHT,
+  START_DATE_ACTIVE = ActiveDateMode.START_DATE_ACTIVE,
+  END_DATE_ACTIVE = ActiveDateMode.END_DATE_ACTIVE;
 
 export const DateRangePickerContext = React.createContext<string | null>(null);
-
-function DateDisplay({value, active, onSelect}: {
-  value: Moment | string | number,
-  active: boolean,
-  onSelect: () => void,
-}) {
-  return (
-    <div
-      tabIndex={0}
-      style={{
-        width: 86,
-        fontSize: 14,
-        borderRadius: 2,
-        cursor: 'pointer',
-        fontWeight: 'bold',
-        padding: '3px 7px',
-        whiteSpace: 'nowrap',
-        textAlign: 'center',
-        userSelect: 'none',
-        msUserSelect: 'none',
-        WebkitUserSelect: 'none',
-        border: `1px solid ${active ? colors.blueLight : colors.gray300}`,
-        backgroundColor: active ? colors.blueLight : colors.gray300,
-        color: active ? colors.blue : colors.midnight,
-      }}
-      onClick={onSelect}
-      onKeyDown={e => { if (e.key === 'Enter') { onSelect(); }}}
-    >
-      {moment(value).format('MMM D, YYYY')}
-    </div>
-  );
-}
 
 export default function DateRangePicker({
   startDate,
@@ -59,16 +35,17 @@ export default function DateRangePicker({
 }: {
   startDate: Moment | string | number,
   endDate: Moment | string | number,
-  focusedInput: 'startDate' | 'endDate' | null,
-  anchor?: 'ANCHOR_RIGHT' | 'ANCHOR_LEFT' | null,
+  focusedInput: ActiveDate,
+  anchor?: Anchor.ANCHOR_LEFT | Anchor.ANCHOR_RIGHT,
   commonRanges?: Array<{ id: any, name: React.ReactNode, label: React.ReactNode }>,
   onChange: Function,
-  onFocusChange: (active: 'startDate' | 'endDate' | null) => void,
+  onFocusChange: (active: ActiveDate) => void,
   onSelectCommonRange?: (range: any) => void,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
   const startValue = moment(startDate).toDate();
   const endValue = moment(endDate).toDate();
+
   return (
     <DateRangePickerContext.Consumer>{context => (
       <div
@@ -76,15 +53,12 @@ export default function DateRangePicker({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: (context === 'SMALL_WIDTH' || anchor === 'ANCHOR_RIGHT') ? 'flex-end' : 'flex-start'
+          alignItems: (context === 'SMALL_WIDTH' || anchor === Anchor.ANCHOR_RIGHT) ?
+            'flex-end' :
+            'flex-start'
         }}
         onBlur={e => {
-          function contains(parent: EventTarget & HTMLElement, child: EventTarget & HTMLElement) {
-            if (!child || !child.parentElement) { return false; }
-            if (child.parentElement === parent) { return true; }
-            return contains(parent, child.parentElement);
-          }
-          if (!contains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
+          if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
             onFocusChange(null);
           }
         }}
@@ -102,12 +76,17 @@ export default function DateRangePicker({
             alignItems: 'center',
           }}
         >
-          <DateDisplay value={startDate} active={focusedInput === 'startDate'} onSelect={() => onFocusChange('startDate')} />
+          <DateDisplay
+            value={startDate}
+            active={focusedInput === ActiveDateMode.START_DATE_ACTIVE}
+            onSelect={() => onFocusChange(ActiveDateMode.START_DATE_ACTIVE)} />
           <span style={{padding: '0 4px', userSelect: 'none', msUserSelect: 'none', WebkitUserSelect: 'none'}}>—</span>
-          <DateDisplay value={endDate} active={focusedInput === 'endDate'} onSelect={() => onFocusChange('endDate')} />
+          <DateDisplay
+            value={endDate}
+            active={focusedInput === ActiveDateMode.END_DATE_ACTIVE}
+            onSelect={() => onFocusChange(ActiveDateMode.END_DATE_ACTIVE)} />
         </div>
         {focusedInput ? <div
-          tabIndex={-1}
           style={{
             marginTop: 10,
             border: `1px solid ${colors.gray300}`,
@@ -128,20 +107,23 @@ export default function DateRangePicker({
           </div> : null}
           <DayPicker
             className="Selectable"
+            month={startValue}
             numberOfMonths={context === 'SMALL_WIDTH' ? 1 : 2}
             selectedDays={{ from: startValue, to: endValue }}
             modifiers={{start: startValue, end: endValue}}
             onDayClick={day => {
               const focus = moment(day).diff(startDate) < 0 ?
-                'startDate' :
+                ActiveDateMode.START_DATE_ACTIVE :
                 moment(day).diff(endDate) > 0 ?
-                  'endDate' :
+                  ActiveDateMode.END_DATE_ACTIVE :
                   focusedInput;
               onChange({
-                startDate: focus === 'startDate' ? moment(day) : startDate,
-                endDate: focus === 'endDate' ? moment(day) : endDate,
+                startDate: focus === ActiveDateMode.START_DATE_ACTIVE ? moment(day) : startDate,
+                endDate: focus === ActiveDateMode.END_DATE_ACTIVE ? moment(day) : endDate,
               });
-              if (focusedInput !== 'endDate') { onFocusChange('endDate'); }
+              if (focusedInput !== ActiveDateMode.END_DATE_ACTIVE) {
+                onFocusChange(ActiveDateMode.END_DATE_ACTIVE);
+              }
             }}
           />
         </div> : null}
