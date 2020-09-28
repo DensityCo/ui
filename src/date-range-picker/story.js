@@ -12,56 +12,56 @@ const commonRanges = [
   {
     id: 'WEEK_TO_DATE',
     name: 'Week to date',
-    startDate: moment.utc().startOf('week'),
-    endDate: moment.utc()
+    startDate: moment().startOf('week'),
+    endDate: moment()
   },
   {
     id: 'MONTH_TO_DATE',
     name: 'Month to date',
-    startDate: moment.utc().startOf('month'),
-    endDate: moment.utc()
+    startDate: moment().startOf('month'),
+    endDate: moment()
   },
   {
     id: 'QUARTER_TO_DATE',
     name: 'Quarter to date',
-    startDate: moment.utc().startOf('quarter'),
-    endDate: moment.utc()
+    startDate: moment().startOf('quarter'),
+    endDate: moment()
   },
   {
     id: 'LAST_WEEK',
     name: 'Last week',
-    startDate: moment.utc().startOf('week').subtract(1, 'week'),
-    endDate: moment.utc().endOf('week').subtract(1, 'week')
+    startDate: moment().subtract(1, 'week').startOf('week'),
+    endDate: moment().subtract(1, 'week').endOf('week')
   },
   {
     id: 'LAST_MONTH',
     name: 'Last month',
-    startDate: moment.utc().startOf('month').subtract(1, 'month'),
-    endDate: moment.utc().endOf('month').subtract(1, 'month')
+    startDate: moment().subtract(1, 'month').startOf('month'),
+    endDate: moment().subtract(1, 'month').endOf('month')
   },
   {
     id: 'LAST_QUARTER',
     name: 'Last Quarter',
-    startDate: moment.utc().startOf('quarter').subtract(1, 'quarter'),
-    endDate: moment.utc().endOf('quarter').subtract(1, 'quarter')
+    startDate: moment().subtract(1, 'quarter').startOf('quarter'),
+    endDate: moment().subtract(1, 'quarter').endOf('quarter')
   },
   {
     id: 'LAST_7_DAYS',
     name: 'Last 7 days',
-    startDate: moment.utc().subtract(1, 'week'),
-    endDate: moment.utc()
+    startDate: moment().subtract(1, 'week'),
+    endDate: moment()
   },
   {
     id: 'LAST_30_DAYS',
     name: 'Last 30 days',
-    startDate: moment.utc().subtract(1, 'month'),
-    endDate: moment.utc()
+    startDate: moment().subtract(1, 'month'),
+    endDate: moment()
   },
   {
     id: 'LAST_90_DAYS',
     name: 'Last 90 days',
-    startDate: moment.utc().subtract(1, 'quarter'),
-    endDate: moment.utc()
+    startDate: moment().subtract(1, 'quarter'),
+    endDate: moment()
   },
 ];
 
@@ -71,8 +71,8 @@ storiesOf('DateRangePicker', module)
       onChange={action('dates change')}
       onFocusChange={action('focus')}
       focusedInput="startDate"
-      startDate={moment.utc()}
-      endDate={moment.utc().subtract(1, 'day')}
+      startDate={moment()}
+      endDate={moment().subtract(1, 'day')}
     />
   ))
   .add('With common date ranges', () => {
@@ -80,8 +80,8 @@ storiesOf('DateRangePicker', module)
       onChange={action('dates change')}
       onFocusChange={action('focus')}
       focusedInput="startDate"
-      startDate={moment.utc()}
-      endDate={moment.utc().subtract(1, 'day')}
+      startDate={moment()}
+      endDate={moment().subtract(1, 'day')}
       commonRanges={commonRanges}
       onSelectCommonRange={action('common range selected')}
     />;
@@ -93,8 +93,8 @@ storiesOf('DateRangePicker', module)
         onChange={action('dates change')}
         onFocusChange={action('focus')}
         focusedInput="startDate"
-        startDate={moment.utc()}
-        endDate={moment.utc().subtract(1, 'day')}
+        startDate={moment()}
+        endDate={moment().subtract(1, 'day')}
       />
     </div>
   ))
@@ -105,8 +105,8 @@ storiesOf('DateRangePicker', module)
         onChange={action('dates change')}
         onFocusChange={action('focus')}
         focusedInput="startDate"
-        startDate={moment.utc()}
-        endDate={moment.utc().subtract(1, 'day')}
+        startDate={moment()}
+        endDate={moment().subtract(1, 'day')}
         commonRanges={commonRanges}
         onSelectCommonRange={action('common range selected')}
       />
@@ -118,8 +118,8 @@ storiesOf('DateRangePicker', module)
         super(props);
         this.state = {
           focus: null,
-          startDate: moment.utc(),
-          endDate: moment.utc().add(1, 'day'),
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
         };
       }
       render() {
@@ -142,8 +142,8 @@ storiesOf('DateRangePicker', module)
         super(props);
         this.state = {
           focus: null,
-          startDate: moment.utc(),
-          endDate: moment.utc().add(1, 'day'),
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
         };
       }
       render() {
@@ -173,8 +173,8 @@ storiesOf('DateRangePicker', module)
         super(props);
         this.state = {
           focus: null,
-          startDate: moment.utc(),
-          endDate: moment.utc().add(1, 'day'),
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
         };
       }
       render() {
@@ -205,8 +205,8 @@ storiesOf('DateRangePicker', module)
         onChange={action('dates change')}
         onFocusChange={action('focus')}
         focusedInput="startDate"
-        startDate={moment.utc()}
-        endDate={moment.utc().subtract(1, 'day')}
+        startDate={moment()}
+        endDate={moment().subtract(1, 'day')}
         commonRanges={commonRanges}
         onSelectCommonRange={action('common range selected')}
       />
