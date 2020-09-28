@@ -7,9 +7,15 @@ import 'react-day-picker/lib/style.css';
 
 import styles from './styles.module.scss';
 import colors from '../../variables/colors.json';
-import { DateDisplay, elementContains } from '../date-picker';
+import { CompatibleDateValue, DateDisplay, elementContains } from '../date-picker';
 
 export type ActiveDate = 'startDate' | 'endDate' | null;
+export type CommonRange = {
+  id: React.ReactNode,
+  name: React.ReactNode,
+  startDate: CompatibleDateValue,
+  endDate: CompatibleDateValue,
+};
 
 export const DateRangePickerContext = React.createContext<string | null>(null);
 
@@ -25,16 +31,16 @@ export default function DateRangePicker({
   onSelectCommonRange,
   isOutsideRange,
 }: {
-  startDate: Moment | string | number,
-  endDate: Moment | string | number,
+  startDate: CompatibleDateValue,
+  endDate: CompatibleDateValue,
   focusedInput: ActiveDate,
   anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
-  commonRanges?: Array<{ id: any, name: React.ReactNode, label: React.ReactNode }>,
+  commonRanges?: Array<CommonRange>,
   numberOfMonths?: 1 | 2,
-  onChange: (values: {startDate: Moment | string | number, endDate: Moment | string | number}) => void,
+  onChange: (values: {startDate: CompatibleDateValue, endDate: CompatibleDateValue}) => void,
   onFocusChange: (active: ActiveDate) => void,
   onSelectCommonRange?: (range: any) => void,
-  isOutsideRange?: (date: Moment | string | number) => boolean,
+  isOutsideRange?: (date: CompatibleDateValue) => boolean,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
   const startValue = moment(startDate).toDate();
@@ -83,7 +89,7 @@ export default function DateRangePicker({
             marginTop: 10,
             border: `1px solid ${colors.gray300}`,
             borderRadius: 4,
-            width: (numberOfMonths === 1 ? 277 : 557) + (commonRanges ? 176 : 0),
+            width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges ? 176 : 0),
             display: 'flex',
           }}
         >

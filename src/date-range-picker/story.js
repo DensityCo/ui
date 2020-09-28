@@ -207,6 +207,7 @@ storiesOf('DateRangePicker', module)
         focusedInput="startDate"
         startDate={moment()}
         endDate={moment().subtract(1, 'day')}
+        numberOfMonths={1}
         commonRanges={commonRanges}
         onSelectCommonRange={action('common range selected')}
       />

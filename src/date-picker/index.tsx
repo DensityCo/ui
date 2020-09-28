@@ -7,6 +7,8 @@ import colors from '../../variables/colors.json';
 import styles from './styles.module.scss';
 import moment, { Moment } from 'moment-timezone';
 
+export type CompatibleDateValue = Moment | string | number;
+
 export const DatePickerContext = React.createContext<string | null>(null);
 
 // Check if a child element is contained by a parent (for "blur"-ing the whole control)
@@ -18,7 +20,7 @@ export function elementContains(parent: EventTarget & HTMLElement, child: EventT
 
 // Component to render a single focusable date display
 export function DateDisplay({value, active, onSelect}: {
-  value: Moment | string | number,
+  value: CompatibleDateValue,
   active: boolean,
   onSelect: () => void,
 }) {
@@ -60,15 +62,15 @@ export default function DatePicker({
   onFocusChange,
   isOutsideRange,
 }: {
-  date: Moment | string | number,
+  date: CompatibleDateValue,
   focused: boolean,
   anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
   arrowLeftDisabled?: boolean,
   arrowRightDisabled?: boolean,
   numberOfMonths?: 1 | 2,
-  onChange: (date: Moment | string | number) => void,
+  onChange: (date: CompatibleDateValue) => void,
   onFocusChange: ({focused}: {focused: boolean}) => void,
-  isOutsideRange?: (date: Moment | string | number) => boolean,
+  isOutsideRange?: (date: CompatibleDateValue) => boolean,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
   const value = moment(date).toDate();
