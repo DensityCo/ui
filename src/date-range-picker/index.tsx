@@ -11,7 +11,7 @@ import { CompatibleDateValue, DateDisplay, elementContains } from '../date-picke
 
 export type ActiveDate = 'startDate' | 'endDate' | null;
 export type CommonRange = {
-  id: React.ReactNode,
+  id: string,
   name: React.ReactNode,
   startDate: CompatibleDateValue,
   endDate: CompatibleDateValue,
@@ -103,8 +103,9 @@ export default function DateRangePicker({
           {commonRanges ? <div className={styles.commonRangeList}>
             {commonRanges.map(range => (
               <div
-                className={styles.commonRangeItem}
+                key={range.id}
                 tabIndex={0}
+                className={styles.commonRangeItem}
                 onClick={() => onSelectCommonRange(range)}
                 onKeyDown={e => { if (e.key === 'Enter') { onSelectCommonRange(range); } }}
               >{range.name}</div>
