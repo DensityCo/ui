@@ -65,8 +65,9 @@ export default function DateRangePicker({
       >
         <div
           style={{
-            width: 242,
-            height: 40,
+            width: 240,
+            height: 38,
+            backgroundColor: colors.white,
             border: `1px solid ${focusedInput ? colors.blue : colors.gray300}`,
             borderRadius: 4,
             display: 'flex',
@@ -112,22 +113,18 @@ export default function DateRangePicker({
               disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
             }}
             numberOfMonths={numberOfMonths || 2}
-            month={focusedInput === 'endDate' ?
-              moment(endValue).subtract(1, 'months').toDate() :
-              startValue}
+            month={focusedInput === 'endDate' ? endValue : startValue}
             onDayClick={day => {
               if (!isOutsideRange || !isOutsideRange(moment(day))) {
-                const focus = moment(day).diff(startDate) < 0 ?
-                  'startDate' :
-                  moment(day).diff(endDate) > 0 ?
-                    'endDate' :
-                    focusedInput;
+                const focus = moment(day).diff(startDate) < 0 ? 'startDate' : focusedInput
                 onChange({
                   startDate: focus === 'startDate' ? moment(day) : startDate,
-                  endDate: focus === 'endDate' ? moment(day) : endDate,
+                  endDate: moment(day),
                 });
-                if (focusedInput !== 'endDate') {
+                if (focus === 'startDate') {
                   onFocusChange('endDate');
+                } else if (focus === 'endDate') {
+                  onFocusChange('startDate');
                 }
               }
             }}

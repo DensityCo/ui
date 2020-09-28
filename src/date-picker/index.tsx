@@ -99,7 +99,8 @@ export default function DatePicker({
       <div
         style={{
           width: 192,
-          height: 40,
+          height: 38,
+          backgroundColor: colors.white,
           border: `1px solid ${focused ? colors.blue : colors.gray300}`,
           borderRadius: 4,
           display: 'flex',
