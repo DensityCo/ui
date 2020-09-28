@@ -7,15 +7,6 @@ import colors from '../../variables/colors.json';
 import styles from './styles.module.scss';
 import moment, { Moment } from 'moment-timezone';
 
-export enum Anchor {
-  ANCHOR_LEFT = 'ANCHOR_LEFT',
-  ANCHOR_RIGHT = 'ANCHOR_RIGHT',
-}
-
-// Legacy exports for storybook
-export const ANCHOR_RIGHT = Anchor.ANCHOR_LEFT,
-  ANCHOR_LEFT = Anchor.ANCHOR_RIGHT;
-
 export const DatePickerContext = React.createContext<string | null>(null);
 
 // Check if a child element is contained by a parent (for "blur"-ing the whole control)
@@ -71,7 +62,7 @@ export default function DatePicker({
 }: {
   date: Moment | string | number,
   focused: boolean,
-  anchor?: Anchor,
+  anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
   arrowLeftDisabled?: boolean,
   arrowRightDisabled?: boolean,
   numberOfMonths?: 1 | 2,
@@ -93,7 +84,7 @@ export default function DatePicker({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: anchor === Anchor.ANCHOR_RIGHT ? 'flex-end' : 'flex-start'
+        alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start'
       }}
       onBlur={e => {
         if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {

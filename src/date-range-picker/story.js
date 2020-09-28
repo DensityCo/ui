@@ -3,12 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.module.scss';
-import DateRangePicker, {
-  DateRangePickerContext,
-  START_DATE_ACTIVE,
-  END_DATE_ACTIVE,
-  ANCHOR_RIGHT,
-} from './index';
+import DateRangePicker, { DateRangePickerContext } from './index';
 
 import moment from 'moment';
 
@@ -75,7 +70,7 @@ storiesOf('DateRangePicker', module)
     <DateRangePicker
       onChange={action('dates change')}
       onFocusChange={action('focus')}
-      focusedInput={START_DATE_ACTIVE}
+      focusedInput="startDate"
       startDate={moment.utc()}
       endDate={moment.utc().subtract(1, 'day')}
     />
@@ -84,7 +79,7 @@ storiesOf('DateRangePicker', module)
     return <DateRangePicker
       onChange={action('dates change')}
       onFocusChange={action('focus')}
-      focusedInput={START_DATE_ACTIVE}
+      focusedInput="startDate"
       startDate={moment.utc()}
       endDate={moment.utc().subtract(1, 'day')}
       commonRanges={commonRanges}
@@ -94,10 +89,10 @@ storiesOf('DateRangePicker', module)
   .add('Floated right', () => (
     <div style={{paddingLeft: 500, width: 400}}>
       <DateRangePicker
-        anchor={ANCHOR_RIGHT}
+        anchor="ANCHOR_RIGHT"
         onChange={action('dates change')}
         onFocusChange={action('focus')}
-        focusedInput={START_DATE_ACTIVE}
+        focusedInput="startDate"
         startDate={moment.utc()}
         endDate={moment.utc().subtract(1, 'day')}
       />
@@ -106,10 +101,10 @@ storiesOf('DateRangePicker', module)
   .add('Floated right with common date ranges', () => {
     return <div style={{paddingLeft: 500, width: 400}}>
       <DateRangePicker
-        anchor={ANCHOR_RIGHT}
+        anchor="ANCHOR_RIGHT"
         onChange={action('dates change')}
         onFocusChange={action('focus')}
-        focusedInput={START_DATE_ACTIVE}
+        focusedInput="startDate"
         startDate={moment.utc()}
         endDate={moment.utc().subtract(1, 'day')}
         commonRanges={commonRanges}
@@ -204,12 +199,12 @@ storiesOf('DateRangePicker', module)
 
     return <Wrapper />;
   })
-  .add('With SMALL_WIDTH context', () => (
+  .add('With deprecated SMALL_WIDTH context', () => (
     <DateRangePickerContext.Provider value="SMALL_WIDTH">
       <DateRangePicker
         onChange={action('dates change')}
         onFocusChange={action('focus')}
-        focusedInput={START_DATE_ACTIVE}
+        focusedInput="startDate"
         startDate={moment.utc()}
         endDate={moment.utc().subtract(1, 'day')}
         commonRanges={commonRanges}

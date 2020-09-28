@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.module.scss';
-import DatePicker, { DatePickerContext, ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
+import DatePicker, { DatePickerContext } from './index';
 
 import moment from 'moment';
 
@@ -15,7 +15,7 @@ storiesOf('DatePicker', module)
       onChange={action('date')}
       focused={true}
       onFocusChange={action('focus change')}
-      anchor={ANCHOR_LEFT}
+      anchor="ANCHOR_LEFT"
     />
   ))
   .add('Example usage with disabled arrows', () => (
@@ -24,7 +24,7 @@ storiesOf('DatePicker', module)
       onChange={action('date')}
       focused={true}
       onFocusChange={action('focus change')}
-      anchor={ANCHOR_LEFT}
+      anchor="ANCHOR_LEFT"
       arrowRightDisabled arrowLeftDisabled
     />
   ))
@@ -35,7 +35,7 @@ storiesOf('DatePicker', module)
         onChange={action('date')}
         focused={true}
         onFocusChange={action('focus change')}
-        anchor={ANCHOR_RIGHT}
+        anchor="ANCHOR_RIGHT"
       />
     </div>
   ))
