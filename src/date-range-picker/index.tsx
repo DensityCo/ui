@@ -29,6 +29,7 @@ export default function DateRangePicker({
   focusedInput,
   anchor,
   commonRanges,
+  numberOfMonths,
   onChange,
   onFocusChange,
   onSelectCommonRange,
@@ -39,7 +40,8 @@ export default function DateRangePicker({
   focusedInput: ActiveDate,
   anchor?: Anchor.ANCHOR_LEFT | Anchor.ANCHOR_RIGHT,
   commonRanges?: Array<{ id: any, name: React.ReactNode, label: React.ReactNode }>,
-  onChange: Function,
+  numberOfMonths?: 1 | 2,
+  onChange: (values: {startDate: Moment | string | number, endDate: Moment | string | number}) => void,
   onFocusChange: (active: ActiveDate) => void,
   onSelectCommonRange?: (range: any) => void,
   isOutsideRange?: (date: Moment | string | number) => boolean,
@@ -55,9 +57,7 @@ export default function DateRangePicker({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: (context === 'SMALL_WIDTH' || anchor === Anchor.ANCHOR_RIGHT) ?
-            'flex-end' :
-            'flex-start'
+          alignItems: anchor === Anchor.ANCHOR_RIGHT ? 'flex-end' : 'flex-start'
         }}
         onBlur={e => {
           if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
@@ -93,7 +93,7 @@ export default function DateRangePicker({
             marginTop: 10,
             border: `1px solid ${colors.gray300}`,
             borderRadius: 4,
-            width: (context === 'SMALL_WIDTH' ? 277 : 557) + (commonRanges ? 176 : 0),
+            width: (numberOfMonths === 1 ? 277 : 557) + (commonRanges ? 176 : 0),
             display: 'flex',
           }}
         >
@@ -109,14 +109,16 @@ export default function DateRangePicker({
           </div> : null}
           <DayPicker
             className="Selectable"
-            month={startValue}
-            numberOfMonths={context === 'SMALL_WIDTH' ? 1 : 2}
             selectedDays={{from: startValue, to: endValue}}
             modifiers={{
               start: startValue,
               end: endValue,
               disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
             }}
+            numberOfMonths={numberOfMonths || 2}
+            month={focusedInput === END_DATE_ACTIVE ?
+              moment(endValue).subtract(1, 'months').toDate() :
+              startValue}
             onDayClick={day => {
               if (!isOutsideRange || !isOutsideRange(moment(day))) {
                 const focus = moment(day).diff(startDate) < 0 ?
