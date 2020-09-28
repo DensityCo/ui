@@ -73,7 +73,7 @@ storiesOf('DatePicker', module)
 
     return <Wrapper />;
   })
-  .add('With ANALYTICS_CONTROL_BAR context', () => {
+  .add('With deprecated ANALYTICS_CONTROL_BAR context', () => {
     class Wrapper extends React.Component {
       constructor(props) {
         super(props);
