@@ -11,11 +11,12 @@
     padding: 12px 8px;
   }
   .commonRangeItem {
+    color: $gray700;
     padding: 4px 12px;
     cursor: pointer;
   }
   .commonRangeItem:hover {
-    background-color: $gray200;
+    background-color: $gray100;
   }
  
   :global {

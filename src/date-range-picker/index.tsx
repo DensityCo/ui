@@ -106,6 +106,7 @@ export default function DateRangePicker({
             borderRadius: 4,
             flexShrink: floating ? 0 : undefined,
             display: 'flex',
+            boxShadow: `0px 2px 4px ${colors.midnightOpaque10}`,
           }}
         >
           {commonRanges.length ? <div className={styles.commonRangeList}>
