@@ -94,6 +94,7 @@ export default function DatePicker({
         display: 'flex',
         flexDirection: 'column',
         alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start',
+        width: floating ? 194 : undefined,
         height: floating ? 40 : undefined,
       }}
       onBlur={e => {

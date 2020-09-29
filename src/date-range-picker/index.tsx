@@ -64,6 +64,7 @@ export default function DateRangePicker({
           display: 'flex',
           flexDirection: 'column',
           alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start',
+          width: floating ? 242 : undefined,
           height: floating ? 40 : undefined,
         }}
         onBlur={e => {
