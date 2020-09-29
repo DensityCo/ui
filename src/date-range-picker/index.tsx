@@ -25,6 +25,7 @@ export default function DateRangePicker({
   focusedInput,
   anchor = 'ANCHOR_LEFT',
   floating = true,
+  autoClose = false,
   commonRanges = [],
   numberOfMonths = 2,
   onChange,
@@ -38,6 +39,7 @@ export default function DateRangePicker({
   focusedInput?: ActiveDate,
   anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
   floating?: boolean,
+  autoClose?: boolean,
   commonRanges?: Array<CommonRange>,
   numberOfMonths?: 1 | 2,
   onChange: (values: {startDate: CompatibleDateValue, endDate: CompatibleDateValue}) => void,
@@ -137,7 +139,7 @@ export default function DateRangePicker({
                 if (active === 'startDate') {
                   setActiveDate('endDate');
                 } else if (active === 'endDate') {
-                  setActiveDate('startDate');
+                  setActiveDate(autoClose ? null : 'startDate');
                 }
               }
             }}

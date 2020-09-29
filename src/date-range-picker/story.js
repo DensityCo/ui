@@ -136,6 +136,31 @@ storiesOf('DateRangePicker', module)
 
     return <Wrapper />;
   })
+  .add('Interactive with auto-close', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          focus: null,
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePicker
+          autoClose={true}
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onChange={e => this.setState({startDate: e.startDate, endDate: e.endDate})}
+
+          focusedInput={this.state.focus}
+          onFocusChange={focus => this.setState({focus})}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
   .add('Interactive with common date ranges', () => {
     class Wrapper extends React.Component {
       constructor(props) {
