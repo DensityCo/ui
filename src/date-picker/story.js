@@ -3,8 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.module.scss';
-import DatePicker, { DatePickerContext, ANCHOR_LEFT, ANCHOR_RIGHT } from './index';
-import { isInclusivelyBeforeDay } from '@density/react-dates';
+import DatePicker, { DatePickerContext } from './index';
 
 import moment from 'moment';
 
@@ -16,7 +15,7 @@ storiesOf('DatePicker', module)
       onChange={action('date')}
       focused={true}
       onFocusChange={action('focus change')}
-      anchor={ANCHOR_LEFT}
+      anchor="ANCHOR_LEFT"
     />
   ))
   .add('Example usage with disabled arrows', () => (
@@ -25,7 +24,7 @@ storiesOf('DatePicker', module)
       onChange={action('date')}
       focused={true}
       onFocusChange={action('focus change')}
-      anchor={ANCHOR_LEFT}
+      anchor="ANCHOR_LEFT"
       arrowRightDisabled arrowLeftDisabled
     />
   ))
@@ -36,7 +35,7 @@ storiesOf('DatePicker', module)
         onChange={action('date')}
         focused={true}
         onFocusChange={action('focus change')}
-        anchor={ANCHOR_RIGHT}
+        anchor="ANCHOR_RIGHT"
       />
     </div>
   ))
@@ -49,7 +48,7 @@ storiesOf('DatePicker', module)
 
       // Other props
       numberOfMonths={2}
-      isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+      isOutsideRange={day => moment().startOf('day').diff(day) > 0}
     />
   ))
   .add('Interactive', () => {
@@ -67,14 +66,37 @@ storiesOf('DatePicker', module)
           }}
           focused={this.state.focus}
           arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
-          onFocusChange={e => this.setState({focus: e.focused})}
+          onFocusChange={focus => this.setState({focus})}
         />;
       }
     }
 
     return <Wrapper />;
   })
-  .add('With ANALYTICS_CONTROL_BAR context', () => {
+  .add('Not floating', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { focus: false, date: moment.utc() };
+      }
+      render() {
+        return <DatePicker
+          date={this.state.date}
+          onChange={date => {
+            action('date')(date);
+            this.setState({date});
+          }}
+          floating={false}
+          focused={this.state.focus}
+          arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
+          onFocusChange={focus => this.setState({focus})}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .add('With deprecated ANALYTICS_CONTROL_BAR context', () => {
     class Wrapper extends React.Component {
       constructor(props) {
         super(props);
@@ -90,7 +112,7 @@ storiesOf('DatePicker', module)
             }}
             focused={this.state.focus}
             arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
-            onFocusChange={e => this.setState({focus: e.focused})}
+            onFocusChange={focus => this.setState({focus})}
           />
         </DatePickerContext.Provider>;
       }

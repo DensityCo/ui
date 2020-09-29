@@ -66,6 +66,6 @@
   height: auto;
 
   border-radius: $borderRadiusBase;
-  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 8px 8px 0px $midnightOpaque05;
 }
 .dashboardModalDialog:focus { outline: none; }

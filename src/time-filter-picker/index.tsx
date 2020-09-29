@@ -6,8 +6,12 @@ import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/picker
 import { DayOfWeek } from '@density/lib-common-types';
 
 import colorVariables from '../../variables/colors.json';
+import spacingVariables from '../../variables/spacing.json';
 import DayOfWeekPicker, { DayOfWeekPickerContext } from '../day-of-week-picker';
-import InputBox, { ANCHOR_RIGHT, InputBoxContext } from '../input-box';
+import InputBox, { InputBoxContext } from '../input-box';
+
+import styles from './styles.module.scss';
+import { elementContains } from '../date-picker';
 
 const COMMON_TIMES = [
   '12:00 AM',
@@ -37,22 +41,33 @@ const COMMON_TIMES = [
 ]
 
 function TimePickerInput({value, onBlur, onChange, disabled, error}) {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [tempValue, setTempValue] = useState(value);
   useEffect(() => setTempValue(value), [value]);
-  return (
-    <InputBox
-      width={108}
-      value={tempValue}
-      onBlur={() => {
+  return <div
+    style={{zIndex: 1, height: 40}}
+    onFocus={() => setDropdownOpen(true)}
+    onBlur={e => {
+      if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
         const newValue = moment(tempValue, 'hh:mm A').toISOString() ||
           moment('12:00 AM', 'hh:mm A').toISOString();
         setTempValue(moment(newValue).format('hh:mm A'));
         onBlur(moment(newValue));
-      }}
+        setDropdownOpen(false);
+      }
+    }}
+  >
+    <InputBox
+      width={110}
+      value={tempValue}
       onChange={event => setTempValue(event.target.value)}
       onKeyDown={e => {
+        console.log(e.key);
         if (e.key === 'Enter') {
           onChange(e);
+          setDropdownOpen(false);
+        } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          setDropdownOpen(true);
         } else if (e.key === ':') {
           const value = e.target.value;
           if (value.length === 1 && parseInt(value, 10).toString() === value) {
@@ -62,12 +77,28 @@ function TimePickerInput({value, onBlur, onChange, disabled, error}) {
       }}
       disabled={disabled}
       invalid={error ? 'true' : undefined} />
-  );
+    {dropdownOpen ? <div className={styles.commonTimeMenu}>
+      {COMMON_TIMES.map(time => {
+        function select() {
+          setDropdownOpen(false);
+          setTempValue(time);
+          onBlur(moment(time, 'hh:mm A'));
+        }
+        return <div
+          key={time}
+          tabIndex={0}
+          className={styles.commonTimeMenuItem}
+          onKeyDown={e => e.key === 'Enter' && select()}
+          onMouseDown={select}
+        >{time}</div>
+      })}
+    </div> : null}
+  </div>;
 }
 
 function TimePicker({value, onChange, disabled}) {
   return (
-    <InputBoxContext.Provider value="TIME_PICKER">
+    <InputBoxContext.Provider value="WAS_TIME_PICKER">
       {/* Renders an InputBox as its input */}
       <KeyboardTimePicker
         mask="__:__ _M"
@@ -78,7 +109,7 @@ function TimePicker({value, onChange, disabled}) {
         disabled={disabled}
         TextFieldComponent={TimePickerInput} />
       {/* Renders a SelectBox */}
-      <InputBox
+      {/* <InputBox
         type="select"
         width={40}
         listBoxWidth={148}
@@ -88,7 +119,7 @@ function TimePicker({value, onChange, disabled}) {
         value={{ id: 'caret', label: '' }}
         choices={COMMON_TIMES.map(time => ({ id: time, label: <div style={{width: 114}}>{time}</div> }))}
         onChange={value => onChange(moment(value.id, 'hh:mm A'))}
-      />
+      /> */}
     </InputBoxContext.Provider>
   );
 }

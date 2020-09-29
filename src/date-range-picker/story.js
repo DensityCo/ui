@@ -3,12 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import './styles.module.scss';
-import DateRangePicker, {
-  DateRangePickerContext,
-  START_DATE_ACTIVE,
-  END_DATE_ACTIVE,
-  ANCHOR_RIGHT,
-} from './index';
+import DateRangePicker, { DateRangePickerContext } from './index';
 
 import moment from 'moment';
 
@@ -17,56 +12,56 @@ const commonRanges = [
   {
     id: 'WEEK_TO_DATE',
     name: 'Week to date',
-    startDate: moment.utc().startOf('week'),
-    endDate: moment.utc()
+    startDate: moment().startOf('week'),
+    endDate: moment()
   },
   {
     id: 'MONTH_TO_DATE',
     name: 'Month to date',
-    startDate: moment.utc().startOf('month'),
-    endDate: moment.utc()
+    startDate: moment().startOf('month'),
+    endDate: moment()
   },
   {
     id: 'QUARTER_TO_DATE',
     name: 'Quarter to date',
-    startDate: moment.utc().startOf('quarter'),
-    endDate: moment.utc()
+    startDate: moment().startOf('quarter'),
+    endDate: moment()
   },
   {
     id: 'LAST_WEEK',
     name: 'Last week',
-    startDate: moment.utc().startOf('week').subtract(1, 'week'),
-    endDate: moment.utc().endOf('week').subtract(1, 'week')
+    startDate: moment().subtract(1, 'week').startOf('week'),
+    endDate: moment().subtract(1, 'week').endOf('week')
   },
   {
     id: 'LAST_MONTH',
     name: 'Last month',
-    startDate: moment.utc().startOf('month').subtract(1, 'month'),
-    endDate: moment.utc().endOf('month').subtract(1, 'month')
+    startDate: moment().subtract(1, 'month').startOf('month'),
+    endDate: moment().subtract(1, 'month').endOf('month')
   },
   {
     id: 'LAST_QUARTER',
     name: 'Last Quarter',
-    startDate: moment.utc().startOf('quarter').subtract(1, 'quarter'),
-    endDate: moment.utc().endOf('quarter').subtract(1, 'quarter')
+    startDate: moment().subtract(1, 'quarter').startOf('quarter'),
+    endDate: moment().subtract(1, 'quarter').endOf('quarter')
   },
   {
     id: 'LAST_7_DAYS',
     name: 'Last 7 days',
-    startDate: moment.utc().subtract(1, 'week'),
-    endDate: moment.utc()
+    startDate: moment().subtract(1, 'week'),
+    endDate: moment()
   },
   {
     id: 'LAST_30_DAYS',
     name: 'Last 30 days',
-    startDate: moment.utc().subtract(1, 'month'),
-    endDate: moment.utc()
+    startDate: moment().subtract(1, 'month'),
+    endDate: moment()
   },
   {
     id: 'LAST_90_DAYS',
     name: 'Last 90 days',
-    startDate: moment.utc().subtract(1, 'quarter'),
-    endDate: moment.utc()
+    startDate: moment().subtract(1, 'quarter'),
+    endDate: moment()
   },
 ];
 
@@ -75,18 +70,18 @@ storiesOf('DateRangePicker', module)
     <DateRangePicker
       onChange={action('dates change')}
       onFocusChange={action('focus')}
-      focusedInput={START_DATE_ACTIVE}
-      startDate={moment.utc()}
-      endDate={moment.utc().subtract(1, 'day')}
+      focusedInput="startDate"
+      startDate={moment()}
+      endDate={moment().subtract(1, 'day')}
     />
   ))
   .add('With common date ranges', () => {
     return <DateRangePicker
       onChange={action('dates change')}
       onFocusChange={action('focus')}
-      focusedInput={START_DATE_ACTIVE}
-      startDate={moment.utc()}
-      endDate={moment.utc().subtract(1, 'day')}
+      focusedInput="startDate"
+      startDate={moment()}
+      endDate={moment().subtract(1, 'day')}
       commonRanges={commonRanges}
       onSelectCommonRange={action('common range selected')}
     />;
@@ -94,24 +89,24 @@ storiesOf('DateRangePicker', module)
   .add('Floated right', () => (
     <div style={{paddingLeft: 500, width: 400}}>
       <DateRangePicker
-        anchor={ANCHOR_RIGHT}
+        anchor="ANCHOR_RIGHT"
         onChange={action('dates change')}
         onFocusChange={action('focus')}
-        focusedInput={START_DATE_ACTIVE}
-        startDate={moment.utc()}
-        endDate={moment.utc().subtract(1, 'day')}
+        focusedInput="startDate"
+        startDate={moment()}
+        endDate={moment().subtract(1, 'day')}
       />
     </div>
   ))
   .add('Floated right with common date ranges', () => {
     return <div style={{paddingLeft: 500, width: 400}}>
       <DateRangePicker
-        anchor={ANCHOR_RIGHT}
+        anchor="ANCHOR_RIGHT"
         onChange={action('dates change')}
         onFocusChange={action('focus')}
-        focusedInput={START_DATE_ACTIVE}
-        startDate={moment.utc()}
-        endDate={moment.utc().subtract(1, 'day')}
+        focusedInput="startDate"
+        startDate={moment()}
+        endDate={moment().subtract(1, 'day')}
         commonRanges={commonRanges}
         onSelectCommonRange={action('common range selected')}
       />
@@ -123,12 +118,37 @@ storiesOf('DateRangePicker', module)
         super(props);
         this.state = {
           focus: null,
-          startDate: moment.utc(),
-          endDate: moment.utc().add(1, 'day'),
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
         };
       }
       render() {
         return <DateRangePicker
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onChange={e => this.setState({startDate: e.startDate, endDate: e.endDate})}
+
+          focusedInput={this.state.focus}
+          onFocusChange={focus => this.setState({focus})}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .add('Interactive with auto-close', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          focus: null,
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePicker
+          autoClose={true}
           startDate={this.state.startDate}
           endDate={this.state.endDate}
           onChange={e => this.setState({startDate: e.startDate, endDate: e.endDate})}
@@ -146,9 +166,8 @@ storiesOf('DateRangePicker', module)
       constructor(props) {
         super(props);
         this.state = {
-          focus: null,
-          startDate: moment.utc(),
-          endDate: moment.utc().add(1, 'day'),
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
         };
       }
       render() {
@@ -156,8 +175,6 @@ storiesOf('DateRangePicker', module)
           startDate={this.state.startDate}
           endDate={this.state.endDate}
           onChange={e => this.setState({ startDate: e.startDate, endDate: e.endDate })}
-          focusedInput={this.state.focus}
-          onFocusChange={focus => this.setState({ focus }) }
           commonRanges={commonRanges}
           onSelectCommonRange={commonRange => {
             this.setState({
@@ -178,8 +195,8 @@ storiesOf('DateRangePicker', module)
         super(props);
         this.state = {
           focus: null,
-          startDate: moment.utc(),
-          endDate: moment.utc().add(1, 'day'),
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
         };
       }
       render() {
@@ -204,14 +221,44 @@ storiesOf('DateRangePicker', module)
 
     return <Wrapper />;
   })
-  .add('With SMALL_WIDTH context', () => (
+  .add('Interactive and not floating', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePicker
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          floating={false}
+          onChange={e => this.setState({ startDate: e.startDate, endDate: e.endDate })}
+          commonRanges={commonRanges}
+          onSelectCommonRange={commonRange => {
+            this.setState({
+              startDate: commonRange.startDate,
+              endDate: commonRange.endDate
+            })
+          }}
+          onOpenCommonRangeList={action('common range list opened')}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .add('With deprecated SMALL_WIDTH context', () => (
     <DateRangePickerContext.Provider value="SMALL_WIDTH">
       <DateRangePicker
         onChange={action('dates change')}
         onFocusChange={action('focus')}
-        focusedInput={START_DATE_ACTIVE}
-        startDate={moment.utc()}
-        endDate={moment.utc().subtract(1, 'day')}
+        focusedInput="startDate"
+        startDate={moment()}
+        endDate={moment().subtract(1, 'day')}
+        numberOfMonths={1}
         commonRanges={commonRanges}
         onSelectCommonRange={action('common range selected')}
       />
