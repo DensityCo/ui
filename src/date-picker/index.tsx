@@ -22,7 +22,7 @@ export function elementContains(parent: EventTarget & HTMLElement, child: EventT
 export function DateDisplay({value, active, onSelect}: {
   value: CompatibleDateValue,
   active: boolean,
-  onSelect: () => void,
+  onSelect: (active: boolean) => void,
 }) {
   return (
     <div
@@ -43,8 +43,8 @@ export function DateDisplay({value, active, onSelect}: {
         backgroundColor: active ? colors.blueLight : colors.gray300,
         color: active ? colors.blue : colors.midnight,
       }}
-      onClick={onSelect}
-      onKeyDown={e => { if (e.key === 'Enter') { onSelect(); }}}
+      onClick={() => onSelect(!active)}
+      onKeyDown={e => { if (e.key === 'Enter') { onSelect(!active); }}}
     >
       {moment(value).format('MMM D, YYYY')}
     </div>
@@ -54,26 +54,33 @@ export function DateDisplay({value, active, onSelect}: {
 export default function DatePicker({
   date,
   focused,
-  anchor,
-  arrowLeftDisabled,
-  arrowRightDisabled,
-  numberOfMonths,
+  anchor = 'ANCHOR_LEFT',
+  floating = true,
+  arrowLeftDisabled = false,
+  arrowRightDisabled = false,
+  numberOfMonths = 1,
   onChange,
   onFocusChange,
   isOutsideRange,
 }: {
   date: CompatibleDateValue,
-  focused: boolean,
+  focused?: boolean,
   anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
+  floating?: boolean,
   arrowLeftDisabled?: boolean,
   arrowRightDisabled?: boolean,
   numberOfMonths?: 1 | 2,
   onChange: (date: CompatibleDateValue) => void,
-  onFocusChange: ({focused}: {focused: boolean}) => void,
+  onFocusChange: (focused: boolean) => void,
   isOutsideRange?: (date: CompatibleDateValue) => boolean,
 }) {
   const [mouseMode, setMouseMode] = useState(true);
+  const [uncontrolledFocus, setUncontrolledFocus] = useState<boolean>(false);
   const value = moment(date).toDate();
+
+  // Either controlled or uncontrolled "focus" state
+  const focus = focused === undefined ? uncontrolledFocus : focused;
+  const setFocus = onFocusChange === undefined ? setUncontrolledFocus : onFocusChange;
 
   function scrubDays(days: number) {
     const newDate = moment(date).clone().add(days, 'days');
@@ -86,11 +93,12 @@ export default function DatePicker({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start'
+        alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start',
+        height: floating ? 40 : undefined,
       }}
       onBlur={e => {
         if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
-          onFocusChange({focused: false});
+          setFocus(false);
         }
       }}
       onMouseDown={() => setMouseMode(true)}
@@ -103,6 +111,7 @@ export default function DatePicker({
           backgroundColor: colors.white,
           border: `1px solid ${focused ? colors.blue : colors.gray300}`,
           borderRadius: 4,
+          flexShrink: floating ? 0 : undefined,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -125,7 +134,7 @@ export default function DatePicker({
             height={20}
           />
         </div>
-        <DateDisplay value={date} active={focused} onSelect={() => onFocusChange({focused: true})} />
+        <DateDisplay value={date} active={focus} onSelect={setFocus} />
         <div
           tabIndex={0}
           className={classnames(
@@ -144,12 +153,14 @@ export default function DatePicker({
           />
         </div>
       </div>
-      {focused ? <div
+      {focus ? <div
         style={{
+          width: numberOfMonths === 2 ? 557 : 277,
+          backgroundColor: colors.white,
           marginTop: 10,
           border: `1px solid ${colors.gray300}`,
           borderRadius: 4,
-          width: numberOfMonths === 2 ? 557 : 277,
+          flexShrink: floating ? 0 : undefined,
           display: 'flex',
         }}
       >
@@ -164,7 +175,7 @@ export default function DatePicker({
           onDayClick={day => {
             if (!isOutsideRange || !isOutsideRange(moment(day))) {
               onChange(moment(day));
-              onFocusChange({focused: false});
+              setFocus(false);
             }
           }}
         />

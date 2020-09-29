@@ -23,9 +23,10 @@ export default function DateRangePicker({
   startDate,
   endDate,
   focusedInput,
-  anchor,
-  commonRanges,
-  numberOfMonths,
+  anchor = 'ANCHOR_LEFT',
+  floating = true,
+  commonRanges = [],
+  numberOfMonths = 2,
   onChange,
   onFocusChange,
   onSelectCommonRange,
@@ -36,6 +37,7 @@ export default function DateRangePicker({
   // This should be renamed to "activeDate" or some such in a future version
   focusedInput?: ActiveDate,
   anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
+  floating?: boolean,
   commonRanges?: Array<CommonRange>,
   numberOfMonths?: 1 | 2,
   onChange: (values: {startDate: CompatibleDateValue, endDate: CompatibleDateValue}) => void,
@@ -59,7 +61,8 @@ export default function DateRangePicker({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start'
+          alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start',
+          height: floating ? 40 : undefined,
         }}
         onBlur={e => {
           if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
@@ -76,6 +79,7 @@ export default function DateRangePicker({
             backgroundColor: colors.white,
             border: `1px solid ${activeDate ? colors.blue : colors.gray300}`,
             borderRadius: 4,
+            flexShrink: floating ? 0 : undefined,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -84,23 +88,25 @@ export default function DateRangePicker({
           <DateDisplay
             value={startDate}
             active={activeDate === 'startDate'}
-            onSelect={() => setActiveDate('startDate')} />
+            onSelect={(focused: boolean) => setActiveDate(focused ? 'startDate' : null)} />
           <span style={{padding: '0 4px', userSelect: 'none', msUserSelect: 'none', WebkitUserSelect: 'none'}}>—</span>
           <DateDisplay
             value={endDate}
             active={activeDate === 'endDate'}
-            onSelect={() => setActiveDate('endDate')} />
+            onSelect={(focused: boolean) => setActiveDate(focused ? 'endDate' : null)} />
         </div>
         {activeDate ? <div
           style={{
+            width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 176 : 0),
+            backgroundColor: colors.white,
             marginTop: 10,
             border: `1px solid ${colors.gray300}`,
             borderRadius: 4,
-            width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges ? 176 : 0),
+            flexShrink: floating ? 0 : undefined,
             display: 'flex',
           }}
         >
-          {commonRanges ? <div className={styles.commonRangeList}>
+          {commonRanges.length ? <div className={styles.commonRangeList}>
             {commonRanges.map(range => (
               <div
                 key={range.id}

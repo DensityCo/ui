@@ -196,6 +196,35 @@ storiesOf('DateRangePicker', module)
 
     return <Wrapper />;
   })
+  .add('Interactive and not floating', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePicker
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          floating={false}
+          onChange={e => this.setState({ startDate: e.startDate, endDate: e.endDate })}
+          commonRanges={commonRanges}
+          onSelectCommonRange={commonRange => {
+            this.setState({
+              startDate: commonRange.startDate,
+              endDate: commonRange.endDate
+            })
+          }}
+          onOpenCommonRangeList={action('common range list opened')}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
   .add('With deprecated SMALL_WIDTH context', () => (
     <DateRangePickerContext.Provider value="SMALL_WIDTH">
       <DateRangePicker

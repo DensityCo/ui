@@ -66,7 +66,30 @@ storiesOf('DatePicker', module)
           }}
           focused={this.state.focus}
           arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
-          onFocusChange={e => this.setState({focus: e.focused})}
+          onFocusChange={focus => this.setState({focus})}
+        />;
+      }
+    }
+
+    return <Wrapper />;
+  })
+  .add('Not floating', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { focus: false, date: moment.utc() };
+      }
+      render() {
+        return <DatePicker
+          date={this.state.date}
+          onChange={date => {
+            action('date')(date);
+            this.setState({date});
+          }}
+          floating={false}
+          focused={this.state.focus}
+          arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
+          onFocusChange={focus => this.setState({focus})}
         />;
       }
     }
@@ -89,7 +112,7 @@ storiesOf('DatePicker', module)
             }}
             focused={this.state.focus}
             arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
-            onFocusChange={e => this.setState({focus: e.focused})}
+            onFocusChange={focus => this.setState({focus})}
           />
         </DatePickerContext.Provider>;
       }
