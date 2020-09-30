@@ -158,7 +158,7 @@ export default function DatePicker({
         style={{
           width: numberOfMonths === 2 ? 557 : 277,
           backgroundColor: colors.white,
-          marginTop: 10,
+          marginTop: 8,
           border: `1px solid ${colors.gray300}`,
           borderRadius: 4,
           flexShrink: floating ? 0 : undefined,
