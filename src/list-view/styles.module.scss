@@ -72,6 +72,11 @@
   font-size: $fontSizeBase;
   color: $gray700;
 }
+.listViewCell:after{
+  content:'';
+  min-height:inherit;
+  font-size:0;
+}
 
 .listViewTable :last-child > .listViewCell { padding-right: 0px; }
 .listViewTable.padOuterColumns :first-child > .listViewCell { padding-left: 24px; }
