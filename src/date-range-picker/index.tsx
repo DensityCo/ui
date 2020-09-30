@@ -68,7 +68,8 @@ export default function DateRangePicker({
           height: floating ? 40 : undefined,
         }}
         onBlur={e => {
-          if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
+          const relatedTarget = e.relatedTarget || document.activeElement;
+          if (!elementContains(e.currentTarget, relatedTarget as EventTarget & HTMLElement)) {
             setActiveDate(null);
           }
         }}
@@ -122,7 +123,6 @@ export default function DateRangePicker({
             ))}
           </div> : null}
           <DayPicker
-            className="Selectable"
             selectedDays={{from: startValue, to: endValue}}
             modifiers={{
               start: startValue,

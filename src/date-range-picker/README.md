@@ -10,18 +10,18 @@ To enable the common range list, pass through a JSON array of common range defin
 [
   {
     name: "Week to date",
-    startDate: moment.utc().startOf('week'),
-    endDate: moment.utc()
+    startDate: moment().startOf('week'),
+    endDate: moment()
   },
   {
     name: "Month to date",
-    startDate: moment.utc().startOf('month'),
-    endDate: moment.utc()
+    startDate: moment().startOf('month'),
+    endDate: moment()
   },
   {
     name: "Quarter to date",
-    startDate: moment.utc().startOf('quarter'),
-    endDate: moment.utc()
+    startDate: moment().startOf('quarter'),
+    endDate: moment()
   }
 ]
 ```

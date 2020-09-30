@@ -41,7 +41,7 @@ const commonRanges = [
   },
   {
     id: 'LAST_QUARTER',
-    name: 'Last Quarter',
+    name: 'Last quarter',
     startDate: moment().subtract(1, 'quarter').startOf('quarter'),
     endDate: moment().subtract(1, 'quarter').endOf('quarter')
   },

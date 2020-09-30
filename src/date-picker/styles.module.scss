@@ -7,17 +7,17 @@
   &.mouseMode :focus { outline: none; }
 
   :global {
-    .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
       background-color: $blue !important;
       color: $white;
     }
-    .Selectable .DayPicker-Day {
+    .DayPicker-Day {
       border-radius: $borderRadiusBase !important;
     }
-    .Selectable .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
       background-color: $gray100 !important;
     }
-    .Selectable .DayPicker-Day--today:not(.DayPicker-Day--start):not(.DayPicker-Day--end) {
+    .DayPicker-Day--today:not(.DayPicker-Day--start):not(.DayPicker-Day--end) {
       color: $red;
     }
   }

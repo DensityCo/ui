@@ -98,7 +98,8 @@ export default function DatePicker({
         height: floating ? 40 : undefined,
       }}
       onBlur={e => {
-        if (!elementContains(e.currentTarget, e.relatedTarget as EventTarget & HTMLElement)) {
+        const relatedTarget = e.relatedTarget || document.activeElement;
+        if (!elementContains(e.currentTarget, relatedTarget as EventTarget & HTMLElement)) {
           setFocus(false);
         }
       }}
@@ -167,7 +168,6 @@ export default function DatePicker({
         }}
       >
         <DayPicker
-          className="Selectable"
           month={value}
           selectedDays={value}
           numberOfMonths={numberOfMonths || 1}
