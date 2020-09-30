@@ -67,6 +67,7 @@ storiesOf('DatePicker', module)
           focused={this.state.focus}
           arrowRightDisabled={moment(this.state.date).date() >= moment.utc().date()}
           onFocusChange={focus => this.setState({focus})}
+          isOutsideRange={day => moment(day).diff(moment()) > 999999999}
         />;
       }
     }

@@ -39,9 +39,9 @@ export function DateDisplay({value, active, onSelect}: {
         userSelect: 'none',
         msUserSelect: 'none',
         WebkitUserSelect: 'none',
-        border: `1px solid ${active ? colors.blueLight : colors.gray300}`,
-        backgroundColor: active ? colors.blueLight : colors.gray300,
-        color: active ? colors.blue : colors.midnight,
+        border: `1px solid ${active ? colors.blue : colors.gray200}`,
+        backgroundColor: active ? colors.blueLight : colors.gray200,
+        color: active ? colors.blue : colors.midnightOpaque80,
       }}
       onClick={() => onSelect(!active)}
       onKeyDown={e => { if (e.key === 'Enter') { onSelect(!active); }}}

@@ -20,28 +20,42 @@
   }
  
   :global {
-    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-      background-color: $blueLight !important;
-      color: $blueDark;
+    .DayPicker-Caption {
+      color: $midnightOpaque80;
+    }
+    .DayPicker-Weekday {
+      color: $midnightOpaque40;
     }
     .DayPicker-Day {
       border-radius: 0 !important;
+      font-weight: 500 !important;
+      color: $midnightOpaque80;
     }
     .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
       background-color: $gray100 !important;
     }
-    .DayPicker-Day--today:not(.DayPicker-Day--start):not(.DayPicker-Day--end) {
-      color: $red;
+    .DayPicker-Day--disabled {
+      color: $midnightOpaque20;
+    }
+    .DayPicker-Day--today {
+      font-weight: bold !important;
+      color: $blue;
+    }
+    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+      background-color: $blueLight !important;
+      color: $blue;
     }
     .DayPicker-Day--start:not(.DayPicker-Day--outside) {
       border-top-left-radius: $borderRadiusBase !important;
       border-bottom-left-radius: $borderRadiusBase !important;
       background-color: $blue !important;
+      color: $white !important;
     }
     .DayPicker-Day--end:not(.DayPicker-Day--outside) {
       border-top-right-radius: $borderRadiusBase !important;
       border-bottom-right-radius: $borderRadiusBase !important;
       background-color: $blue !important;
+      color: $white !important;
     }
   }
 }

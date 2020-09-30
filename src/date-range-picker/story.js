@@ -130,6 +130,7 @@ storiesOf('DateRangePicker', module)
 
           focusedInput={this.state.focus}
           onFocusChange={focus => this.setState({focus})}
+          isOutsideRange={day => moment(day).diff(moment()) > 999999999}
         />;
       }
     }

@@ -7,18 +7,30 @@
   &.mouseMode :focus { outline: none; }
 
   :global {
-    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-      background-color: $blue !important;
-      color: $white;
+    .DayPicker-Caption {
+      color: $midnightOpaque80;
+    }
+    .DayPicker-Weekday {
+      color: $midnightOpaque40;
     }
     .DayPicker-Day {
       border-radius: $borderRadiusBase !important;
+      font-weight: 500 !important;
+      color: $midnightOpaque80;
     }
     .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
       background-color: $gray100 !important;
     }
-    .DayPicker-Day--today:not(.DayPicker-Day--start):not(.DayPicker-Day--end) {
-      color: $red;
+    .DayPicker-Day--disabled {
+      color: $midnightOpaque20;
+    }
+    .DayPicker-Day--today {
+      font-weight: bold !important;
+      color: $blue;
+    }
+    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+      background-color: $blue !important;
+      color: $white;
     }
   }
 }
