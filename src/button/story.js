@@ -19,9 +19,9 @@ storiesOf('Button', module)
       display: 'grid',
       gridTemplateColumns: `repeat(${Object.keys(BUTTON_VARIANT_STYLES).length}, 180px)`,
       gridTemplateRows: `repeat(${Object.keys(BUTTON_TYPE_STYLES).length}, 40px)`,
-      gridGap: 10,
-      marginLeft: 10,
-      marginTop: 10,
+      gridGap: 8,
+      marginLeft: 8,
+      marginTop: 8,
     }}>
       {Object.keys(BUTTON_TYPE_STYLES).map(type => (
         <Fragment key={type}>

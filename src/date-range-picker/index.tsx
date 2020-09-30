@@ -1,113 +1,160 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
-import { DateRangePicker as ReactDatesDateRangePicker } from '@density/react-dates';
-import propTypes from 'prop-types';
-import moment from 'moment';
+import moment, { Moment } from 'moment-timezone';
 
-import InputBox from '../input-box';
-import Icons from '../icons';
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 import styles from './styles.module.scss';
 import colors from '../../variables/colors.json';
+import { CompatibleDateValue, DateDisplay, elementContains } from '../date-picker';
 
-export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
-  ANCHOR_LEFT = 'ANCHOR_LEFT',
-  START_DATE_ACTIVE = 'startDate',
-  END_DATE_ACTIVE = 'endDate';
+export type ActiveDate = 'startDate' | 'endDate' | null;
+export type CommonRange = {
+  id: string,
+  name: React.ReactNode,
+  startDate: CompatibleDateValue,
+  endDate: CompatibleDateValue,
+};
 
 export const DateRangePickerContext = React.createContext<string | null>(null);
 
-// internal date range picker (via ReactDates)
-const ReactDateRangePicker: React.FC<any> = props => {
-  const context = useContext(DateRangePickerContext);
+export default function DateRangePicker({
+  startDate,
+  endDate,
+  focusedInput,
+  anchor = 'ANCHOR_LEFT',
+  floating = true,
+  autoClose = false,
+  commonRanges = [],
+  numberOfMonths = 2,
+  onChange,
+  onFocusChange,
+  onSelectCommonRange,
+  isOutsideRange,
+}: {
+  startDate: CompatibleDateValue,
+  endDate: CompatibleDateValue,
+  // This should be renamed to "activeDate" or some such in a future version
+  focusedInput?: ActiveDate,
+  anchor?: 'ANCHOR_LEFT' | 'ANCHOR_RIGHT',
+  floating?: boolean,
+  autoClose?: boolean,
+  commonRanges?: Array<CommonRange>,
+  numberOfMonths?: 1 | 2,
+  onChange: (values: {startDate: CompatibleDateValue, endDate: CompatibleDateValue}) => void,
+  onFocusChange?: (active: ActiveDate) => void,
+  onSelectCommonRange?: (range: any) => void,
+  isOutsideRange?: (date: CompatibleDateValue) => boolean,
+}) {
+  const [mouseMode, setMouseMode] = useState(true);
+  const [uncontrolledActiveDate, setUncontrolledActiveDate] = useState<ActiveDate>(null);
+  const startValue = moment(startDate).toDate();
+  const endValue = moment(endDate).toDate();
 
-  const restProps = Object.assign({}, props);
-  delete restProps.onChange;
-  delete restProps.anchor;
-  delete restProps.className;
+  // Either controlled or uncontrolled "active date" state
+  const activeDate = focusedInput === undefined ? uncontrolledActiveDate : focusedInput;
+  const setActiveDate = onFocusChange === undefined ? setUncontrolledActiveDate : onFocusChange;
 
-  if (context === 'SMALL_WIDTH') {
-    restProps.numberOfMonths = 1;
-  }
-
-  return <div className={classnames(styles.dateRangePicker, {
-    [styles.dateRangePickerAnchorLeft]: !props.anchor || props.anchor === ANCHOR_LEFT,
-    [styles.dateRangePickerAnchorRight]: props.anchor === ANCHOR_RIGHT,
-    [styles.dateRangePickerFocused]: props.focusedInput,
-  }, props.className)}>
-    <ReactDatesDateRangePicker
-      onDatesChange={props.onChange}
-      customArrowIcon={<span>&mdash;</span>}
-      {...restProps}
-    />
-  </div>;
-}
-
-// exposed component that renders both the date range picker and
-// common range list, and binds them together
-const DateRangePicker: React.FC<any> = props => {
-  const context = useContext(DateRangePickerContext);
-
-  const commonRangeList = Array.isArray(props.commonRanges) ? (
-    <div className={styles.dateRangePickerCommonRangeList}>
-      <InputBox
-        type="select"
-        width={70 /* px */}
-        listBoxWidth={200 /* px */}
-        anchor={context === 'SMALL_WIDTH' ? ANCHOR_RIGHT : props.anchor}
-        value={{
-          id: 'icon',
-          label: <div style={{ marginTop: 4, marginLeft: -5, marginRight: 3 }}>
-            <Icons.Calendar width={22} height={22} color={colors.gray700} />
-          </div>,
+  return (
+    <DateRangePickerContext.Consumer>{context => (
+      <div
+        className={classnames(styles.dateRangePicker, {[styles.mouseMode]: mouseMode})}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: anchor === 'ANCHOR_RIGHT' ? 'flex-end' : 'flex-start',
+          width: floating ? 242 : undefined,
+          height: floating ? 40 : undefined,
         }}
-        choices={props.commonRanges.map(range => Object.assign({}, range, {
-          label: <span>{range.name || range.label}</span>,
-        }))}
-        onChange={props.onSelectCommonRange}
-      />
-    </div>
-  ) : null;
-
-  const pickerProps = Object.assign({}, props);
-  delete pickerProps.commonRanges
-  delete pickerProps.onSelectCommonRange
-  delete pickerProps.showCommonRangeSubtitles
-  delete pickerProps.onOpenCommonRangeList
-
-  return <div className={styles.dateRangePickerWrapper}>
-    <ReactDateRangePicker {...pickerProps} />
-    {commonRangeList}
-  </div>;
+        onBlur={e => {
+          const relatedTarget = e.relatedTarget || document.activeElement;
+          if (!elementContains(e.currentTarget, relatedTarget as EventTarget & HTMLElement)) {
+            setActiveDate(null);
+          }
+        }}
+        onMouseDown={() => setMouseMode(true)}
+        onKeyDown={() => setMouseMode(false)}
+      >
+        <div
+          style={{
+            width: 240,
+            height: 38,
+            backgroundColor: colors.white,
+            border: `1px solid ${activeDate ? colors.blue : colors.gray300}`,
+            borderRadius: 4,
+            flexShrink: floating ? 0 : undefined,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <DateDisplay
+            value={startDate}
+            active={activeDate === 'startDate'}
+            onSelect={(focused: boolean) => setActiveDate(focused ? 'startDate' : null)} />
+          <span style={{padding: '0 4px', userSelect: 'none', msUserSelect: 'none', WebkitUserSelect: 'none'}}>—</span>
+          <DateDisplay
+            value={endDate}
+            active={activeDate === 'endDate'}
+            onSelect={(focused: boolean) => setActiveDate(focused ? 'endDate' : null)} />
+        </div>
+        {activeDate ? <div
+          style={{
+            width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 156 : 0),
+            backgroundColor: colors.white,
+            marginTop: 8,
+            border: `1px solid ${colors.gray300}`,
+            borderRadius: 4,
+            flexShrink: floating ? 0 : undefined,
+            display: 'flex',
+            boxShadow: `0px 2px 4px ${colors.midnightOpaque10}`,
+          }}
+        >
+          {commonRanges.length ? <div className={styles.commonRangeList}>
+            <div style={{
+              fontSize: '1.15em',
+              fontWeight: 500,
+              color: colors.midnightOpaque80,
+              marginLeft: 12,
+              marginBottom: 8,
+            }}>Range</div>
+            {commonRanges.map(range => (
+              <div
+                key={range.id}
+                tabIndex={0}
+                className={styles.commonRangeItem}
+                onClick={() => onSelectCommonRange(range)}
+                onKeyDown={e => { if (e.key === 'Enter') { onSelectCommonRange(range); } }}
+              >{range.name}</div>
+            ))}
+          </div> : null}
+          <DayPicker
+            selectedDays={{from: startValue, to: endValue}}
+            modifiers={{
+              start: startValue,
+              end: endValue,
+              disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
+            }}
+            numberOfMonths={numberOfMonths || 2}
+            month={activeDate === 'endDate' ? endValue : startValue}
+            onDayClick={day => {
+              if (!isOutsideRange || !isOutsideRange(moment(day))) {
+                const active = moment(day).diff(startDate) < 0 ? 'startDate' : activeDate
+                onChange({
+                  startDate: active === 'startDate' ? moment(day) : startDate,
+                  endDate: moment(day),
+                });
+                if (active === 'startDate') {
+                  setActiveDate('endDate');
+                } else if (active === 'endDate') {
+                  setActiveDate(autoClose ? null : 'startDate');
+                }
+              }
+            }}
+          />
+        </div> : null}
+      </div>
+    )}</DateRangePickerContext.Consumer>
+  );
 }
-
-DateRangePicker.displayName = 'DateRangePicker';
-DateRangePicker.propTypes = {
-  onChange: propTypes.func,
-  onFocusChange: propTypes.func,
-  focusedInput: propTypes.oneOf([
-    null,
-    START_DATE_ACTIVE,
-    END_DATE_ACTIVE,
-  ]),
-  anchor: propTypes.oneOf([ANCHOR_LEFT, ANCHOR_RIGHT]),
-
-  startDate: propTypes.oneOfType([
-    propTypes.instanceOf(moment as any),
-    propTypes.string, /* for moment to parse */
-    propTypes.number,
-  ]).isRequired,
-  endDate: propTypes.oneOfType([
-    propTypes.instanceOf(moment as any),
-    propTypes.string, /* for moment to parse */
-    propTypes.number,
-  ]).isRequired,
-
-  commonRanges: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.any,
-    name: propTypes.node,
-    label: propTypes.node,
-  })),
-  onSelectCommonRange: propTypes.func,
-};
-export default DateRangePicker;

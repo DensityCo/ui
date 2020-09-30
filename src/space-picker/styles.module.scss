@@ -35,7 +35,7 @@
 
 .popup {
   position: absolute;
-  top: 50px;
+  top: 48px;
   padding-left: 0px;
   padding-right: 0px;
 
@@ -44,7 +44,7 @@
   z-index: 999999;
   color: $midnight;
   background-color: $white;
-  box-shadow: 0px 2px 4px rgba($gray900, 0.1);
+  box-shadow: 0px 2px 4px $midnightOpaque10;
   box-sizing: border-box;
   border: 1px solid $gray200;
   border-radius: $borderRadiusBase;

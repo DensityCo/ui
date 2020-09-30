@@ -5,9 +5,7 @@ import moment from 'moment';
 
 import './styles.module.scss';
 import TagInput from './index';
-import DateRangePicker, { START_DATE_ACTIVE } from '../date-range-picker/index';
-import colorVariables from '../../variables/colors.json';
-
+import DateRangePicker from '../date-range-picker/index';
 
 storiesOf('TagInput', module)
   .add('Default', () => (
@@ -149,7 +147,7 @@ storiesOf('TagInput', module)
         The date picker, when opened, should show over top of the tag input.
       </p>
       <DateRangePicker
-        focusedInput={START_DATE_ACTIVE}
+        focusedInput="startDate"
         startDate={moment.utc()}
         endDate={moment.utc().subtract(1, 'day')}
       />

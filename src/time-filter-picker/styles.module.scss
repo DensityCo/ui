@@ -1,0 +1,28 @@
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+
+.commonTimeMenu {
+  border: 1px solid $gray300;
+  border-radius: $borderRadiusBase;
+  background-color: $white;
+  padding: 8px;
+  margin-top: 8px;
+  height: 80px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-shadow: 0px 2px 4px $midnightOpaque10;
+}
+.commonTimeMenuItem {
+  width: 92px;
+  padding: 8px 0;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: $gray700;
+}
+.commonTimeMenuItem:hover, .commonTimeMenuItem:focus {
+  background-color: $gray100;
+}
+.commonTimeMenuItem:active, .commonTimeMenuItem:focus {
+  text-decoration: underline;
+}
