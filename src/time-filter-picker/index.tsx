@@ -92,7 +92,7 @@ function TimePickerInput({value, onBlur, onChange, disabled, error}) {
           tabIndex={0}
           className={styles.commonTimeMenuItem}
           onKeyDown={e => e.key === 'Enter' && select()}
-          onMouseDown={select}
+          onClick={select}
         >{time}</div>
       })}
     </div> : null}
