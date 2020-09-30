@@ -101,7 +101,7 @@ export default function DateRangePicker({
         </div>
         {activeDate ? <div
           style={{
-            width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 176 : 0),
+            width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 156 : 0),
             backgroundColor: colors.white,
             marginTop: 8,
             border: `1px solid ${colors.gray300}`,
@@ -112,6 +112,13 @@ export default function DateRangePicker({
           }}
         >
           {commonRanges.length ? <div className={styles.commonRangeList}>
+            <div style={{
+              fontSize: '1.15em',
+              fontWeight: 500,
+              color: colors.midnightOpaque80,
+              marginLeft: 12,
+              marginBottom: 8,
+            }}>Range</div>
             {commonRanges.map(range => (
               <div
                 key={range.id}
