@@ -4,6 +4,7 @@ import DayPicker from 'react-day-picker';
 import Icons from '../icons';
 
 import colors from '../../variables/colors.json';
+import spacing from '../../variables/spacing.json';
 import styles from './styles.module.scss';
 import moment, { Moment } from 'moment-timezone';
 
@@ -30,7 +31,7 @@ export function DateDisplay({value, active, onSelect}: {
       style={{
         width: 86,
         fontSize: 14,
-        borderRadius: 2,
+        borderRadius: spacing.borderRadiusBase,
         cursor: 'pointer',
         fontWeight: 'bold',
         padding: '3px 7px',

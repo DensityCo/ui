@@ -137,7 +137,7 @@ export default function DateRangePicker({
               disabled: isOutsideRange ? (day: Date) => isOutsideRange(moment(day)) : undefined,
             }}
             numberOfMonths={numberOfMonths || 2}
-            month={activeDate === 'endDate' ? endValue : startValue}
+            initialMonth={activeDate === 'endDate' ? endValue : startValue}
             onDayClick={day => {
               if (!isOutsideRange || !isOutsideRange(moment(day))) {
                 const active = moment(day).diff(startDate) < 0 ? 'startDate' : activeDate
