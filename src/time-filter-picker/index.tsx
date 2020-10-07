@@ -64,7 +64,6 @@ function TimePickerInput({value, onBlur, onChange, disabled, error}) {
       value={tempValue}
       onChange={event => setTempValue(event.target.value)}
       onKeyDown={e => {
-        console.log(e.key);
         if (e.key === 'Enter') {
           onChange(e);
           setDropdownOpen(false);
