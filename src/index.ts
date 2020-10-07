@@ -9,7 +9,7 @@ export { default as AppSidebar } from './app-sidebar';
 export { default as Button, ButtonContext, ButtonGroup } from './button';
 export { default as Checkbox } from './checkbox';
 export { default as DashboardReportGrid } from './dashboard-report-grid';
-export { default as DatePicker, DatePickerContext } from './date-picker';
+export { default as DatePicker, DatePickerContext, elementContains } from './date-picker';
 export { default as DateRangePicker, DateRangePickerContext } from './date-range-picker';
 export { default as DensityMark, DensityLogo } from './density-mark';
 //export { default as Floorplan } from './floorplan';
