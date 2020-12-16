@@ -55,6 +55,7 @@ import DeviceTop from './symbols/device-top';
 import DoNotEnter from './symbols/do-not-enter';
 import Door from './symbols/door';
 import Dot from './symbols/dot';
+import Dots from './symbols/dots';
 import Download from './symbols/download';
 import Ebook from './symbols/ebook';
 import EgressDown from './symbols/egress-down';
@@ -264,6 +265,7 @@ const ICONS = {
   Door: Door,
   Doorway: Door,
   Dot: Dot,
+  Dots: Dots,
   Download: Download,
   Ebook: Ebook,
 
