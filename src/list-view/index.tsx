@@ -348,10 +348,13 @@ export function getDefaultSortFunction<T>(sortTemplate: (item: T) => SortableVal
   }
 }
 
-export function getNextSortDirection(sortDirection: SortDirection) {
-  return {
-    'desc': 'asc',
-    'asc': 'none',
-    'none': 'desc'
-  }[sortDirection] as SortDirection
+export function getNextSortDirection(sortDirection: SortDirection, reverse = false) {
+  const nextMap = {
+    'asc': 'desc',
+    'desc': 'none',
+    'none': 'asc'
+  };
+  return reverse ?
+    nextMap[nextMap[sortDirection]] :
+    nextMap[sortDirection] as SortDirection;
 };
