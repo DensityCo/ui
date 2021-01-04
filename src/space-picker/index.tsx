@@ -32,6 +32,7 @@ type SpacePickerProps = {
   placeholder?: string,
   height?: React.ReactText,
   canSelectMultiple?: boolean,
+  autoSelectChildren?: boolean,
   selectControl?: SpacePickerSelectControlTypes,
   isItemDisabled?: (SpaceHierarchyDisplayItem) => boolean,
   onCloseDropdown?: () => void,
@@ -83,6 +84,7 @@ export const SpacePicker: React.FunctionComponent<SpacePickerProps> = ({
   formattedHierarchy,
 
   canSelectMultiple=false,
+  autoSelectChildren=false,
   isItemDisabled=(s) => false,
   height,
   showSearchBox=true,
@@ -109,16 +111,23 @@ export const SpacePicker: React.FunctionComponent<SpacePickerProps> = ({
   function callOnChange(item, isChecked) {
     if (canSelectMultiple) {
       if (isChecked) {
-        onChange(
-          [...selectedSpaceIds, item.space.id]
-          .map(id => formattedHierarchy.find(h => h.space.id === id))
-        );
+        onChange(formattedHierarchy.filter(h => {
+          const isSpaceSelected = h.space.id === item.space.id;
+          const isAutoSelectedChild = autoSelectChildren ?
+            h.ancestry.map(a => a.id).includes(item.space.id) : false;
+          const isAlreadySelected = selectedSpaceIds.includes(h.space.id);
+  
+          return isSpaceSelected || isAutoSelectedChild || isAlreadySelected;
+        }));
       } else {
-        onChange(
-          selectedSpaceIds
-          .filter(id => id !== item.space.id)
-          .map(id => formattedHierarchy.find(h => h.space.id === id))
-        );
+        onChange(formattedHierarchy.filter(h => {
+          const isSpaceSelected = h.space.id === item.space.id;
+          const isAutoSelectedChild = autoSelectChildren ?
+            h.ancestry.map(a => a.id).includes(item.space.id) : false;
+          const isAlreadySelected = selectedSpaceIds.includes(h.space.id);
+
+          return !isSpaceSelected && !isAutoSelectedChild && isAlreadySelected;
+        }));
       }
     } else {
       onChange(item);
@@ -242,6 +251,7 @@ export class SpacePickerDropdown extends Component<SpacePickerDropdownProps, {op
       searchBoxPlaceholder,
       formattedHierarchy,
       canSelectMultiple,
+      autoSelectChildren,
       isItemDisabled,
       onChange,
     } = this.props;
@@ -298,6 +308,7 @@ export class SpacePickerDropdown extends Component<SpacePickerDropdownProps, {op
                 searchBoxPlaceholder={searchBoxPlaceholder}
                 formattedHierarchy={formattedHierarchy}
                 canSelectMultiple={canSelectMultiple}
+                autoSelectChildren={autoSelectChildren}
                 isItemDisabled={isItemDisabled}
                 height={height}
                 onCloseDropdown={() => this.setState({opened: false})}

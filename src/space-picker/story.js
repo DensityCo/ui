@@ -960,6 +960,26 @@ storiesOf('SpacePicker/Regular Space Picker', module)
     4. Undo the search and filter. Make sure that both spaces are still selected.
     `,
   })
+  .add('Space Picker: with multi-select and auto-select children', () => {
+    function Wrapper() {
+      const [ selected, setSelected ] = useState([]);
+      return (
+        <SpacePicker
+          value={selected}
+          onChange={setSelected}
+          formattedHierarchy={formattedHierarchy}
+          canSelectMultiple={true}
+          autoSelectChildren={true}
+        />
+      );
+    }
+
+    return (
+      <div style={{width: 300, height: 300, margin: '100px auto'}}>
+        <Wrapper />
+      </div>
+    );
+  })
   .add('Space Picker: with all buildings disabled', () => {
     function Wrapper() {
       const [ selected, setSelected ] = useState(null);
@@ -1107,6 +1127,26 @@ storiesOf('SpacePicker/Dropdown Space Picker', module)
           onChange={setSelected}
           formattedHierarchy={formattedHierarchy}
           canSelectMultiple={true}
+        />
+      );
+    }
+
+    return (
+      <div style={{width: 300, height: 300, margin: '100px auto'}}>
+        <Wrapper />
+      </div>
+    );
+  })
+  .add('Dropdown Space Picker: with multiple select and auto-select children', () => {
+    function Wrapper() {
+      const [ selected, setSelected ] = useState([]);
+      return (
+        <SpacePickerDropdown
+          value={selected}
+          onChange={setSelected}
+          formattedHierarchy={formattedHierarchy}
+          canSelectMultiple={true}
+          autoSelectChildren={true}
         />
       );
     }
