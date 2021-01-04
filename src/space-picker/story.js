@@ -1137,3 +1137,23 @@ storiesOf('SpacePicker/Dropdown Space Picker', module)
       </div>
     );
   })
+  .add('Dropdown Space Picker: with multiple select and auto-select children', () => {
+    function Wrapper() {
+      const [ selected, setSelected ] = useState([]);
+      return (
+        <SpacePickerDropdown
+          value={selected}
+          onChange={setSelected}
+          formattedHierarchy={formattedHierarchy}
+          canSelectMultiple={true}
+          autoSelectChildren={true}
+        />
+      );
+    }
+
+    return (
+      <div style={{width: 300, height: 300, margin: '100px auto'}}>
+        <Wrapper />
+      </div>
+    );
+  })

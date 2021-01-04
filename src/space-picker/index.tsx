@@ -112,15 +112,21 @@ export const SpacePicker: React.FunctionComponent<SpacePickerProps> = ({
     if (canSelectMultiple) {
       if (isChecked) {
         onChange(formattedHierarchy.filter(h => {
-          return h.space.id === item.space.id ||
-            (autoSelectChildren && h.ancestry.map(a => a.id).includes(item.space.id)) ||
-            selectedSpaceIds.includes(h.space.id);
+          const isSpaceSelected = h.space.id === item.space.id;
+          const isAutoSelectedChild = autoSelectChildren ?
+            h.ancestry.map(a => a.id).includes(item.space.id) : false;
+          const isAlreadySelected = selectedSpaceIds.includes(h.space.id);
+  
+          return isSpaceSelected || isAutoSelectedChild || isAlreadySelected;
         }));
       } else {
         onChange(formattedHierarchy.filter(h => {
-          return h.space.id !== item.space.id &&
-            (!autoSelectChildren || !h.ancestry.map(a => a.id).includes(item.space.id)) &&
-            selectedSpaceIds.includes(h.space.id);
+          const isSpaceSelected = h.space.id === item.space.id;
+          const isAutoSelectedChild = autoSelectChildren ?
+            h.ancestry.map(a => a.id).includes(item.space.id) : false;
+          const isAlreadySelected = selectedSpaceIds.includes(h.space.id);
+
+          return !isSpaceSelected && !isAutoSelectedChild && isAlreadySelected;
         }));
       }
     } else {
