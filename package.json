@@ -31,7 +31,7 @@
     "@density/lib-api-types": "^2.0.1",
     "@density/lib-space-helpers": "^0.2.7",
     "@density/node-sass-json-importer": "^5.0.0",
-    "@storybook/addon-actions": "^5.1.10",
+    "@storybook/addon-actions": "^6.2.2",
     "@storybook/addon-notes": "^5.1.10",
     "@storybook/addon-storysource": "^5.1.10",
     "@storybook/addons": "^5.1.10",
