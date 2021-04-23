@@ -339,3 +339,45 @@
 .contextAnalyticsControlBar.inputBoxSelectBoxValue.inputBoxSelectBoxValueOpened {
   border: 1px solid $blue;
 }
+
+// RULES FOR SPACE_DETAIL_CARD CONTEXT
+.contextSpaceDetailCard.inputBoxSelectBox {
+  width: auto;
+  display: inline-block;
+}
+.contextSpaceDetailCard.inputBoxSelectBoxValue {
+  font-size: 12px;
+  height: 13px;
+  padding: 2px 3px 1px 3px;
+  margin-left: -3px;
+  margin-bottom: 3px;
+  color: $midnightOpaque40;
+  width: auto;
+  border: none;
+}
+.contextSpaceDetailCard.inputBoxSelectBoxValue:hover,
+.contextSpaceDetailCard.inputBoxSelectBoxValue:focus {
+  background: $blueLight;
+  color: $blue;
+  & .inputBoxSelectPlaceholder {
+    color: $blue;
+  }
+}
+.contextSpaceDetailCard.inputBoxSelectBoxValue .inputBoxSelectBoxValueCaret {
+  margin-left: 4px;
+}
+.contextSpaceDetailCard.inputBoxSelectBoxMenu {
+  top: 20px;
+  left: -3px;
+  padding: 3px 0;
+  width: auto;
+}
+.contextSpaceDetailCard.inputBoxSelectBoxMenuLi {
+  margin: 0 2px;
+  height: 24px;
+  font-size: 12px;
+  color: $gray600;
+}
+.contextSpaceDetailCard.inputBoxSelectBoxMenuLi.inputBoxSelectBoxMenuLiDisabled {
+  color: $gray400;
+}

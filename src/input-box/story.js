@@ -237,3 +237,37 @@ storiesOf('InputBox', module)
 
     return <Wrapper />;
   })
+  .add('select box with SPACE_DETAIL_CARD context', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+
+        const choices = [
+          {id: 0, label: "Foo"},
+          {id: 1, label: "Bar"},
+          {id: 2, label: "Disabled", disabled: true},
+          {id: 3, label: "Baz"},
+        ];
+
+        this.state = {
+          value: null,
+          choices,
+        };
+      }
+
+      render() {
+        return <div style={{padding: 20, background: '#999'}}>
+          <InputBoxContext.Provider value="SPACE_DETAIL_CARD">
+            <InputBox
+              type="select"
+              value={this.state.value}
+              choices={this.state.choices}
+              onChange={value => this.setState({value})}
+            />
+          </InputBoxContext.Provider>
+        </div>;
+      }
+    }
+
+    return <Wrapper />;
+  })

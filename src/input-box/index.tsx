@@ -1,10 +1,11 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
 import propTypes from 'prop-types';
 
 import Icons from '../icons';
 
 import styles from './styles.module.scss';
+import colors from '../../variables/colors.json';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
@@ -12,6 +13,7 @@ const CONTEXT_CLASSES = {
   'LIST_VIEW': styles.contextListView,
   'NAVBAR_INLINE': styles.contextNavbarInline,
   'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
+  'SPACE_DETAIL_CARD': styles.contextSpaceDetailCard,
 };
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',
@@ -186,7 +188,9 @@ export class SelectBox extends React.Component<any, any> {
             </span>
           }
           <div className={styles.inputBoxSelectBoxValueCaret}>
-            <Icons.ChevronDown />
+            <Icons.ChevronDown
+              width={context === 'SPACE_DETAIL_CARD' ? 16 : undefined}
+              color={context === 'SPACE_DETAIL_CARD' ? colors.midnightOpaque40 : undefined} />
           </div>
         </div>
 
