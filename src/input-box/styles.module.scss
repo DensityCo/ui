@@ -343,13 +343,13 @@
 // RULES FOR SPACE_DETAIL_CARD CONTEXT
 .contextSpaceDetailCard.inputBoxSelectBox {
   width: auto;
-  display: inline-block;
+  display: block;
 }
 .contextSpaceDetailCard.inputBoxSelectBoxValue {
   font-size: 12px;
   font-weight: bold;
   height: 13px;
-  padding: 1px 1px 4px 1px;
+  padding: 2px 3px;
   margin-left: -3px;
   margin-bottom: 3px;
   color: $midnightOpaque40;
