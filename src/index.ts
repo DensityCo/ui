@@ -31,6 +31,8 @@ export { default as TagInput } from './tag-input';
 export { default as DayOfWeekPicker, DayOfWeekPickerContext } from './day-of-week-picker';
 export { default as FormLabel } from './form-label';
 export { default as EnvironmentSwitcher, getEnvironmentFromLocalStorage } from './environment-switcher';
+export { default as Navbar, NavbarItem } from './navbar';
+
 export {
   default as SpacePicker,
   SpacePickerDropdown,
