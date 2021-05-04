@@ -1,0 +1,200 @@
+@import "../../variables/colors.scss";
+@import "../../variables/spacing.scss";
+@import "../../variables/grid.scss";
+
+// Navbar Layout
+// -------------------------------------------
+
+.NavbarContainer {
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  background-color: #fff;
+  height: 41px;
+  border-bottom: 1px solid $gray200;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.Navbar {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+
+  height: 41px;
+
+  padding-left: 8px;
+  padding-right: 8px;
+
+  width: 100%;
+}
+
+.NavbarLeft {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-left: 0px;
+
+  list-style-type: none;
+}
+
+.NavbarRight {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding-right: 0px;
+
+  list-style-type: none;
+}
+
+.NavbarCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Navbar Logo
+// -------------------------------------------
+
+.NavbarLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  width: 26px;
+  margin-right: 16px;
+  margin-left: 8px;
+  background-color: $grayCinder;
+  border-radius: 4px;
+}
+
+
+// Navbar Items
+// -------------------------------------------
+
+.NavbarItem {
+  display: flex;
+  user-select: none;
+  height: 41px;
+  cursor: pointer;
+
+  opacity: 0.5;
+  position: relative;
+}
+.NavbarItem:hover, .NavbarItem.selected { opacity: 1; }
+
+.NavbarItem > a, .NavbarItem > span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 41px;
+
+  padding-left: 16px;
+  padding-right: 16px;
+
+  color: $midnight;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.NavbarItem > .NavBarItemBetaTag {
+  color: $blue;
+  font-weight: 500;
+  font-size: 12px;
+
+  position: absolute;
+  right: 0;
+  padding-right: 16px;
+}
+
+.NavbarItem.iconOnly > a,
+.NavbarItem.iconOnly > span { padding-left: 8px; padding-right: 8px; }
+
+.NavbarItem.selected > a,
+.NavbarItem.selected > span { color: $midnight; }
+
+.NavbarItem.showOnMobile {
+  display: flex;
+}
+
+.NavbarIcon {
+  display: flex;
+  align-items: center;
+}
+.NavbarText {
+  margin-left: 8px;
+}
+
+
+// Dropdown menu
+.NavbarMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  // Should not be below anything except modals
+  z-index: 99;
+  position: relative;
+}
+
+.NavbarMenuTarget {
+  cursor: pointer;
+  outline: none;
+  &:hover { opacity: 0.9; }
+}
+.NavbarMenuTarget.opened > .NavbarItem { opacity: 1; }
+
+.NavbarMenuItems {
+  position: absolute;
+  top: 40px;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 32px;
+
+  border: 1px solid $gray300;
+  border-radius: 4px;
+
+  opacity: 0;
+  pointer-events: none;
+}
+.NavbarMenuItems.opened {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.NavbarMenuItem {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  opacity: 0.5;
+  user-select: none;
+
+  color: $midnight;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+}
+.NavbarMenuItem:hover { opacity: 1; }
+.NavbarMenuItem.selected {
+  opacity: 1;
+  color: $midnight;
+}
+
+.NavbarMenuItemIcon {
+  padding-right: 8px;
+}
