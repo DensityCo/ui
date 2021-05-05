@@ -9,6 +9,7 @@ import colors from '../../variables/colors.json';
 
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
+  'COMPACT_GRAY': styles.contextCompactGray,
   'TIME_PICKER': styles.contextTimePicker,
   'LIST_VIEW': styles.contextListView,
   'NAVBAR_INLINE': styles.contextNavbarInline,

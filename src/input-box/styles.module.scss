@@ -277,6 +277,26 @@
 .invalid { border-color: $red; }
 
 
+// RULES FOR COMPACT_GRAY context
+.contextCompactGray.inputBox {
+  background: $gray200;
+  border: 1px solid $gray200;
+  width: 80px;
+  height: 25px;
+  padding-right: 8px;
+  
+  & > input {
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+.contextCompactGray.inputBox.inputBoxFocused {
+  background: $blueLight;
+  border: 1px solid $blue;
+}
+
+
 // RULES FOR TIME_PICKER context
 .contextTimePicker.inputBox {
   padding-right: 0;

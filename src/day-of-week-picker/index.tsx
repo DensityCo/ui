@@ -6,6 +6,7 @@ import {DayOfWeek} from '@density/lib-common-types';
 // Classes to merge in, depending on context
 const CONTEXT_CLASSES = {
   'TIME_FILTER_PICKER': styles.contextTimeFilterPicker,
+  'TIME_FILTER_PICKER_SMALL': styles.contextTimeFilterPickerSmall,
 };
 
 export const DayOfWeekPickerContext = React.createContext<string | null>(null);

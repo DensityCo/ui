@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import moment from 'moment-timezone';
 
 // import './styles.module.scss';
-import TimeFilterPicker from './index';
+import TimeFilterPicker, { TimeFilterPickerContext } from './index';
 import {DayOfWeek} from '@density/lib-common-types';
 import colorVariables from '../../variables/colors.json';
 
@@ -46,4 +46,19 @@ storiesOf('TimeFilterPicker', module)
       setEndTime={() => undefined}
       setDaysOfWeek={() => undefined}
     />
+  })
+  .add('With TIME_RANGE_CONTROL_BAR context', () => {
+    const [startTime, setStartTime] = useState(moment('08:00', 'HH:mm'));
+    const [endTime, setEndTime] = useState(moment('17:00', 'HH:mm'));
+    const [daysOfWeek, setDaysOfWeek] = useState([DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY]);
+    return <TimeFilterPickerContext.Provider value="TIME_RANGE_CONTROL_BAR">
+      <TimeFilterPicker
+        startTime={startTime}
+        endTime={endTime}
+        daysOfWeek={daysOfWeek}
+        setStartTime={setStartTime}
+        setEndTime={setEndTime}
+        setDaysOfWeek={setDaysOfWeek}
+      />
+    </TimeFilterPickerContext.Provider>
   })
