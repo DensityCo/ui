@@ -121,7 +121,9 @@ workflows:
   npm-deployment:
     jobs:
       # For all pushes, build/deploy to `https://ui-preview.density.rodeo/SHA`
-      - preview
+      - preview:
+          context:
+            - circleci-aws-creds
 
       # Trunk is published to npm
       - publish:
@@ -131,6 +133,8 @@ workflows:
 
       # Trunk is also built and deployed to https://ui-preview.density.rodeo
       - build:
+          context:
+            - circleci-aws-creds
           filters:
             branches:
               only: trunk
