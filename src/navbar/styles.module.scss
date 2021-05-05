@@ -28,7 +28,7 @@
   padding-left: 8px;
   padding-right: 8px;
 
-  width: 100%;
+  width: calc(100%-16px);
 }
 
 .NavbarLeft {
@@ -107,9 +107,10 @@
 .NavbarItem > .NavBarItemBetaTag {
   color: $blue;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 11px;
 
   position: absolute;
+  top: 2px;
   right: 0;
   padding-right: 16px;
 }
