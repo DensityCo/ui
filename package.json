@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "22.2.1",
+  "version": "22.2.2",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
