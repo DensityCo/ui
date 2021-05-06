@@ -284,8 +284,10 @@
   width: 80px;
   height: 25px;
   padding-right: 8px;
+  padding-top: 2px;
   
   & > input {
+    height: 25px;
     margin-left: 8px;
     font-size: 14px;
     font-weight: bold;
