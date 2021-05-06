@@ -58,3 +58,20 @@ $percentageBarPercentageTextSpacing: 8px; // Spacing to the left of the formatte
   color: $gray300;
   font-size: $fontSizeLarge;
 }
+
+
+.contextListView.percentageBar {
+  height: 9px;
+  border-radius: 5px;
+  margin-top: ($percentageBarContainerHeight - 8px) / 2;
+}
+.contextListView.percentageBarColoredSection {
+  background-color: $blue;
+  height: 9px;
+  border-radius: 5px;
+}
+.contextListView.percentageBarText {
+  color: $gray600;
+  font-weight: 500;
+  font-size: 14px;
+}

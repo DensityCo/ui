@@ -296,6 +296,10 @@
 .contextCompactGray.inputBox.inputBoxFocused {
   background: $blueLight;
   border: 1px solid $blue;
+
+  & > input {
+    color: $blue;
+  }
 }
 
 

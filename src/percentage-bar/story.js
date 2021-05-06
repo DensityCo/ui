@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import './styles.module.scss';
-import PercentageBar from './index';
+import PercentageBar, { PercentageBarContext } from './index';
 import fontVariables from '../../variables/fonts.json';
 
 const INFINITELY_LARGE_BREAK_WIDTH = 9999999999999999999;
@@ -58,4 +58,22 @@ storiesOf('PercentageBar', module)
       <PercentageBar percentage={0.9} breakWidth={INFINITELY_LARGE_BREAK_WIDTH} />
       <PercentageBar percentage={1} breakWidth={INFINITELY_LARGE_BREAK_WIDTH} />
     </div>
+  ))
+  .add('With LIST_VIEW context', () => (
+    <PercentageBarContext.Provider value="LIST_VIEW">
+      <div>
+        <PercentageBar percentage={0} percentageFormatter={n => null} />
+        <PercentageBar percentage={0} />
+        <PercentageBar percentage={0.1} />
+        <PercentageBar percentage={0.2} />
+        <PercentageBar percentage={0.3} />
+        <PercentageBar percentage={0.4} />
+        <PercentageBar percentage={0.5} />
+        <PercentageBar percentage={0.6} />
+        <PercentageBar percentage={0.7} />
+        <PercentageBar percentage={0.8} />
+        <PercentageBar percentage={0.9} />
+        <PercentageBar percentage={1} />
+      </div>
+    </PercentageBarContext.Provider>
   ))
