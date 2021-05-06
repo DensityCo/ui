@@ -251,6 +251,33 @@ storiesOf('DateRangePicker', module)
 
     return <Wrapper />;
   })
+  .add('With TIME_RANGE_CONTROL_BAR context', () => {
+    class Wrapper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          focus: null,
+          startDate: moment(),
+          endDate: moment().add(1, 'day'),
+        };
+      }
+      render() {
+        return <DateRangePickerContext.Provider value="TIME_RANGE_CONTROL_BAR">
+          <DateRangePicker
+            autoClose={true}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onChange={e => this.setState({startDate: e.startDate, endDate: e.endDate})}
+
+            focusedInput={this.state.focus}
+            onFocusChange={focus => this.setState({focus})}
+          />
+        </DateRangePickerContext.Provider>;
+      }
+    }
+
+    return <Wrapper />;
+  })
   .add('With deprecated SMALL_WIDTH context', () => (
     <DateRangePickerContext.Provider value="SMALL_WIDTH">
       <DateRangePicker

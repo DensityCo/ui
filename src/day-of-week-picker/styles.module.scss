@@ -67,3 +67,28 @@
   border-color: $gray400;
   color: $white;
 }
+
+
+// RULES FOR TIME_FILTER_PICKER_SMALL CONTEXT
+.contextTimeFilterPickerSmall.item { margin-right: 4px; }
+.contextTimeFilterPickerSmall.item:last-child { margin-right: 0; }
+.contextTimeFilterPickerSmall.button {
+  width: 20px;
+  height: 20px;
+  background-color: $gray200;
+  border-color: $gray200;
+  color: $gray500;
+}
+.contextTimeFilterPickerSmall.button.active {
+  background-color: $blue;
+  border-color: $blue;
+  color: $white;
+}
+.contextTimeFilterPickerSmall.button.disabled {
+  color: $gray400;
+}
+.contextTimeFilterPickerSmall.button.active.disabled {
+  background-color: $gray400;
+  border-color: $gray400;
+  color: $white;
+}

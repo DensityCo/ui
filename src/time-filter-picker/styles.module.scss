@@ -26,3 +26,38 @@
 .commonTimeMenuItem:active, .commonTimeMenuItem:focus {
   text-decoration: underline;
 }
+
+.timeFilterPicker {
+  display: flex;
+  padding-bottom: 24px;
+  border-bottom: 1px dashed $gray200;
+}
+.timeFilterPickerToText {
+  line-height: 40px;
+  padding: 0px 16px;
+}
+.timeFilterPickerDayOfWeekContainer {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.contextTimeRangeControlBar.timeFilterPicker {
+  height: 40px;
+  align-items: center;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.contextTimeRangeControlBar.timeFilterPickerDayOfWeekContainer {
+  height: 25px;
+}
+
+.contextTimeRangeControlBar.commonTimeMenu {
+  margin-top: 7px;
+  padding: 4px;
+}
+.contextTimeRangeControlBar.commonTimeMenuItem {
+  width: 78px;
+  padding: 4px 0;
+  font-size: 14px;
+}

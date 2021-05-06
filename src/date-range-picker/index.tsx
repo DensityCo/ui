@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import classnames from 'classnames';
-import moment, { Moment } from 'moment-timezone';
+import moment from 'moment-timezone';
 
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -8,6 +8,7 @@ import 'react-day-picker/lib/style.css';
 import styles from './styles.module.scss';
 import colors from '../../variables/colors.json';
 import { CompatibleDateValue, DateDisplay, elementContains } from '../date-picker';
+import Icons from '../icons';
 
 export type ActiveDate = 'startDate' | 'endDate' | null;
 export type CommonRange = {
@@ -57,8 +58,10 @@ export default function DateRangePicker({
   const setActiveDate = onFocusChange === undefined ? setUncontrolledActiveDate : onFocusChange;
 
   return (
-    <DateRangePickerContext.Consumer>{context => (
-      <div
+    <DateRangePickerContext.Consumer>{context => {
+      const isTimeRangeControlBar = context === 'TIME_RANGE_CONTROL_BAR';
+
+      return <div
         className={classnames(styles.dateRangePicker, {[styles.mouseMode]: mouseMode})}
         style={{
           display: 'flex',
@@ -78,10 +81,10 @@ export default function DateRangePicker({
       >
         <div
           style={{
-            width: 240,
-            height: 38,
+            width: isTimeRangeControlBar ? undefined : 240,
+            height: isTimeRangeControlBar ? 40 : 38,
             backgroundColor: colors.white,
-            border: `1px solid ${activeDate ? colors.blue : colors.gray300}`,
+            border: isTimeRangeControlBar ? 'none' : `1px solid ${activeDate ? colors.blue : colors.gray300}`,
             borderRadius: 4,
             flexShrink: floating ? 0 : undefined,
             display: 'flex',
@@ -89,6 +92,13 @@ export default function DateRangePicker({
             alignItems: 'center',
           }}
         >
+          {isTimeRangeControlBar ? <div style={{height: 20, width: 20, marginRight: 4}}>
+            <Icons.Calendar
+              color={colors.gray500}
+              width={20}
+              height={20}
+            />&nbsp;
+          </div> : null}
           <DateDisplay
             value={startDate}
             active={activeDate === 'startDate'}
@@ -103,7 +113,8 @@ export default function DateRangePicker({
           style={{
             width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 156 : 0),
             backgroundColor: colors.white,
-            marginTop: 8,
+            marginTop: isTimeRangeControlBar ? 0 : 8,
+            marginLeft: isTimeRangeControlBar ? 24 : 0,
             border: `1px solid ${colors.gray300}`,
             borderRadius: 4,
             flexShrink: floating ? 0 : undefined,
@@ -155,6 +166,6 @@ export default function DateRangePicker({
           />
         </div> : null}
       </div>
-    )}</DateRangePickerContext.Consumer>
+    }}</DateRangePickerContext.Consumer>
   );
 }
