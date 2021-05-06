@@ -83,7 +83,7 @@ export default function DateRangePicker({
           style={{
             width: isTimeRangeControlBar ? undefined : 240,
             height: isTimeRangeControlBar ? 40 : 38,
-            backgroundColor: colors.white,
+            backgroundColor: isTimeRangeControlBar ? undefined : colors.white,
             border: isTimeRangeControlBar ? 'none' : `1px solid ${activeDate ? colors.blue : colors.gray300}`,
             borderRadius: 4,
             flexShrink: floating ? 0 : undefined,
