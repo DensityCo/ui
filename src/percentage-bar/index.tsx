@@ -31,9 +31,11 @@ export default function PercentageBar({
   const isListViewContext = context === 'LIST_VIEW';
 
   useEffect(() => {
-    window.addEventListener('resize', forceUpdate);
-    return () => window.removeEventListener('resize', forceUpdate);
-  }, [forceUpdate]);
+    if (!isListViewContext) {
+      window.addEventListener('resize', forceUpdate);
+      return () => window.removeEventListener('resize', forceUpdate);
+    }
+  }, [forceUpdate, isListViewContext]);
 
   breakWidth = breakWidth || PERCENTAGE_BAR_DEFAULT_BREAK_WIDTH;
   percentageFormatter = percentageFormatter || (n => `${(n * 100).toFixed(isListViewContext ? 0 : 1)}%`);
@@ -46,7 +48,7 @@ export default function PercentageBar({
   const formattedPercentage = percentageFormatter(percentage);
 
   // Check if the percentage bar has enough screen width to render the bar or not.
-  const isExpanded = document.body && document.body.clientWidth >= breakWidth;
+  const isExpanded = isListViewContext || (document.body && document.body.clientWidth >= breakWidth);
 
   const percentageGraphic = <div
     className={classnames(
