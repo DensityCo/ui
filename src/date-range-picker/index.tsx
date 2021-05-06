@@ -113,7 +113,7 @@ export default function DateRangePicker({
           style={{
             width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 156 : 0),
             backgroundColor: colors.white,
-            marginTop: isTimeRangeControlBar ? 0 : 8,
+            marginTop: isTimeRangeControlBar ? -1 : 8,
             marginLeft: isTimeRangeControlBar ? 24 : 0,
             border: `1px solid ${colors.gray300}`,
             borderRadius: 4,
