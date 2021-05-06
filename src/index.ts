@@ -18,7 +18,7 @@ export { default as InfoPopup, InfoPopupCardWellHighlight } from './info-popup';
 export { default as InputBox, InputBoxContext, SelectBox } from './input-box';
 export { default as Modal } from './modal';
 export { default as PagerButtonGroup } from './pager-button-group';
-export { default as PercentageBar } from './percentage-bar';
+export { default as PercentageBar, PercentageBarContext } from './percentage-bar';
 export { default as PhoneInputBox } from './phone-input-box';
 export { default as RadioButton, RadioButtonContext } from './radio-button';
 export { default as Switch } from './switch';
@@ -42,7 +42,7 @@ export {
 
 export {
   InputStackGroup,
-  InputStackItem
+  InputStackItem,
 } from './input-stack';
 
 export { default as TimeFilterPicker, TimeFilterPickerContext } from './time-filter-picker';
