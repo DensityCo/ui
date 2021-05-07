@@ -10,16 +10,21 @@ $whiteTransparent10: rgba($white, 0.1);
 $whiteTransparent05: rgba($white, 0.05);
 
 // Grayscale
-$gray000:               #FAFBFC;
-$gray100:               #F6F8FA;
-$gray200:               #E1E4E8;
-$gray300:               #D1D5DA;
-$gray400:               #959DA5;
-$gray500:               #6A737D;
-$gray600:               #586069;
-$gray700:               #444D56;
-$gray800:               #2F363D;
-$gray900:               #24292E;
+$gray000:               #F5F6F7;
+$gray100:               #EFF0F2;
+$gray200:               #E0E3E6;
+$gray300:               #C0C6CC;
+$gray400:               #929BA6;
+$gray500:               #687380;
+$gray600:               #4E5966;
+$gray700:               #3A434D;
+$gray800:               #313840;
+$gray900:               #272D33;
+$gray900Transparent80: rgba($gray900, 0.8);
+$gray900Transparent40: rgba($gray900, 0.4);
+$gray900Transparent20: rgba($gray900, 0.2);
+$gray900Transparent10: rgba($gray900, 0.1);
+$gray900Transparent05: rgba($gray900, 0.05);
 
 // Midnightscale
 $midnight:              #0D183A;
