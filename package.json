@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "22.3.5",
+  "version": "23.0.0",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -12,14 +12,14 @@
   "author": "Density <team+javascript@density.io>",
   "license": "MIT",
   "peerDependencies": {
-    "react": "16.x.x",
-    "react-dom": "16.x.x",
-    "prop-types": "*",
+    "@density/lib-api-types": "*",
+    "@density/lib-space-helpers": "*",
     "moment": "*",
     "moment-timezone": "*",
-    "regenerator-runtime": "*",
-    "@density/lib-space-helpers": "*",
-    "@density/lib-api-types": "*"
+    "prop-types": "*",
+    "react": "16.x.x",
+    "react-dom": "16.x.x",
+    "regenerator-runtime": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -65,7 +65,7 @@
     "react-addons-shallow-compare": "^15.6.2",
     "react-day-picker": "^7.4.8",
     "react-phone-number-input": "^2.5.3",
-    "regenerator-runtime": "^0.13.1",
+    "regenerator-runtime": "*",
     "typescript": "^3.7.5",
     "uuid": "^8.0.0"
   },

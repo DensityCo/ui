@@ -1,6 +1,32 @@
 // Colors
 // -------------------------------
+
+// Whitescale
 $white:                 #fff;
+$whiteTransparent80: rgba($white, 0.8);
+$whiteTransparent40: rgba($white, 0.4);
+$whiteTransparent20: rgba($white, 0.2);
+$whiteTransparent10: rgba($white, 0.1);
+$whiteTransparent05: rgba($white, 0.05);
+
+// Grayscale
+$gray000:               #F5F6F7;
+$gray100:               #EFF0F2;
+$gray200:               #E0E3E6;
+$gray300:               #C0C6CC;
+$gray400:               #929BA6;
+$gray500:               #687380;
+$gray600:               #4E5966;
+$gray700:               #3A434D;
+$gray800:               #313840;
+$gray900:               #272D33;
+$gray900Transparent80: rgba($gray900, 0.8);
+$gray900Transparent40: rgba($gray900, 0.4);
+$gray900Transparent20: rgba($gray900, 0.2);
+$gray900Transparent10: rgba($gray900, 0.1);
+$gray900Transparent05: rgba($gray900, 0.05);
+
+// Midnightscale
 $midnight:              #0D183A;
 $midnightTransparent80: rgba($midnight, 0.8);
 $midnightTransparent40: rgba($midnight, 0.4);
@@ -12,31 +38,102 @@ $midnightOpaque40:      #9FA3AF;
 $midnightOpaque20:      #CFD1D7;
 $midnightOpaque10:      #E6E7EB;
 $midnightOpaque05:      #F3F3F5;
-$blue:                  #5581FF;
-$blueLight:             #DDE6FF;
-$blueDark:              #2749AA;
-$red:                   #FF624D;
-$redLight:              #FFDCD9;
-$redDark:               #B4301E;
-$yellow:                #F4AB4E;
-$yellowLight:           #FFEED6;
-$yellowDark:            #C07619;
-$purple:                #AB67B5;
-$purpleLight:           #E4D5E6;
-$purpleDark:            #7A3A84;
-$green:                 #249F70;
-$greenLight:            #E0EDEC;
-$greenDark:             #09613F;
-$gray000:               #FAFBFC;
-$gray100:               #F6F8FA;
-$gray200:               #E1E4E8;
-$gray300:               #D1D5DA;
-$gray400:               #959DA5;
-$gray500:               #6A737D;
-$gray600:               #586069;
-$gray700:               #444D56;
-$gray800:               #2F363D;
-$gray900:               #24292E;
+
+// Bluescale
+$blue000:               #F1F6FF;
+$blue100:               #DAE6FF;
+$blue200:               #A6C3FF;
+$blue300:               #6A9BFC;
+$blue400:               #1A79FF;
+$blue500:               #003FBC;
+$blue600:               #02198C;
+$blue700:               #001169;
+$blue800:               #000b3f;
+$blue900:               #000624;
+$blue:                  $blue400;
+$blueLight:             $blue100;
+$blueDark:              $blue700;
+
+// Redscale
+$red000:                #FFEFEC;
+$red100:                #FFDFD9;
+$red200:                #FFBCB2;
+$red300:                #FF8678;
+$red400:                #FF5548;
+$red500:                #CC3931;
+$red600:                #8A2320;
+$red700:                #401010;
+$red800:                #300a0a;
+$red900:                #240404;
+$red:                   $red400;
+$redLight:              $red100;
+$redDark:               $red700;
+
+// Greenscale
+$green000:              #EEFCF4;
+$green100:              #D6FCE6;
+$green200:              #ACF0C8;
+$green300:              #70D79B;
+$green400:              #00BC8A;
+$green500:              #139768;
+$green600:              #0D6248;
+$green700:              #083421;
+$green800:              #042718;
+$green900:              #031d11;
+$green:                 $green400;
+$greenLight:            $green100;
+$greenDark:             $green700;
+
+// Purplescale
+$teal000:               #F4FFFF;
+$teal100:               #D9FFFF;
+$teal200:               #9DEFEF;
+$teal300:               #56D9D5;
+$teal400:               #25BBB2;
+$teal500:               #129C9C;
+$teal600:               #096D72;
+$teal700:               #053A40;
+$teal800:               #03282c;
+$teal900:               #01181b;
+$teal:                  $teal400;
+$tealLight:             $teal100;
+$tealDark:              $teal700;
+
+// Yellowscale
+$yellow000:             #FEFCF4;
+$yellow100:             #FEF6D8;
+$yellow200:             #FFE9A7;
+$yellow300:             #FFD25F;
+$yellow400:             #F3B828;
+$yellow500:             #C49012;
+$yellow600:             #866109;
+$yellow700:             #402E05;
+$yellow800:             #302203;
+$yellow900:             #1f1601;
+$yellow:                $yellow400;
+$yellowLight:           $yellow100;
+$yellowDark:            $yellow700;
+
+// Purplescale
+$purple000:             #F8F4FF;
+$purple100:             #E7D9FF;
+$purple200:             #D1AFFF;
+$purple300:             #B06BFF;
+$purple400:             #9933FF;
+$purple500:             #7525CC;
+$purple600:             #4F1C8A;
+$purple700:             #251040;
+$purple800:             #18082e;
+$purple900:             #0f031f;
+$purple:                $purple400;
+$purpleLight:           $purple100;
+$purpleDark:            $purple700;
+
+
+// Component color variables
+$fontColor:             $gray800;
+
+
 
 // LEGACY COLORS
 $grayCinder: #222A2E;
