@@ -5,6 +5,7 @@ import colorVariables from '../../variables/colors.json';
 import fontVariables from '../../variables/fonts.json';
 
 import Icons from './index';
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
 
 storiesOf('Icons', module)
   .add('A sample icon', () => (

@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import fontVariables from '../../variables/fonts.json';
 
 import './index';
+import iconFont from './index';
 
 storiesOf('Fonts', module)
   .add('Includes fonts into the page', () => (
@@ -32,6 +33,9 @@ storiesOf('Fonts', module)
           <p> Back of the net.Anti - pattern we have put the apim bol, temporarily so that we can later put the monitors on.Locked and loaded my supervisor didn 't like the latest revision you gave me can you switch back to the first revision? nor teams were able to drive adoption and awareness and drive awareness to increase engagement when does this sunset?.</p>
           <p>Get buy-in optics yet face time I just wanted to give you a heads-up, for deliverables. Blue sky on-brand but completeley fresh, sacred cow, nor reach out. We need to touch base off-line before we fire the new ux experience I have zero cycles for this good optics Bob called an all-hands this afternoon.</p>
           <p>If you like links, <a href="https://roundedco.com">here's your link</a>, enjoy.</p>
+          <hr/>
+          <p>Density supports a robust custom icon library, and we include it here as a font package in addition to the svg library</p>
+          <i className={iconFont.airplay}></i>
         </div>
         <div style={{flexBasis: '50%', paddingLeft: 12, paddingRight: 12}}>
           <hr/>
