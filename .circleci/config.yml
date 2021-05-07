@@ -34,7 +34,9 @@ jobs:
           command: |
             echo "* Installing amazon's cli..."
             sudo apt install -y python3-pip python3-dev
-            sudo pip3 install -U 'awscli>=1.15'
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
             echo "* Copying to S3..."
             aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/${CIRCLE_SHA1} --region us-east-1
@@ -80,7 +82,9 @@ jobs:
           command: |
             echo "* Installing amazon's cli..."
             sudo apt install -y python3-pip python3-dev
-            sudo pip3 install -U 'awscli>=1.15'
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
             echo "* Copying to S3..."
             aws s3 sync storybook-static/ s3://ui-preview.density.rodeo --region us-east-1
