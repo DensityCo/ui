@@ -1,7 +1,8 @@
 import * as React from "react";
 
-const Copy = ({ width, height, color }) => (
+const CopyAlt = ({ width, height, color }) => (
     <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
+      <path d="M13 6V9H10V11H13V14H15V11H18V9H15V6H13Z" fill={color} />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -13,5 +14,5 @@ const Copy = ({ width, height, color }) => (
   );
 
 
-export default Copy;
+export default CopyAlt;
 

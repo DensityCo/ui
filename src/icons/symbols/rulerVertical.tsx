@@ -1,17 +1,15 @@
 import * as React from "react";
 
-const Copy = ({ width, height, color }) => (
+const RulerVertical = ({ width, height, color }) => (
     <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M6 18V2H22V18H6ZM8 4H20V16H8V4Z"
+        d="M6 2L18 2L18 22H6L6 2ZM16 8V11H13V13H16V16H13L13 18H16V20H8L8 4L16 4V6H13V8H16Z"
         fill={color}
       />
-      <path d="M4 6H2V22H18V20H4V6Z" fill={color} />
     </svg>
   );
 
-
-export default Copy;
+export default RulerVertical;
 

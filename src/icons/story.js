@@ -7,6 +7,24 @@ import fontVariables from '../../variables/fonts.json';
 import Icons from './index';
 
 storiesOf('Icons', module)
+  .add('All Icons', () => (
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 275px)',
+      gridTemplateRows: 'repeat(100, 30px)',
+      gridGap: 10,
+      marginLeft: 10,
+      marginTop: 10,
+    }}>
+      {Object.keys(Icons).map(iconName => {
+        const IconComponent = Icons[iconName];
+        return <div key={iconName} style={{fontFamily: fontVariables.fontBase}}>
+          <IconComponent />
+          <span style={{marginLeft: 10, fontSize: 14, verticalAlign: 4, color: colorVariables.gray500}}>{iconName}</span>
+        </div>;
+      })}
+    </div>
+  ))
   .add('A sample icon', () => (
     <Icons.ImageUpload />
   ))
@@ -30,22 +48,4 @@ storiesOf('Icons', module)
   ))
   .add(`A sample icon that's sized with percents`, () => (
     <Icons.ImageUpload width="10%" height="10%" />
-  ))
-  .add('All Icons', () => (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3, 275px)',
-      gridTemplateRows: 'repeat(100, 30px)',
-      gridGap: 10,
-      marginLeft: 10,
-      marginTop: 10,
-    }}>
-      {Object.keys(Icons).map(iconName => {
-        const IconComponent = Icons[iconName];
-        return <div key={iconName} style={{fontFamily: fontVariables.fontBase}}>
-          <IconComponent />
-          <span style={{marginLeft: 10, fontSize: 14, verticalAlign: 4, color: colorVariables.gray500}}>{iconName}</span>
-        </div>;
-      })}
-    </div>
   ))

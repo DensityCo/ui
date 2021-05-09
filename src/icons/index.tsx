@@ -4,17 +4,30 @@ import React from 'react';
 import propTypes from 'prop-types';
 import colorVariables from '../../variables/colors.json';
 
+// Imports begin for SED
+import AccuracyTarget from './symbols/accuracyTarget';
+import Airplay from './symbols/airplay';
 import Alert from './symbols/alert';
+import ArrowDeparting from './symbols/arrowDeparting';
 import ArrowDown from './symbols/arrow-down';
 import ArrowDownLeft from './symbols/arrow-down-left';
 import ArrowDownRight from './symbols/arrow-down-right';
 import ArrowLeft from './symbols/arrow-left';
+import ArrowMeeting from './symbols/arrowMeeting';
 import ArrowRight from './symbols/arrow-right';
 import ArrowUp from './symbols/arrow-up';
 import ArrowUpLeft from './symbols/arrow-up-left';
 import ArrowUpRight from './symbols/arrow-up-right';
+import BatteryEmpty from './symbols/batteryEmpty';
+import BatteryEmptyWarning from './symbols/batteryEmptyWarning';
+import BatteryEmptyCharge from './symbols/batteryEmptyCharge';
+import BatteryFull from './symbols/batteryFull';
+import BatteryFullWarning from './symbols/batteryFullWarning';
+import BatteryFullCharge from './symbols/batteryFullCharge';
 import BookmarkFill from './symbols/bookmark-fill';
 import BookmarkOutline from './symbols/bookmark-outline';
+import Bug from './symbols/bug';
+import BugAlt from './symbols/bugAlt';
 import CalendarDetail from './symbols/calendar-detail';
 import CalendarSimple from './symbols/calendar-simple';
 import Camera from './symbols/camera';
@@ -44,9 +57,11 @@ import CloudSecure from './symbols/cloud-secure';
 import Code from './symbols/code';
 import Cog from './symbols/cog';
 import Collapse from './symbols/collapse';
+import ColumnEditor from './symbols/columnEditor';
 import Control1 from './symbols/control-1';
 import Control2 from './symbols/control-2';
 import Copy from './symbols/copy';
+import CopyAlt from './symbols/copyAlt';
 import Danger from './symbols/danger';
 import Dashboard from './symbols/dashboard';
 import DashboardAdd from './symbols/dashboard-add';
@@ -58,6 +73,8 @@ import Dot from './symbols/dot';
 import Dots from './symbols/dots';
 import Download from './symbols/download';
 import Ebook from './symbols/ebook';
+import EditorCircle from './symbols/editorCircle';
+import EditorSquare from './symbols/editorSquare';
 import EgressDown from './symbols/egress-down';
 import EgressLeft from './symbols/egress-left';
 import Filter from './symbols/filter';
@@ -79,10 +96,12 @@ import Keyhole from './symbols/keyhole';
 import Lightbulb from './symbols/lightbulb';
 import LightningFill from './symbols/lightning-fill';
 import LightningOutline from './symbols/lightning-outline';
-import LinkBroken from './symbols/link-broken';
-import LinkLinked from './symbols/link-linked';
+import LinkBroken from './symbols/linkBroken';
+import LinkLinked from './symbols/linkLinked';
 import List from './symbols/list';
 import Listening from './symbols/listening';
+import LockClosed from './symbols/lockClosed';
+import LockOpen from './symbols/lockOpen';
 import Message from './symbols/message';
 import Minus from './symbols/minus';
 import MinusCircle from './symbols/minus-circle';
@@ -90,6 +109,8 @@ import Money from './symbols/money';
 import More from './symbols/more';
 import Move from './symbols/move';
 import Notification from './symbols/notification';
+import NotificationsMultiple from './symbols/notificationsMultiple';
+import Pan from './symbols/pan';
 import Paintbrush from './symbols/paintbrush';
 import Parking from './symbols/parking';
 import PencilFill from './symbols/pencil-fill';
@@ -111,6 +132,9 @@ import Report from './symbols/report';
 import ReportAdd from './symbols/report-add';
 import ReportShare from './symbols/report-share';
 import Rotate from './symbols/rotate';
+import Router from './symbols/router';
+import Ruler from './symbols/ruler';
+import RulerVertical from './symbols/rulerVertical';
 import SaveFill from './symbols/save-fill';
 import SaveOutline from './symbols/save-outline';
 import Search from './symbols/search';
@@ -129,14 +153,28 @@ import StarFill from './symbols/star-fill';
 import StarOutline from './symbols/star-outline';
 import SwapHorizontal from './symbols/swap-horizontal';
 import SwapVertical from './symbols/swap-vertical';
+import Table from './symbols/table';
+import Tag from './symbols/tag';
+import TagFill from './symbols/tagFill';
+import TelevisionTvDisplay from './symbols/televisionTvDisplay';
+import ThermometerTemperatureThermostat from './symbols/thermometerTemperatureThermostat';
 import Trash from './symbols/trash';
 import Tray from './symbols/tray';
 import Upload from './symbols/upload';
 import Video from './symbols/video';
 import VisibilityHide from './symbols/visibility-hide';
 import VisibilityShow from './symbols/visibility-show';
+import Widgets from './symbols/widgets';
+import WifiConnected from './symbols/wifiConnected';
+import WifiNull from './symbols/wifiNull';
+import WifiNoInternet from './symbols/wifiNoInternet';
+import WifiNoInternetFill from './symbols/wifiNoInternetFill';
 import Workflow from './symbols/workflow';
+import ZoomIn from './symbols/zoomIn';
+import ZoomOut from './symbols/zoomOut';
+import ZoomToFit from './symbols/zoomToFit';
 
+// Space Functions
 import BabyChanging from './space-functions/baby-changing';
 import BreakoutRoom from './space-functions/breakout-room';
 import Breakroom from './space-functions/breakroom';
@@ -157,10 +195,14 @@ import Study from './space-functions/study';
 import Theater from './space-functions/theater';
 import UtilityRoom from './space-functions/utility-room';
 
+// Space Types
+import Campus from './space-types/campus';
 import Building from './space-types/building';
 import Floor from './space-types/floor';
 import Space from './space-types/space';
+import Entry from './space-types/entry';
 
+// Legacy
 import Algo from './legacy/algo';
 import Apps from './legacy/apps';
 import Bucket from './legacy/bucket';
@@ -185,7 +227,6 @@ import Plane from './legacy/plane';
 import Progress from './legacy/progress';
 import Soup from './legacy/soup';
 import Square from './legacy/square';
-import Tag from './legacy/tag';
 import Zoom from './legacy/zoom';
 
 // Regex for testing color values
@@ -194,21 +235,39 @@ const COLOR_REGEX = /^(currentColor)|(#([\da-f]{3}){1,2}|(rgb|hsl)a\((\d{1,3}%?,
 // A list of all density icons.
 const ICONS = {
 
+  // Symbols begin for SED
+  
   // Symbols
+  Airplay: Airplay,
+
+  AccuracyTarget: AccuracyTarget,
+  
   Alert: Alert,
 
+  ArrowDeparting: ArrowDeparting,
   ArrowDown: ArrowDown,
   ArrowDownLeft: ArrowDownLeft,
   ArrowDownRight: ArrowDownRight,
   ArrowLeft: ArrowLeft,
+  ArrowMeeting: ArrowMeeting,
   ArrowRight: ArrowRight,
   ArrowUp: ArrowUp,
   ArrowUpLeft: ArrowUpLeft,
   ArrowUpRight: ArrowUpRight,
 
+  BatteryEmpty: BatteryEmpty,
+  BatteryEmptyWarning: BatteryEmptyWarning,
+  BatteryEmptyCharge: BatteryEmptyCharge,
+  BatteryFull: BatteryFull,
+  BatteryFullWarning: BatteryFullWarning,
+  BatteryFullCharge: BatteryFullCharge,
+
   BookmarkFill: BookmarkFill,
   BookmarkOutline: BookmarkOutline,
   Bookmark: BookmarkOutline,
+
+  Bug: Bug,
+  BugAlt: BugAlt,
 
   CalendarDetail: CalendarDetail,
   CalendarSimple: CalendarSimple,
@@ -249,12 +308,21 @@ const ICONS = {
   CloseCircle: CloseCircle,
 
   CloudSecure: CloudSecure,
+
   Code: Code,
+
   Cog: Cog,
+
   Collapse: Collapse,
+
+  ColumnEditor: ColumnEditor,
+
   Control1: Control1,
   Control2: Control2,
+
   Copy: Copy,
+  CopyAlt: CopyAlt,
+
   Danger: Danger,
 
   Dashboard: Dashboard,
@@ -306,6 +374,9 @@ const ICONS = {
   List: List,
   Listening: Listening,
 
+  LockClosed: LockClosed,
+  LockOpen: LockOpen,
+
   Message: Message,
   Mail: Message,
   Minus: Minus,
@@ -313,7 +384,11 @@ const ICONS = {
   Money: Money,
   More: More,
   Move: Move,
+
   Notification: Notification,
+  NotificationsMultiple: NotificationsMultiple,
+
+  Pan: Pan,
   Paintbrush: Paintbrush,
   Parking: Parking,
 
@@ -344,6 +419,11 @@ const ICONS = {
 
   Rotate: Rotate,
 
+  Router: Router,
+
+  Ruler: Ruler,
+  RulerVertical: RulerVertical,
+
   SaveFill: SaveFill,
   SaveOutline: SaveOutline,
   Save: SaveOutline,
@@ -363,6 +443,9 @@ const ICONS = {
   SoundOn: SoundOn,
   SpaceAdd: SpaceAdd,
 
+  EditorSquare: EditorSquare,
+  EditorCircle: EditorCircle,
+
   StairsDown: StairsDown,
   StairsUp: StairsUp,
 
@@ -374,6 +457,13 @@ const ICONS = {
   Switch: SwapHorizontal,
   SwapVertical: SwapVertical,
 
+  Table: Table,
+
+  Tag: Tag,
+  TagFill: TagFill,
+
+  TelevisionTvDisplay: TelevisionTvDisplay,
+  ThermometerTemperatureThermostat: ThermometerTemperatureThermostat,
   Trash: Trash,
   Tray: Tray,
   Menu: Tray,
@@ -385,7 +475,17 @@ const ICONS = {
   VisibilityShow: VisibilityShow,
   Show: VisibilityShow,
 
+  WifiConnected: WifiConnected,
+  WifiNull: WifiNull,
+  WifiNoInternet: WifiNoInternet,
+  WifiNoInternetFill: WifiNoInternetFill,
+
+  Widgets: Widgets,
   Workflow: Workflow,
+
+  ZoomIn: ZoomIn,
+  ZoomOut: ZoomOut,
+  ZoomToFit: ZoomToFit,
 
 
   // Space Functions
@@ -411,9 +511,11 @@ const ICONS = {
 
 
   // Space Types
+  Campus: Campus,
   Building: Building,
   Floor: Floor,
   Space: Space,
+  Entry: Entry,
 
 
   // Legacy (v1) Icons
@@ -441,7 +543,6 @@ const ICONS = {
   Progress: Progress,
   Soup: Soup,
   Square: Square,
-  Tag: Tag,
   Zoom: Zoom,
 };
 
