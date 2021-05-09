@@ -1,17 +1,15 @@
 import * as React from "react";
 
-const Copy = ({ width, height, color }) => (
+const ColumnEditor = ({ width, height, color }) => (
     <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M6 18V2H22V18H6ZM8 4H20V16H8V4Z"
+        d="M2 2H22V22H2L2 2ZM14 6H10V20H14V6ZM4 6H8V20H4V6ZM16 6H20V20H16V6Z"
         fill={color}
       />
-      <path d="M4 6H2V22H18V20H4V6Z" fill={color} />
     </svg>
   );
 
-
-export default Copy;
+export default ColumnEditor;
 

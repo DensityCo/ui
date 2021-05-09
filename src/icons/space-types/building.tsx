@@ -1,16 +1,16 @@
-import React from "react";
+import * as React from "react";
 
 const Building = ({ width, height, color }) => (
-  <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
-    <g fill="none" fillRule="evenodd">
-      <rect width={24} height={24} />
+    <svg width={width || 24} height={height || 24} viewBox="0 0 24 24">
       <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 2L21 21L3 21L3 2.38197L11 6.382V2L21 2ZM19 4L13 4L13 9.61803L5 5.618L5 19L15 19L15 15H17L17 19H19L19 4ZM9 15L9 17H7L7 15L9 15ZM13 15V17H11V15H13ZM13 11V13H11V11H13ZM9 11V13L7 13V11L9 11ZM17 11V13H15V11H17ZM17 7V9L15 9L15 7L17 7Z"
         fill={color}
-        fillRule="nonzero"
-        d="M11,20 L11,4 L4,4 L4,20 L11,20 Z M13,6 L22,6 L22,22 L2,22 L2,2 L13,2 L13,6 Z M13,8 L13,20 L20,20 L20,8 L13,8 Z M5,5 L7,5 L7,8 L5,8 L5,5 Z M5,9 L7,9 L7,12 L5,12 L5,9 Z M5,13 L7,13 L7,16 L5,16 L5,13 Z M14,13 L16,13 L16,16 L14,16 L14,13 Z M14,9 L16,9 L16,12 L14,12 L14,9 Z M8,5 L10,5 L10,8 L8,8 L8,5 Z M8,9 L10,9 L10,12 L8,12 L8,9 Z M8,13 L10,13 L10,16 L8,16 L8,13 Z M17,13 L19,13 L19,16 L17,16 L17,13 Z M17,9 L19,9 L19,12 L17,12 L17,9 Z"
       />
-    </g>
-  </svg>
-);
+    </svg>
+  );
+
 
 export default Building;
+
