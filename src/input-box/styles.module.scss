@@ -410,3 +410,20 @@
 .contextSpaceDetailCard.inputBoxSelectBoxMenuLi.inputBoxSelectBoxMenuLiDisabled {
   color: $gray400;
 }
+
+// RULES FOR COMPACT_GRAY context
+.contextOpenAreaAppBar.inputBoxSelectBoxValue {
+  height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  border-color: $gray200;
+}
+.contextOpenAreaAppBar.inputBoxSelectBoxMenu {
+  top: 36px;
+  border-color: $gray200;
+}
+.contextOpenAreaAppBar.inputBoxSelectBoxMenuLi {
+  height: 32px;
+  font-size: 14px;
+  font-weight: bold;
+}
