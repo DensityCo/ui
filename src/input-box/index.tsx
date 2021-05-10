@@ -15,6 +15,7 @@ const CONTEXT_CLASSES = {
   'NAVBAR_INLINE': styles.contextNavbarInline,
   'ANALYTICS_CONTROL_BAR': styles.contextAnalyticsControlBar,
   'SPACE_DETAIL_CARD': styles.contextSpaceDetailCard,
+  'OPEN_AREA_APP_BAR': styles.contextOpenAreaAppBar,
 };
 
 export const ANCHOR_RIGHT = 'ANCHOR_RIGHT',

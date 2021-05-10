@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import './styles.module.scss';
 import InputBox, { InputBoxContext } from './index';
 import Icon from '../icons/index';
+import Icons from '../icons/index';
 
 storiesOf('InputBox', module)
   .add('Empty', () => (
@@ -203,6 +204,17 @@ storiesOf('InputBox', module)
   .add('select box with "NAVBAR_INLINE" context', () => (
     <InputBoxContext.Provider value="NAVBAR_INLINE">
       <InputBox type="select" width={160} />
+    </InputBoxContext.Provider>
+  ))
+  .add('select box with "OPEN_AREA_APP_BAR" context', () => (
+    <InputBoxContext.Provider value="OPEN_AREA_APP_BAR">
+      <InputBox type="select" width={160}
+        choices={[
+          {id: 0, label: "Management"},
+          {id: 1, label: "Analysis"},
+          {id: 2, label: "Availability", disabled: true},
+        ]}
+      />
     </InputBoxContext.Provider>
   ))
   .add('select box with ANALYTICS_CONTROL_BAR context', () => {
