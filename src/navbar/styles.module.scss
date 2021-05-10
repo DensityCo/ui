@@ -2,9 +2,10 @@
 @import "../../variables/spacing.scss";
 @import "../../variables/grid.scss";
 
+a, a:visited { color: $blue; }
+
 // Navbar Layout
 // -------------------------------------------
-
 .NavbarContainer {
   flex-direction: row;
   justify-content: flex-start;
@@ -68,8 +69,8 @@
   width: 26px;
   margin-right: 16px;
   margin-left: 8px;
-  background-color: $grayCinder;
-  border-radius: 4px;
+  background-color: $gray900;
+  border-radius: 6px;
 }
 
 
@@ -82,10 +83,17 @@
   height: 41px;
   cursor: pointer;
 
+  color: $gray400;
+
   opacity: 0.5;
   position: relative;
+
+  transition: opacity ease-in-out 100ms;
 }
-.NavbarItem:hover, .NavbarItem.selected { opacity: 1; }
+.NavbarItem:hover, .NavbarItem.selected {
+  opacity: 1;
+  transition: opacity ease-in-out 150ms;
+}
 
 .NavbarItem > a, .NavbarItem > span {
   display: flex;
@@ -97,7 +105,7 @@
   padding-left: 16px;
   padding-right: 16px;
 
-  color: $midnight;
+  color: $gray900;
   text-decoration: none;
   font-size: 14px;
   font-weight: bold;
@@ -110,7 +118,7 @@
   font-size: 11px;
 
   position: absolute;
-  top: 2px;
+  top: 3px;
   right: 0;
   padding-right: 16px;
 }
@@ -119,7 +127,7 @@
 .NavbarItem.iconOnly > span { padding-left: 8px; padding-right: 8px; }
 
 .NavbarItem.selected > a,
-.NavbarItem.selected > span { color: $midnight; }
+.NavbarItem.selected > span { color: $gray900; }
 
 .NavbarItem.showOnMobile {
   display: flex;
@@ -153,7 +161,7 @@
 
 .NavbarMenuItems {
   position: absolute;
-  top: 40px;
+  top: 38px;
   right: 0;
 
   display: flex;
@@ -165,7 +173,7 @@
   padding-left: 16px;
   padding-right: 32px;
 
-  border: 1px solid $gray300;
+  border: 1px solid $gray200;
   border-radius: 4px;
 
   opacity: 0;
@@ -183,17 +191,27 @@
   opacity: 0.5;
   user-select: none;
 
-  color: $midnight;
+  color: $gray900;
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
   white-space: nowrap;
   outline: none;
+  transition: opacity ease-in-out 100ms;
+
+  a, a:visited {
+    color: $gray900;
+  }
 }
 .NavbarMenuItem:hover { opacity: 1; }
 .NavbarMenuItem.selected {
   opacity: 1;
-  color: $midnight;
+  color: $gray900;
+  transition: opacity ease-in-out 150ms;
+
+  a, a:visited {
+    color: $gray900;
+  }
 }
 
 .NavbarMenuItemIcon {

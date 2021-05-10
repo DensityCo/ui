@@ -205,44 +205,44 @@ export default function Navbar({
             <NavbarItem
               selected={path.startsWith(navbarPaths.portfolio)}
               path={navbarPaths.portfolio}
-              icon={<Icons.Globe color="currentColor" />}
+              icon={<Icons.Globe height={22} width={22} color="currentColor" />}
               text="Portfolio"
             />
           ) : null}
           <NavbarItem
             selected={path.startsWith(navbarPaths.spaces) && !path.startsWith(navbarPaths.live)}
             path={navbarPaths.spaces}
-            icon={<Icons.Space color="currentColor" />}
+            icon={<Icons.Space height={22} width={22} color="currentColor" />}
             text="Spaces"
           />
           <NavbarItem
             selected={path.startsWith(navbarPaths.analytics)}
             path={navbarPaths.analytics}
-            icon={<Icons.Report color="currentColor" />}
+            icon={<Icons.Report height={22} width={22} color="currentColor" />}
             text="Analytics"
           />
           <NavbarItem
             selected={path.startsWith(navbarPaths.dashboards)}
             path={navbarPaths.dashboards}
-            icon={<Icons.Dashboard color="currentColor" />}
+            icon={<Icons.Dashboard height={22} width={22} color="currentColor" />}
             text="Dashboards"
           />
           <NavbarItem
             selected={path.startsWith(navbarPaths.live)}
             path={navbarPaths.live}
-            icon={<Icons.StopWatch color="currentColor" />}
+            icon={<Icons.StopWatch height={22} width={22} color="currentColor" />}
             text="Live"
           />
           <NavbarItem
             selected={path.startsWith(navbarPaths.display)}
             path={navbarPaths.display}
-            icon={<Icons.PersonHuddle color="currentColor" />}
+            icon={<Icons.PersonHuddle height={22} width={22} color="currentColor" />}
             text="Displays"
           />
           <NavbarItem
             selected={path.startsWith(navbarPaths.openArea)}
             path={navbarPaths.openArea}
-            icon={<Icons.DeviceSide color="currentColor" />}
+            icon={<Icons.DeviceSide height={22} width={22} color="currentColor" />}
             text={`Open\u00A0Area`}
             beta={true}
           />
@@ -258,7 +258,7 @@ export default function Navbar({
               selected={path.startsWith(navbarPaths.support)}
               path={navbarPaths.support}
               targetBlank={true}
-              icon={<Icons.Chat color="currentColor" />}
+              icon={<Icons.Chat height={22} width={22} color="currentColor" />}
             />
           ) : null}
 
@@ -268,27 +268,27 @@ export default function Navbar({
               header={
                 <NavbarItem
                   selected={path.startsWith(navbarPaths.admin)}
-                  icon={<Icons.Cog color="currentColor" />}
+                  icon={<Icons.Cog height={22} width={22} color="currentColor" />}
                 />
               }
             >
               <NavbarMenuItem
                 path={navbarPaths.adminLocations}
                 text="Locations"
-                icon={<Icons.Globe color="currentColor" />}
+                icon={<Icons.Globe height={22} width={22} color="currentColor" />}
                 selected={path.startsWith(navbarPaths.adminLocations)}
               />
               <NavbarMenuItem
                 path={navbarPaths.adminUserManagement}
                 text="User Management"
-                icon={<Icons.Team color="currentColor" />}
+                icon={<Icons.Team height={22} width={22} color="currentColor" />}
                 selected={path.startsWith(navbarPaths.adminUserManagement)}
               />
               {showDevTools && !onPrem ? (
                 <NavbarMenuItem
                   path={navbarPaths.adminIntegrations}
                   text="Integrations"
-                  icon={<Icons.Integrations2 color="currentColor" />}
+                  icon={<Icons.Integrations2 height={22} width={22} color="currentColor" />}
                   selected={path.startsWith(navbarPaths.adminIntegrations)}
                 />
               ) : null}
@@ -296,7 +296,7 @@ export default function Navbar({
                 <NavbarMenuItem
                   path={navbarPaths.adminDeveloper}
                   text="Developer"
-                  icon={<Icons.Code color="currentColor" />}
+                  icon={<Icons.Code height={22} width={22} color="currentColor" />}
                   selected={path.startsWith(navbarPaths.adminDeveloper)}
                 />
               ) : null}
@@ -304,7 +304,7 @@ export default function Navbar({
                 <NavbarMenuItem
                   path={navbarPaths.adminSensorStatus}
                   text="Sensor Status"
-                  icon={<Icons.Heartbeat color="currentColor" />}
+                  icon={<Icons.Heartbeat height={22} width={22} color="currentColor" />}
                   selected={path.startsWith(navbarPaths.adminSensorStatus)}
                 />
               ) : null}
@@ -314,20 +314,20 @@ export default function Navbar({
             header={
               <NavbarItem
                 selected={path.startsWith(navbarPaths.account)}
-                icon={<Icons.Person color="currentColor" />}
+                icon={<Icons.Person height={22} width={22} color="currentColor" />}
               />
             }
           >
             <NavbarMenuItem
               path={navbarPaths.account}
               text="Your Account"
-              icon={<Icons.Person color="currentColor" />}
+              icon={<Icons.Person height={22} width={22} color="currentColor" />}
               selected={path.startsWith(navbarPaths.account)}
             />
             <NavbarMenuItem
               path={logoutUrl}
               text="Logout"
-              icon={<Icons.Power color="currentColor" />}
+              icon={<Icons.Power height={22} width={22} color="currentColor" />}
               selected={false}
             />
           </NavbarMenu>
