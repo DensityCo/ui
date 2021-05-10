@@ -257,7 +257,7 @@ export default function TimeFilterPicker({
           <div style={{minWidth: 24, flex:1}}></div>
 
           {isTimeRangeControlBar ? <div style={{height: 20, width: 20, marginRight: 8}}>
-            <Icons.Filters
+            <Icons.ColumnEditor
               color={colors.gray500}
               width={20}
               height={20}
