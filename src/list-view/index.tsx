@@ -27,7 +27,7 @@ export type SortRule = {
 
 type ListViewContextType<C extends string = string> = {
   mode: typeof TABLE_ROW | typeof TABLE_HEADER
-  height: React.CSSProperties['height']
+  height: React.CSSProperties['minHeight']
   fontSize: React.CSSProperties['fontSize']
   rowHeaderWidth: number
   item?: any
@@ -57,8 +57,8 @@ export type ListViewProps<T, C extends string> = {
   padOuterColumns?: boolean
   scrollX?: boolean
 
-  rowHeight?: React.CSSProperties['height']
-  headerHeight?: React.CSSProperties['height']
+  rowHeight?: React.CSSProperties['minHeight']
+  headerHeight?: React.CSSProperties['minHeight']
   fontSize?: React.CSSProperties['fontSize']
   headerFontSize?: React.CSSProperties['fontSize']
 
@@ -267,7 +267,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
         <div
           onClick={headerClickable && onClickHeader ? () => onClickHeader(id, valueTemplate || template) : undefined}
           className={classnames(styles.listViewHeader, { [styles.clickable]: headerClickable })}
-          style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
+          style={{minHeight: height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
         >
           {title !== null ? title : id}
           {sortIndicator}
@@ -279,7 +279,7 @@ export function ListViewColumn<T = any>(props: ListViewColumnProps<T>) {
       <div
         onClick={(cellClickable && onClick) ? () => onClick(item) : undefined}
         className={classnames(styles.listViewCell, { [styles.clickable]: cellClickable })}
-        style={{height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
+        style={{minHeight: height, fontSize, justifyContent: ALIGN_TO_JUSTIFY[align]}}
       >
         {Boolean(template) && template(item)}
       </div>
