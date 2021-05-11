@@ -53,6 +53,23 @@ storiesOf('ListView', module)
       />
     </ListView>
   ), {info: {inline: false}})
+  .add('With custom row height', () => (
+    <ListView
+      showHeaders={true}
+      rowHeight={40}
+      onClickRow={item => alert(item.name)}
+      data={TEST_DATA}
+    >
+      <ListViewColumn
+        id="Name"
+        template={item => <div><div>{item.name}</div></div>}
+      />
+      <ListViewColumn
+        id="Visits"
+        template={item => item.visits}
+      />
+    </ListView>
+  ), {info: {inline: false}})
   .add('With split left/right column groups', () => (
     <ListView
       showHeaders={true}
