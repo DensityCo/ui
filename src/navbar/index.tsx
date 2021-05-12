@@ -244,7 +244,7 @@ export default function Navbar({
             path={navbarPaths.openArea}
             icon={<Icons.Floor height={22} width={22} color="currentColor" />}
             text={`Open\u00A0Area`}
-            beta={true}
+            beta={false}
           />
         </ul>
 
