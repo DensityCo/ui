@@ -236,15 +236,15 @@ export default function Navbar({
           <NavbarItem
             selected={path.startsWith(navbarPaths.display)}
             path={navbarPaths.display}
-            icon={<Icons.PersonHuddle height={22} width={22} color="currentColor" />}
+            icon={<Icons.Airplay height={22} width={22} color="currentColor" />}
             text="Displays"
           />
           <NavbarItem
             selected={path.startsWith(navbarPaths.openArea)}
             path={navbarPaths.openArea}
-            icon={<Icons.DeviceSide height={22} width={22} color="currentColor" />}
+            icon={<Icons.Floor height={22} width={22} color="currentColor" />}
             text={`Open\u00A0Area`}
-            beta={true}
+            beta={false}
           />
         </ul>
 
