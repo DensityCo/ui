@@ -60,6 +60,7 @@ export default function DateRangePicker({
   return (
     <DateRangePickerContext.Consumer>{context => {
       const isTimeRangeControlBar = context === 'TIME_RANGE_CONTROL_BAR';
+      const isNoHeader = context === 'NO_HEADER';
 
       return <div
         className={classnames(styles.dateRangePicker, {[styles.mouseMode]: mouseMode})}
@@ -79,7 +80,7 @@ export default function DateRangePicker({
         onMouseDown={() => setMouseMode(true)}
         onKeyDown={() => setMouseMode(false)}
       >
-        <div
+        {!isNoHeader ? <div
           style={{
             width: isTimeRangeControlBar ? undefined : 240,
             height: isTimeRangeControlBar ? 40 : 38,
@@ -108,7 +109,7 @@ export default function DateRangePicker({
             value={endDate}
             active={activeDate === 'endDate'}
             onSelect={(focused: boolean) => setActiveDate(focused ? 'endDate' : null)} />
-        </div>
+        </div> : null }
         {activeDate ? <div
           style={{
             width: (numberOfMonths === 1 ? 277 : 568) + (commonRanges.length ? 156 : 0),
