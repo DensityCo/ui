@@ -14,6 +14,7 @@ storiesOf('Navbar', module)
       <Navbar
         path='test'
         showPortfolio={false}
+        showOpenArea={false}
         showAdminMenu={false}
         showDevTools={false}
         showSensorList={false}
@@ -25,6 +26,7 @@ storiesOf('Navbar', module)
       <Navbar
         path='test'
         showPortfolio={true}
+        showOpenArea={true}
         showAdminMenu={true}
         showDevTools={true}
         showSensorList={true}
@@ -36,6 +38,7 @@ storiesOf('Navbar', module)
       <Navbar
         path='test'
         showPortfolio={false}
+        showOpenArea={false}
         showAdminMenu={true}
         showDevTools={true}
         showSensorList={false}
