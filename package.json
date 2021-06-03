@@ -1,6 +1,6 @@
 {
   "name": "@density/ui",
-  "version": "23.5.0",
+  "version": "23.5.1",
   "description": "A UI framework for density projects",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -28,7 +28,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
-    "@density/lib-api-types": "^2.0.1",
+    "@density/lib-api-types": "^3.2.0",
     "@density/lib-space-helpers": "^0.2.7",
     "@density/node-sass-json-importer": "^5.0.0",
     "@storybook/addon-actions": "^5.1.10",
