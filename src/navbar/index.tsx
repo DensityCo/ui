@@ -142,6 +142,7 @@ export function NavbarItem({
 export default function Navbar({
   path,
   showPortfolio,
+  showOpenArea,
   showAdminMenu,
   showDevTools,
   showSensorList,
@@ -157,6 +158,7 @@ export default function Navbar({
 }: {
   path: string;
   showPortfolio: boolean;
+  showOpenArea: boolean;
   showAdminMenu: boolean;
   showDevTools: boolean;
   showSensorList: boolean;
@@ -201,14 +203,14 @@ export default function Navbar({
               width={14}
             />
           </div>
-          {showPortfolio ? (
+          {Boolean(showPortfolio) && (
             <NavbarItem
               selected={path.startsWith(navbarPaths.portfolio)}
               path={navbarPaths.portfolio}
               icon={<Icons.Globe height={22} width={22} color="currentColor" />}
               text="Portfolio"
             />
-          ) : null}
+          )}
           <NavbarItem
             selected={path.startsWith(navbarPaths.spaces) && !path.startsWith(navbarPaths.live)}
             path={navbarPaths.spaces}
@@ -239,13 +241,15 @@ export default function Navbar({
             icon={<Icons.Airplay height={22} width={22} color="currentColor" />}
             text="Displays"
           />
-          <NavbarItem
-            selected={path.startsWith(navbarPaths.openArea)}
-            path={navbarPaths.openArea}
-            icon={<Icons.Floor height={22} width={22} color="currentColor" />}
-            text={`Open\u00A0Area`}
-            beta={false}
-          />
+          {Boolean(showOpenArea) && (
+            <NavbarItem
+              selected={path.startsWith(navbarPaths.openArea)}
+              path={navbarPaths.openArea}
+              icon={<Icons.Floor height={22} width={22} color="currentColor" />}
+              text={`Open\u00A0Area`}
+              beta={false}
+            />
+          )}
         </ul>
 
         <ul className={styles.NavbarRight}>
