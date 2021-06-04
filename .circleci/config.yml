@@ -3,7 +3,7 @@ version: 2
 jobs:
   preview:
     docker:
-      - image: circleci/node:10.7.0
+      - image: density/baseimage-node-14
     resource_class: small
     steps:
       - checkout
@@ -32,12 +32,6 @@ jobs:
       - run:
           name: "Push preview to the cloud"
           command: |
-            echo "* Installing amazon's cli..."
-            sudo apt install -y python3-pip python3-dev
-            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            unzip awscli-bundle.zip
-            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-
             echo "* Copying to S3..."
             aws s3 sync storybook-static/ s3://ui-preview.density.rodeo/${CIRCLE_SHA1} --region us-east-1
       - run:
@@ -51,7 +45,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/node:10.7.0
+      - image: density/baseimage-node-14
     resource_class: small
     steps:
       - checkout
@@ -80,18 +74,12 @@ jobs:
       - run:
           name: "Push preview to the cloud"
           command: |
-            echo "* Installing amazon's cli..."
-            sudo apt install -y python3-pip python3-dev
-            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            unzip awscli-bundle.zip
-            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-
             echo "* Copying to S3..."
             aws s3 sync storybook-static/ s3://ui-preview.density.rodeo --region us-east-1
 
   publish:
     docker:
-      - image: circleci/node:10.7.0
+      - image: density/baseimage-node-14
     resource_class: small
     steps:
       - checkout
