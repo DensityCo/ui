@@ -24,13 +24,11 @@ export default function Tooltip({
   contents,
   placement,
   enterDelay,
-  wrap,
 }: {
   target: React.ReactElement;
   contents: React.ReactNode;
   placement?: MaterialTooltipProps['placement'];
   enterDelay?: MaterialTooltipProps['enterDelay'];
-  wrap?: boolean;
 }) {
   const classes = useStyles();
 
