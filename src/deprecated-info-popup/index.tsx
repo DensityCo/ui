@@ -26,6 +26,7 @@ export type InfoPopupState = {
   visible: boolean,
 };
 
+// DEPRECATED: Use the "Tooltip" component instead
 export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState> {
   private icon: RefObject<HTMLSpanElement>;
   private popup: RefObject<HTMLDivElement>;
@@ -124,6 +125,8 @@ export default class InfoPopup extends Component<InfoPopupProps, InfoPopupState>
   }
 
   render() {
+    console.warn('The InfoPopup component is deprecated. Use the Tooltip component instead.');
+
     const {
       infoIconColor,
       singleLine,

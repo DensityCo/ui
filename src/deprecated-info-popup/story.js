@@ -9,7 +9,7 @@ import Card, { CardHeader, CardBody, CardWell, CardWellHighlight } from '../card
 import fontVariables from '../../variables/fonts.json';
 
 
-storiesOf('InfoPopup', module)
+storiesOf('[DEPRECATED] InfoPopup', module)
   .add('Alone', () => (
     <div style={{marginLeft: 50}}>
       <InfoPopup>
