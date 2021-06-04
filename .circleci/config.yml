@@ -3,7 +3,7 @@ version: 2
 jobs:
   preview:
     docker:
-      - image: 937369328181.dkr.ecr.us-east-1.amazonaws.com/density/baseimage-node-14:trunk
+      - image: 937369328181.dkr.ecr.us-east-1.amazonaws.com/density/baseimage-node-12:trunk
     resource_class: small
     steps:
       - checkout
@@ -15,14 +15,14 @@ jobs:
             echo "yarn --version = $(yarn --version)"
 
       - restore_cache:
-          key: node_modules-{{checksum "./package.json"}}-v3
+          key: node_modules-{{checksum "./package.json"}}-v4
       - run:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
             npm i
       - save_cache:
-          key: node_modules-{{checksum "./package.json"}}-v3
+          key: node_modules-{{checksum "./package.json"}}-v4
           paths:
             - "./node_modules"
 
@@ -45,7 +45,7 @@ jobs:
 
   build:
     docker:
-      - image: 937369328181.dkr.ecr.us-east-1.amazonaws.com/density/baseimage-node-14:trunk
+      - image: 937369328181.dkr.ecr.us-east-1.amazonaws.com/density/baseimage-node-12:trunk
     resource_class: small
     steps:
       - checkout
@@ -57,14 +57,14 @@ jobs:
             echo "yarn --version = $(yarn --version)"
 
       - restore_cache:
-          key: node_modules-{{checksum "./package.json"}}-v3
+          key: node_modules-{{checksum "./package.json"}}-v4
       - run:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
             npm i
       - save_cache:
-          key: node_modules-{{checksum "./package.json"}}-v3
+          key: node_modules-{{checksum "./package.json"}}-v4
           paths:
             - "./node_modules"
 
@@ -79,7 +79,7 @@ jobs:
 
   publish:
     docker:
-      - image: 937369328181.dkr.ecr.us-east-1.amazonaws.com/density/baseimage-node-14:trunk
+      - image: 937369328181.dkr.ecr.us-east-1.amazonaws.com/density/baseimage-node-12:trunk
     resource_class: small
     steps:
       - checkout
