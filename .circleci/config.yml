@@ -20,7 +20,7 @@ jobs:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
-            npm i
+            npm i --unsafe-perm
       - save_cache:
           key: node_modules-{{checksum "./package.json"}}-v4
           paths:
@@ -28,7 +28,7 @@ jobs:
 
       - run:
           name: "Build preview"
-          command: npm run build-storybook
+          command: npm run build-storybook --unsafe-perm
       - run:
           name: "Push preview to the cloud"
           command: |
@@ -62,7 +62,7 @@ jobs:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
-            npm i
+            npm i --unsafe-perm
       - save_cache:
           key: node_modules-{{checksum "./package.json"}}-v4
           paths:
@@ -70,7 +70,7 @@ jobs:
 
       - run:
           name: "Build density ui storybook"
-          command: npm run build-storybook
+          command: npm run build-storybook --unsafe-perm
       - run:
           name: "Push preview to the cloud"
           command: |
@@ -89,7 +89,7 @@ jobs:
           name: "Install dependencies"
           command: |
             echo "# Top level package"
-            npm i
+            npm i --unsafe-perm
       - run:
           name: "Add npm token to npmrc"
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
@@ -105,7 +105,7 @@ jobs:
             echo "Publishing $(jq -r .version ./package.json) to tag ${tag}"
 
             set +e # This permits the publish to fail if the version is the same as the previous commit
-            npm publish --tag ${tag}
+            npm publish --tag ${tag} --unsafe-perm
             set -e
 
 workflows:
