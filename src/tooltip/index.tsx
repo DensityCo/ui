@@ -24,11 +24,19 @@ export default function Tooltip({
   contents,
   placement,
   enterDelay,
+  enterNextDelay,
+  enterTouchDelay,
+  leaveDelay,
+  leaveTouchDelay,
 }: {
   target: React.ReactElement;
   contents: React.ReactNode;
   placement?: MaterialTooltipProps['placement'];
   enterDelay?: MaterialTooltipProps['enterDelay'];
+  enterNextDelay?: MaterialTooltipProps['enterNextDelay'];
+  enterTouchDelay?: MaterialTooltipProps['enterTouchDelay'];
+  leaveDelay?: MaterialTooltipProps['leaveDelay'];
+  leaveTouchDelay?: MaterialTooltipProps['leaveTouchDelay'];
 }) {
   const classes = useStyles();
 
@@ -37,7 +45,11 @@ export default function Tooltip({
       classes={classes}
       title={contents || ''}
       placement={placement || 'bottom-start'}
-      enterDelay={enterDelay || 700}
+      enterDelay={enterDelay || 400}
+      enterNextDelay={enterNextDelay || 0}
+      enterTouchDelay={enterTouchDelay || 800}
+      leaveDelay={leaveDelay || 0}
+      leaveTouchDelay={leaveTouchDelay || 1600}
     >
       {target}
     </MaterialTooltip>
