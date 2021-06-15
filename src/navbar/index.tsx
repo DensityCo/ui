@@ -64,11 +64,13 @@ function NavbarMenuItem({
   text,
   icon,
   selected,
+  onClick,
 }: {
   path: string;
   text: string;
   icon: React.ReactNode;
   selected: boolean;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>
 }) {
   return (
     <NavbarMenuContext.Consumer>
@@ -82,7 +84,7 @@ function NavbarMenuItem({
           tabIndex={0}
           onFocus={context.onMenuFocus}
           onBlur={context.onMenuBlur}
-          onClick={context.onMenuBlur}
+          onClick={onClick || context.onMenuBlur}
         >
           <span className={styles.NavbarMenuItemIcon}>{icon}</span>
           {text}
@@ -108,7 +110,7 @@ export function NavbarItem({
   path?: string;
   text?: string | undefined;
   style?: React.CSSProperties;
-  onClick?: ((event: any) => void) | undefined;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   targetBlank?: boolean;
   beta?: boolean
 }) {
@@ -155,6 +157,7 @@ export default function Navbar({
   displayHost = 'safe.density.io',
   openAreaHost = 'oa.density.io',
   supportHost = 'help.density.io',
+  onClickLogout = () => null,
 }: {
   path: string;
   showPortfolio: boolean;
@@ -171,6 +174,7 @@ export default function Navbar({
   displayHost?: string,
   openAreaHost?: string,
   supportHost?: string,
+  onClickLogout?: React.MouseEventHandler<HTMLAnchorElement>;
 }) {
 
   // Path definitions for each navbar link
@@ -333,6 +337,7 @@ export default function Navbar({
               text="Logout"
               icon={<Icons.Power height={22} width={22} color="currentColor" />}
               selected={false}
+              onClick={onClickLogout}
             />
           </NavbarMenu>
         </ul>
