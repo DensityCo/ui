@@ -151,49 +151,49 @@ export default function Navbar({
   onPrem = false,
   impersonate = null,
   environmentSwitcher = null,
+  portfolioHost = 'https://portfolio.density.io',
+  dashboardHost = 'https://dashboard.density.io',
+  displayHost = 'https://safe.density.io',
+  openAreaHost = 'https://oa.density.io',
+  supportUrl = 'https://support.density.io/hc',
   logoutUrl = 'https://densityio.auth0.com/v2/logout?returnTo=https%3A%2F%2Fdashboard.density.io%2F%23%2Flogout',
-  portfolioHost = 'portfolio.density.io',
-  dashboardHost = 'dashboard.density.io',
-  displayHost = 'safe.density.io',
-  openAreaHost = 'oa.density.io',
-  supportHost = 'help.density.io',
   onClickLogout = () => null,
 }: {
-  path: string;
-  showPortfolio: boolean;
-  showOpenArea: boolean;
-  showAdminMenu: boolean;
-  showDevTools: boolean;
-  showSensorList: boolean;
-  onPrem?: boolean;
-  impersonate?: React.ReactNode;
-  environmentSwitcher?: React.ReactNode;
-  logoutUrl?: string;
+  path: string,
+  showPortfolio: boolean,
+  showOpenArea: boolean,
+  showAdminMenu: boolean,
+  showDevTools: boolean,
+  showSensorList: boolean,
+  onPrem?: boolean,
+  impersonate?: React.ReactNode,
+  environmentSwitcher?: React.ReactNode,
   portfolioHost?: string,
   dashboardHost?: string,
   displayHost?: string,
   openAreaHost?: string,
-  supportHost?: string,
-  onClickLogout?: React.MouseEventHandler<HTMLAnchorElement>;
+  supportUrl?: string,
+  logoutUrl?: string,
+  onClickLogout?: React.MouseEventHandler<HTMLAnchorElement>,
 }) {
 
   // Path definitions for each navbar link
   const navbarPaths = {
-    portfolio: `https://${portfolioHost}`,
-    spaces: `https://${dashboardHost}/#/spaces`,
-    analytics: `https://${dashboardHost}/#/analytics`,
-    dashboards: `https://${dashboardHost}/#/dashboards`,
-    live: `https://${dashboardHost}/#/spaces/live`,
-    display: `https://${displayHost}`,
-    openArea: `https://${openAreaHost}`,
-    support: `https://${supportHost}`,
-    admin: `https://${dashboardHost}/#/admin`,
-    adminLocations: `https://${dashboardHost}/#/admin/locations`,
-    adminUserManagement: `https://${dashboardHost}/#/admin/user-management`,
-    adminIntegrations: `https://${dashboardHost}/#/admin/integrations`,
-    adminDeveloper: `https://${dashboardHost}/#/admin/developer`,
-    adminSensorStatus: `https://${dashboardHost}/#/admin/device-status`,
-    account: `https://${dashboardHost}/#/account`,
+    portfolio: portfolioHost,
+    spaces: `${dashboardHost}/#/spaces`,
+    analytics: `${dashboardHost}/#/analytics`,
+    dashboards: `${dashboardHost}/#/dashboards`,
+    live: `${dashboardHost}/#/spaces/live`,
+    display: displayHost,
+    openArea: openAreaHost,
+    support: supportUrl,
+    admin: `${dashboardHost}/#/admin`,
+    adminLocations: `${dashboardHost}/#/admin/locations`,
+    adminUserManagement: `${dashboardHost}/#/admin/user-management`,
+    adminIntegrations: `${dashboardHost}/#/admin/integrations`,
+    adminDeveloper: `${dashboardHost}/#/admin/developer`,
+    adminSensorStatus: `${dashboardHost}/#/admin/device-status`,
+    account: `${dashboardHost}/#/account`,
   }
 
   return (
