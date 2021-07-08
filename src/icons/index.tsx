@@ -147,6 +147,7 @@ import Share2 from './symbols/share-2';
 import SoundOff from './symbols/sound-off';
 import SoundOn from './symbols/sound-on';
 import SpaceAdd from './symbols/space-add';
+import SnapGrid from './symbols/snap-grid';
 import StairsDown from './symbols/stairs-down';
 import StairsUp from './symbols/stairs-up';
 import StarFill from './symbols/star-fill';
@@ -442,6 +443,7 @@ const ICONS = {
   SoundOff: SoundOff,
   SoundOn: SoundOn,
   SpaceAdd: SpaceAdd,
+  SnapGrid: SnapGrid,
 
   EditorSquare: EditorSquare,
   EditorCircle: EditorCircle,
